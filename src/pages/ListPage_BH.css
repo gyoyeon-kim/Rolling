@@ -1,39 +1,52 @@
 .list-page {
-    padding: 20px;
-  }
-  
-  .list-content {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .list-section {
-    margin-bottom: 40px;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .create-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .create-button {
-    padding: 10px 20px;
-    background-color: #6c63ff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .create-button:hover {
-    background-color: #5a54d3;
-  }
-  
+  padding: 20px;
+  background-color: #f9f9f9; /* 페이지 배경색 추가 */
+}
+
+.list-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.list-section {
+  margin-bottom: 40px;
+  background-color: #fff; /* 섹션 배경색 */
+  padding: 20px; /* 섹션 내부 여백 */
+  border-radius: 8px; /* 섹션 테두리 둥글게 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 섹션 그림자 추가 */
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold; /* 제목 폰트 굵게 */
+  margin-bottom: 20px;
+  color: #333; /* 제목 색상 */
+}
+
+.create-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.create-button {
+  padding: 10px 20px;
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold; /* 버튼 텍스트 굵게 */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-button:hover {
+  background-color: #5a54d3;
+  transform: scale(1.05); /* 버튼 크기 약간 확대 */
+}
+
+.create-button:active {
+  background-color: #4839a1; /* 클릭 시 버튼 색상 변경 */
+  transform: scale(0.98); /* 클릭 시 버튼 크기 약간 축소 */
+}
