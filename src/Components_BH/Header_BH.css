@@ -1,41 +1,49 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background-color: #f8f9fa; /* 헤더 배경색 */
-    border-bottom: 1px solid #ddd; /* 헤더 하단 경계선 */
-  }
-  
-  .header-logo {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .logo-image {
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  .logo-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .create-paper-button {
-    padding: 10px 20px;
-    background-color: #6c63ff; /* 버튼 색상 */
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .create-paper-button:hover {
-    background-color: #5a54d3;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #f8f9fa; /* 헤더 배경색 */
+  border-bottom: 1px solid #ddd; /* 헤더 하단 경계선 */
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-image {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.create-paper-button {
+  padding: 8px 16px;
+  background-color: #fff; /* 배경색 흰색 */
+  color: #181818; /* 텍스트 색상 */
+  border: 1px solid #cccccc; /* 테두리 색상 */
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px; /* 테두리 둥글게 */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-paper-button:hover {
+  background-color: #6c63ff; /* 호버시 배경색 */
+  color: #fff; /* 호버시 텍스트 색상 */
+  transform: scale(1.05); /* 버튼 크기 약간 확대 */
+}
+
+.create-paper-button:active {
+  background-color: #4839a1; /* 클릭 시 배경색 */
+  color: #fff; /* 클릭 시 텍스트 색상 */
+  transform: scale(0.98); /* 클릭 시 버튼 크기 축소 */
+}

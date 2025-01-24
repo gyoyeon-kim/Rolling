@@ -20,12 +20,12 @@ function ListPage_BH() {
   ];
 
   const recentItems = [
-    { id: 8, title: "To. ㅠㅠㅠㅠ", image: "/image5.jpg", stats: "1명이 작성했어요!" },
-    { id: 9, title: "To. test", image: "/image6.jpg", stats: "2명이 작성했어요!" },
-    { id: 10, title: "To. 보희", image: "/image7.jpg", stats: "0명이 작성했어요!" },
-    { id: 11, title: "To. 123", image: "/image8.jpg", stats: "0명이 작성했어요!" },
-    { id: 12, title: "To. 추가된 카드1", image: "/image9.jpg", stats: "0명이 작성했어요!" },
-    { id: 13, title: "To. 추가된 카드2", image: "/image10.jpg", stats: "0명이 작성했어요!" },
+    { id: 8, title: "To. 분명", image: "/image5.jpg", stats: "1명이 작성했어요!" },
+    { id: 9, title: "To. 집에있는데", image: "/image6.jpg", stats: "2명이 작성했어요!" },
+    { id: 10, title: "To. 집에가고싶어", image: "/image7.jpg", stats: "0명이 작성했어요!" },
+    { id: 11, title: "To. ㅏ살려줘", image: "/image8.jpg", stats: "0명이 작성했어요!" },
+    { id: 12, title: "To. ㅠㅠㅠㅠ", image: "/image9.jpg", stats: "0명이 작성했어요!" },
+    { id: 13, title: "To. ㅎㅎㅎㅎㅎ", image: "/image10.jpg", stats: "0명이 작성했어요!" },
   ];
 
   const maxVisibleCards = 4;
