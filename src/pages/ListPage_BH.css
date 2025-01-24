@@ -1,11 +1,11 @@
 .list-page {
-  padding: 20px;
   background-color: #f9f9f9; /* 페이지 배경색 추가 */
 }
 
 .list-content {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 .list-section {

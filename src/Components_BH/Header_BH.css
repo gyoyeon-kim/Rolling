@@ -1,12 +1,27 @@
+/* 기본 헤더 스타일 */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
   background-color: #f8f9fa; /* 헤더 배경색 */
   border-bottom: 1px solid #ddd; /* 헤더 하단 경계선 */
+  width: 100%; /* 전체 너비를 100%로 설정 */
+  height: 64px; /* 높이를 64px로 설정 */
+  display: flex;  /* 플렉스박스로 설정하여 자식 요소를 제어 */
+  justify-content: center;  /* 자식 요소를 가로로 가운데 정렬 */
+  align-items: center;  /* 자식 요소를 세로로 가운데 정렬 */
 }
 
+/* 헬퍼 컨테이너 */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* 로고와 버튼 사이에 간격을 두고 */
+  align-items: center; /* 세로 가운데 정렬 */
+  max-width: 1207px; /* 최대 너비 설정 */
+  width: 100%; /* 전체 화면을 차지하도록 */
+  margin: 0 auto; /* 가로 중앙 정렬 */
+  padding: 20px 40px; /* 적절한 여백 추가 */
+  height: 64px; /* 컨테이너 높이 설정 */
+}
+
+/* 로고 스타일 */
 .header-logo {
   display: flex;
   align-items: center;
@@ -14,36 +29,79 @@
 }
 
 .logo-image {
-  height: 40px;
-  margin-right: 10px;
+  height: 28px;
+  margin-right: 8px;
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: #4a494f;
 }
 
+/* 버튼 스타일 */
 .create-paper-button {
   padding: 8px 16px;
-  background-color: #fff; /* 배경색 흰색 */
-  color: #181818; /* 텍스트 색상 */
-  border: 1px solid #cccccc; /* 테두리 색상 */
+  background-color: #fff;
+  color: #181818;
+  border: 1px solid #cccccc;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 6px; /* 테두리 둥글게 */
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .create-paper-button:hover {
-  background-color: #181818; /* 호버시 배경색 */
-  color: #fff; /* 호버시 텍스트 색상 */
-  transform: scale(1.05); /* 버튼 크기 약간 확대 */
+  background-color: #181818;
+  color: #fff;
+  transform: scale(1.05);
 }
 
 .create-paper-button:active {
-  background-color: #4839a1; /* 클릭 시 배경색 */
-  color: #fff; /* 클릭 시 텍스트 색상 */
-  transform: scale(0.98); /* 클릭 시 버튼 크기 축소 */
+  background-color: #4839a1;
+  color: #fff;
+  transform: scale(0.98);
+}
+
+/* 반응형 디자인 */
+
+/* PC (1248px 이하) */
+@media (max-width: 1248px) {
+  .header-container {
+    padding: 0 24px; /* PC에서 좌우 여백을 24px로 고정 */
+    justify-content: space-between; /* 로고와 버튼 간격 줄어들기 */
+  }
+
+  .create-paper-button {
+    margin-left: 10px; /* 버튼 간격 좁히기 */
+  }
+}
+
+
+
+/* Tablet (1024px 이하) */
+@media (max-width: 1024px) {
+  .header-container {
+    padding: 0 24px; /* Tablet에서 좌우 여백을 24px로 고정 */
+    justify-content: space-between; /* 간격을 유동적으로 조정 */
+  }
+
+  .create-paper-button {
+    margin-left: 10px; /* 버튼 간격 조정 */
+  }
+}
+
+
+
+/* Mobile (767px 이하) */
+@media (max-width: 767px) {
+  .header-container {
+    padding: 0 16px; /* Mobile에서 좌우 여백을 16px로 고정 */
+    justify-content: space-between;
+  }
+
+  .create-paper-button {
+    font-size: 14px;
+  }
 }
