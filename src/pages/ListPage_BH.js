@@ -10,7 +10,7 @@ function ListPage_BH() {
   const popularItems = [
     { id: 1, title: "To. 안녕하세요", image: "/image1.jpg", stats: "1명이 작성했어요!" },
     { id: 2, title: "To. 홍보희", image: "/image2.jpg", stats: "1명이 작성했어요!" },
-    { id: 3, title: "To. 테스트3", image: "/image3.jpg", stats: "0명이 작성했어요!" },
+    { id: 3, title: "To. 테스트", image: "/image3.jpg", stats: "0명이 작성했어요!" },
     { id: 4, title: "To. 123", image: "/image4.jpg", stats: "3명이 작성했어요!" },
   ];
 
