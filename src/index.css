@@ -1,13 +1,144 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Pretendard"; /* 기본 글꼴 Pretendard */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/*color-palette*/
+:root {
+  --purple-900: #5603a7;
+  --purple-800: #6e0ad1;
+  --purple-700: #861dee;
+  --purple-600: #9935ff;
+  --purple-500: #ab57ff;
+  --purple-400: #ab57ff;
+  --purple-300: #dcb9ff;
+  --purple-200: #ecd9ff;
+  --purple-100: #f8f0ff;
+
+  --beige-500: #ff8832;
+  --beige-400: #ffae65;
+  --beige-300: #ffc583;
+  --beige-200: #ffe2ad;
+  --beige-100: #fff0d6;
+
+  --blue-500: #fff0d6;
+  --blue-400: #34b9ff;
+  --blue-300: #7cd2ff;
+  --blue-200: #b1e4ff;
+  --blue-100: #e2f5ff;
+
+  --green-500: #e2f5ff;
+  --green-400: #60cf37;
+  --green-300: #9be282;
+  --green-200: #d0f5c3;
+  --green-100: #e4fbdc;
+
+  --gray-900: #181818;
+  --gray-800: #2b2b2b;
+  --gray-700: #3a3a3a;
+  --gray-600: #4a4a4a;
+  --gray-500: #555555;
+  --gray-400: #999999;
+  --gray-300: #cccccc;
+  --gray-200: #eeeeee;
+  --gray-100: #f6f6f6;
+
+  --white: #fff;
+  --black: #000;
+  --error: #dc3a3a;
+  --surface: #f6f8ff;
+}
+/*color-palette end*/
+
+/*font-guide*/
+:root {
+  /* 폰트 크기 */
+  --font-size-28: 28px;
+  --font-size-24: 24px;
+  --font-size-20: 20px;
+  --font-size-18: 18px;
+  --font-size-16: 16px;
+  --font-size-15: 15px;
+  --font-size-14: 14px;
+  --font-size-12: 12px;
+
+  /* 폰트 굵기 */
+  --font-bold: bold;
+  --font-regular: normal;
+
+  /* 자간 설정 */
+  --letter-spacing-tight: -0.01em;
+}
+
+/*font-guide end*/
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./fonts/Pretendard-Thin.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-Thin.woff2) format("woff2"),
+    url(./fonts/Pretendard-Thin.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 300;
+  src: url(./fonts/Pretendard-Light.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-Light.woff2) format("woff2"),
+    url(./fonts/Pretendard-Light.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/Pretendard-Regular.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-Regular.woff2) format("woff2"),
+    url(./fonts/Pretendard-Regular.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  src: url(./fonts/Pretendard-Medium.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-Medium.woff2) format("woff2"),
+    url(./fonts/Pretendard-Medium.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  src: url(./fonts/Pretendard-SemiBold.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-SemiBold.woff2) format("woff2"),
+    url(./fonts/Pretendard-SemiBold.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  src: url(./fonts/Pretendard-Bold.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-Bold.woff2) format("woff2"),
+    url(./fonts/Pretendard-Bold.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 800;
+  src: url(./fonts/Pretendard-ExtraBold.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-ExtraBold.woff2) format("woff2"),
+    url(./fonts/Pretendard-ExtraBold.woff) format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 900;
+  src: url(./fonts/Pretendard-Black.eot); /* EI9 호환성 보기 */
+  src: local("※"), url(./fonts/Pretendard-Black.woff2) format("woff2"),
+    url(./fonts/Pretendard-Black.woff) format("woff");
 }
