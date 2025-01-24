@@ -31,19 +31,20 @@
 }
 
 .create-button {
-  padding: 10px 20px;
-  background-color: #6c63ff;
+  padding: 14px 24px;
+  background-color: #9935ff;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold; /* 버튼 텍스트 굵게 */
   transition: background-color 0.3s ease, transform 0.2s ease;
+  height: 56px; /* 버튼 높이 56px로 설정 */
 }
 
 .create-button:hover {
-  background-color: #5a54d3;
+  background-color: #591183;
   transform: scale(1.05); /* 버튼 크기 약간 확대 */
 }
 
@@ -144,6 +145,10 @@
   .header .create-button {
     margin-left: 24px; /* 버튼 간격 */
   }
+  .create-button {
+    width: 726px; /* 타블릿에서 버튼 너비 자동으로 설정 */
+    font-size: 14px;
+  }
 }
 
 /* Mobile (767px 이하) */
@@ -185,5 +190,18 @@
 
   .header .create-button {
     margin-left: 16px; /* 버튼 간격 축소 */
+  }
+
+  .create-button {
+    width: 100%; /* 모바일에서 버튼을 100% 너비로 확장 */
+    font-size: 14px;
+  }
+}
+
+/* PC 버전 */
+@media (min-width: 1025px) {
+  .create-button {
+    width: 280px; /* 버튼 너비 280px로 설정 */
+    font-size: 16px;
   }
 }
