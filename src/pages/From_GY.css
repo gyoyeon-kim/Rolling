@@ -23,6 +23,11 @@ p {
   justify-content: center;
   align-items: center;
   height: 100vh; /* 전체 화면 높이 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤이 생기도록 설정 */
+}
+
+.logo {
+  margin-top: 15px;
 }
 
 .header {
@@ -154,6 +159,7 @@ p {
   background-repeat: no-repeat;
   background-size: 16px;
 }
+
 .btn_send {
   width: 100%;
   position: relative;
@@ -166,4 +172,5 @@ p {
   font-weight: 500;
   border: none;
   cursor: pointer;
+  margin-top: 20px;
 }
