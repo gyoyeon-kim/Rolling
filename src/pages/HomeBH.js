@@ -1,6 +1,6 @@
 import React from "react";
 
-function Home_BH() {
+function HomeBH() {
   return (
     <div>
       <h1>홈 페이지</h1>
@@ -9,4 +9,4 @@ function Home_BH() {
   );
 }
 
-export default Home_BH;
+export default HomeBH;

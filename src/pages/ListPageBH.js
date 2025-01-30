@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // navigate를 사용하기 위한 import
-import Header_BH from "../Components_BH/Header_BH";
-import CardList_BH from "../Components_BH/CardList_BH";
-import "./ListPage_BH.css";
+import HeaderBH from "../ComponentsBH/HeaderBH";
+import CardListBH from "../ComponentsBH/CardListBH";
+import "./ListPageBH.css";
 
-function ListPage_BH() {
+function ListPageBH() {
   const navigate = useNavigate(); // navigate 선언
   const [popularStartIndex, setPopularStartIndex] = useState(0);
   const [recentStartIndex, setRecentStartIndex] = useState(0);
@@ -53,14 +53,14 @@ function ListPage_BH() {
 
   return (
     <div className="list-page">
-      <Header_BH />
+      <HeaderBH />
 
       <main className="list-content">
         {/* 인기 섹션 */}
         <section className="list-section">
           <h2 className="section-title">인기 롤링 페이퍼 🔥</h2>
           <div className="carousel-container">
-            {popularStartIndex > 0 && (
+            {popularItems.length > maxVisibleCards && popularStartIndex > 0 && (
               <button
                 className="scroll-button left"
                 onClick={() => scrollLeft("popular")}
@@ -68,20 +68,21 @@ function ListPage_BH() {
                 ◀
               </button>
             )}
-            <CardList_BH
+            <CardListBH
               items={popularItems.slice(
                 popularStartIndex,
                 popularStartIndex + maxVisibleCards
               )}
             />
-            {popularStartIndex + maxVisibleCards < popularItems.length && (
-              <button
-                className="scroll-button right"
-                onClick={() => scrollRight("popular", popularItems.length)}
-              >
-                ▶
-              </button>
-            )}
+            {popularItems.length > maxVisibleCards &&
+              popularStartIndex + maxVisibleCards < popularItems.length && (
+                <button
+                  className="scroll-button right"
+                  onClick={() => scrollRight("popular", popularItems.length)}
+                >
+                  ▶
+                </button>
+              )}
           </div>
         </section>
 
@@ -89,7 +90,7 @@ function ListPage_BH() {
         <section className="list-section">
           <h2 className="section-title">최근에 만든 롤링 페이퍼 ⭐</h2>
           <div className="carousel-container">
-            {recentStartIndex > 0 && (
+            {recentItems.length > maxVisibleCards && recentStartIndex > 0 && (
               <button
                 className="scroll-button left"
                 onClick={() => scrollLeft("recent")}
@@ -97,20 +98,21 @@ function ListPage_BH() {
                 ◀
               </button>
             )}
-            <CardList_BH
+            <CardListBH
               items={recentItems.slice(
                 recentStartIndex,
                 recentStartIndex + maxVisibleCards
               )}
             />
-            {recentStartIndex + maxVisibleCards < recentItems.length && (
-              <button
-                className="scroll-button right"
-                onClick={() => scrollRight("recent", recentItems.length)}
-              >
-                ▶
-              </button>
-            )}
+            {recentItems.length > maxVisibleCards &&
+              recentStartIndex + maxVisibleCards < recentItems.length && (
+                <button
+                  className="scroll-button right"
+                  onClick={() => scrollRight("recent", recentItems.length)}
+                >
+                  ▶
+                </button>
+              )}
           </div>
         </section>
 
@@ -128,4 +130,4 @@ function ListPage_BH() {
   );
 }
 
-export default ListPage_BH;
+export default ListPageBH;

@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Navigation_BH.css";
+import "./NavigationBH.css";
 
-function Navigation_BH() {
+function NavigationBH() {
   const navigate = useNavigate();
 
   return (
@@ -13,4 +13,4 @@ function Navigation_BH() {
   );
 }
 
-export default Navigation_BH;
+export default NavigationBH;

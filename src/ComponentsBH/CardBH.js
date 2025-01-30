@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Card_BH.css";
+import "./CardBH.css";
 
-function Card_BH({ id, title, image, stats }) {
+function CardBH({ id, title, image, stats }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -20,4 +20,4 @@ function Card_BH({ id, title, image, stats }) {
   );
 }
 
-export default Card_BH;
+export default CardBH;

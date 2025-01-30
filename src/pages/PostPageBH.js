@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-function PostPage_BH() {
+function PostPageBH() {
   const { id } = useParams();
 
   return (
@@ -12,4 +12,4 @@ function PostPage_BH() {
   );
 }
 
-export default PostPage_BH;
+export default PostPageBH;

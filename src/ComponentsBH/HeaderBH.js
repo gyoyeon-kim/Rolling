@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Header_BH.css";
-import Logo from "../images/Logo_BH.svg"; // 로고 파일 경로
+import "./HeaderBH.css";
+import Logo from "../images/LogoBH.svg"; // 로고 파일 경로
 
-function Header_BH() {
+function HeaderBH() {
   const navigate = useNavigate();
 
   return (
@@ -21,4 +21,4 @@ function Header_BH() {
   );
 }
 
-export default Header_BH;
+export default HeaderBH;
