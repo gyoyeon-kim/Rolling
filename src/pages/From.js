@@ -10,6 +10,10 @@ import "draft-js/dist/Draft.css";
 /* 텍스트 에디터 */
 import TextArea from "../component/TextArea";
 
+/*select 박스 */
+import arrowTop from "../images/From_img/arrow_top.svg";
+import arrowDown from "../images/From_img/arrow_bottom.svg";
+
 const From_GY = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [quillValue, setQuillValue] = useState("");

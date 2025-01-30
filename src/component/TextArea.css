@@ -34,6 +34,33 @@
   text-align: right;
 }
 
+.ql-formats {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.ql-size {
+  font-size: 1rem; /* 기본 폰트 크기 */
+  padding: 0.2rem;
+  border-radius: 0.4rem;
+}
+
+.ql-size option {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .ql-size {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+
+  .ql-size select {
+    padding: 0.2rem;
+  }
+}
+
 .ql-editor ol li:not(.ql-direction-rtl),
 .ql-editor ul li:not(.ql-direction-rtl) {
   padding: 0;
