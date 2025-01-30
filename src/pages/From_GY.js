@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import "./From_GY.css";
 
 import rolling_icon from "../images/logo.svg";
@@ -7,13 +7,24 @@ import default_profile from "../images/From_img/profile.svg";
 import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 
+/* 텍스트 에디터 */
+import TextArea from "../component/TextArea";
+
 const From_GY = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [quillValue, setQuillValue] = useState("");
+
+  const textContainerRef = useRef(null);
 
   // 에디터 상태 변경 함수
   const onEditorStateChange = (newState) => {
     setEditorState(newState);
   };
+
+  const handleQuillValue = useCallback((value) => {
+    const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
+    setQuillValue(cleanedHtml);
+  }, []);
 
   return (
     <div className="main">
@@ -69,6 +80,10 @@ const From_GY = () => {
 
         <div className="content">
           <p className="title">내용을 입력해 주세요</p>
+          <TextArea
+            onQuillValueChange={handleQuillValue}
+            textContainerRef={textContainerRef}
+          />
         </div>
 
         <div className="font">
