@@ -79,7 +79,7 @@ const From_GY = () => {
         </div>
 
         <div className="content">
-          <p className="title">내용을 입력해 주세요</p>
+          <p className="contnetp">내용을 입력해 주세요</p>
           <TextArea
             onQuillValueChange={handleQuillValue}
             textContainerRef={textContainerRef}

@@ -52,6 +52,13 @@ p {
   color: var(--gray-900);
 }
 
+.contnetp {
+  font-size: var(--font-size-24);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 20px;
+}
+
 .name {
   display: flex;
   flex-direction: column;
