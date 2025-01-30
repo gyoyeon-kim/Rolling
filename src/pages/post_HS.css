@@ -1,0 +1,73 @@
+
+html,body{ position:relative; font-family:'Pretendard', sans-serif; font-size:1em; font-weight:300; -webkit-text-size-adjust: 100%; }
+
+/*reset*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; vertical-align:baseline; box-sizing: border-box;  }
+
+body { line-height:1 }
+ol, ul { list-style:none; padding:0; margin:0 }
+blockquote, q { quotes:none }
+blockquote:before, blockquote:after, q:before, q:after { content:''; content:none }
+table { border-collapse:collapse; border-spacing:0 }
+a { text-decoration:none; color:#666 }
+em,i{ font-style:normal }
+
+fieldset { min-width: 0; padding: 0; margin: 0; border: 0; }
+input[type="text"],input[type="submit"],input[type="button"],textarea,select,select option{ font-family:'Noto Sans Korean', sans-serif;  box-sizing: border-box; }
+input[type="search"] { box-sizing: border-box; }
+input[type="radio"], input[type="checkbox"] { line-height: normal; }
+input[type="file"] { display:inline-block; }
+input[type="range"] { display: block; width: 100%; }
+select[multiple], select[size] { height: auto; }
+input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus { outline: thin dotted; outline: 5px auto; outline-offset: -2px; }
+textarea { height: auto !important; box-sizing: border-box; }
+/*reset end*/
+
+.blind { position:absolute; overflow:hidden; width:1px; height:1px; padding:0; margin-top:-1px; font-size:0; line-height:0; text-indent:-9999px}
+caption,legend { overflow:hidden; width:0px; height:0px; padding:0; font-size:0; line-height:0; text-indent:-9999px}
+
+
+/*이현선 작업 시작*/
+
+.container { width: 100%; margin: 0 auto;}
+
+header .container {display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid #EDEDED;}
+header .container a {}
+header .container .btn_making {font-size: var(--font-size-14); letter-spacing: calc(var(--font-size) * 0.005); padding: 8px 16px; border: 1px solid #ccc; border-radius: 6px;}
+
+main .postHeader {}
+main .postHeader .container {}
+main .postHeader .container .leftWrap {border-bottom: 1px solid #EDEDED; padding: 12px 20px;}
+main .postHeader .container .leftWrap p {font-size: var(--font-size-18); font-weight: 700; letter-spacing: calc(var(--font-size) * 0.001);}
+main .postHeader .container .rightWrap {border-bottom: 1px solid #EDEDED; padding: 8px 20px;}
+main .postHeader .container .rightWrap .emojiReactionWrap {}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection {display: flex; gap: 8px; align-items: center;}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List {display: flex; gap: 8px;}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List li {padding: 4px 8px; border-radius: 32px; background-color: #0000008A; display: inline-flex; color: #fff; gap: 2px; font-size: var(--font-size-14); font-weight: 400; letter-spacing: calc(var(--font-size) * 0.005);}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList {position: relative;}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList button {border: none; background: none; padding: 0; width: 24px;}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul {position: absolute; top: 30px; right: 0; border: 1px solid #b6b6b6; background-color: #fff; display: flex; padding: 10px; border-radius: 8px; gap: 8px; box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul li {flex: 1 1 calc(33.333% - 10px); padding: 4px 8px; border-radius: 32px; background-color: #0000008A; display: inline-flex; color: #fff; gap: 2px; font-size: var(--font-size-14); font-weight: 400; letter-spacing: calc(var(--font-size) * 0.005);}
+
+/*=================
+태블릿 기본 세팅
+===================*/
+@media all and (min-width:768px) {
+
+}
+
+/*=================
+데스크탑 기본 세팅
+===================*/
+ @media all and ( min-width:1024px){
+
+  .container { max-width: 1200px; padding: 0 24px; /* 중앙 정렬 */}
+ 
+ }
+
+/* 미디어 쿼리: 화면 너비가 1248px 이하일 때 */
+@media all and ( min-width:1248px){
+
+ }
+
+/*이현선 작업 끝*/
