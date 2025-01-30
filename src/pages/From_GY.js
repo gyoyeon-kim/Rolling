@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./From_GY.css";
 
 import rolling_icon from "../images/logo.svg";
 import default_profile from "../images/From_img/profile.svg";
 
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
+
 const From_GY = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  // 에디터 상태 변경 함수
+  const onEditorStateChange = (newState) => {
+    setEditorState(newState);
+  };
+
   return (
     <div className="main">
       <div className="header">

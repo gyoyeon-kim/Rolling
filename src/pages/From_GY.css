@@ -44,7 +44,7 @@ p {
 .from_main {
   width: 720px;
   height: 944px;
-  margin: 20px auto; /* 위 아래 20px, 좌우 자동 정렬 */
+  margin: 20px auto;
 }
 
 .title {
@@ -81,6 +81,7 @@ p {
   flex-direction: column;
   height: 98px;
   gap: 1.2rem;
+  margin-top: 40px; /* name과 profileimg 사이 여백 추가 */
   margin-bottom: 65px;
 }
 
