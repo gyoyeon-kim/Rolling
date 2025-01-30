@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useRef } from "react";
-import "./From_GY.css";
+import "./From.css";
 
 import rolling_icon from "../images/logo.svg";
 import default_profile from "../images/From_img/profile.svg";
