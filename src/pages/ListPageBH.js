@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderBH from "../ComponentsBH/HeaderBH";
 import CardListBH from "../ComponentsBH/CardListBH";
+import FooterBtnBH from "../ComponentsBH/FooterBtnBH"; // 추가
 import "./ListPageBH.css";
 
 function ListPageBH() {
-  const navigate = useNavigate();
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
   const [popularStartIndex, setPopularStartIndex] = useState(0);
   const [recentStartIndex, setRecentStartIndex] = useState(0);
@@ -69,36 +69,19 @@ function ListPageBH() {
         {/* 인기 섹션 */}
         <section className="list-section">
           <h2 className="section-title">인기 롤링 페이퍼 🔥</h2>
-          <div
-            className={`carousel-container ${
-              isMobileOrTablet ? "touch-scroll" : ""
-            }`}
-          >
+          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
             {!isMobileOrTablet && popularItems.length > maxVisibleCards && popularStartIndex > 0 && (
-              <button
-                className="scroll-button left"
-                onClick={() => scrollLeft("popular")}
-              >
+              <button className="scroll-button left" onClick={() => scrollLeft("popular")}>
                 ◀
               </button>
             )}
             <CardListBH
-              items={
-                isMobileOrTablet
-                  ? popularItems
-                  : popularItems.slice(
-                      popularStartIndex,
-                      popularStartIndex + maxVisibleCards
-                    )
-              }
+              items={isMobileOrTablet ? popularItems : popularItems.slice(popularStartIndex, popularStartIndex + maxVisibleCards)}
             />
             {!isMobileOrTablet &&
               popularItems.length > maxVisibleCards &&
               popularStartIndex + maxVisibleCards < popularItems.length && (
-                <button
-                  className="scroll-button right"
-                  onClick={() => scrollRight("popular", popularItems.length)}
-                >
+                <button className="scroll-button right" onClick={() => scrollRight("popular", popularItems.length)}>
                   ▶
                 </button>
               )}
@@ -108,48 +91,27 @@ function ListPageBH() {
         {/* 최근 섹션 */}
         <section className="list-section">
           <h2 className="section-title">최근에 만든 롤링 페이퍼 ⭐</h2>
-          <div
-            className={`carousel-container ${
-              isMobileOrTablet ? "touch-scroll" : ""
-            }`}
-          >
+          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
             {!isMobileOrTablet && recentItems.length > maxVisibleCards && recentStartIndex > 0 && (
-              <button
-                className="scroll-button left"
-                onClick={() => scrollLeft("recent")}
-              >
+              <button className="scroll-button left" onClick={() => scrollLeft("recent")}>
                 ◀
               </button>
             )}
             <CardListBH
-              items={
-                isMobileOrTablet
-                  ? recentItems
-                  : recentItems.slice(
-                      recentStartIndex,
-                      recentStartIndex + maxVisibleCards
-                    )
-              }
+              items={isMobileOrTablet ? recentItems : recentItems.slice(recentStartIndex, recentStartIndex + maxVisibleCards)}
             />
             {!isMobileOrTablet &&
               recentItems.length > maxVisibleCards &&
               recentStartIndex + maxVisibleCards < recentItems.length && (
-                <button
-                  className="scroll-button right"
-                  onClick={() => scrollRight("recent", recentItems.length)}
-                >
+                <button className="scroll-button right" onClick={() => scrollRight("recent", recentItems.length)}>
                   ▶
                 </button>
               )}
           </div>
         </section>
 
-        {/* 나도 만들어보기 버튼 */}
-        <div className="create-button-container">
-          <button className="create-button" onClick={() => navigate("/post")}>
-            나도 만들어보기
-          </button>
-        </div>
+        {/* ✅ FooterBtnBH 컴포넌트로 변경 */}
+        <FooterBtnBH />
       </main>
     </div>
   );
