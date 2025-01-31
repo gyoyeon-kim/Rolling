@@ -13,7 +13,10 @@ function HeaderBH() {
           <img src={Logo} alt="Rolling Logo" className="logo-image" />
           <h1 className="logo-text">Rolling</h1>
         </div>
-        <button className="create-paper-button" onClick={() => navigate("/post")}>
+        <button
+          className="create-paper-button"
+          onClick={() => navigate("/post")}
+        >
           롤링 페이퍼 만들기
         </button>
       </div>
