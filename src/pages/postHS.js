@@ -55,7 +55,7 @@ function Post() {
           <Link to="/" className="logo">
             <img src={logo} alt="롤링페이퍼 로고" />
           </Link>
-          <Link to="/post/message" className="btn_making">롤링페이퍼 만들기</Link>
+          <Link to="/post" className="btn_making">롤링페이퍼 만들기</Link>
         </div>
       </header>
       <main>
@@ -117,11 +117,11 @@ function Post() {
           <div className="container">
             <ul className="postCard">
               <li className="addPostCard">
-                <a role="button">
+                <Link to="/post/message">
                   <span>
-                    <img src={plusIcon} alt="이모지 추가하기" />
+                      <img src={plusIcon} alt="이모지 추가하기" />
                   </span>
-                </a>
+                </Link>
               </li>
               <li className="savedPostCard">
                 <a role="button">
