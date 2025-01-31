@@ -14,7 +14,7 @@ function Navigation() {
       </Link>
 
       {/* 롤링 페이퍼 만들기 버튼 */}
-      <Link to="/post" className="rolling-button">
+      <Link to="/post/123" className="rolling-button">
         롤링 페이퍼 만들기
       </Link>
     </header>
