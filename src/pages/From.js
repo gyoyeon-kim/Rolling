@@ -32,7 +32,7 @@ const From_GY = () => {
 
   return (
     <div className="main">
-      <div className="header">
+      <div className="fheader">
         <a href="/">
           <img className="logo" src={rolling_icon} alt="롤링 이미지" />
         </a>

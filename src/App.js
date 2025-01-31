@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import './index.css'; 
+
 
 import Post_HS from "./pages/postHS";
 import From from "./pages/From";
