@@ -1,21 +1,21 @@
-import React from 'react';
-import './postHS.css';
+import React from "react";
+import "./postHS.css";
 
 // 이미지 import
-import logo from '../images/logo.svg';
-import arrowBottom from '../images/arrow_bottom.svg';
-import addEmoji from '../images/ico_add.svg';
-import shareIcon from '../images/share-24.svg';
-import plusIcon from '../images/plus.svg';
-import deleteIcon from '../images/ico_delete.svg';
+import logo from "../images/logo.svg";
+import arrowBottom from "../images/arrow_bottom.svg";
+import addEmoji from "../images/ico_add.svg";
+import shareIcon from "../images/share-24.svg";
+import plusIcon from "../images/plus.svg";
+import deleteIcon from "../images/ico_delete.svg";
 
 // 배지 컴포넌트
 const Badge = ({ type }) => {
   const BADGE_STYLES = {
-    지인: { background: '#FFF0D6', color: '#FF8832' }, // 연한 주황색
-    동료: { background: '#F8F0FF', color: '#9935FF' }, // 연한 보라색
-    가족: { background: '#E4FBDC', color: '#2BA600' }, // 연한 초록색
-    친구: { background: '#E2F5FF', color: '#00A2FE' }, // 연한 파란색
+    지인: { background: "#FFF0D6", color: "#FF8832" }, // 연한 주황색
+    동료: { background: "#F8F0FF", color: "#9935FF" }, // 연한 보라색
+    가족: { background: "#E4FBDC", color: "#2BA600" }, // 연한 초록색
+    친구: { background: "#E2F5FF", color: "#00A2FE" }, // 연한 파란색
   };
 
   return (
@@ -27,9 +27,9 @@ const Badge = ({ type }) => {
 
 // 이모티콘과 그에 대한 반응 카운트
 const EMOJI_DATA = [
-  { emoji: '🥰', count: 24 },
-  { emoji: '😂', count: 16 },
-  { emoji: '😎', count: 10 },
+  { emoji: "🥰", count: 24 },
+  { emoji: "😂", count: 16 },
+  { emoji: "😎", count: 10 },
 ];
 
 // 각 문장마다 다른 폰트 적용하기
@@ -39,7 +39,7 @@ const FONT_STYLES = {
   nanumMyeongjo: { fontFamily: '"NanumMyengjo", serif' },
   NanumSonPyeonJiCe: {
     fontFamily: '"NanumSonPyeonJiCe", sans-serif',
-    fontSize: '24px',
+    fontSize: "24px",
   },
 };
 

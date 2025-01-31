@@ -1,26 +1,26 @@
-import React, { useMemo } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import './TextArea.css';
-import QuillToolbar from './QuillToolBar';
+import React, { useMemo } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "./TextArea.css";
+import QuillToolbar from "./QuillToolBar";
 
 const formats = [
-  'font',
-  'header',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'align',
-  'color',
-  'background',
-  'size',
-  'h1',
+  "font",
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "align",
+  "color",
+  "background",
+  "size",
+  "h1",
 ];
 
 function TextArea({ onQuillValueChange, textContainerRef }) {
@@ -31,7 +31,7 @@ function TextArea({ onQuillValueChange, textContainerRef }) {
   const modules = useMemo(() => {
     return {
       toolbar: {
-        container: '#toolbar',
+        container: "#toolbar",
       },
       history: {},
     };

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './CardBH.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./CardBH.css";
 
 function CardBH({ id, title, image, stats }) {
   const navigate = useNavigate();

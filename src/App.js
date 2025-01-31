@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 
-import Post_HS from './pages/postHS';
-import From from './pages/From';
-import Home from './pages/Home';
-import ListPageBH from './pages/ListPageBH';
+import Post_HS from "./pages/postHS";
+import From from "./pages/From";
+import Home from "./pages/Home";
+import ListPageBH from "./pages/ListPageBH";
 function App() {
   return (
     <Router>

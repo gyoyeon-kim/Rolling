@@ -1,22 +1,22 @@
-import React, { useCallback, useState, useRef } from 'react';
-import './From.css';
+import React, { useCallback, useState, useRef } from "react";
+import "./From.css";
 
-import rolling_icon from '../images/logo.svg';
-import default_profile from '../images/From_img/profile.svg';
+import rolling_icon from "../images/logo.svg";
+import default_profile from "../images/From_img/profile.svg";
 
-import { Editor, EditorState } from 'draft-js';
-import 'draft-js/dist/Draft.css';
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
 
 /* 텍스트 에디터 */
-import TextArea from '../component/TextArea';
+import TextArea from "../component/TextArea";
 
 /*select 박스 */
-import arrowTop from '../images/From_img/arrow_top.svg';
-import arrowDown from '../images/From_img/arrow_bottom.svg';
+import arrowTop from "../images/From_img/arrow_top.svg";
+import arrowDown from "../images/From_img/arrow_bottom.svg";
 
 const From_GY = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [quillValue, setQuillValue] = useState('');
+  const [quillValue, setQuillValue] = useState("");
 
   const textContainerRef = useRef(null);
 
@@ -26,7 +26,7 @@ const From_GY = () => {
   };
 
   const handleQuillValue = useCallback((value) => {
-    const cleanedHtml = value.replace(/<p><br><\/p>/g, '');
+    const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
     setQuillValue(cleanedHtml);
   }, []);
 

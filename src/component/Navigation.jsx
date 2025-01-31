@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navigation.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navigation.css";
 
-import logo from '../images/logo.svg';
+import logo from "../images/logo.svg";
 
 function Navigation() {
   return (

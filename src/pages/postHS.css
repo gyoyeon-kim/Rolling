@@ -1,7 +1,7 @@
 html,
 body {
   position: relative;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   font-size: 1em;
   font-weight: 400;
   -webkit-text-size-adjust: 100%;
@@ -113,7 +113,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 table {
@@ -138,26 +138,26 @@ fieldset {
   margin: 0;
   border: 0;
 }
-input[type='text'],
-input[type='submit'],
-input[type='button'],
+input[type="text"],
+input[type="submit"],
+input[type="button"],
 textarea,
 select,
 select option {
-  font-family: 'Noto Sans Korean', sans-serif;
+  font-family: "Noto Sans Korean", sans-serif;
   box-sizing: border-box;
 }
-input[type='search'] {
+input[type="search"] {
   box-sizing: border-box;
 }
-input[type='radio'],
-input[type='checkbox'] {
+input[type="radio"],
+input[type="checkbox"] {
   line-height: normal;
 }
-input[type='file'] {
+input[type="file"] {
   display: inline-block;
 }
-input[type='range'] {
+input[type="range"] {
   display: block;
   width: 100%;
 }
@@ -165,9 +165,9 @@ select[multiple],
 select[size] {
   height: auto;
 }
-input[type='file']:focus,
-input[type='radio']:focus,
-input[type='checkbox']:focus {
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
   outline: thin dotted;
   outline: 5px auto;
   outline-offset: -2px;
@@ -379,7 +379,7 @@ main .postHeader .container .rightWrap .shareSnsWrap {
 }
 main .postHeader .container .rightWrap .shareSnsWrap:before {
   position: absolute;
-  content: '';
+  content: "";
   background-color: #eee;
   height: 28px;
   width: 1px;
