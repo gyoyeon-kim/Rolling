@@ -7,7 +7,7 @@ import default_profile from "../images/From_img/profile.svg";
 import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 
-/* 텍스트 에디터 */ /* 배포좀*/
+/* 텍스트 에디터 */
 import TextArea from "../component/TextArea";
 
 /*select 박스 */
