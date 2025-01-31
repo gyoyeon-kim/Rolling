@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<ListPageBH />} />
         <Route path="/post" element={<PostPageBH />} />
-        <Route path="/post/:id" element={<PostPageBH />} /> {/* 동적 경로 */}
+        <Route path="/post/:id" element={<PostPageBH />} /> {}
       </Routes>
     </Router>
   );
