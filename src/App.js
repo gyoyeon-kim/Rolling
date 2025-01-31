@@ -1,28 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Post from './pages/Post';
-import List from './pages/List';
-import From from './pages/From';
-import To from './pagwe';
-import Navigation from './components/Navigation';
+import Navigation from './component/Navigation';
 import './App.css';
+
+import Post_HS from './pages/postHS';
+import From from './pages/From';
+import Home from './pages/Home';
+import ListPageBH from './pages/ListPageBH';
+import PostPageBH from './pages/PostPageBH';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        {/* 상단 네비게이션 */}
-        <Navigation />
-
-        {/* 라우트 영역 */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/post" element={<Post />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/From" element={<From />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/list" element={<ListPageBH />} />
+        <Route path="/post" element={<PostPageBH />} />
+        <Route path="/post/:id" element={<PostPageBH />} />
+        <Route path="/post/123" element={<Post_HS />} />
+        <Route path="/post/message" element={<From />} />
+      </Routes>
     </Router>
   );
 }
