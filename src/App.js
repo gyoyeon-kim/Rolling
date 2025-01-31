@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Post from './pages/Post';
 import List from './pages/List';
 import From from './pages/From';
-import Navigation from './components/Navigation';
+import Navigation from './component/Navigation';
 import './App.css';
 
 function App() {
