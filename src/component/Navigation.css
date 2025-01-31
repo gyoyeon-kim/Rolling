@@ -1,0 +1,47 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* PC 기본값은 중앙정렬 + 적절한 양옆 여백 */
+  width: 100%;
+  max-width: 1248px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+/* 로고 */
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.logo-img {
+  height: 40px;
+}
+
+/* 롤링 페이퍼 만들기 버튼 */
+.rolling-button {
+  background-color: #5b67f1;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.2s;
+}
+.rolling-button:hover {
+  opacity: 0.8;
+}
+
+/* 1248px 이하에서 로고와 버튼의 간격이 조금 줄어들도록 */
+@media (max-width: 1248px) {
+  .nav-container {
+    padding: 0 24px;
+  }
+  .rolling-button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}

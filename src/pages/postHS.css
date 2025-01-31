@@ -1,142 +1,726 @@
-
-html,body{ position:relative; font-family:'Pretendard', sans-serif; font-size:1em; font-weight:400; -webkit-text-size-adjust: 100%; }
+html,
+body {
+  position: relative;
+  font-family: "Pretendard", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  -webkit-text-size-adjust: 100%;
+}
 
 /*reset*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; vertical-align:baseline; box-sizing: border-box;  }
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
 
-body { line-height:1 }
-ol, ul { list-style:none; padding:0; margin:0 }
-blockquote, q { quotes:none }
-blockquote:before, blockquote:after, q:before, q:after { content:''; content:none }
-table { border-collapse:collapse; border-spacing:0 }
-a { text-decoration:none; color:#666 }
-em,i{ font-style:normal }
-button {cursor: pointer;}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+  color: #666;
+}
+em,
+i {
+  font-style: normal;
+}
+button {
+  cursor: pointer;
+}
 
-fieldset { min-width: 0; padding: 0; margin: 0; border: 0; }
-input[type="text"],input[type="submit"],input[type="button"],textarea,select,select option{ font-family:'Noto Sans Korean', sans-serif;  box-sizing: border-box; }
-input[type="search"] { box-sizing: border-box; }
-input[type="radio"], input[type="checkbox"] { line-height: normal; }
-input[type="file"] { display:inline-block; }
-input[type="range"] { display: block; width: 100%; }
-select[multiple], select[size] { height: auto; }
-input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus { outline: thin dotted; outline: 5px auto; outline-offset: -2px; }
-textarea { height: auto !important; box-sizing: border-box; }
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+input[type="text"],
+input[type="submit"],
+input[type="button"],
+textarea,
+select,
+select option {
+  font-family: "Noto Sans Korean", sans-serif;
+  box-sizing: border-box;
+}
+input[type="search"] {
+  box-sizing: border-box;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  line-height: normal;
+}
+input[type="file"] {
+  display: inline-block;
+}
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+select[multiple],
+select[size] {
+  height: auto;
+}
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: thin dotted;
+  outline: 5px auto;
+  outline-offset: -2px;
+}
+textarea {
+  height: auto !important;
+  box-sizing: border-box;
+}
 /*reset end*/
 
-.blind { position:absolute; overflow:hidden; width:1px; height:1px; padding:0; margin-top:-1px; font-size:0; line-height:0; text-indent:-9999px}
-caption,legend { overflow:hidden; width:0px; height:0px; padding:0; font-size:0; line-height:0; text-indent:-9999px}
+.blind {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin-top: -1px;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+caption,
+legend {
+  overflow: hidden;
+  width: 0px;
+  height: 0px;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
 
 @font-face {
   font-family: Noto-Sans;
-  src: url(../fonts//NotoSansKR-Regular.ttf)
+  src: url(../fonts//NotoSansKR-Regular.ttf);
 }
 
 @font-face {
   font-family: NanumMyengjo;
-  src: url(../fonts//NanumMyeongjo.ttf)
+  src: url(../fonts//NanumMyeongjo.ttf);
 }
 
 @font-face {
   font-family: NanumSonPyeonJiCe;
-  src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf)
+  src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf);
 }
 
 /*이현선 작업 시작*/
 
-.container { width: 100%; margin: 0 auto;}
-header {border-bottom: 1px solid #EDEDED; display: none;}
-header .container {display: flex; justify-content: space-between; align-items: center;}
-header .container .btn_making {font-size: var(--font-size-14); letter-spacing: calc(var(--font-size) * 0.005); padding: 8px 16px; border: 1px solid #ccc; border-radius: 6px;}
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+header {
+  border-bottom: 1px solid #ededed;
+  display: none;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .container .btn_making {
+  font-size: var(--font-size-14);
+  letter-spacing: calc(var(--font-size) * 0.005);
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
 
-main .postHeader {position: sticky; top: 0; background-color: #fff;}
-main .postHeader .container .leftWrap {border-bottom: 1px solid #EDEDED; padding: 12px 20px;}
-main .postHeader .container .leftWrap p {font-size: var(--font-size-18); font-weight: 700; letter-spacing: calc(var(--font-size) * 0.001);}
-main .postHeader .container .rightWrap {border-bottom: 1px solid #EDEDED; padding: 8px 20px; display: flex;}
-main .postHeader .container .rightWrap .emojiReactionWrap {display: flex; align-items: center;}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection {display: flex; gap: 8px; align-items: center; margin-right: 10px;}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List {display: flex; gap: 8px;}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List li {padding: 4px 8px; border-radius: 32px; background-color: #0000008A; display: inline-flex; color: #fff; gap: 2px; font-size: var(--font-size-14); font-weight: 400; letter-spacing: calc(var(--font-size) * 0.005);}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList {position: relative;}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList button {border: none; background: none; padding: 0; width: 24px;}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul {position: absolute; top: 30px; right: 0; border: 1px solid #b6b6b6; background-color: #fff; display: flex; padding: 10px; border-radius: 8px; gap: 8px; box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08); display: none;}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul li {flex: 1 1 calc(33.333% - 10px); padding: 4px 8px; border-radius: 32px; background-color: #0000008A; display: inline-flex; color: #fff; gap: 2px; font-size: var(--font-size-14); font-weight: 400; letter-spacing: calc(var(--font-size) * 0.005);}
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button {border: 1px solid #ccc; border-radius: 6px; background: none; padding: 6px 8px; }
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button span {display: none;}
-main .postHeader .container .rightWrap .shareSnsWrap {position: relative; padding-left: 20px;}
-main .postHeader .container .rightWrap .shareSnsWrap:before {position: absolute; content: ""; background-color: #eee; height: 28px; width: 1px; left: 10px; top: 50%; transform: translateY(-50%);}
-main .postHeader .container .rightWrap .shareSnsWrap button {transition: 0.2s; border: 1px solid #ccc; border-radius: 6px; background: none; padding: 6px 8px; }
-main .postHeader .container .rightWrap .shareSnsWrap button:hover {background-color: #F6F6F6; border: 1px solid #ccc; transition: 0.2s;}
-main .postHeader .container .rightWrap .shareSnsWrap ul {display: none; width: 140px; position: absolute; right: 0; top: 60px; background-color: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08); padding: 10px 0;}
-main .postHeader .container .rightWrap .shareSnsWrap ul li a {display: block; padding: 12px 16px; font-weight: 400; font-size: var(--font-size-16); letter-spacing: calc(var(--font-size) * 0.001); background-color: #fff; transition: 0.2s; color: var(--gray-900);}
-main .postHeader .container .rightWrap .shareSnsWrap ul li a:hover {background-color: #F6F6F6; transition: 0.2s;}
+main .postHeader {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+main .postHeader .container .leftWrap {
+  border-bottom: 1px solid #ededed;
+  padding: 12px 20px;
+}
+main .postHeader .container .leftWrap p {
+  font-size: var(--font-size-18);
+  font-weight: 700;
+  letter-spacing: calc(var(--font-size) * 0.001);
+}
+main .postHeader .container .rightWrap {
+  border-bottom: 1px solid #ededed;
+  padding: 8px 20px;
+  display: flex;
+}
+main .postHeader .container .rightWrap .emojiReactionWrap {
+  display: flex;
+  align-items: center;
+}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-right: 10px;
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiTop3List {
+  display: flex;
+  gap: 8px;
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiTop3List
+  li {
+  padding: 4px 8px;
+  border-radius: 32px;
+  background-color: #0000008a;
+  display: inline-flex;
+  color: #fff;
+  gap: 2px;
+  font-size: var(--font-size-14);
+  font-weight: 400;
+  letter-spacing: calc(var(--font-size) * 0.005);
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList {
+  position: relative;
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList
+  button {
+  border: none;
+  background: none;
+  padding: 0;
+  width: 24px;
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList
+  ul {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  border: 1px solid #b6b6b6;
+  background-color: #fff;
+  display: flex;
+  padding: 10px;
+  border-radius: 8px;
+  gap: 8px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+  display: none;
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList
+  ul
+  li {
+  flex: 1 1 calc(33.333% - 10px);
+  padding: 4px 8px;
+  border-radius: 32px;
+  background-color: #0000008a;
+  display: inline-flex;
+  color: #fff;
+  gap: 2px;
+  font-size: var(--font-size-14);
+  font-weight: 400;
+  letter-spacing: calc(var(--font-size) * 0.005);
+}
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: none;
+  padding: 6px 8px;
+}
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiPicker
+  button
+  span {
+  display: none;
+}
+main .postHeader .container .rightWrap .shareSnsWrap {
+  position: relative;
+  padding-left: 20px;
+}
+main .postHeader .container .rightWrap .shareSnsWrap:before {
+  position: absolute;
+  content: "";
+  background-color: #eee;
+  height: 28px;
+  width: 1px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+main .postHeader .container .rightWrap .shareSnsWrap button {
+  transition: 0.2s;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: none;
+  padding: 6px 8px;
+}
+main .postHeader .container .rightWrap .shareSnsWrap button:hover {
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+main .postHeader .container .rightWrap .shareSnsWrap ul {
+  display: none;
+  width: 140px;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 10px 0;
+}
+main .postHeader .container .rightWrap .shareSnsWrap ul li a {
+  display: block;
+  padding: 12px 16px;
+  font-weight: 400;
+  font-size: var(--font-size-16);
+  letter-spacing: calc(var(--font-size) * 0.001);
+  background-color: #fff;
+  transition: 0.2s;
+  color: var(--gray-900);
+}
+main .postHeader .container .rightWrap .shareSnsWrap ul li a:hover {
+  background-color: #f6f6f6;
+  transition: 0.2s;
+}
 
-.post {background-color: var(--beige-200); height: calc(100vh - 102px); padding:  30px 20px; display: flex; flex-direction: column; box-sizing: border-box; position: fixed; width: 100%;} 
-.post .container {display: flex; flex-direction: column; height: 100%; /* 부모가 post이므로 100vh 유지 */}
-.post .container .postCard {padding-bottom: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 16px; overflow-y: auto; /* 내부 스크롤 적용 */ max-height: calc(100vh - 120px); /* 전체 높이에서 header, padding 제외한 크기 */ padding-right: 10px;}
-.post .container .postCard li {flex-basis: 100%; max-width: 100%;}
+.post {
+  background-color: var(--beige-200);
+  height: calc(100vh - 102px);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+}
+.post .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 부모가 post이므로 100vh 유지 */
+}
+.post .container .postCard {
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  overflow-y: auto; /* 내부 스크롤 적용 */
+  max-height: calc(
+    100vh - 120px
+  ); /* 전체 높이에서 header, padding 제외한 크기 */
+  padding-right: 10px;
+}
+.post .container .postCard li {
+  flex-basis: 100%;
+  max-width: 100%;
+}
 /* .post .container .postCard li:last-child {margin-bottom: 30px;} */
-.post .container .postCard li > a {display: flex; height: 230px; justify-content: center; align-items: center; width: 100%; background-color: #fff; box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08); border-radius: 16px; transition: all .1s linear}
-.post .container .postCard li > a:hover {transform: scale(1.03); transition: all .1s linear;}
-.post .container .postCard li.addPostCard span {transition: transform 0.1s ease-in-out; width: 56px; height: 56px; background-color: #555; border-radius: 28px; display: flex; justify-content: center; align-items: center;}
-.post .container .postCard li.addPostCard:hover span {transform: rotate(90deg);}
-.post .container .postCard li.savedPostCard {}
-.post .container .postCard li.savedPostCard > a {flex-wrap: wrap; padding: 24px; justify-content: flex-start;}
-.post .container .postCard li.savedPostCard > a .cardInfo {display: flex; align-items: flex-start; width: 100%; justify-content: space-between; gap: 6px; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px;}
-.post .container .postCard li.savedPostCard > a .cardInfo div { display: flex; align-items: center; gap: 6px;}
-.post .container .postCard li.savedPostCard > a .cardInfo div .photo {min-width: 56px; min-height: 56px; border-radius: 28px;; border: 1px solid #eee; background-color: #ddd; background-image: url(https://picsum.photos/300/300); background-position: center center; background-repeat: no-repeat; background-size: cover;}
-.post .container .postCard li.savedPostCard > a .cardInfo div .fromName {display: flex; flex-wrap: wrap; gap: 10px;}
-.post .container .postCard li.savedPostCard > a .cardInfo div .fromName span {color: #000; word-break: keep-all; width: 100%; font-size: var(--font-size-18); font-weight: 400;}
-.post .container .postCard li.savedPostCard > a .cardInfo div .fromName span em {font-weight: 700;}
-.post .container .postCard li.savedPostCard > a .cardInfo div .fromName .badge {display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: var(--font-size-14); font-weight: 400; letter-spacing: calc(var(--font-size) * 0.005);}
-.post .container .postCard li.savedPostCard > a .cardInfo .btnDelete {transition: 0.2s; min-width: 40px; min-height: 40px; border-radius: 6px; display: flex; align-items: center; justify-content: center; border: 1px solid #ccc;}
-.post .container .postCard li.savedPostCard > a .cardInfo .btnDelete:hover {background-color: #F6F6F6; border: 1px solid #ccc; transition: 0.2s;}
-.post .container .postCard li.savedPostCard > a .content {text-align: left; line-height: 1.2; font-weight: 400; word-break: keep-all; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; font-size: var(--font-size-15); color: #4A4A4A; letter-spacing: calc(var(--font-size) * 0.005);}
-.post .container .postCard li.savedPostCard > a .date {text-align: left; color: #999; font-size: var(--font-size-12);}
+.post .container .postCard li > a {
+  display: flex;
+  height: 230px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  transition: all 0.1s linear;
+}
+.post .container .postCard li > a:hover {
+  transform: scale(1.03);
+  transition: all 0.1s linear;
+}
+.post .container .postCard li.addPostCard span {
+  transition: transform 0.1s ease-in-out;
+  width: 56px;
+  height: 56px;
+  background-color: #555;
+  border-radius: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.post .container .postCard li.addPostCard:hover span {
+  transform: rotate(90deg);
+}
+.post .container .postCard li.savedPostCard {
+}
+.post .container .postCard li.savedPostCard > a {
+  flex-wrap: wrap;
+  padding: 24px;
+  justify-content: flex-start;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+  gap: 6px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo div .photo {
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: 28px;
+  border: 1px solid #eee;
+  background-color: #ddd;
+  background-image: url(https://picsum.photos/300/300);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo div .fromName {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo div .fromName span {
+  color: #000;
+  word-break: keep-all;
+  width: 100%;
+  font-size: var(--font-size-18);
+  font-weight: 400;
+}
+.post
+  .container
+  .postCard
+  li.savedPostCard
+  > a
+  .cardInfo
+  div
+  .fromName
+  span
+  em {
+  font-weight: 700;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo div .fromName .badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: var(--font-size-14);
+  font-weight: 400;
+  letter-spacing: calc(var(--font-size) * 0.005);
+}
+.post .container .postCard li.savedPostCard > a .cardInfo .btnDelete {
+  transition: 0.2s;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+.post .container .postCard li.savedPostCard > a .cardInfo .btnDelete:hover {
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+.post .container .postCard li.savedPostCard > a .content {
+  text-align: left;
+  line-height: 1.2;
+  font-weight: 400;
+  word-break: keep-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  font-size: var(--font-size-15);
+  color: #4a4a4a;
+  letter-spacing: calc(var(--font-size) * 0.005);
+}
+.post .container .postCard li.savedPostCard > a .date {
+  text-align: left;
+  color: #999;
+  font-size: var(--font-size-12);
+}
 
-
-.post .container .postCard::-webkit-scrollbar {width: 10px;}
-.post .container .postCard::-webkit-scrollbar-thumb {height: 100px; background: rgba(0, 0, 0, 0.2);border-radius: 10px}
-.post .container .postCard::-webkit-scrollbar-corner {display: none;}
+.post .container .postCard::-webkit-scrollbar {
+  width: 10px;
+}
+.post .container .postCard::-webkit-scrollbar-thumb {
+  height: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.post .container .postCard::-webkit-scrollbar-corner {
+  display: none;
+}
 
 /*=================
 태블릿 기본 세팅
 ===================*/
-@media all and (min-width:768px) {
-  header {display: block; padding: 12px 24px;}
-  header .container .btn_making {font-size: var(--font-size-16)}
+@media all and (min-width: 768px) {
+  header {
+    display: block;
+    padding: 12px 24px;
+  }
+  header .container .btn_making {
+    font-size: var(--font-size-16);
+  }
 
-  main .postHeader {border-bottom: 1px solid #ededed; padding: 12px 24px; }
-  main .postHeader .container {display: flex; align-items: center; justify-content: space-between;}
-  main .postHeader .container .leftWrap {border-bottom: none; padding: 0;}
-  main .postHeader .container .leftWrap p {font-size: var(--font-size-28);}
-  main .postHeader .container .rightWrap {border-bottom: none; padding: 0;}
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List li {padding: 8px 12px; font-size: var(--font-size-16); }
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button {display: flex; gap: 4px; align-items: center; transition: 0.2s;}
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button:hover {background-color: #F6F6F6; border: 1px solid #ccc; transition: 0.2s;}
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button span {display: inline-block; font-size: var(--font-size-16); line-height: 1;}
+  main .postHeader {
+    border-bottom: 1px solid #ededed;
+    padding: 12px 24px;
+  }
+  main .postHeader .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  main .postHeader .container .leftWrap {
+    border-bottom: none;
+    padding: 0;
+  }
+  main .postHeader .container .leftWrap p {
+    font-size: var(--font-size-28);
+  }
+  main .postHeader .container .rightWrap {
+    border-bottom: none;
+    padding: 0;
+  }
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiCollection
+    .emojiTop3List
+    li {
+    padding: 8px 12px;
+    font-size: var(--font-size-16);
+  }
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    button {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    transition: 0.2s;
+  }
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    button:hover {
+    background-color: #f6f6f6;
+    border: 1px solid #ccc;
+    transition: 0.2s;
+  }
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    button
+    span {
+    display: inline-block;
+    font-size: var(--font-size-16);
+    line-height: 1;
+  }
 
-  .post .container .postCard li {flex-basis: calc(50% - 8px); /* 한 줄에 2개씩 배치 (gap 고려) */ max-width: calc(50% - 8px); /* 부모 크기 초과 방지 */}
-  .post .container .postCard li > a {height: 280px;}
-  .post .container .postCard li.savedPostCard > a {flex-direction: column; align-items: flex-start;}
-  .post .container .postCard li.savedPostCard > a .cardInfo div .fromName span {font-size: var(--font-size-20);}
-  .post .container .postCard li.savedPostCard > a .content {font-size: var(--font-size-18); min-height: calc(1em * 3); /* 한 줄 높이 * 3줄 */ max-height: calc(1.5em * 3); /* 최대 3줄까지만 표시 */ line-height: 1.4;}
-  .post .container .postCard li.savedPostCard > a .date {margin-top: auto;}
+  .post .container .postCard li {
+    flex-basis: calc(50% - 8px); /* 한 줄에 2개씩 배치 (gap 고려) */
+    max-width: calc(50% - 8px); /* 부모 크기 초과 방지 */
+  }
+  .post .container .postCard li > a {
+    height: 280px;
+  }
+  .post .container .postCard li.savedPostCard > a {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .post .container .postCard li.savedPostCard > a .cardInfo div .fromName span {
+    font-size: var(--font-size-20);
+  }
+  .post .container .postCard li.savedPostCard > a .content {
+    font-size: var(--font-size-18);
+    min-height: calc(1em * 3); /* 한 줄 높이 * 3줄 */
+    max-height: calc(1.5em * 3); /* 최대 3줄까지만 표시 */
+    line-height: 1.4;
+  }
+  .post .container .postCard li.savedPostCard > a .date {
+    margin-top: auto;
+  }
 }
 
 /*=================
 데스크탑 기본 세팅
 ===================*/
- @media all and (min-width:1024px) {
-  .container { max-width: 1200px;}
-
-
- }
+@media all and (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+  }
+}
 
 /* 미디어 쿼리: 화면 너비가 1248px 이하일 때 */
-@media all and (min-width:1248px) {
-  .post .container .postCard {max-height: 700px;}
-  .post .container .postCard li {flex-basis: calc(33.333% - 11px); /* 한 줄에 3개씩 배치 (gap 고려) */ max-width: calc(33.333% - 11px); /* 부모 크기 초과 방지 */}
- }
+@media all and (min-width: 1248px) {
+  .post .container .postCard {
+    max-height: 700px;
+  }
+  .post .container .postCard li {
+    flex-basis: calc(33.333% - 11px); /* 한 줄에 3개씩 배치 (gap 고려) */
+    max-width: calc(33.333% - 11px); /* 부모 크기 초과 방지 */
+  }
+}
 
 /*이현선 작업 끝*/

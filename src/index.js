@@ -1,14 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css"; // 전체 애플리케이션 적용 css
+import { createRoot } from "react-dom/client";
 import App from "./App";
-import reportWebVitals from "./etc/reportWebVitals";
+import "./App.css"; // 전역 스타일
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-reportWebVitals(); // 웹 성능 측정 함수
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);

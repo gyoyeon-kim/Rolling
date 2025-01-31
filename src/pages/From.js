@@ -7,7 +7,7 @@ import default_profile from "../images/From_img/profile.svg";
 import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 
-/* 텍스트 에디터 */
+/* 텍스트 에디터 */ /* 배포좀*/
 import TextArea from "../component/TextArea";
 
 /*select 박스 */
@@ -32,7 +32,7 @@ const From_GY = () => {
 
   return (
     <div className="main">
-      <div className="header">
+      <div className="fromheader">
         <a href="/">
           <img className="logo" src={rolling_icon} alt="롤링 이미지" />
         </a>

@@ -38,7 +38,10 @@ const FONT_STYLES = {
   notoSans: { fontFamily: '"Noto-Sans", sans-serif' },
   pretendard: { fontFamily: '"Pretendard", sans-serif' },
   nanumMyeongjo: { fontFamily: '"NanumMyengjo", serif' },
-  NanumSonPyeonJiCe: { fontFamily: '"NanumSonPyeonJiCe", sans-serif', fontSize: "24px" },
+  NanumSonPyeonJiCe: {
+    fontFamily: '"NanumSonPyeonJiCe", sans-serif',
+    fontSize: "24px",
+  },
 };
 
 function Post() {
@@ -69,7 +72,8 @@ function Post() {
                   <ul className="emojiTop3List">
                     {EMOJI_DATA.map((emoji, index) => (
                       <li key={index}>
-                        <em>{emoji.emoji}</em><span>{emoji.count}</span>
+                        <em>{emoji.emoji}</em>
+                        <span>{emoji.count}</span>
                       </li>
                     ))}
                   </ul>
@@ -80,7 +84,8 @@ function Post() {
                     <ul>
                       {EMOJI_DATA.map((emoji, index) => (
                         <li key={index}>
-                          <em>{emoji.emoji}</em><span>{emoji.count}</span>
+                          <em>{emoji.emoji}</em>
+                          <span>{emoji.count}</span>
                         </li>
                       ))}
                     </ul>
@@ -88,7 +93,8 @@ function Post() {
                 </div>
                 <div className="emojiPicker">
                   <button>
-                    <img src={addEmoji} alt="이모지 추가하기" /><span>추가</span>
+                    <img src={addEmoji} alt="이모지 추가하기" />
+                    <span>추가</span>
                   </button>
                   <div></div>
                 </div>
@@ -123,7 +129,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="친구" />
                       </div>
                     </div>
@@ -145,7 +153,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="가족" />
                       </div>
                     </div>
@@ -156,9 +166,10 @@ function Post() {
                   <p className="content" style={FONT_STYLES.pretendard}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
@@ -169,7 +180,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="가족" />
                       </div>
                     </div>
@@ -177,12 +190,13 @@ function Post() {
                       <img src={deleteIcon} alt="삭제하기" />
                     </a>
                   </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe }>
+                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
@@ -193,7 +207,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="동료" />
                       </div>
                     </div>
@@ -201,12 +217,13 @@ function Post() {
                       <img src={deleteIcon} alt="삭제하기" />
                     </a>
                   </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe }>
+                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
@@ -217,7 +234,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="지인" />
                       </div>
                     </div>
@@ -225,12 +244,13 @@ function Post() {
                       <img src={deleteIcon} alt="삭제하기" />
                     </a>
                   </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe }>
+                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
@@ -241,7 +261,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="가족" />
                       </div>
                     </div>
@@ -249,12 +271,13 @@ function Post() {
                       <img src={deleteIcon} alt="삭제하기" />
                     </a>
                   </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe }>
+                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
@@ -265,7 +288,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="가족" />
                       </div>
                     </div>
@@ -273,12 +298,13 @@ function Post() {
                       <img src={deleteIcon} alt="삭제하기" />
                     </a>
                   </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe }>
+                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
@@ -289,7 +315,9 @@ function Post() {
                     <div>
                       <div className="photo"></div>
                       <div className="fromName">
-                        <span>From. <em>김동훈</em></span>
+                        <span>
+                          From. <em>김동훈</em>
+                        </span>
                         <Badge type="가족" />
                       </div>
                     </div>
@@ -297,12 +325,13 @@ function Post() {
                       <img src={deleteIcon} alt="삭제하기" />
                     </a>
                   </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe }>
+                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
+                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
+                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
+                    하세요!
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>

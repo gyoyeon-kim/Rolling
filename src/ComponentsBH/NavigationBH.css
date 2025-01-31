@@ -1,0 +1,20 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ccc;
+}
+
+.navigation button {
+  padding: 10px 20px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.navigation button:hover {
+  background-color: #5a54d3;
+}
