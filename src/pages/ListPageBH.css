@@ -38,34 +38,40 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: #6c63ff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.5rem;
+    width: 48px; /* 버튼 크기 */
+    height: 48px;
+    background-color: rgba(255, 255, 255, 0.8); /* 버튼 배경 */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* 버튼 테두리 */
+    border-radius: 50%; /* 원형 버튼 */
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 10;
   }
 
+  /* ✅ 호버 상태 */
   .scroll-button:hover {
-    background-color: #5a54d3;
+    background-color: rgba(255, 255, 255, 1); /* 호버 시 배경색 */
+    border-color: rgba(0, 0, 0, 0.2); /* 호버 시 테두리 */
+    transform: translateY(-50%) scale(1.1); /* 확대 효과 */
   }
 
+  /* ✅ 비활성화 상태 */
   .scroll-button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
+    opacity: 0.5; /* 투명도 */
+    cursor: not-allowed; /* 클릭 불가 */
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.1);
   }
 
+  /* ✅ 왼쪽 버튼 */
   .scroll-button.left {
     left: -20px;
   }
 
+  /* ✅ 오른쪽 버튼 */
   .scroll-button.right {
     right: -20px;
   }
