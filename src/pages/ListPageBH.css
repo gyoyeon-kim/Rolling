@@ -100,10 +100,12 @@
 .card-list {
   display: flex;
   gap: 20px;
-  overflow: hidden;
-  flex: 1;
-  max-width: 1160px; /* 카드 목록 너비 고정 */
-  margin: 0 auto; /* 가운데 정렬 */
+  overflow-x: auto; /* 좌우 스크롤 활성화 */
+  flex-wrap: nowrap; /* 카드가 자동으로 줄어들지 않도록 설정 */
+  justify-content: center; /* 가운데 정렬 */
+  max-width: 1160px;
+  margin: 0 auto;
+  align-items: center; /* 카드가 위아래로 흔들리는 경우 방지 */
 }
 
 /* 반응형 디자인 */
@@ -118,9 +120,10 @@
   }
 
   .card-list {
-    overflow-x: auto; /* 좌우 스크롤 활성화 */
-    -webkit-overflow-scrolling: touch; /* 부드러운 스크롤 */
     max-width: 100%;
+    overflow-x: auto;
+    justify-content: center;
+    align-items: center;
   }
 
   .scroll-button.left {
@@ -155,7 +158,6 @@
 @media (max-width: 767px) {
   .list-content {
     max-width: 100%;
-    padding: 12px; /* 페이지 좌우 여백 축소 */
   }
 
   .list-section {
@@ -163,10 +165,8 @@
   }
 
   .card-list {
-    overflow-x: auto; /* 좌우 스크롤 활성화 */
-    -webkit-overflow-scrolling: touch;
-    max-width: 100%;
-    gap: 16px; /* 카드 간격 축소 */
+    gap: 16px;
+    overflow-x: auto;
   }
 
   .scroll-button.left {
