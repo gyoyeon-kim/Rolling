@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Post from './pages/Post';
 import List from './pages/List';
+import From from './pages/From';
 import Navigation from './components/Navigation';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/post" element={<Post />} />
           <Route path="/list" element={<List />} />
+          <Route path="/From" element={<From />} />
         </Routes>
       </div>
     </Router>
