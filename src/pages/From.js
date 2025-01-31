@@ -8,7 +8,7 @@ import { Editor, EditorState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 /* 텍스트 에디터 */
-import TextArea from '../components/TextArea';
+import TextArea from '../component/TextArea';
 
 /*select 박스 */
 import arrowTop from '../images/From_img/arrow_top.svg';

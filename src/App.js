@@ -7,7 +7,6 @@ import Post_HS from './pages/postHS';
 import From from './pages/From';
 import Home from './pages/Home';
 import ListPageBH from './pages/ListPageBH';
-import PostPageBH from './pages/PostPageBH';
 
 function App() {
   return (
