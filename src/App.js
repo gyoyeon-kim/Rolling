@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Post_HS />} />
+        <Route path="/post/123" element={<Post_HS />} />
         <Route path="/post/message" element={<From />} />
       </Routes>
     </Router>
