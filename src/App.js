@@ -12,10 +12,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/list" element={<ListPageBH />} />
-        <Route path="/post" element={<PostPageBH />} />
-        <Route path="/post/:id" element={<PostPageBH />} />
         <Route path="/post/123" element={<Post_HS />} />
         <Route path="/post/message" element={<From />} />
       </Routes>
