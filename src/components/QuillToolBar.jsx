@@ -1,8 +1,8 @@
-import { Quill } from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { Quill } from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 function QuillToolbar() {
-  const icons = Quill.import("ui/icons");
+  const icons = Quill.import('ui/icons');
 
   // 색상 아이콘을 정의
   icons.color = `<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="3 3 24 24" fill="none">
