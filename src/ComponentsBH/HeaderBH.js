@@ -15,7 +15,7 @@ function HeaderBH() {
         </div>
         <button
           className="create-paper-button"
-          onClick={() => navigate("/post")}
+          onClick={() => navigate("/post/123")}
         >
           롤링 페이퍼 만들기
         </button>
