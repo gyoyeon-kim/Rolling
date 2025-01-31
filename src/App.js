@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import Post_HS from "./pages/post_HS";
+import Post_HS from "./pages/postHS";
 
 function App() {
   return (
