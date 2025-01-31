@@ -7,6 +7,7 @@
     "@draft-js-plugins/static-toolbar": "^4.1.4",
     "cra-template": "1.2.0",
     "draft-js": "^0.11.7",
+    "quill": "^2.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-quill": "^2.0.0",
@@ -42,7 +43,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",

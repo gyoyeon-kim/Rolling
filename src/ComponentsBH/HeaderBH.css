@@ -4,9 +4,9 @@
   border-bottom: 1px solid #ddd; /* 헤더 하단 경계선 */
   width: 100%; /* 전체 너비를 100%로 설정 */
   height: 64px; /* 높이를 64px로 설정 */
-  display: flex;  /* 플렉스박스로 설정하여 자식 요소를 제어 */
-  justify-content: center;  /* 자식 요소를 가로로 가운데 정렬 */
-  align-items: center;  /* 자식 요소를 세로로 가운데 정렬 */
+  display: flex; /* 플렉스박스로 설정하여 자식 요소를 제어 */
+  justify-content: center; /* 자식 요소를 가로로 가운데 정렬 */
+  align-items: center; /* 자식 요소를 세로로 가운데 정렬 */
 }
 
 /* 헬퍼 컨테이너 */
@@ -49,7 +49,9 @@
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .create-paper-button:hover {
@@ -78,8 +80,6 @@
   }
 }
 
-
-
 /* Tablet (1024px 이하) */
 @media (max-width: 1024px) {
   .header-container {
@@ -91,8 +91,6 @@
     margin-left: 10px; /* 버튼 간격 조정 */
   }
 }
-
-
 
 /* Mobile (767px 이하) */
 @media (max-width: 767px) {

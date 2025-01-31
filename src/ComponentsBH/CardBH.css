@@ -27,16 +27,16 @@
 
 /* ✅ 태블릿 크기를 먼저 적용 (768px ~ 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
-.card {
-  width: 275px !important; /* 태블릿 크기 강제 적용 */
-  height: 260px !important; /* 태블릿 크기 강제 적용 */
-}
+  .card {
+    width: 275px !important; /* 태블릿 크기 강제 적용 */
+    height: 260px !important; /* 태블릿 크기 강제 적용 */
+  }
 }
 
 /* ✅ 모바일 화면에서만 208x232 적용 (768px 이하) */
 @media (max-width: 767px) {
-.card {
-  width: 208px !important; /* 모바일 크기 강제 적용 */
-  height: 232px !important; /* 모바일 크기 강제 적용 */
-}
+  .card {
+    width: 208px !important; /* 모바일 크기 강제 적용 */
+    height: 232px !important; /* 모바일 크기 강제 적용 */
+  }
 }

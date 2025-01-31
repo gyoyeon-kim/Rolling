@@ -1,6 +1,6 @@
-import React from "react";
-import CardBH from "./CardBH"; // Card_BH의 경로 확인 및 수정
-import "./CardListBH.css";
+import React from 'react';
+import CardBH from './CardBH'; // Card_BH의 경로 확인 및 수정
+import './CardListBH.css';
 
 function CardListBH({ items }) {
   return (
