@@ -1,7 +1,30 @@
 .card-list {
-    display: flex;
-    gap: 20px;
-    overflow: auto;
-    padding: 10px;
+  display: flex;
+  gap: 20px;
+  overflow: hidden; /* 기본적으로 스크롤 비활성화 */
+  padding: 10px;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+
+/* ✅ PC 모드 (1025px 이상) */
+@media (min-width: 1025px) {
+  .card-list {
+    overflow-x: hidden !important; /* PC에서는 가로 스크롤 완전히 제거 */
+    -webkit-overflow-scrolling: auto;
+    scrollbar-width: auto;
   }
-  
+}
+
+/* ✅ 태블릿 및 모바일 (1024px 이하) */
+@media (max-width: 1024px) {
+  .card-list {
+    overflow-x: auto !important; /* 터치 스크롤 활성화 */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .card-list::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨김 */
+  }
+}
