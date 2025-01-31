@@ -9,6 +9,11 @@ function ListPageBH() {
   const [recentItems, setRecentItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [popularStartIndex, setPopularStartIndex] = useState(0);
+  const [recentStartIndex, setRecentStartIndex] = useState(0);
+
+  const maxVisibleCards = 4;
 
   // 테스트 데이터
   const defaultPopularItems = [
@@ -16,15 +21,28 @@ function ListPageBH() {
     { id: 2, title: "테스트 인기 카드 2", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
     { id: 3, title: "테스트 인기 카드 3", image: "/image3.jpg", stats: "3명이 작성했어요!" },
     { id: 4, title: "테스트 인기 카드 4", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    { id: 5, title: "테스트 인기 카드 5", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 6, title: "테스트 인기 카드 6", image: "/image4.jpg", stats: "1명이 작성했어요!" },
   ];
 
   const defaultRecentItems = [
     { id: 5, title: "테스트 최근 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
     { id: 6, title: "테스트 최근 카드 2", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
     { id: 7, title: "테스트 최근 카드 3", image: "/image3.jpg", stats: "3명이 작성했어요!" },
-    { id: 8, title: "테스트 최근 카드 4", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    // { id: 8, title: "테스트 최근 카드 4", image: "/image4.jpg", stats: "1명이 작성했어요!" },
   ];
 
+  // 반응형 디바이스 감지
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileOrTablet(window.innerWidth <= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -53,17 +71,89 @@ function ListPageBH() {
   if (loading) return <p>⏳ 데이터 불러오는 중입니다. 잠시만 기다려 주세요...</p>;
   if (error) return <p>❌ {error}</p>;
 
+  // 스크롤 핸들러
+  const scrollLeft = (section) => {
+    if (section === "popular") {
+      setPopularStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    } else if (section === "recent") {
+      setRecentStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    }
+  };
+
+  const scrollRight = (section, itemsLength) => {
+    if (section === "popular") {
+      setPopularStartIndex((prevIndex) =>
+        Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
+      );
+    } else if (section === "recent") {
+      setRecentStartIndex((prevIndex) =>
+        Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
+      );
+    }
+  };
+
   return (
     <div className="list-page">
       <HeaderBH />
       <main className="list-content">
+        {/* 인기 섹션 */}
         <section className="list-section">
           <h2 className="section-title">인기 롤링 페이퍼 🔥</h2>
-          <CardListBH items={popularItems} />
+          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
+            {!isMobileOrTablet && popularItems.length > maxVisibleCards && popularStartIndex > 0 && (
+              <button
+                className="scroll-button left"
+                onClick={() => scrollLeft("popular")}
+              >
+                ◀
+              </button>
+            )}
+            <CardListBH
+              items={isMobileOrTablet
+                ? popularItems
+                : popularItems.slice(popularStartIndex, popularStartIndex + maxVisibleCards)}
+            />
+            {!isMobileOrTablet &&
+              popularItems.length > maxVisibleCards &&
+              popularStartIndex + maxVisibleCards < popularItems.length && (
+                <button
+                  className="scroll-button right"
+                  onClick={() => scrollRight("popular", popularItems.length)}
+                >
+                  ▶
+                </button>
+              )}
+          </div>
         </section>
+
+        {/* 최근 섹션 */}
         <section className="list-section">
           <h2 className="section-title">최근에 만든 롤링 페이퍼 ⭐</h2>
-          <CardListBH items={recentItems} />
+          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
+            {!isMobileOrTablet && recentItems.length > maxVisibleCards && recentStartIndex > 0 && (
+              <button
+                className="scroll-button left"
+                onClick={() => scrollLeft("recent")}
+              >
+                ◀
+              </button>
+            )}
+            <CardListBH
+              items={isMobileOrTablet
+                ? recentItems
+                : recentItems.slice(recentStartIndex, recentStartIndex + maxVisibleCards)}
+            />
+            {!isMobileOrTablet &&
+              recentItems.length > maxVisibleCards &&
+              recentStartIndex + maxVisibleCards < recentItems.length && (
+                <button
+                  className="scroll-button right"
+                  onClick={() => scrollRight("recent", recentItems.length)}
+                >
+                  ▶
+                </button>
+              )}
+          </div>
         </section>
         <FooterBtnBH />
       </main>
