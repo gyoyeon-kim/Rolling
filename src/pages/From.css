@@ -80,6 +80,12 @@ p {
   line-height: 150%;
 }
 
+.name-error_message {
+  color: var(--error);
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: -5px;
+}
 .profileimg {
   width: 717px;
   height: 142px;

@@ -13,8 +13,9 @@ import TextArea from "../component/TextArea";
 import arrowTop from "../images/From_img/arrow_top.svg";
 import arrowDown from "../images/From_img/arrow_bottom.svg";
 
-const From_GY = () => {
+const From = () => {
   const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(""); // name 에러 상태
   const [profileImageURL, setProfileImageURL] = useState(default_profile);
   const [relationship, setRelationship] = useState("지인");
   const [font, setFont] = useState("Noto Sans");
@@ -22,6 +23,20 @@ const From_GY = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // 버튼 비활성화 상태 추가
 
   const textContainerRef = useRef(null);
+
+  // 이름 입력 처리
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  // 이름 입력 필드에서 포커스를 잃었을 때 에러 상태 처리
+  const handleNameBlur = () => {
+    if (!name) {
+      setNameError("값을 입력해 주세요.");
+    } else {
+      setNameError(""); // 값이 있으면 에러 메시지 초기화
+    }
+  };
 
   const handleQuillValue = useCallback((value) => {
     const cleanedHtml = value.replace(/<p><br><\/p>/g, ""); // 줄바꿈 시 자동 생성 태그 없앰
@@ -79,11 +94,13 @@ const From_GY = () => {
         <div className="name">
           <p className="title">From.</p>
           <input
-            className="name_input"
+            className={`name_input ${nameError ? "error" : ""}`}
             placeholder="이름을 입력해 주세요."
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
+            onBlur={handleNameBlur} // 포커스 아웃 시 에러 체크
           />
+          {nameError && <p className="name-error_message">{nameError}</p>}{" "}
         </div>
         <div className="profileimg">
           <p className="title">프로필 이미지</p>
@@ -160,4 +177,4 @@ const From_GY = () => {
   );
 };
 
-export default From_GY;
+export default From;
