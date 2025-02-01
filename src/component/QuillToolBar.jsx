@@ -43,7 +43,7 @@ function QuillToolbar() {
         <select className="ql-color" />
       </span>
       <span className="ql-formats">
-        <select className="ql-size">
+        <select className="ql-size" defaultValue="16px">
           <option value="10px">10</option>
           <option value="12px">12</option>
           <option value="14px">14</option>
