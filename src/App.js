@@ -9,6 +9,8 @@ import From from "./pages/From";
 import Home from "./pages/Home";
 import ListPageBH from "./pages/ListPageBH";
 import PostPageBH from "./pages/PostPageBH"
+import ToPageKM from "./pages/ToPageKM"
+
 function App() {
   return (
     <Router>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/post/:id" element={<PostPageBH />} />
         <Route path="/post/123" element={<Post_HS />} />
         <Route path="/post/message" element={<From />} />
+        <Route path="/post/789" element={<ToPageKM />} />
       </Routes>
     </Router>
   );
