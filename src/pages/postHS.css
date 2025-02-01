@@ -242,6 +242,8 @@ main .postHeader {
   position: sticky;
   top: 0;
   background-color: #fff;
+  z-index: 10;
+  position: relative;
 }
 main .postHeader .container .leftWrap {
   border-bottom: 1px solid #ededed;
@@ -335,7 +337,7 @@ main
   border-radius: 8px;
   gap: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
-  display: none;
+  /* display: none; */
 }
 main
   .postHeader
@@ -357,6 +359,9 @@ main
   font-weight: 400;
   letter-spacing: calc(var(--font-size) * 0.005);
 }
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker {
+  position: relative;
+}
 main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button {
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -373,9 +378,22 @@ main
   span {
   display: none;
 }
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiPicker
+  .emojiPickerDiv {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+}
 main .postHeader .container .rightWrap .shareSnsWrap {
   position: relative;
   padding-left: 20px;
+  z-index: 10;
 }
 main .postHeader .container .rightWrap .shareSnsWrap:before {
   position: absolute;
@@ -387,20 +405,19 @@ main .postHeader .container .rightWrap .shareSnsWrap:before {
   top: 50%;
   transform: translateY(-50%);
 }
-main .postHeader .container .rightWrap .shareSnsWrap button {
+main .postHeader .container .rightWrap .shareSnsWrap > button {
   transition: 0.2s;
   border: 1px solid #ccc;
   border-radius: 6px;
   background: none;
   padding: 6px 8px;
 }
-main .postHeader .container .rightWrap .shareSnsWrap button:hover {
+main .postHeader .container .rightWrap .shareSnsWrap > button:hover {
   background-color: #f6f6f6;
   border: 1px solid #ccc;
   transition: 0.2s;
 }
 main .postHeader .container .rightWrap .shareSnsWrap ul {
-  display: none;
   width: 140px;
   position: absolute;
   right: 0;
@@ -410,8 +427,11 @@ main .postHeader .container .rightWrap .shareSnsWrap ul {
   border-radius: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   padding: 10px 0;
+  z-index: 999;
 }
-main .postHeader .container .rightWrap .shareSnsWrap ul li a {
+ul.shareList.active {display: block;}
+ul.shareList.hidden {display: none;}
+main .postHeader .container .rightWrap .shareSnsWrap ul li button {
   display: block;
   padding: 12px 16px;
   font-weight: 400;
@@ -420,8 +440,11 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li a {
   background-color: #fff;
   transition: 0.2s;
   color: var(--gray-900);
+  border: none;
+  width: 100%;
+  text-align: left;
 }
-main .postHeader .container .rightWrap .shareSnsWrap ul li a:hover {
+main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   background-color: #f6f6f6;
   transition: 0.2s;
 }
@@ -435,6 +458,8 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li a:hover {
   box-sizing: border-box;
   position: fixed;
   width: 100%;
+  z-index: 0;
+  overflow: visible;
 }
 .post .container {
   display: flex;
@@ -639,6 +664,10 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li a:hover {
     .emojiCollection
     .emojiTop3List
     li {
+    padding: 8px 12px;
+    font-size: var(--font-size-16);
+  }
+  main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul li {
     padding: 8px 12px;
     font-size: var(--font-size-16);
   }
