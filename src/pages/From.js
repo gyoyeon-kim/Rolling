@@ -20,15 +20,13 @@ const From_GY = () => {
 
   const textContainerRef = useRef(null);
 
-  // 에디터 상태 변경 함수
   const handleQuillValue = useCallback((value) => {
     const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
     setQuillValue(cleanedHtml);
   }, []);
 
-  // 버튼 클릭 시 데이터 확인
   const handleSubmit = () => {
-    console.log("🟢 최종 데이터 제출:");
+    console.log("최종 데이터 제출:");
     console.log("이름:", name);
     console.log("선택된 프로필:", profileImageURL);
     console.log("선택된 관계:", relationship);
@@ -36,7 +34,7 @@ const From_GY = () => {
     console.log("선택된 폰트:", font);
   };
 
-  // API 요청 보내기 함수
+  /*
   const sendMessage = async () => {
     const url =
       "https://rolling-api.vercel.app/13-1/recipients/{recipientId}/messages/";
@@ -67,7 +65,7 @@ const From_GY = () => {
       //alert("오류가 발생했습니다.");
     }
   };
-
+*/
   return (
     <div className="main">
       <div className="fromheader">
@@ -147,9 +145,7 @@ const From_GY = () => {
         </div>
 
         <div>
-          <button className="btn_send" onClick={sendMessage}>
-            보내기
-          </button>
+          <button className="btn_send" /*onClick={sendMessage}*/>보내기</button>
         </div>
       </div>
     </div>
