@@ -1,0 +1,46 @@
+.footer-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .footer-btn {
+    padding: 14px 24px;
+    background-color: #9935ff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    height: 56px;
+    width: 280px; /* 기본값 (PC 버전) */
+  }
+  
+  .footer-btn:hover {
+    background-color: #591183;
+    transform: scale(1.05);
+  }
+  
+  .footer-btn:active {
+    background-color: #4839a1;
+    transform: scale(0.98);
+  }
+  
+  /* 태블릿 (화면 너비 768px ~ 1024px) */
+  @media (max-width: 1024px) {
+    .footer-btn {
+      width: 720px;
+      font-size: 14px;
+    }
+  }
+  
+  /* 모바일 (화면 너비 767px 이하) */
+  @media (max-width: 767px) {
+    .footer-btn {
+      width: 320px;
+      font-size: 14px;
+    }
+  }
+  
