@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./postHS.css";
 
 // 이미지 import
@@ -44,16 +45,17 @@ const FONT_STYLES = {
 };
 
 function Post() {
+
+  const navigate = useNavigate(); // useNavigate 훅 추가
+
   return (
     <>
       <header>
         <div className="container">
-          <a href="#" className="logo">
+          <Link to="/" className="logo">
             <img src={logo} alt="롤링페이퍼 로고" />
-          </a>
-          <a href="#" className="btn_making">
-            롤링페이퍼 만들기
-          </a>
+          </Link>
+          <Link to="/post" className="btn_making">롤링페이퍼 만들기</Link>
         </div>
       </header>
       <main>
@@ -102,12 +104,8 @@ function Post() {
                   <img src={shareIcon} alt="공유하기" />
                 </button>
                 <ul>
-                  <li>
-                    <a href="#">카카오톡 공유</a>
-                  </li>
-                  <li>
-                    <a href="#">URL 공유</a>
-                  </li>
+                  <li><a role="button">카카오톡 공유</a></li>
+                  <li><a role="button">URL 공유</a></li>
                 </ul>
               </div>
             </div>
@@ -119,14 +117,14 @@ function Post() {
           <div className="container">
             <ul className="postCard">
               <li className="addPostCard">
-                <a href="#">
+                <Link to="/post/message">
                   <span>
-                    <img src={plusIcon} alt="이모지 추가하기" />
+                      <img src={plusIcon} alt="이모지 추가하기" />
                   </span>
-                </a>
+                </Link>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -150,7 +148,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -177,7 +175,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -204,7 +202,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -231,7 +229,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -258,7 +256,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -285,7 +283,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
@@ -312,7 +310,7 @@ function Post() {
                 </a>
               </li>
               <li className="savedPostCard">
-                <a href="#">
+                <a role="button">
                   <div className="cardInfo">
                     <div>
                       <div className="photo"></div>
