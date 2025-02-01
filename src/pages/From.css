@@ -181,3 +181,16 @@ p {
   cursor: pointer;
   margin-top: 20px;
 }
+
+/* 비활성화 상태일 때 */
+.btn_send:disabled {
+  background: var(--gray-400);
+  cursor: not-allowed;
+}
+
+@font-face {
+  font-family: "NanumMyeongjo";
+  font-style: normal;
+  font-weight: 100;
+  src: url(../fonts/NanumMyeongjo.ttf);
+}

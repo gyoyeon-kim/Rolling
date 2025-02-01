@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useRef } from "react";
+import axios from "axios"; // axios import 추가
 import "./From.css";
 import Quill from "quill";
 
@@ -18,6 +19,7 @@ const From_GY = () => {
   const [relationship, setRelationship] = useState("지인");
   const [font, setFont] = useState("Noto Sans");
   const [quillValue, setQuillValue] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // 버튼 비활성화 상태 추가
 
   const textContainerRef = useRef(null);
 
@@ -27,7 +29,6 @@ const From_GY = () => {
   }, []);
 
   const handleSubmit = () => {
-    console.log("최종 데이터 제출:");
     console.log("이름:", name);
     console.log("선택된 프로필:", profileImageURL);
     console.log("선택된 관계:", relationship);
@@ -35,10 +36,10 @@ const From_GY = () => {
     console.log("선택된 폰트:", font);
   };
 
-  /*
+  /* 메시지 생성 API */
   const sendMessage = async () => {
     const url =
-      "https://rolling-api.vercel.app/13-1/recipients/{recipientId}/messages/";
+      "https://rolling-navy.vercel.app/13-1/recipients/9761/messages/";
     const data = {
       sender: name,
       profileImageURL: profileImageURL,
@@ -47,26 +48,26 @@ const From_GY = () => {
       font: font,
     };
 
+    console.log("전송할 데이터:", data);
+
     try {
-      const response = await fetch(url, {
-        method: "POST",
+      const response = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         alert("메시지가 성공적으로 전송되었습니다!");
       } else {
-        //alert("메시지 전송에 실패했습니다.");
+        alert("메시지 전송에 실패했습니다.");
       }
     } catch (error) {
       console.error("메시지 전송 중 오류 발생:", error);
-      //alert("오류가 발생했습니다.");
+      alert("오류가 발생했습니다.");
     }
   };
-*/
+
   return (
     <div className="main">
       <div className="fromheader">
@@ -146,7 +147,11 @@ const From_GY = () => {
         </div>
 
         <div>
-          <button className="btn_send" onClick={handleSubmit}>
+          <button
+            className="btn_send"
+            onClick={handleSubmit}
+            disabled={!name || !quillValue}
+          >
             보내기
           </button>
         </div>
