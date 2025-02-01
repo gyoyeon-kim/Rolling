@@ -1,7 +1,21 @@
 import { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+const Size = Quill.import("formats/size");
+Size.whitelist = [
+  "10px",
+  "12px",
+  "14px",
+  "16px",
+  "20px",
+  "24px",
+  "32px",
+  "40px",
+  "48px",
+];
+Quill.register(Size, true);
 
 function QuillToolbar() {
+  // 툴바 아이콘 정의
   const icons = Quill.import("ui/icons");
 
   // 색상 아이콘을 정의

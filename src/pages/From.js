@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useRef } from "react";
 import "./From.css";
+import Quill from "quill";
 
 import rolling_icon from "../images/logo.svg";
 import default_profile from "../images/From_img/profile.svg";
@@ -12,16 +13,16 @@ import arrowTop from "../images/From_img/arrow_top.svg";
 import arrowDown from "../images/From_img/arrow_bottom.svg";
 
 const From_GY = () => {
-  const [name, setName] = useState(""); // 이름 상태 추가
-  const [profileImageURL, setProfileImageURL] = useState(default_profile); // 프로필 이미지 URL 상태 추가
-  const [relationship, setRelationship] = useState("지인"); // 관계 상태 추가
-  const [font, setFont] = useState("Noto Sans"); // 폰트 상태 추가
+  const [name, setName] = useState("");
+  const [profileImageURL, setProfileImageURL] = useState(default_profile);
+  const [relationship, setRelationship] = useState("지인");
+  const [font, setFont] = useState("Noto Sans");
   const [quillValue, setQuillValue] = useState("");
 
   const textContainerRef = useRef(null);
 
   const handleQuillValue = useCallback((value) => {
-    const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
+    const cleanedHtml = value.replace(/<p><br><\/p>/g, ""); // 줄바꿈 시 자동 생성 태그 없앰
     setQuillValue(cleanedHtml);
   }, []);
 
@@ -145,7 +146,9 @@ const From_GY = () => {
         </div>
 
         <div>
-          <button className="btn_send" /*onClick={sendMessage}*/>보내기</button>
+          <button className="btn_send" onClick={handleSubmit}>
+            보내기
+          </button>
         </div>
       </div>
     </div>
