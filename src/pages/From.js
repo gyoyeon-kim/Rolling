@@ -5,6 +5,7 @@ import Quill from "quill";
 
 import rolling_icon from "../images/logo.svg";
 import default_profile from "../images/From_img/profile.svg";
+import btn_plus from "../images/From_img/Btn_plus.svg";
 
 /* 텍스트 에디터 */
 import TextArea from "../component/TextArea";
@@ -12,6 +13,18 @@ import TextArea from "../component/TextArea";
 /* select 박스 */
 import arrowTop from "../images/From_img/arrow_top.svg";
 import arrowDown from "../images/From_img/arrow_bottom.svg";
+
+/* 예시 이미지 */
+const ex_img = [
+  "https://i.ibb.co/YBLJML7/Frame-2593.png",
+  "https://images.pexels.com/photos/10718305/pexels-photo-10718305.jpeg",
+  "https://images.pexels.com/photos/1716861/pexels-photo-1716861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/7829101/pexels-photo-7829101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/1606655/pexels-photo-1606655.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/10987077/pexels-photo-10987077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/25916115/pexels-photo-25916115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/15009816/pexels-photo-15009816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+];
 
 const From = () => {
   const [name, setName] = useState("");
@@ -42,6 +55,18 @@ const From = () => {
     const cleanedHtml = value.replace(/<p><br><\/p>/g, ""); // 줄바꿈 시 자동 생성 태그 없앰
     setQuillValue(cleanedHtml);
   }, []);
+
+  // 이미지 업로드
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImageURL(reader.result); // 업로드한 이미지 URL을 상태로 저장
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = () => {
     console.log("이름:", name);
@@ -112,17 +137,36 @@ const From = () => {
             />
             <div className="profile_list">
               <p className="profile_list-p">프로필 이미지를 선택해주세요!</p>
+
+              {/* 프로필 이미지 영역 */}
               <div className="profile_list_image">
+                {/* 사용자 이미지 파일*/}
+                <img
+                  className="custom_image"
+                  src={btn_plus}
+                  alt="프로필 이미지"
+                  onClick={() => document.getElementById("fileInput").click()} // 클릭 시 파일 선택 input 활성화
+                />
+
+                {/* 기본 프로필 이미지들 */}
                 {[...Array(7)].map((_, index) => (
                   <img
                     key={index}
                     className="list_image"
-                    src={default_profile} // 실제 이미지 URL을 사용 예정
+                    src={ex_img[index % ex_img.length]}
                     alt={`프로필 이미지 ${index + 1}`}
-                    onClick={() => setProfileImageURL(default_profile)} // 클릭 시 변경
+                    onClick={
+                      () => setProfileImageURL(ex_img[index % ex_img.length]) // 기본 이미지로 변경
+                    }
                   />
                 ))}
               </div>
+              <input
+                type="file"
+                id="fileInput"
+                style={{ display: "none" }} // 파일 선택 input은 화면에 보이지 않게 숨김
+                onChange={handleImageUpload}
+              />
             </div>
           </div>
         </div>

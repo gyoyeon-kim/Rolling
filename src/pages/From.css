@@ -121,12 +121,23 @@ p {
   width: 80px;
   height: 80px;
   object-fit: cover; /* 이미지가 비율에 맞게 잘리도록 설정 */
+  border-radius: 50%; /* 동그라미로 만들기 */
+}
+
+.custom_image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .list_image {
   width: 56px;
   height: 56px;
-  object-fit: cover; /* 이미지가 비율에 맞게 잘리도록 설정 */
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .relation {
