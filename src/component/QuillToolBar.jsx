@@ -1,5 +1,6 @@
 import { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
 const Size = Quill.import("formats/size");
 Size.whitelist = [
   "10px",

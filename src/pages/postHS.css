@@ -124,7 +124,7 @@ a {
   text-decoration: none;
   color: #666;
 }
-em,
+
 i {
   font-style: normal;
 }
@@ -429,8 +429,12 @@ main .postHeader .container .rightWrap .shareSnsWrap ul {
   padding: 10px 0;
   z-index: 999;
 }
-ul.shareList.active {display: block;}
-ul.shareList.hidden {display: none;}
+ul.shareList.active {
+  display: block;
+}
+ul.shareList.hidden {
+  display: none;
+}
 main .postHeader .container .rightWrap .shareSnsWrap ul li button {
   display: block;
   padding: 12px 16px;
@@ -667,7 +671,15 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     padding: 8px 12px;
     font-size: var(--font-size-16);
   }
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul li {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiCollection
+    .emojiAllList
+    ul
+    li {
     padding: 8px 12px;
     font-size: var(--font-size-16);
   }
