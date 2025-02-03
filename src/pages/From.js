@@ -30,10 +30,16 @@ const From = () => {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(""); // name 에러 상태
   const [profileImageURL, setProfileImageURL] = useState(default_profile);
+
+  {
+    /*관계 */
+  }
+  const [isOpen, setIsOpen] = useState(false);
   const [relationship, setRelationship] = useState("지인");
-  const [font, setFont] = useState("Noto Sans");
+  const options = ["친구", "지인", "동료", "가족"];
+
   const [quillValue, setQuillValue] = useState("");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // 버튼 비활성화 상태 추가
+  const [font, setFont] = useState("Noto Sans");
 
   const textContainerRef = useRef(null);
 
@@ -68,6 +74,7 @@ const From = () => {
     }
   };
 
+  /* 데이터 테스트용 */
   const handleSubmit = () => {
     console.log("이름:", name);
     console.log("선택된 프로필:", profileImageURL);
@@ -173,16 +180,28 @@ const From = () => {
 
         <div className="relation">
           <p className="title">상대와의 관계</p>
-          <select
-            className="selection"
-            value={relationship}
-            onChange={(e) => setRelationship(e.target.value)}
-          >
-            <option value="친구">친구</option>
-            <option value="지인">지인</option>
-            <option value="동료">동료</option>
-            <option value="가족">가족</option>
-          </select>
+          <div className="selection" onClick={() => setIsOpen(!isOpen)}>
+            {relationship}
+            <img
+              src={isOpen ? arrowTop : arrowDown}
+              className="btn_selection"
+            />
+            {isOpen && (
+              <ul className="selection_list">
+                {options.map((option, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setRelationship(option);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
 
         <div className="content">
