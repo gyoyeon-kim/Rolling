@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
+import EmojiButton from "../component/EmojiButton";
 
 function Home() {
   return (
@@ -74,19 +75,13 @@ function Home() {
             </p>
 
             <div className="emoji-preview">
-              <div className="emoji-display">
-                <button type="button">👍 10</button>
-                <button type="button">😍 24</button>
-                <button type="button">🥺 10</button>
-                <button type="button">👏 8</button>
-                <button type="button">...</button>
-              </div>
-              <button type="button" className="emoji-add-btn">
-                추가
-              </button>
+              <EmojiButton emoji="👍" count={10} />
+              <EmojiButton emoji="😍" count={24} />
+              <EmojiButton emoji="🥺" count={10} />
+              <EmojiButton emoji="👏" count={8} />
+              <EmojiButton emoji="..." count={0} />
             </div>
           </div>
-          {/* 구경해보기 버튼 */}
         </section>
         <section className="explore section">
           <Link to="/list" className="explore-button">
