@@ -17,9 +17,6 @@
   display: flex;
   align-items: center;
 }
-.logo-img {
-  height: 40px;
-}
 
 /* 롤링 페이퍼 만들기 버튼 */
 .rolling-button {

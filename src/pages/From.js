@@ -23,6 +23,7 @@ const ex_img = [
   "https://images.pexels.com/photos/10987077/pexels-photo-10987077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   "https://images.pexels.com/photos/25916115/pexels-photo-25916115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   "https://images.pexels.com/photos/15009816/pexels-photo-15009816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/30081152/pexels-photo-30081152.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 ];
 
 const From = () => {
@@ -127,7 +128,7 @@ const From = () => {
     <div className="main">
       <div className="fromheader">
         <a href="/">
-          <img className="logo" src={rolling_icon} alt="롤링 이미지" />
+          <img className="fromlogo " src={rolling_icon} alt="롤링 이미지" />
         </a>
       </div>
       <div className="from_main">
@@ -162,7 +163,7 @@ const From = () => {
                 />
 
                 {/* 기본 프로필 이미지들 */}
-                {[...Array(7)].map((_, index) => (
+                {[...Array(9)].map((_, index) => (
                   <img
                     key={index}
                     className="list_image"
