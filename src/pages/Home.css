@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  background-color: #f6f8ff;
 }
 
 /* 제목, 부제목, 설명 */
@@ -42,28 +43,102 @@
 }
 
 /* 카드 배치 */
+/* 카드들을 감싸는 전체 컨테이너 */
+.point-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
+  padding: 40px 20px; /* 필요에 따라 조정 */
+  background-color: #f6f8ff;
+}
+
+/* 섹션의 제목 부분 */
+.point-title {
+  color: #9b51e0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.point-subtitle {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+.point-description {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+/* 카드가 나란히 배치되는 래퍼 */
 .card-wrapper {
   display: flex;
   gap: 16px;
 }
+
+/* 개별 카드 스타일 */
 .card {
   flex: 1;
-  background-color: #fafafa;
-  padding: 16px;
+  background-color: #fff;
+  border: 1px solid #ebebeb;
   border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* 카드의 헤더 영역 (프로필, 작성자 정보 등) */
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* 프로필 이미지를 원 모양으로 보여주기 */
+.card-profile-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+}
+
+.card-profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 작성자 정보 */
+.card-author-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .card-author {
   font-weight: bold;
-  margin-bottom: 8px;
-  display: inline-block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
 }
-.card-content {
-  margin-bottom: 8px;
+
+.card-relationship {
+  font-weight: normal;
+  font-size: 0.85rem;
+  color: #9b51e0;
+  margin-left: 8px;
 }
+
 .card-date {
-  font-size: 12px;
+  font-size: 0.8rem;
   color: #999;
 }
+
+/* 카드 본문 내용 */
+.card-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* + 버튼 카드 스타일 */
 .card-placeholder {
   flex: 1;
   display: flex;
@@ -74,6 +149,12 @@
   border-radius: 8px;
   font-size: 24px;
   color: #aaa;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card-placeholder:hover {
+  background-color: #eaeaea;
 }
 
 /* 이모지 영역 */
@@ -104,9 +185,9 @@
   text-align: center;
 }
 .explore-button {
-  background-color: #5b67f1;
+  background-color: #9935ff;
   color: #fff;
-  padding: 14px 24px;
+  padding: 14px 60px;
   border-radius: 6px;
   text-decoration: none;
   font-size: 16px;

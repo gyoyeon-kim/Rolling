@@ -16,20 +16,47 @@ function Home() {
               누구나 손쉽게, 온라인 <br /> 롤링 페이퍼를 만들 수 있어요
             </h3>
             <p className="point-description">로그인 없이 자유롭게 만들어요.</p>
-            {/* 오른쪽에 카드가 2개 있고 + 버튼이 있는 형태라고 가정 */}
+
+            {/* 오른쪽에 카드가 2개 있고 + 버튼이 있는 형태 */}
             <div className="card-wrapper">
+              {/* 첫 번째 카드 */}
               <div className="card">
-                <span className="card-author">From. 이성준</span>
+                <div className="card-header">
+                  <div className="card-profile-image">
+                    {/* 여기서 실제 이미지 경로나 URL로 변경 */}
+                    <img src="/path/to/profile1.jpg" alt="프로필1" />
+                  </div>
+                  <div className="card-author-info">
+                    <span className="card-author">
+                      From. 이성준{" "}
+                      <span className="card-relationship">친구</span>
+                    </span>
+                    <span className="card-date">2025.1.29</span>
+                  </div>
+                </div>
                 <p className="card-content">여러분의 치아는 안녕하신가요?</p>
-                <span className="card-date">2025.1.29</span>
               </div>
+
+              {/* 두 번째 카드 */}
               <div className="card">
-                <span className="card-author">From. 이성준</span>
+                <div className="card-header">
+                  <div className="card-profile-image">
+                    <img src="/path/to/profile2.jpg" alt="프로필2" />
+                  </div>
+                  <div className="card-author-info">
+                    <span className="card-author">
+                      From. 이성준{" "}
+                      <span className="card-relationship">동료</span>
+                    </span>
+                    <span className="card-date">2025.01.30</span>
+                  </div>
+                </div>
                 <p className="card-content">
                   일교차가 큰 시기입니다. 모두 건강 잘 챙기세요!
                 </p>
-                <span className="card-date">2025.01.30</span>
               </div>
+
+              {/* + 버튼 카드 */}
               <div className="card-placeholder">+</div>
             </div>
           </div>
@@ -45,6 +72,7 @@ function Home() {
             <p className="point-description">
               롤링 페이퍼에 이모지를 추가할 수 있어요!
             </p>
+
             <div className="emoji-preview">
               <div className="emoji-display">
                 <button type="button">👍 10</button>
