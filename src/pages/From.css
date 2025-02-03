@@ -82,7 +82,7 @@ p {
 .name-error_message {
   color: var(--error);
   font-size: 14px;
-  margin-left: 10px;
+  margin-left: 5px;
   margin-top: -5px;
 }
 .profileimg {
