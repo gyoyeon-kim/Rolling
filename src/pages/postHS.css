@@ -784,7 +784,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   gap: 6px;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;}
-.modalContents .modalHeader .date {color: var(--gray-400);}
+.modalContents .modalHeader .date {color: var(--gray-400); font-size: var(--font-size-12);}
 .modalContents .modalHeader > div {
   display: flex;
   align-items: center;
@@ -821,6 +821,12 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 .modalContents .modalBtn button {border:none; font-size: 16px; font-weight: 400; background-color: var(--purple-600);
   color: var(--white); border-radius: 6px; padding: 8px 16px;  transition: .2s;}
 .modalContents .modalBtn button:hover {background-color: var(--purple-700); transition: .2s;}
+
+@media all and (min-width: 768px) {
+  .modalContents .modalHeader > div .fromName span {font-size: var(--font-size-20);}
+  .modalContents .modalBody p {font-size: var(--font-size-18);}
+}
+
 
 ::-webkit-scrollbar {
   width: 10px;

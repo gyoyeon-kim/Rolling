@@ -402,9 +402,9 @@ function Post() {
                           <Badge type={card.type} />
                         </div>
                       </div>
-                      <a className="btnDelete">
+                      {/* <a className="btnDelete">
                         <img src={deleteIcon} alt="삭제하기" />
-                      </a>
+                      </a> */}
                     </div>
                     <p className="content" style={FONT_STYLES[card.fontStyle]}>
                       {card.message}
