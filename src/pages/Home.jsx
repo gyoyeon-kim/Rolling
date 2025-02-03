@@ -86,10 +86,9 @@ function Home() {
               </button>
             </div>
           </div>
+          {/* 구경해보기 버튼 */}
         </section>
-
-        {/* 구경해보기 버튼 */}
-        <section className="explore-section">
+        <section className="explore section">
           <Link to="/list" className="explore-button">
             구경하러 가기
           </Link>

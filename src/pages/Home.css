@@ -41,6 +41,7 @@
   gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
   padding: 40px 20px; /* 필요에 따라 조정 */
   background-color: #f6f8ff;
+  border-radius: 4px;
 }
 
 .point-subtitle {
@@ -71,17 +72,33 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 768px) {
-  .card-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 자식 요소를 수평 중앙 정렬 */
-  }
+  @media (max-width: 768px) {
+    .card-wrapper {
+      /* 수평 스크롤을 가능하게 하는 핵심 */
+      display: flex;
+      flex-direction: row; /* 필요 시 제거 가능 */
+      overflow-x: auto; /* 수평 스크롤 표시 */
+      scroll-snap-type: x mandatory; /* 부드러운 스크롤 경험을 위해 추가 (옵션) */
+      -webkit-overflow-scrolling: touch; /* iOS에서 부드럽게 스크롤 되도록 */
+      gap: 16px; /* 카드 간격 */
+    }
+    .card-wrapper.card-wrapper::-webkit-scrollbar {
+      /* 크롬,사파리에서만 밑 스크롤 숨김*/
+      display: none;
+    }
 
-  .card {
-    flex: none;
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 16px;
+    .card {
+      flex: 0 0 auto; /* 아이템이 줄바꿈되지 않고 고정된 크기 */
+      min-width: 240px; /* 원하는 만큼 최소 너비 설정 */
+      scroll-snap-align: start; /* 스크롤 스냅 포인트 (옵션) */
+    }
+
+    /* + 버튼 카드도 동일한 규칙 */
+    .card-placeholder {
+      flex: 0 0 auto;
+      min-width: 100px; /* 원하는 만큼 조정 */
+      scroll-snap-align: start;
+    }
   }
 }
 
@@ -180,34 +197,30 @@
 }
 
 /* 구경해보기 버튼 섹션 */
-.explore-section {
+.explore.section {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  position: relative;
-  padding: 0 12px;
+  align-self: center;
 }
 .explore-button {
-  background-color: #b566ff; /* 버튼 색상 */
-  color: white;
-  border: none;
-  padding: 15px 30px; /* 버튼 크기 */
-  font-size: 16px;
-  border-radius: 5px; /* 모서리 둥글게 */
-  cursor: pointer;
-  margin: 8px 0;
+  color: #fff;
+  padding: 14px 24px;
+  background-color: #9935ff;
+  border-radius: 6px;
+  transition: 0.3s;
+  width: 280px;
+  align-self: center;
 }
+
 .explore-button:hover {
   opacity: 0.8;
 }
-
-@media (max-width: 768px) {
-  .explore-section {
-    top: -20px; /* 작은 화면에서만 위로 이동 */
-    width: 100%;
-  }
-}
-
-@media (min-width: 769px) {
+/* 태블릿 및 모바일 (769px 미만)에서 구경해보기 버튼 전체 너비 적용 */
+@media (max-width: 769px) {
   .explore-button {
-    top: 0; /* 큰 화면에서는 원래 위치 유지 */
+    width: 100%; /* 컨테이너 전체 너비 */
+    padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
+    box-sizing: border-box;
   }
 }
