@@ -36,10 +36,19 @@ const From = () => {
   }
   const [isOpen, setIsOpen] = useState(false);
   const [relationship, setRelationship] = useState("지인");
-  const options = ["친구", "지인", "동료", "가족"];
+  const realtion_options = ["친구", "지인", "동료", "가족"];
+
+  /*폰트 */
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [font, setFont] = useState("Noto Sans");
+  const font_options = [
+    "Pretendard",
+    "Noto Sans",
+    "나눔명조",
+    "나눔손글씨 손편지체",
+  ];
 
   const [quillValue, setQuillValue] = useState("");
-  const [font, setFont] = useState("Noto Sans");
 
   const textContainerRef = useRef(null);
 
@@ -188,15 +197,15 @@ const From = () => {
             />
             {isOpen && (
               <ul className="selection_list">
-                {options.map((option, index) => (
+                {realtion_options.map((realtion_options, index) => (
                   <li
                     key={index}
                     onClick={() => {
-                      setRelationship(option);
+                      setRelationship(realtion_options);
                       setIsOpen(false);
                     }}
                   >
-                    {option}
+                    {realtion_options}
                   </li>
                 ))}
               </ul>
@@ -214,16 +223,28 @@ const From = () => {
 
         <div className="font">
           <p className="title">폰트 선택</p>
-          <select
-            className="selection"
-            value={font}
-            onChange={(e) => setFont(e.target.value)}
-          >
-            <option value="Pretendard">Pretendard</option>
-            <option value="Noto Sans">Noto Sans</option>
-            <option value="나눔명조">나눔명조</option>
-            <option value="나눔손글씨 손편지체">나눔손글씨 손편지체</option>
-          </select>
+          <div className="selection" onClick={() => setIsOpen2(!isOpen2)}>
+            {font}
+            <img
+              src={isOpen2 ? arrowTop : arrowDown}
+              className="btn_selection"
+            />
+            {isOpen2 && (
+              <ul className="selection_list">
+                {font_options.map((font_options, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setFont(font_options);
+                      setIsOpen2(false);
+                    }}
+                  >
+                    {font_options}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
 
         <div>

@@ -22,7 +22,6 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: auto; /* 내용이 넘칠 경우 스크롤이 생기도록 설정 */
 }
 
 .logo {
