@@ -1,12 +1,5 @@
-
 * {
   box-sizing: border-box;
-}
-.header {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 10;  /* 다른 요소와 겹치지 않도록 */
 }
 
 .logo {

@@ -6,7 +6,7 @@ function CardBH({ id, title, image, stats }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/post/${id}`); // 동적 경로 이동
+    navigate(`/post/123`); // 동적 경로 이동
   };
 
   return (

@@ -130,8 +130,7 @@ a {
   color: #666;
 }
 
-em,
-i {
+em, i {
   font-style: normal;
 }
 
@@ -419,15 +418,12 @@ main .postHeader .container .rightWrap .shareSnsWrap ul {
   padding: 10px 0;
   z-index: 999;
 }
-
 ul.shareList.active {
   display: block;
 }
-
 ul.shareList.hidden {
   display: none;
 }
-
 main .postHeader .container .rightWrap .shareSnsWrap ul li button {
   display: block;
   padding: 12px 16px;
@@ -627,6 +623,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   font-weight: 400;
   word-break: keep-all;
   display: -webkit-box;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
