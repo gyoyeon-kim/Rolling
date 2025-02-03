@@ -21,8 +21,16 @@
 
 /* 제목, 부제목, 설명 */
 .point-title {
-  color: #5b67f1;
-  font-weight: 700;
+  background-color: #a74bff;
+  color: #ffffff;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 9999px;
+  outline: none;
+  display: inline-block;
+  align-self: flex-start; /* 추가 */
 }
 .point-subtitle {
   font-size: 24px;
