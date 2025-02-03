@@ -157,9 +157,9 @@ function Post() {
   }, [isEmojiListOpen]);
 
   // 이모지 선택 시 처리
-  const onEmojiClick = (emojiData) => {
-    console.log("선택된 이모지:", emojiData.emoji);
-  };
+  // const onEmojiClick = (emojiData) => {
+  //   console.log("선택된 이모지:", emojiData.emoji);
+  // };
 
   const saveRecentEmoji = (emoji) => {
     let recentEmojis = JSON.parse(localStorage.getItem('recentEmojis')) || [];
@@ -169,6 +169,56 @@ function Post() {
       localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
     }
   };
+
+  // 이모지 선택시 이모지 저장
+  const saveEmojiToLocal = (emoji) => {
+    let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || []; // 기존 데이터 불러오기
+    const existingEmoji = savedEmojis.find((item) => item.emoji === emoji);
+  
+    if (existingEmoji) {
+      existingEmoji.count += 1; // 이미 있는 이모지는 count 증가
+    } else {
+      savedEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
+    }
+  
+    localStorage.setItem("savedEmojis", JSON.stringify(savedEmojis)); // localStorage에 저장
+  };
+
+  // 저장된 이모지 불러오기
+  const [emojiList, setEmojiList] = useState([]);
+
+  useEffect(() => {
+    const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || [];
+  
+    // 🔥 count 기준으로 내림차순 정렬
+    storedEmojis.sort((a, b) => b.count - a.count);
+  
+    setEmojiList(storedEmojis);
+  }, []);
+
+  // 이모지 선택시 화면에 반영
+  const onEmojiClick = (emojiData) => {
+    saveEmojiToLocal(emojiData.emoji);
+  
+    setEmojiList((prev) => {
+      const updatedList = [...prev];
+      const existingEmoji = updatedList.find((item) => item.emoji === emojiData.emoji);
+  
+      if (existingEmoji) {
+        existingEmoji.count += 1;
+      } else {
+        updatedList.push({ emoji: emojiData.emoji, count: 1 });
+      }
+  
+      // 🔥 count 기준으로 내림차순 정렬
+      return updatedList.sort((a, b) => b.count - a.count);
+    });
+  };
+
+  // 이모지 카운트 수 상위 3개만 가져오기
+  const topEmojis = emojiList.slice(0, 3);
+  
+  
 
   // 1. 카카오 SDK 초기화 (최초 한 번 실행)
   useEffect(() => {
@@ -320,12 +370,12 @@ function Post() {
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
                   <ul className="emojiTop3List">
-                    {EMOJI_DATA.map((emoji, index) => (
-                      <li key={index}>
-                        <em>{emoji.emoji}</em>
-                        <span>{emoji.count}</span>
-                      </li>
-                    ))}
+                  {topEmojis.map((emoji, index) => (
+                    <li key={index}>
+                      <span>{emoji.emoji}</span>
+                      <span>{emoji.count}</span>
+                    </li>
+                  ))}
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
@@ -333,9 +383,10 @@ function Post() {
                       </button>
                       {isEmojiListOpen && (
                         <ul>
-                          {EMOJI_DATA.map((emoji, index) => (
+                          {emojiList.map((emoji, index) => (
                             <li key={index}>
-                              <em>{emoji.emoji}</em><span>{emoji.count}</span>
+                              <span>{emoji.emoji}</span>
+                              <span>{emoji.count}</span>
                             </li>
                           ))}
                         </ul>
