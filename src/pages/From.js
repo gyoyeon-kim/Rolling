@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useRef } from "react";
-import axios from "axios"; // axios import 추가
+import axios from "axios";
 import "./From.css";
-import Quill from "quill";
 
 import rolling_icon from "../images/logo.svg";
 import default_profile from "../images/From_img/profile.svg";
@@ -27,18 +26,22 @@ const ex_img = [
 ];
 
 const From = () => {
+  /* 이름 */
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(""); // name 에러 상태
+
   const [profileImageURL, setProfileImageURL] = useState(default_profile);
 
-  {
-    /*관계 */
-  }
+  /* 관계 */
   const [isOpen, setIsOpen] = useState(false);
   const [relationship, setRelationship] = useState("지인");
   const realtion_options = ["친구", "지인", "동료", "가족"];
 
-  /*폰트 */
+  /* 내용 */
+  const [quillValue, setQuillValue] = useState("");
+  const textContainerRef = useRef(null);
+
+  /* 폰트 */
   const [isOpen2, setIsOpen2] = useState(false);
   const [font, setFont] = useState("Noto Sans");
   const font_options = [
@@ -48,11 +51,7 @@ const From = () => {
     "나눔손글씨 손편지체",
   ];
 
-  const [quillValue, setQuillValue] = useState("");
-
-  const textContainerRef = useRef(null);
-
-  // 이름 입력 처리
+  /* 이름 입력 처리 */
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -60,18 +59,19 @@ const From = () => {
   // 이름 입력 필드에서 포커스를 잃었을 때 에러 상태 처리
   const handleNameBlur = () => {
     if (!name) {
-      setNameError("값을 입력해 주세요.");
+      setNameError("값을 입력해 주세요!");
     } else {
       setNameError(""); // 값이 있으면 에러 메시지 초기화
     }
   };
 
+  /* 내용 에디터 */
   const handleQuillValue = useCallback((value) => {
     const cleanedHtml = value.replace(/<p><br><\/p>/g, ""); // 줄바꿈 시 자동 생성 태그 없앰
     setQuillValue(cleanedHtml);
   }, []);
 
-  // 이미지 업로드
+  /* 이미지 업로드*/
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -94,8 +94,7 @@ const From = () => {
 
   /* 메시지 생성 API */
   const sendMessage = async () => {
-    const url =
-      "https://rolling-navy.vercel.app/13-1/recipients/9761/messages/";
+    const url = "https://rolling-api.vercel.app/13-1/recipients/9767/messages/";
     const data = {
       sender: name,
       profileImageURL: profileImageURL,
@@ -153,10 +152,8 @@ const From = () => {
             />
             <div className="profile_list">
               <p className="profile_list-p">프로필 이미지를 선택해주세요!</p>
-
-              {/* 프로필 이미지 영역 */}
               <div className="profile_list_image">
-                {/* 사용자 이미지 파일*/}
+                {/* 사용자 지정 이미지 파일 */}
                 <img
                   className="custom_image"
                   src={btn_plus}
@@ -171,13 +168,13 @@ const From = () => {
                     className="list_image"
                     src={ex_img[index % ex_img.length]}
                     alt={`프로필 이미지 ${index + 1}`}
-                    onClick={
-                      () => setProfileImageURL(ex_img[index % ex_img.length]) // 기본 이미지로 변경
+                    onClick={() =>
+                      setProfileImageURL(ex_img[index % ex_img.length])
                     }
                   />
                 ))}
               </div>
-              <input
+              <input // custom_image img에서 활성화
                 type="file"
                 id="fileInput"
                 style={{ display: "none" }} // 파일 선택 input은 화면에 보이지 않게 숨김
