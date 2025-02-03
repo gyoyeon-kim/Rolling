@@ -362,7 +362,7 @@ main
 main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker {
   position: relative;
 }
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button {
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker > button {
   border: 1px solid #ccc;
   border-radius: 6px;
   background: none;
@@ -466,6 +466,9 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   flex-direction: column;
   height: 100%; /* 부모가 post이므로 100vh 유지 */
 }
+.post .container .deletePostCard {text-align: right; margin-bottom: 20px;}
+.post .container .deletePostCard button {border: none; border-radius: 6px; transition: .2s; padding: 8px 16px; line-height: 1.2; font-size: 14px; font-weight: 400; background: var(--purple-600); color: var(--white);}
+.post .container .deletePostCard button:hover {background-color: var(--purple-700); transition: .2s;}
 .post .container .postCard {
   padding-bottom: 16px;
   display: flex;
@@ -645,6 +648,9 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     align-items: center;
     justify-content: space-between;
   }
+
+  .post .container .deletePostCard button {font-size: 16px; }
+
   main .postHeader .container .leftWrap {
     border-bottom: none;
     padding: 0;
@@ -689,7 +695,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     .rightWrap
     .emojiReactionWrap
     .emojiPicker
-    button:hover {
+    > button:hover {
     background-color: #f6f6f6;
     border: 1px solid #ccc;
     transition: 0.2s;
@@ -750,6 +756,82 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     flex-basis: calc(33.333% - 11px); /* 한 줄에 3개씩 배치 (gap 고려) */
     max-width: calc(33.333% - 11px); /* 부모 크기 초과 방지 */
   }
+}
+
+/* 모달창 */
+.modal {align-items: center;
+  background: #0006;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;}
+.modalContents { background-color: var(--white); border-radius: 16px; display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 20px;
+  height: 475px;
+  padding: 30px;
+  width: calc(100% - 40px);
+  max-width: 600px;}
+.modalContents .modalHeader {display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  gap: 6px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;}
+.modalContents .modalHeader .date {color: var(--gray-400);}
+.modalContents .modalHeader > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.modalContents .modalHeader > div .photo {
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: 28px;
+  border: 1px solid #eee;
+  background-color: #ddd;
+  background-image: url(https://picsum.photos/300/300);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;}
+.modalContents .modalHeader > div .fromName {    display: flex;
+  flex-wrap: wrap;
+  gap: 10px;}
+.modalContents .modalHeader > div .fromName span {color: #000;
+  word-break: keep-all;
+  width: 100%;
+  font-size: var(--font-size-18);
+  font-weight: 400;}
+.modalContents .modalHeader > div .fromName span em {font-weight: 700;}
+.modalContents .modalHeader > div .fromName .badge {display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: var(--font-size-14);
+  font-weight: 400;
+  letter-spacing: calc(var(--font-size)* 0.005);}
+.modalContents .modalBody {height: 300px; overflow: auto;}
+.modalContents .modalBody p {line-height: 1.4; word-break: keep-all;}
+.modalContents .modalBtn {align-items: center; display: flex; justify-content: center;}
+.modalContents .modalBtn button {border:none; font-size: 16px; font-weight: 400; background-color: var(--purple-600);
+  color: var(--white); border-radius: 6px; padding: 8px 16px;  transition: .2s;}
+.modalContents .modalBtn button:hover {background-color: var(--purple-700); transition: .2s;}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  height: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-corner {
+  display: none;
 }
 
 /*이현선 작업 끝*/

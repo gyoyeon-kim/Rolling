@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import EmojiPicker, { Theme, EmojiStyle,SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
 import "./postHS.css";
@@ -11,21 +11,8 @@ import shareIcon from "../images/share-24.svg";
 import plusIcon from "../images/plus.svg";
 import deleteIcon from "../images/ico_delete.svg";
 
-// 배지 컴포넌트
-const Badge = ({ type }) => {
-  const BADGE_STYLES = {
-    지인: { background: "#FFF0D6", color: "#FF8832" }, // 연한 주황색
-    동료: { background: "#F8F0FF", color: "#9935FF" }, // 연한 보라색
-    가족: { background: "#E4FBDC", color: "#2BA600" }, // 연한 초록색
-    친구: { background: "#E2F5FF", color: "#00A2FE" }, // 연한 파란색
-  };
-
-  return (
-    <em className="badge" style={BADGE_STYLES[type]}>
-      {type}
-    </em>
-  );
-};
+// .env에서 키 불러오기
+const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
 
 // 이모티콘과 그에 대한 반응 카운트
 const EMOJI_DATA = [
@@ -45,8 +32,56 @@ const FONT_STYLES = {
   },
 };
 
-// .env에서 키 불러오기
-const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
+// 배지 컴포넌트
+const Badge = ({ type }) => {
+  const BADGE_STYLES = {
+    지인: { background: "#FFF0D6", color: "#FF8832" }, // 연한 주황색
+    동료: { background: "#F8F0FF", color: "#9935FF" }, // 연한 보라색
+    가족: { background: "#E4FBDC", color: "#2BA600" }, // 연한 초록색
+    친구: { background: "#E2F5FF", color: "#00A2FE" }, // 연한 파란색
+  };
+
+  return (
+    <em className="badge" style={BADGE_STYLES[type]}>
+      {type}
+    </em>
+  );
+};
+
+const dummyData = [
+  {
+    id: 1,
+    name: "홍보희",
+    type: "친구",
+    message: "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+    date: "2023.07.08",
+    fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
+  },
+  {
+    id: 2,
+    name: "김경민",
+    type: "가족",
+    message: "요즘 날씨가 너무 덥죠? 건강 잘 챙기고 맛있는 것도 많이 먹어요!",
+    date: "2023.08.02",
+    fontStyle: "nanumMyeongjo",
+  },
+  {
+    id: 3,
+    name: "김교연",
+    type: "동료",
+    message: "새로운 프로젝트 시작하느라 고생 많아! 이번에도 화이팅!",
+    date: "2023.09.15",
+    fontStyle: "notoSans",
+  },
+  {
+    id: 4,
+    name: "이성준",
+    type: "친구",
+    message: "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+    date: "2023.07.08",
+    fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
+  },
+];
 
 function Post() {
 
@@ -55,25 +90,84 @@ function Post() {
 
   // 공유 버튼 상태 관리
   const [isShareOpen, setIsShareOpen] = useState(false);
-
+  // 공유 버튼 및 목록을 감싸는 ref 생성
+  const shareRef = useRef(null);
   // 공유 버튼을 클릭하면 상태 변경 (토글)
   const toggleShare = () => {
     setIsShareOpen((prev) => !prev);
   };
+  // 외부 클릭 감지 기능 추가
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (shareRef.current && !shareRef.current.contains(event.target)) {
+        setIsShareOpen(false);
+      }
+    }
+
+    if (isShareOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isShareOpen]);
 
   // 이모지 상태 관리
   const [isEmojiListOpen, setIsEmojiListOpen] = useState(false);
-
-  // 이모지 리스트 토글
-  const toggleEmojiList = () => setIsEmojiListOpen(prev => !prev);
-
-  // 이모지 피커 상태
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const emojiRef = useRef(null);
+  const emojiListRef = useRef(null);
+
+  const toggleEmojiList = () => setIsEmojiListOpen((prev) => !prev);
   const toggleEmojiPicker = () => setIsEmojiPickerOpen((prev) => !prev);
 
+  // 외부 클릭 감지 기능 추가 (이모지 피커)
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (emojiRef.current && !emojiRef.current.contains(event.target)) {
+        setIsEmojiPickerOpen(false);
+      }
+    }
+    if (isEmojiPickerOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isEmojiPickerOpen]);
+
+  // 외부 클릭 감지 기능 추가 (이모지 리스트)
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (emojiListRef.current && !emojiListRef.current.contains(event.target)) {
+        setIsEmojiListOpen(false); // 📌 이모지 리스트 외부 클릭 시 닫힘
+      }
+    }
+  
+    if (isEmojiListOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isEmojiListOpen]);
+
   // 이모지 선택 시 처리
-  const onEmojiClick = (event, emojiObject) => {
-    console.log("선택된 이모지:", emojiObject.emoji);
+  const onEmojiClick = (emojiData) => {
+    console.log("선택된 이모지:", emojiData.emoji);
+  };
+
+  const saveRecentEmoji = (emoji) => {
+    let recentEmojis = JSON.parse(localStorage.getItem('recentEmojis')) || [];
+    if (!recentEmojis.includes(emoji)) {
+      recentEmojis.unshift(emoji);
+      if (recentEmojis.length > 10) recentEmojis.pop(); // 최대 10개 저장
+      localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
+    }
   };
 
   // 1. 카카오 SDK 초기화 (최초 한 번 실행)
@@ -151,8 +245,61 @@ function Post() {
     });
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const modalRef = useRef(null);
+
+  // 모달 토글 함수 (카드 정보와 함께 모달 열기)
+  const openModal = (card) => {
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  // 외부 클릭 감지하여 모달 닫기
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setIsModalOpen(false);
+      }
+    }
+
+    if (isModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isModalOpen]);
+
   return (
     <>
+    {isModalOpen && selectedCard && (
+        <div className="modal">
+          <div className="modalContents" ref={modalRef}>
+            <div className="modalHeader">
+              <div>
+                <div className="photo"></div>
+                <div className="fromName">
+                  <span>
+                    From. <em>{selectedCard.name}</em>
+                  </span>
+                  <Badge type={selectedCard.type} />
+                </div>
+              </div>
+              <span className="date">{selectedCard.date}</span>
+            </div>
+            <div className="modalBody">
+              <p className="content" style={FONT_STYLES[selectedCard.fontStyle]}>
+                {selectedCard.message}
+              </p>
+            </div>
+            <div className="modalBtn">
+              <button onClick={() => setIsModalOpen(false)}>확인</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <header>
         <div className="container">
           <Link to="/" className="logo">
@@ -180,7 +327,7 @@ function Post() {
                       </li>
                     ))}
                   </ul>
-                  <div className="emojiAllList">
+                  <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
                         <img src={arrowBottom} alt="이모지 전체보기" />
                       </button>
@@ -195,8 +342,8 @@ function Post() {
                       )}
                   </div>
                 </div>
-                <div className="emojiPicker">
-                  <button onClick={toggleEmojiPicker}>
+                <div className="emojiPicker" ref={emojiRef}>
+                  <button onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}>
                     <img src={addEmoji} alt="이모지 추가하기" />
                     <span>추가</span>
                   </button>
@@ -204,27 +351,27 @@ function Post() {
                     <div className="emojiPickerDiv">
                       <EmojiPicker
                         onEmojiClick={onEmojiClick}
-                        width="320px"
-                        height="400px"
-                        searchDisabled={false} // 🔥 검색 기능 활성화
-                        previewConfig={{ showPreview: false }} // 🔥 미리보기 비활성화
-                        theme={Theme.LIGHT} // 🔥 라이트 테마 적용 (DARK / AUTO 가능)
-                        emojiStyle={EmojiStyle.APPLE} // 🔥 애플 스타일 이모지 적용
-                        skinTonesDisabled={false} // 🔥 스킨톤 선택 활성화
+                        searchDisabled={false} // 검색 활성화
+                        previewConfig={{ showPreview: false }} // 미리보기 비활성화
+                        theme={Theme.LIGHT}
+                        emojiStyle={EmojiStyle.APPLE}
+                        skinTonesDisabled={false} // 스킨톤 선택 활성화
+                        suggestedEmojisMode={SuggestionMode.RECENT} // 최근 사용한 이모지 표시
                       />
                     </div>
                   )}
                 </div>
               </div>
-              <div className="shareSnsWrap">
+              <div className="shareSnsWrap" ref={shareRef}>
                 <button onClick={toggleShare} className="shareBtn">
                   <img src={shareIcon} alt="공유하기" />
                 </button>
-                {/* 공유 목록: isShareOpen이 true일 때만 보이게 */}
-                <ul className={`shareList ${isShareOpen ? "active" : "hidden"}`}>
-                  <li><button onClick={shareKakao}>카카오톡 공유</button></li>
-                  <li><button onClick={copyURL}>URL 복사</button></li>
-                </ul>
+                {isShareOpen && (
+                  <ul className="shareList">
+                    <li><button onClick={shareKakao}>카카오톡 공유</button></li>
+                    <li><button onClick={copyURL}>URL 복사</button></li>
+                  </ul>
+                )}
               </div>
             </div>
           </div>
@@ -233,6 +380,7 @@ function Post() {
 
         <div className="post">
           <div className="container">
+            <p className="deletePostCard"><button>삭제하기</button></p>
             <ul className="postCard">
               <li className="addPostCard">
                 <Link to="/post/message">
@@ -241,31 +389,31 @@ function Post() {
                   </span>
                 </Link>
               </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="친구" />
+              {dummyData.map((card) => (
+                <li key={card.id} className="savedPostCard">
+                  <a role="button" onClick={() => openModal(card)}>
+                    <div className="cardInfo">
+                      <div>
+                        <div className="photo"></div>
+                        <div className="fromName">
+                          <span>
+                            From. <em>{card.name}</em>
+                          </span>
+                          <Badge type={card.type} />
+                        </div>
                       </div>
+                      <a className="btnDelete">
+                        <img src={deleteIcon} alt="삭제하기" />
+                      </a>
                     </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.nanumMyeongjo}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
-              <li className="savedPostCard">
+                    <p className="content" style={FONT_STYLES[card.fontStyle]}>
+                      {card.message}
+                    </p>
+                    <span className="date">{card.date}</span>
+                  </a>
+                </li>
+              ))}
+              {/* <li className="savedPostCard">
                 <a role="button">
                   <div className="cardInfo">
                     <div>
@@ -291,169 +439,7 @@ function Post() {
                   </p>
                   <span className="date">2023.07.08</span>
                 </a>
-              </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="가족" />
-                      </div>
-                    </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
-                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
-                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-                    하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="동료" />
-                      </div>
-                    </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
-                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
-                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-                    하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="지인" />
-                      </div>
-                    </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
-                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
-                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-                    하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="가족" />
-                      </div>
-                    </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
-                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
-                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-                    하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="가족" />
-                      </div>
-                    </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
-                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
-                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-                    하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
-              <li className="savedPostCard">
-                <a role="button">
-                  <div className="cardInfo">
-                    <div>
-                      <div className="photo"></div>
-                      <div className="fromName">
-                        <span>
-                          From. <em>김동훈</em>
-                        </span>
-                        <Badge type="가족" />
-                      </div>
-                    </div>
-                    <a className="btnDelete">
-                      <img src={deleteIcon} alt="삭제하기" />
-                    </a>
-                  </div>
-                  <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
-                    코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-                    조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
-                    부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
-                    또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-                    하세요!
-                  </p>
-                  <span className="date">2023.07.08</span>
-                </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
