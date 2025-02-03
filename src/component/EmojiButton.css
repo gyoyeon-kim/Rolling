@@ -1,14 +1,15 @@
 .emoji-btn {
-  margin: 0 4px;
+  margin-right: 8px;
   background-color: #ededed;
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+  /* 기본 transition 효과 (클릭 전후의 미세한 변화) */
   transition: transform 0.2s;
 }
 
-/* animate 클래스가 있을 때 bounce 애니메이션 적용 */
+/* animate 클래스가 추가되면 bounce 애니메이션 실행 */
 .emoji-btn.animate {
   animation: bounce 0.5s;
 }
