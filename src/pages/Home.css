@@ -12,18 +12,18 @@
   margin: 40px 0;
 }
 
-/* 포인트 섹션 레이아웃 */
-.point-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background-color: #f6f8ff;
+/* 모바일 이하에서 적용: 768px 미만 */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 0 24px; /* 모바일에서 24px로 고정 */
+  }
+  /* 모바일 전용 스타일 (flex 방향 전환 등) */
 }
 
 /* 제목, 부제목, 설명 */
 .point-title {
   background-color: #a74bff;
-  color: #ffffff;
+  color: #fff;
   padding: 8px 12px;
   font-size: 16px;
   font-weight: bold;
@@ -33,16 +33,7 @@
   display: inline-block;
   align-self: flex-start; /* 추가 */
 }
-.point-subtitle {
-  font-size: 24px;
-  line-height: 1.4;
-}
-.point-description {
-  font-size: 16px;
-  color: #666;
-}
 
-/* 카드 배치 */
 /* 카드들을 감싸는 전체 컨테이너 */
 .point-container {
   display: flex;
@@ -50,13 +41,6 @@
   gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
   padding: 40px 20px; /* 필요에 따라 조정 */
   background-color: #f6f8ff;
-}
-
-/* 섹션의 제목 부분 */
-.point-title {
-  color: #9b51e0;
-  font-weight: bold;
-  font-size: 1.2rem;
 }
 
 .point-subtitle {
@@ -74,6 +58,7 @@
 .card-wrapper {
   display: flex;
   gap: 16px;
+  flex-direction: row;
 }
 
 /* 개별 카드 스타일 */
@@ -84,6 +69,20 @@
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 자식 요소를 수평 중앙 정렬 */
+  }
+
+  .card {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 16px;
+  }
 }
 
 /* 카드의 헤더 영역 (프로필, 작성자 정보 등) */
@@ -147,10 +146,10 @@
   background-color: #f3f3f3;
   border: 1px dashed #ccc;
   border-radius: 8px;
-  font-size: 24px;
   color: #aaa;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100%;
 }
 
 .card-placeholder:hover {
@@ -183,36 +182,32 @@
 /* 구경해보기 버튼 섹션 */
 .explore-section {
   text-align: center;
+  position: relative;
+  padding: 0 12px;
 }
 .explore-button {
-  background-color: #9935ff;
-  color: #fff;
-  padding: 14px 60px;
-  border-radius: 6px;
-  text-decoration: none;
+  background-color: #b566ff; /* 버튼 색상 */
+  color: white;
+  border: none;
+  padding: 15px 30px; /* 버튼 크기 */
   font-size: 16px;
-  transition: 0.2s;
+  border-radius: 5px; /* 모서리 둥글게 */
+  cursor: pointer;
+  margin: 8px 0;
 }
 .explore-button:hover {
   opacity: 0.8;
 }
 
-/* Tablet: 화면의 너비가 줄어들면 좌우 여백, 버튼 너비가 변동 */
-@media (max-width: 1024px) {
-  /* 예시로 너비를 살짝 줄이고 글자 크기도 조정 */
-  .explore-button {
-    width: 80%;
-    font-size: 14px;
+@media (max-width: 768px) {
+  .explore-section {
+    top: -20px; /* 작은 화면에서만 위로 이동 */
+    width: 100%;
   }
 }
 
-/* Mobile: 좌우 여백 24px 고정 + 요소 간격 조정 */
-@media (max-width: 767px) {
-  .home-container {
-    padding: 0 24px;
+@media (min-width: 769px) {
+  .explore-button {
+    top: 0; /* 큰 화면에서는 원래 위치 유지 */
   }
-  .card-wrapper {
-    flex-direction: column;
-  }
-  /* 로고와 롤링 버튼 사이 간격 축소는 네비게이션에서 조정해도 무방 */
 }

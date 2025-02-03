@@ -9,7 +9,7 @@ function Home() {
       <Navigation />
       <main className="home-container">
         {/* 서비스 소개 섹션 */}
-        <section className="intro-section">
+        <section>
           <div className="point-container">
             <h2 className="point-title">Point.01</h2>
             <h3 className="point-subtitle">
@@ -56,7 +56,7 @@ function Home() {
                 </p>
               </div>
 
-              {/* + 버튼 카드 */}
+              {/* + 버튼 카드 , To page연결*/}
               <div className="card-placeholder">+</div>
             </div>
           </div>
@@ -91,7 +91,7 @@ function Home() {
         {/* 구경해보기 버튼 */}
         <section className="explore-section">
           <Link to="/list" className="explore-button">
-            구경해보기
+            구경하러 가기
           </Link>
         </section>
       </main>
