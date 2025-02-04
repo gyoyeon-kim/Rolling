@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import EmojiPicker, { Theme, EmojiStyle,SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
+import EmojiPicker, {
+  Theme,
+  EmojiStyle,
+  SuggestionMode,
+  SkinTonePickerLocation,
+} from "emoji-picker-react";
 import "./postHS.css";
 
 // 이미지 import
@@ -49,7 +54,6 @@ const FONT_STYLES = {
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
 
 function Post() {
-
   // useNavigate 훅 추가
   const navigate = useNavigate();
 
@@ -65,7 +69,7 @@ function Post() {
   const [isEmojiListOpen, setIsEmojiListOpen] = useState(false);
 
   // 이모지 리스트 토글
-  const toggleEmojiList = () => setIsEmojiListOpen(prev => !prev);
+  const toggleEmojiList = () => setIsEmojiListOpen((prev) => !prev);
 
   // 이모지 피커 상태
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
@@ -88,20 +92,22 @@ function Post() {
   // 2. 카카오톡 공유 함수
   const shareKakao = () => {
     if (!window.Kakao) {
-      alert("⚠️ 카카오 SDK가 로드되지 않았습니다. 새로고침 후 다시 시도해주세요.");
+      alert(
+        "⚠️ 카카오 SDK가 로드되지 않았습니다. 새로고침 후 다시 시도해주세요."
+      );
       return;
     }
-  
+
     if (!window.Kakao.isInitialized()) {
       alert("⚠️ 카카오 SDK가 초기화되지 않았습니다!");
       return;
     }
-  
+
     if (!window.Kakao.Share) {
       alert("⚠️ Kakao.Share 모듈이 없습니다. 최신 SDK 버전인지 확인하세요.");
       return;
     }
-  
+
     window.Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
@@ -124,15 +130,17 @@ function Post() {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
           console.log("✅ Kakao SDK 초기화 완료!");
         }
-  
+
         if (!window.Kakao.Link) {
           console.log("⚠️ Kakao.Link가 없습니다. Share API를 사용하세요.");
         }
       } else {
-        console.error("⚠️ Kakao SDK가 로드되지 않았습니다! 스크립트 추가 확인 필요.");
+        console.error(
+          "⚠️ Kakao SDK가 로드되지 않았습니다! 스크립트 추가 확인 필요."
+        );
       }
     };
-  
+
     if (!window.Kakao) {
       const script = document.createElement("script");
       script.src = "https://developers.kakao.com/sdk/js/kakao.js";
@@ -182,17 +190,18 @@ function Post() {
                   </ul>
                   <div className="emojiAllList">
                     <button onClick={toggleEmojiList}>
-                        <img src={arrowBottom} alt="이모지 전체보기" />
-                      </button>
-                      {isEmojiListOpen && (
-                        <ul>
-                          {EMOJI_DATA.map((emoji, index) => (
-                            <li key={index}>
-                              <em>{emoji.emoji}</em><span>{emoji.count}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      <img src={arrowBottom} alt="이모지 전체보기" />
+                    </button>
+                    {isEmojiListOpen && (
+                      <ul>
+                        {EMOJI_DATA.map((emoji, index) => (
+                          <li key={index}>
+                            <em>{emoji.emoji}</em>
+                            <span>{emoji.count}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
                 <div className="emojiPicker">
@@ -221,9 +230,15 @@ function Post() {
                   <img src={shareIcon} alt="공유하기" />
                 </button>
                 {/* 공유 목록: isShareOpen이 true일 때만 보이게 */}
-                <ul className={`shareList ${isShareOpen ? "active" : "hidden"}`}>
-                  <li><button onClick={shareKakao}>카카오톡 공유</button></li>
-                  <li><button onClick={copyURL}>URL 복사</button></li>
+                <ul
+                  className={`shareList ${isShareOpen ? "active" : "hidden"}`}
+                >
+                  <li>
+                    <button onClick={shareKakao}>카카오톡 공유</button>
+                  </li>
+                  <li>
+                    <button onClick={copyURL}>URL 복사</button>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -237,7 +252,7 @@ function Post() {
               <li className="addPostCard">
                 <Link to="/post/message">
                   <span>
-                      <img src={plusIcon} alt="이모지 추가하기" />
+                    <img src={plusIcon} alt="이모지 추가하기" />
                   </span>
                 </Link>
               </li>
@@ -392,7 +407,7 @@ function Post() {
                   <p className="content" style={FONT_STYLES.NanumSonPyeonJiCe}>
                     코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
                     조심 또 하세요! 코로나가 또다시 기승을 부리는 요즘이네요.
-                    건강, 체력 모두 조심 또 하세요! 코로나가 또다시 기승을
+                    건강, 체력 모두 조F심 또 하세요! 코로나가 또다시 기승을
                     부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요! 코로나가
                     또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
                     하세요!
