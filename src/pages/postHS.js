@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import EmojiPicker, { Theme, EmojiStyle,SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
 import "./postHS.css";
+import axios from "axios";
 
 // 이미지 import
 import logo from "../images/logo.svg";
@@ -15,11 +16,11 @@ import deleteIcon from "../images/ico_delete.svg";
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
 
 // 이모티콘과 그에 대한 반응 카운트
-const EMOJI_DATA = [
-  { emoji: "🥰", count: 24 },
-  { emoji: "😂", count: 16 },
-  { emoji: "😎", count: 10 },
-];
+// const EMOJI_DATA = [
+//   { emoji: "🥰", count: 24 },
+//   { emoji: "😂", count: 16 },
+//   { emoji: "😎", count: 10 },
+// ];
 
 // 각 문장마다 다른 폰트 적용하기
 const FONT_STYLES = {
@@ -83,7 +84,9 @@ const dummyData = [
   },
 ];
 
+
 function Post() {
+  
 
   // useNavigate 훅 추가
   const navigate = useNavigate();
@@ -321,6 +324,44 @@ function Post() {
     };
   }, [isModalOpen]);
 
+
+// api 데이터 저장 후 불러오기
+const [messages, setMessages] = useState([]);
+
+useEffect(() => {
+  const fetchMessages = async () => {
+    try {
+      // ✅ localStorage에서 recipientId 가져오기 (없으면 오류 출력)
+      const recipientId = localStorage.getItem("recipientId");
+
+      if (!recipientId) {
+        console.error("❌ recipientId가 없습니다. `from.js`에서 메시지를 먼저 보내주세요.");
+        return;
+      }
+
+      const response = await axios.get(
+        `https://rolling-api.vercel.app/13-1/recipients/${recipientId}/messages/`
+      );
+
+      console.log("📥 가져온 메시지 데이터:", response.data); // ✅ 콘솔 확인
+
+      if (!response.data || response.data.length === 0) {
+        console.warn("⚠️ 메시지가 없습니다. `from.js`에서 메시지를 먼저 보내주세요.");
+      }
+
+      setMessages(response.data);
+    } catch (error) {
+      console.error("❌ 메시지 불러오기 실패:", error);
+    }
+  };
+
+  fetchMessages();
+}, []);
+
+
+
+
+
   return (
     <>
     {isModalOpen && selectedCard && (
@@ -440,6 +481,30 @@ function Post() {
                   </span>
                 </Link>
               </li>
+              {/* {messages.map((card) => (
+                <li key={card.id} className="savedPostCard">
+                  <a role="button" onClick={() => openModal(card)}>
+                    <div className="cardInfo">
+                      <div>
+                        <div className="photo">
+                          <img src={card.profileImageURL} alt="프로필 이미지" width="50" />
+                        </div>
+                        <div className="fromName">
+                          <span>
+                            From. <em>{card.sender}</em>
+                          </span>
+                          <Badge type={card.relationship} />
+                        </div>
+                      </div>
+                    </div>
+                    <p className="content" style={FONT_STYLES[card.font]}>
+                      {card.content}
+                    </p>
+                    <span className="date">{card.createdAt}</span>
+                  </a>
+                </li>
+              ))} */}
+
               {dummyData.map((card) => (
                 <li key={card.id} className="savedPostCard">
                   <a role="button" onClick={() => openModal(card)}>
