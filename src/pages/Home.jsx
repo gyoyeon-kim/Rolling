@@ -18,7 +18,7 @@ function Home() {
             </h3>
             <p className="point-description">로그인 없이 자유롭게 만들어요.</p>
 
-            {/* 오른쪽에 카드가 2개 있고 + 버튼이 있는 형태 */}
+            {/* 왼쪽에 카드 2개 + 버튼이 있는 형태 */}
             <div className="card-wrapper">
               {/* 첫 번째 카드 */}
               <div className="card">
