@@ -217,7 +217,15 @@
   opacity: 0.8;
 }
 /* 태블릿 및 모바일 (769px 미만)에서 구경해보기 버튼 전체 너비 적용 */
-@media (max-width: 769px) {
+@media (max-width: 768px) {
+  .explore-button {
+    width: 100%; /* 컨테이너 전체 너비 */
+    padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1370px) {
   .explore-button {
     width: 100%; /* 컨테이너 전체 너비 */
     padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */

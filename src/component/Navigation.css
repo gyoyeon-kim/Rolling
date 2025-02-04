@@ -27,7 +27,8 @@
   text-decoration: none;
   font-size: 16px;
   transition: 0.2s;
-  margin-top: 22px;
+  margin-top: 16px;
+  flex-wrap: nowrap;
 }
 .rolling-button:hover {
   opacity: 0.8;
@@ -41,5 +42,17 @@
   .rolling-button {
     padding: 10px 16px;
     font-size: 18px;
+  }
+}
+@media (max-width: 375px) {
+  .nav-container {
+    padding: 0 24px;
+    flex-direction: row;
+    align-items: flex-end;
+    align-items: center;
+  }
+  .rolling-button {
+    padding: 10px 16px;
+    font-size: 16px;
   }
 }
