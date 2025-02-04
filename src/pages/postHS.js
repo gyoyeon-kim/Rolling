@@ -1,6 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import EmojiPicker, { Theme, EmojiStyle,SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
+import EmojiPicker, {
+  Theme,
+  EmojiStyle,
+  SuggestionMode,
+  SkinTonePickerLocation,
+} from "emoji-picker-react";
 import "./postHS.css";
 import axios from "axios";
 
@@ -54,7 +59,8 @@ const dummyData = [
     id: 1,
     name: "홍보희",
     type: "친구",
-    message: "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+    message:
+      "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
     date: "2023.07.08",
     fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
   },
@@ -78,7 +84,8 @@ const dummyData = [
     id: 4,
     name: "이성준",
     type: "친구",
-    message: "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+    message:
+      "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
     date: "2023.07.08",
     fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
   },
@@ -87,7 +94,6 @@ const dummyData = [
 
 function Post() {
   
-
   // useNavigate 훅 추가
   const navigate = useNavigate();
 
@@ -145,15 +151,18 @@ function Post() {
   // 외부 클릭 감지 기능 추가 (이모지 리스트)
   useEffect(() => {
     function handleClickOutside(event) {
-      if (emojiListRef.current && !emojiListRef.current.contains(event.target)) {
+      if (
+        emojiListRef.current &&
+        !emojiListRef.current.contains(event.target)
+      ) {
         setIsEmojiListOpen(false); // 📌 이모지 리스트 외부 클릭 시 닫힘
       }
     }
-  
+
     if (isEmojiListOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -165,11 +174,11 @@ function Post() {
   // };
 
   const saveRecentEmoji = (emoji) => {
-    let recentEmojis = JSON.parse(localStorage.getItem('recentEmojis')) || [];
+    let recentEmojis = JSON.parse(localStorage.getItem("recentEmojis")) || [];
     if (!recentEmojis.includes(emoji)) {
       recentEmojis.unshift(emoji);
       if (recentEmojis.length > 10) recentEmojis.pop(); // 최대 10개 저장
-      localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
+      localStorage.setItem("recentEmojis", JSON.stringify(recentEmojis));
     }
   };
 
@@ -177,13 +186,13 @@ function Post() {
   const saveEmojiToLocal = (emoji) => {
     let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || []; // 기존 데이터 불러오기
     const existingEmoji = savedEmojis.find((item) => item.emoji === emoji);
-  
+
     if (existingEmoji) {
       existingEmoji.count += 1; // 이미 있는 이모지는 count 증가
     } else {
       savedEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
     }
-  
+
     localStorage.setItem("savedEmojis", JSON.stringify(savedEmojis)); // localStorage에 저장
   };
 
@@ -192,27 +201,29 @@ function Post() {
 
   useEffect(() => {
     const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || [];
-  
+
     // 🔥 count 기준으로 내림차순 정렬
     storedEmojis.sort((a, b) => b.count - a.count);
-  
+
     setEmojiList(storedEmojis);
   }, []);
 
   // 이모지 선택시 화면에 반영
   const onEmojiClick = (emojiData) => {
     saveEmojiToLocal(emojiData.emoji);
-  
+
     setEmojiList((prev) => {
       const updatedList = [...prev];
-      const existingEmoji = updatedList.find((item) => item.emoji === emojiData.emoji);
-  
+      const existingEmoji = updatedList.find(
+        (item) => item.emoji === emojiData.emoji
+      );
+
       if (existingEmoji) {
         existingEmoji.count += 1;
       } else {
         updatedList.push({ emoji: emojiData.emoji, count: 1 });
       }
-  
+
       // 🔥 count 기준으로 내림차순 정렬
       return updatedList.sort((a, b) => b.count - a.count);
     });
@@ -220,8 +231,6 @@ function Post() {
 
   // 이모지 카운트 수 상위 3개만 가져오기
   const topEmojis = emojiList.slice(0, 3);
-  
-  
 
   // 1. 카카오 SDK 초기화 (최초 한 번 실행)
   useEffect(() => {
@@ -235,20 +244,22 @@ function Post() {
   // 2. 카카오톡 공유 함수
   const shareKakao = () => {
     if (!window.Kakao) {
-      alert("⚠️ 카카오 SDK가 로드되지 않았습니다. 새로고침 후 다시 시도해주세요.");
+      alert(
+        "⚠️ 카카오 SDK가 로드되지 않았습니다. 새로고침 후 다시 시도해주세요."
+      );
       return;
     }
-  
+
     if (!window.Kakao.isInitialized()) {
       alert("⚠️ 카카오 SDK가 초기화되지 않았습니다!");
       return;
     }
-  
+
     if (!window.Kakao.Share) {
       alert("⚠️ Kakao.Share 모듈이 없습니다. 최신 SDK 버전인지 확인하세요.");
       return;
     }
-  
+
     window.Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
@@ -271,15 +282,17 @@ function Post() {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
           console.log("✅ Kakao SDK 초기화 완료!");
         }
-  
+
         if (!window.Kakao.Link) {
           console.log("⚠️ Kakao.Link가 없습니다. Share API를 사용하세요.");
         }
       } else {
-        console.error("⚠️ Kakao SDK가 로드되지 않았습니다! 스크립트 추가 확인 필요.");
+        console.error(
+          "⚠️ Kakao SDK가 로드되지 않았습니다! 스크립트 추가 확인 필요."
+        );
       }
     };
-  
+
     if (!window.Kakao) {
       const script = document.createElement("script");
       script.src = "https://developers.kakao.com/sdk/js/kakao.js";
@@ -364,7 +377,7 @@ useEffect(() => {
 
   return (
     <>
-    {isModalOpen && selectedCard && (
+      {isModalOpen && selectedCard && (
         <div className="modal">
           <div className="modalContents" ref={modalRef}>
             <div className="modalHeader">
@@ -380,7 +393,10 @@ useEffect(() => {
               <span className="date">{selectedCard.date}</span>
             </div>
             <div className="modalBody">
-              <p className="content" style={FONT_STYLES[selectedCard.fontStyle]}>
+              <p
+                className="content"
+                style={FONT_STYLES[selectedCard.fontStyle]}
+              >
                 {selectedCard.message}
               </p>
             </div>
@@ -411,31 +427,33 @@ useEffect(() => {
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
                   <ul className="emojiTop3List">
-                  {topEmojis.map((emoji, index) => (
-                    <li key={index}>
-                      <span>{emoji.emoji}</span>
-                      <span>{emoji.count}</span>
-                    </li>
-                  ))}
+                    {topEmojis.map((emoji, index) => (
+                      <li key={index}>
+                        <span>{emoji.emoji}</span>
+                        <span>{emoji.count}</span>
+                      </li>
+                    ))}
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
-                        <img src={arrowBottom} alt="이모지 전체보기" />
-                      </button>
-                      {isEmojiListOpen && (
-                        <ul>
-                          {emojiList.map((emoji, index) => (
-                            <li key={index}>
-                              <span>{emoji.emoji}</span>
-                              <span>{emoji.count}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      <img src={arrowBottom} alt="이모지 전체보기" />
+                    </button>
+                    {isEmojiListOpen && (
+                      <ul>
+                        {emojiList.map((emoji, index) => (
+                          <li key={index}>
+                            <span>{emoji.emoji}</span>
+                            <span>{emoji.count}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
                 <div className="emojiPicker" ref={emojiRef}>
-                  <button onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}>
+                  <button
+                    onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}
+                  >
                     <img src={addEmoji} alt="이모지 추가하기" />
                     <span>추가</span>
                   </button>
@@ -460,8 +478,12 @@ useEffect(() => {
                 </button>
                 {isShareOpen && (
                   <ul className="shareList">
-                    <li><button onClick={shareKakao}>카카오톡 공유</button></li>
-                    <li><button onClick={copyURL}>URL 복사</button></li>
+                    <li>
+                      <button onClick={shareKakao}>카카오톡 공유</button>
+                    </li>
+                    <li>
+                      <button onClick={copyURL}>URL 복사</button>
+                    </li>
                   </ul>
                 )}
               </div>
@@ -472,12 +494,14 @@ useEffect(() => {
 
         <div className="post">
           <div className="container">
-            <p className="deletePostCard"><button>삭제하기</button></p>
+            <p className="deletePostCard">
+              <button>삭제하기</button>
+            </p>
             <ul className="postCard">
               <li className="addPostCard">
                 <Link to="/post/message">
                   <span>
-                      <img src={plusIcon} alt="이모지 추가하기" />
+                    <img src={plusIcon} alt="이모지 추가하기" />
                   </span>
                 </Link>
               </li>

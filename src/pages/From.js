@@ -12,6 +12,7 @@ import TextArea from "../component/TextArea";
 /* select 박스 */
 import arrowTop from "../images/From_img/arrow_top.svg";
 import arrowDown from "../images/From_img/arrow_bottom.svg";
+import { useNavigate, useParams } from "react-router-dom";
 
 /* 예시 이미지 */
 const ex_img = [
@@ -27,6 +28,9 @@ const ex_img = [
 ];
 
 const From = () => {
+  const navigate = useNavigate();
+  const { id } = useParams(); // URL에서 id 값 추출
+
   /* 이름 */
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(""); // name 에러 상태
@@ -86,6 +90,7 @@ const From = () => {
 
   /* 데이터 테스트용 */
   const handleSubmit = () => {
+    console.log("아아디:", id);
     console.log("이름:", name);
     console.log("선택된 프로필:", profileImageURL);
     console.log("선택된 관계:", relationship);
@@ -95,8 +100,11 @@ const From = () => {
 
   /* 메시지 생성 API */
   const sendMessage = async () => {
-    const url = "https://rolling-api.vercel.app/13-1/recipients/9767/messages/";
+    const url = `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`;
+
     const data = {
+      team: "13-1",
+      recipientId: id,
       sender: name,
       profileImageURL: profileImageURL,
       relationship: relationship,
@@ -104,23 +112,23 @@ const From = () => {
       font: font,
     };
 
-    console.log("전송할 데이터:", data);
-
     try {
+      console.log("Sending request to:", url);
+      console.log("Payload:", data);
+
       const response = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      if (response.status === 200) {
-        alert("메시지가 성공적으로 전송되었습니다!");
-      } else {
-        alert("메시지 전송에 실패했습니다.");
-      }
+      console.log("Message sent successfully:", response.data);
+      navigate(`/post/${id}`);
     } catch (error) {
-      console.error("메시지 전송 중 오류 발생:", error);
-      alert("오류가 발생했습니다.");
+      console.error(
+        "Error sending message:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -248,7 +256,7 @@ const From = () => {
         <div>
           <button
             className="btn_send"
-            onClick={handleSubmit}
+            onClick={sendMessage}
             disabled={!name || !quillValue}
           >
             보내기
