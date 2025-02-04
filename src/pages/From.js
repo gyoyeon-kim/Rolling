@@ -96,14 +96,16 @@ const From = () => {
     console.log("선택된 관계:", relationship);
     console.log("에디터 내용:", quillValue);
     console.log("선택된 폰트:", font);
-    //navigate(`/post/${Id}`);
   };
 
   /* 메시지 생성 API */
+
   const sendMessage = async () => {
-    const url = "https://rolling-api.vercel.app/13-1/recipients/9767/messages/";
+    const url = `https://rolling-api.vercel.app/1/recipients/${id}/messages/`;
+
     const data = {
       team: "1",
+      recipientId: id,
       sender: name,
       profileImageURL: profileImageURL,
       relationship: relationship,
@@ -111,23 +113,23 @@ const From = () => {
       font: font,
     };
 
-    console.log("전송할 데이터:", data);
-
     try {
+      console.log("Sending request to:", url);
+      console.log("Payload:", data);
+
       const response = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      if (response.status === 200) {
-        alert("메시지가 성공적으로 전송되었습니다!");
-      } else {
-        alert("메시지 전송에 실패했습니다.");
-      }
+      console.log("Message sent successfully:", response.data);
+      navigate(`/post/${id}`);
     } catch (error) {
-      console.error("메시지 전송 중 오류 발생:", error);
-      alert("오류가 발생했습니다.");
+      console.error(
+        "Error sending message:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -255,7 +257,7 @@ const From = () => {
         <div>
           <button
             className="btn_send"
-            onClick={handleSubmit}
+            onClick={sendMessage}
             disabled={!name || !quillValue}
           >
             보내기

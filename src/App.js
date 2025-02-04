@@ -16,9 +16,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<ListPageBH />} />
         <Route path="/post/123" element={<Post_HS />} />
-        <Route path="/post/message" element={<From />} />
 
+        {/*동적 라우팅 */}
         <Route path="/post/:id" element={<Post_HS />} />
+        <Route path="/post/message" element={<From />} />
         <Route path="/post/:id/message" element={<From />} />
 
         <Route path="/post" element={<ToPageKM />} />
