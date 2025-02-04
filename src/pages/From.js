@@ -99,12 +99,11 @@ const From = () => {
   };
 
   /* 메시지 생성 API */
-
   const sendMessage = async () => {
-    const url = `https://rolling-api.vercel.app/1/recipients/${id}/messages/`;
+    const url = `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`;
 
     const data = {
-      team: "1",
+      team: "13-1",
       recipientId: id,
       sender: name,
       profileImageURL: profileImageURL,
