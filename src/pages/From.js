@@ -12,6 +12,7 @@ import TextArea from "../component/TextArea";
 /* select 박스 */
 import arrowTop from "../images/From_img/arrow_top.svg";
 import arrowDown from "../images/From_img/arrow_bottom.svg";
+import { useNavigate, useParams } from "react-router-dom";
 
 /* 예시 이미지 */
 const ex_img = [
@@ -27,6 +28,9 @@ const ex_img = [
 ];
 
 const From = () => {
+  const navigate = useNavigate();
+  const { id } = useParams(); // URL에서 id 값 추출
+
   /* 이름 */
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(""); // name 에러 상태
@@ -86,17 +90,20 @@ const From = () => {
 
   /* 데이터 테스트용 */
   const handleSubmit = () => {
+    console.log("아아디:", id);
     console.log("이름:", name);
     console.log("선택된 프로필:", profileImageURL);
     console.log("선택된 관계:", relationship);
     console.log("에디터 내용:", quillValue);
     console.log("선택된 폰트:", font);
+    //navigate(`/post/${Id}`);
   };
 
   /* 메시지 생성 API */
   const sendMessage = async () => {
     const url = "https://rolling-api.vercel.app/13-1/recipients/9767/messages/";
     const data = {
+      team: "1",
       sender: name,
       profileImageURL: profileImageURL,
       relationship: relationship,
