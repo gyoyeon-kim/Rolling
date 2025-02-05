@@ -56,6 +56,10 @@ const From = () => {
     { label: "나눔손글씨 손편지체", value: "NanumSonPyeonJiCe" },
   ];
 
+  /* 비밀번호 */
+  const [pw, setPw] = useState("");
+  const [pwError, setPwError] = useState(""); // pw 에러 상태
+
   /* 이름 입력 처리 */
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -67,6 +71,24 @@ const From = () => {
       setNameError("값을 입력해 주세요!");
     } else {
       setNameError(""); // 값이 있으면 에러 메시지 초기화
+    }
+  };
+
+  /* 비밀번호 입력 처리 */
+  // 숫자만 허용
+  const handlePwChange = (e) => {
+    const input = e.target.value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+    if (input.length <= 4) {
+      setPw(input); // 4자리 이하만 업데이트
+    }
+  };
+
+  // 비번 입력 필드에서 포커스를 잃었을 때 에러 상태 처리
+  const handlePwBlur = () => {
+    if (!pw) {
+      setPwError("비밀번호를 입력해주세요!");
+    } else {
+      setPwError(""); // 값이 있으면 에러 메시지 초기화
     }
   };
 
@@ -254,11 +276,25 @@ const From = () => {
           </div>
         </div>
 
+        <div className="message_pw">
+          <p className="title">비밀번호</p>
+          <input
+            className={`pw_input ${pwError ? "error" : ""}`}
+            placeholder="비밀번호 4자리를 입력해 주세요."
+            value={pw}
+            onChange={handlePwChange}
+            maxLength={4} // 최대 4자리 제한
+            inputMode="numeric"
+            onBlur={handlePwBlur} // 포커스 아웃 시 에러 체크
+          />
+          {pwError && <p className="pw-error_message">{pwError}</p>}{" "}
+        </div>
+
         <div>
           <button
             className="btn_send"
             onClick={sendMessage}
-            disabled={!name || !quillValue}
+            disabled={!name || !quillValue || !pw}
           >
             보내기
           </button>
