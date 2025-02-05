@@ -93,6 +93,11 @@ const Post = () => {
   // useNavigate 훅 추가
   const navigate = useNavigate();
 
+
+  // api 데이터 저장 후 불러오기
+  const { id } = useParams(); // URL에서 recipientId 가져오기
+  console.log("🟢 Post_HS - URL에서 가져온 id:", id);
+
   // 공유 버튼 상태 관리
   const [isShareOpen, setIsShareOpen] = useState(false);
   // 공유 버튼 및 목록을 감싸는 ref 생성
@@ -179,16 +184,19 @@ const Post = () => {
   };
 
   // 이모지 선택시 이모지 저장
-  const saveEmojiToLocal = (emoji) => {
-    let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || []; // 기존 데이터 불러오기
-    const existingEmoji = savedEmojis.find((item) => item.emoji === emoji);
-
+  const saveEmojiToLocal = (recipientId, emoji) => {
+    let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {}; // 객체 형태로 저장
+    const recipientEmojis = savedEmojis[recipientId] || []; // 해당 recipient의 이모지 데이터 가져오기
+  
+    const existingEmoji = recipientEmojis.find((item) => item.emoji === emoji);
+  
     if (existingEmoji) {
       existingEmoji.count += 1; // 이미 있는 이모지는 count 증가
     } else {
-      savedEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
+      recipientEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
     }
-
+  
+    savedEmojis[recipientId] = recipientEmojis; // recipientId별로 저장
     localStorage.setItem("savedEmojis", JSON.stringify(savedEmojis)); // localStorage에 저장
   };
 
@@ -196,34 +204,31 @@ const Post = () => {
   const [emojiList, setEmojiList] = useState([]);
 
   useEffect(() => {
-    const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || [];
-
-    // 🔥 count 기준으로 내림차순 정렬
-    storedEmojis.sort((a, b) => b.count - a.count);
-
-    setEmojiList(storedEmojis);
-  }, []);
+    const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {};
+    setEmojiList(storedEmojis[id] || []); // 해당 recipientId의 이모지만 불러오기
+  }, [id]);
 
   // 이모지 선택시 화면에 반영
-  const onEmojiClick = (emojiData) => {
-    saveEmojiToLocal(emojiData.emoji);
-
+  const onEmojiClick = (recipientId, emojiData) => {
+    saveEmojiToLocal(recipientId, emojiData.emoji); // recipientId 기준으로 저장
+  
     setEmojiList((prev) => {
       const updatedList = [...prev];
       const existingEmoji = updatedList.find(
         (item) => item.emoji === emojiData.emoji
       );
-
+  
       if (existingEmoji) {
         existingEmoji.count += 1;
       } else {
         updatedList.push({ emoji: emojiData.emoji, count: 1 });
       }
-
-      // 🔥 count 기준으로 내림차순 정렬
+  
       return updatedList.sort((a, b) => b.count - a.count);
     });
   };
+  
+  
 
   // 이모지 카운트 수 상위 3개만 가져오기
   const topEmojis = emojiList.slice(0, 3);
@@ -332,11 +337,6 @@ const Post = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isModalOpen]);
-
-
-// api 데이터 저장 후 불러오기
-const { id } = useParams(); // URL에서 recipientId 가져오기
-console.log("🟢 Post_HS - URL에서 가져온 id:", id);
 
 // 메시지 상태 관리
 const [messages, setMessages] = useState([]); // api에서 가져온 메세지 저장
@@ -447,12 +447,14 @@ useEffect(() => {
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
                   <ul className="emojiTop3List">
-                    {topEmojis.map((emoji, index) => (
+                  <ul className="emojiTop3List">
+                    {emojiList.slice(0, 3).map((emoji, index) => (
                       <li key={index}>
                         <span>{emoji.emoji}</span>
                         <span>{emoji.count}</span>
                       </li>
                     ))}
+                  </ul>
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
@@ -480,7 +482,7 @@ useEffect(() => {
                   {isEmojiPickerOpen && (
                     <div className="emojiPickerDiv">
                       <EmojiPicker
-                        onEmojiClick={onEmojiClick}
+                        onEmojiClick={(emojiData) => onEmojiClick(id, emojiData)}
                         searchDisabled={false} // 검색 활성화
                         previewConfig={{ showPreview: false }} // 미리보기 비활성화
                         theme={Theme.LIGHT}
