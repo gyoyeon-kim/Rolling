@@ -191,6 +191,8 @@ textarea {
   box-sizing: border-box;
 }
 
+em { font-style: normal !important;}
+
 /*reset end*/
 
 .blind {
@@ -217,17 +219,17 @@ legend {
 }
 
 @font-face {
-  font-family: Noto-Sans;
+  font-family: Noto Sans;
   src: url(../fonts//NotoSansKR-Regular.ttf);
 }
 
 @font-face {
-  font-family: NanumMyengjo;
+  font-family: 나눔명조;
   src: url(../fonts//NanumMyeongjo.ttf);
 }
 
 @font-face {
-  font-family: NanumSonPyeonJiCe;
+  font-family: 나눔손글씨 손편지체;
   src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf);
 }
 

@@ -1,11 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import EmojiPicker, {
-  Theme,
-  EmojiStyle,
-  SuggestionMode,
-  SkinTonePickerLocation,
-} from "emoji-picker-react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import EmojiPicker, { Theme, EmojiStyle, SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
 import "./postHS.css";
 import axios from "axios";
 
@@ -29,14 +24,15 @@ const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
 
 // 각 문장마다 다른 폰트 적용하기
 const FONT_STYLES = {
-  notoSans: { fontFamily: '"Noto-Sans", sans-serif' },
+  notoSans: { fontFamily: '"Noto Sans", sans-serif' },
   pretendard: { fontFamily: '"Pretendard", sans-serif' },
-  nanumMyeongjo: { fontFamily: '"NanumMyengjo", serif' },
+  nanumMyeongjo: { fontFamily: '"나눔명조", serif' },
   NanumSonPyeonJiCe: {
-    fontFamily: '"NanumSonPyeonJiCe", sans-serif',
+    fontFamily: '"나눔손글씨 손편지체", sans-serif',
     fontSize: "24px",
   },
 };
+
 
 // 배지 컴포넌트
 const Badge = ({ type }) => {
@@ -54,45 +50,45 @@ const Badge = ({ type }) => {
   );
 };
 
-const dummyData = [
-  {
-    id: 1,
-    name: "홍보희",
-    type: "친구",
-    message:
-      "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
-    date: "2023.07.08",
-    fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
-  },
-  {
-    id: 2,
-    name: "김경민",
-    type: "가족",
-    message: "요즘 날씨가 너무 덥죠? 건강 잘 챙기고 맛있는 것도 많이 먹어요!",
-    date: "2023.08.02",
-    fontStyle: "nanumMyeongjo",
-  },
-  {
-    id: 3,
-    name: "김교연",
-    type: "동료",
-    message: "새로운 프로젝트 시작하느라 고생 많아! 이번에도 화이팅!",
-    date: "2023.09.15",
-    fontStyle: "notoSans",
-  },
-  {
-    id: 4,
-    name: "이성준",
-    type: "친구",
-    message:
-      "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
-    date: "2023.07.08",
-    fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
-  },
-];
+// const dummyData = [
+//   {
+//     id: 1,
+//     name: "홍보희",
+//     type: "친구",
+//     message:
+//       "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+//     date: "2023.07.08",
+//     fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
+//   },
+//   {
+//     id: 2,
+//     name: "김경민",
+//     type: "가족",
+//     message: "요즘 날씨가 너무 덥죠? 건강 잘 챙기고 맛있는 것도 많이 먹어요!",
+//     date: "2023.08.02",
+//     fontStyle: "nanumMyeongjo",
+//   },
+//   {
+//     id: 3,
+//     name: "김교연",
+//     type: "동료",
+//     message: "새로운 프로젝트 시작하느라 고생 많아! 이번에도 화이팅!",
+//     date: "2023.09.15",
+//     fontStyle: "notoSans",
+//   },
+//   {
+//     id: 4,
+//     name: "이성준",
+//     type: "친구",
+//     message:
+//       "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+//     date: "2023.07.08",
+//     fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
+//   },
+// ];
 
 
-function Post() {
+const Post = () => {
   
   // useNavigate 훅 추가
   const navigate = useNavigate();
@@ -339,41 +335,54 @@ function Post() {
 
 
 // api 데이터 저장 후 불러오기
-const [messages, setMessages] = useState([]);
+const { id } = useParams(); // URL에서 recipientId 가져오기
+console.log("🟢 Post_HS - URL에서 가져온 id:", id);
 
+// 메시지 상태 관리
+const [messages, setMessages] = useState([]); // api에서 가져온 메세지 저장
+const [loading, setLoading] = useState(true); // 로딩 상태 관리
+
+// 메시지 가져오기
 useEffect(() => {
+  console.log("📌 recipientId:", id);
+
+  if (!id) {
+    console.error("❌ recipientId가 없습니다.");
+    setLoading(false);
+    return;
+  }
+
   const fetchMessages = async () => {
     try {
-      // ✅ localStorage에서 recipientId 가져오기 (없으면 오류 출력)
-      const recipientId = localStorage.getItem("recipientId");
+      console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/`);
+      
+      const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/`);
+      console.log("📥 API 응답 데이터 (전체):", response.data);
 
-      if (!recipientId) {
-        console.error("❌ recipientId가 없습니다. `from.js`에서 메시지를 먼저 보내주세요.");
+      // ✅ results 배열이 존재하는지 확인
+      if (!response.data.results) {
+        console.error("❌ API 응답에서 results 배열이 없습니다.");
         return;
       }
 
-      const response = await axios.get(
-        `https://rolling-api.vercel.app/13-1/recipients/${recipientId}/messages/`
-      );
+      // ✅ recipientId와 일치하는 데이터 찾기
+      const recipientData = response.data.results.find(r => r.id === parseInt(id));
+      console.log("🔎 찾은 recipient 데이터:", recipientData);
 
-      console.log("📥 가져온 메시지 데이터:", response.data); // ✅ 콘솔 확인
+      // ✅ 해당 recipient의 recentMessages 가져오기
+      const recentMessages = recipientData ? recipientData.recentMessages || [] : [];
+      console.log("📩 저장할 messages:", recentMessages);
 
-      if (!response.data || response.data.length === 0) {
-        console.warn("⚠️ 메시지가 없습니다. `from.js`에서 메시지를 먼저 보내주세요.");
-      }
-
-      setMessages(response.data);
+      setMessages(recentMessages);
     } catch (error) {
       console.error("❌ 메시지 불러오기 실패:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   fetchMessages();
-}, []);
-
-
-
-
+}, [id]);
 
   return (
     <>
@@ -382,30 +391,41 @@ useEffect(() => {
           <div className="modalContents" ref={modalRef}>
             <div className="modalHeader">
               <div>
-                <div className="photo"></div>
+                <div className="photo" style={{ backgroundImage: `url(${selectedCard.profileImageURL})` }}></div>
                 <div className="fromName">
                   <span>
-                    From. <em>{selectedCard.name}</em>
+                    From. <em>{selectedCard.sender}</em>
                   </span>
-                  <Badge type={selectedCard.type} />
+                  <Badge type={selectedCard.relationship} />
                 </div>
               </div>
-              <span className="date">{selectedCard.date}</span>
+              <span className="date">
+                {new Date(selectedCard.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
+              </span>
             </div>
+
             <div className="modalBody">
               <p
                 className="content"
-                style={FONT_STYLES[selectedCard.fontStyle]}
+                style={{ 
+                  fontFamily: selectedCard.font, 
+                  color: selectedCard.textColor || "#000",
+                  fontSize: selectedCard.font === "나눔손글씨 손편지체" ? "24px" : selectedCard.fontSize || "18px",
+                  fontWeight: selectedCard.fontWeight || "normal", 
+                  fontStyle: selectedCard.fontStyle || "normal"
+                }}
               >
-                {selectedCard.message}
+                {selectedCard.content.replace(/<[^>]+>/g, '')}
               </p>
             </div>
+
             <div className="modalBtn">
               <button onClick={() => setIsModalOpen(false)}>확인</button>
             </div>
           </div>
         </div>
       )}
+
 
       <header>
         <div className="container">
@@ -421,7 +441,7 @@ useEffect(() => {
         <div className="postHeader">
           <div className="container">
             <div className="leftWrap">
-              <p>To. Ashley Kim</p>
+              <p>To. {id}</p>
             </div>
             <div className="rightWrap">
               <div className="emojiReactionWrap">
@@ -492,44 +512,60 @@ useEffect(() => {
         </div>
         {/* postHeader 끝 */}
 
-        <div className="post">
-          <div className="container">
-            <p className="deletePostCard">
-              <button>삭제하기</button>
-            </p>
-            <ul className="postCard">
-              <li className="addPostCard">
-                <Link to="/post/message">
-                  <span>
-                    <img src={plusIcon} alt="이모지 추가하기" />
-                  </span>
-                </Link>
-              </li>
-              {/* {messages.map((card) => (
-                <li key={card.id} className="savedPostCard">
-                  <a role="button" onClick={() => openModal(card)}>
-                    <div className="cardInfo">
-                      <div>
-                        <div className="photo">
-                          <img src={card.profileImageURL} alt="프로필 이미지" width="50" />
-                        </div>
-                        <div className="fromName">
-                          <span>
-                            From. <em>{card.sender}</em>
-                          </span>
-                          <Badge type={card.relationship} />
-                        </div>
-                      </div>
-                    </div>
-                    <p className="content" style={FONT_STYLES[card.font]}>
-                      {card.content}
-                    </p>
-                    <span className="date">{card.createdAt}</span>
-                  </a>
+        {/* 🔥 2️⃣ 메시지 로딩 상태 표시 */}
+        {loading ? (
+          <p>📩 메시지를 불러오는 중...</p>
+        ) : (
+          <div className="post">
+            <div className="container">
+              {/* <p className="deletePostCard">
+                <button>삭제하기</button>
+              </p> */}
+              <ul className="postCard">
+                <li className="addPostCard">
+                  <Link to={`/post/${id}/message`}>
+                    <span><img src={plusIcon} alt="추가하기" /></span>
+                  </Link>
                 </li>
-              ))} */}
 
-              {dummyData.map((card) => (
+                {/* 🔥 3️⃣ API에서 불러온 메시지 리스트 출력 */}
+                {Array.isArray(messages) && messages.length > 0 && (
+                  messages.map((msg) => (
+                    <li key={msg.id} className="savedPostCard">
+                      <a role="button" onClick={() => openModal(msg)}>
+                        <div className="cardInfo">
+                          <div>
+                            <div className="photo" style={{ backgroundImage: `url(${msg.profileImageURL})`}}></div>
+                            <div className="fromName">
+                              <span>From. <em>{msg.sender}</em></span>
+                              <Badge type={msg.relationship} />
+                            </div>
+                          </div>
+                          <a className="btnDelete">
+                            <img src={deleteIcon} alt="삭제하기" />
+                          </a>
+                        </div>
+                        <p 
+                          className="content"
+                          style={{ fontFamily: msg.font, 
+                            color: msg.textColor || "#000", 
+                            fontSize: msg.font === "나눔손글씨 손편지체" ? "24px" : msg.fontSize || "18px",
+                            fontWeight: msg.fontWeight || "normal", 
+                            fontStyle: msg.fontStyle || "normal"
+                          }}
+                        >
+                          {msg.content.replace(/<[^>]+>/g, '')}
+                        </p>
+
+                        <span className="date">
+                          {new Date(msg.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
+                        </span>
+                      </a>
+                    </li>
+                  ))
+                )}
+
+              {/* {dummyData.map((card) => (
                 <li key={card.id} className="savedPostCard">
                   <a role="button" onClick={() => openModal(card)}>
                     <div className="cardInfo">
@@ -542,9 +578,9 @@ useEffect(() => {
                           <Badge type={card.type} />
                         </div>
                       </div>
-                      {/* <a className="btnDelete">
+                      <a className="btnDelete">
                         <img src={deleteIcon} alt="삭제하기" />
-                      </a> */}
+                      </a>
                     </div>
                     <p className="content" style={FONT_STYLES[card.fontStyle]}>
                       {card.message}
@@ -552,7 +588,7 @@ useEffect(() => {
                     <span className="date">{card.date}</span>
                   </a>
                 </li>
-              ))}
+              ))} */}
               {/* <li className="savedPostCard">
                 <a role="button">
                   <div className="cardInfo">
@@ -583,6 +619,7 @@ useEffect(() => {
             </ul>
           </div>
         </div>
+        )}
       </main>
     </>
   );
