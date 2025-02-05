@@ -209,24 +209,29 @@ const Post = () => {
   }, [id]);
 
   // 이모지 선택시 화면에 반영
-  const onEmojiClick = (recipientId, emojiData) => {
-    saveEmojiToLocal(recipientId, emojiData.emoji); // recipientId 기준으로 저장
+  const onEmojiClick = async (recipientId, emojiData) => {
+    saveEmojiToLocal(recipientId, emojiData.emoji); // 이모지 저장
   
     setEmojiList((prev) => {
       const updatedList = [...prev];
-      const existingEmoji = updatedList.find(
-        (item) => item.emoji === emojiData.emoji
-      );
-  
+      const existingEmoji = updatedList.find((item) => item.emoji === emojiData.emoji);
+      
       if (existingEmoji) {
         existingEmoji.count += 1;
       } else {
         updatedList.push({ emoji: emojiData.emoji, count: 1 });
       }
   
-      return updatedList.sort((a, b) => b.count - a.count);
+      return updatedList; // 🔥 정렬하지 않고 그대로 반환 (정렬을 useEffect에서 수행)
     });
   };
+  
+  // ✅ useEffect를 활용한 정렬 보장
+  useEffect(() => {
+    setEmojiList((prev) => [...prev].sort((a, b) => b.count - a.count));
+  }, [emojiList]); // 🔥 emojiList가 변경될 때마다 정렬 실행
+  
+  
   
   
 
@@ -261,17 +266,30 @@ const Post = () => {
       return;
     }
 
+    // const finalImage = backgroundImage 
+    // ? backgroundImage 
+    // : `https://singlecolorimage.com/get/${backgroundColor.replace("#", "")}/500x500`;
+
     window.Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: "롤링페이퍼 공유하기",
-        description: "함께 롤링페이퍼를 만들어 보세요!",
-        imageUrl: "https://your-image-url.com/image.png", // 🔥 미리보기 이미지 수정 필요
+        title: "따뜻한 마음을 전해보세요",
+        description: "추억을 담은 롤링페이퍼로 소중한 사람에게 따뜻한 한마디를 남겨보세요!",
+        imageUrl: "https://rolling-navy.vercel.app/sharebg_kakao.png", // 미리보기 이미지
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,
         },
       },
+      buttons: [
+        {
+          title: "💌 마음 전하기 💌", // 버튼 이름
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+      ],
     });
   };
 
@@ -315,32 +333,50 @@ const Post = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const modalRef = useRef(null);
+  //삭제모달 상태 추가
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // 모달 토글 함수 (카드 정보와 함께 모달 열기)
   const openModal = (card) => {
     setSelectedCard(card);
     setIsModalOpen(true);
   };
+  // 삭제 모달 열기
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  // 모달 닫기 함수 (일반 모달 + 삭제 모달)
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsDeleteModalOpen(false); // 삭제 모달도 닫기
+  };
+
 
   // 외부 클릭 감지하여 모달 닫기
   useEffect(() => {
     function handleClickOutside(event) {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setIsModalOpen(false);
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target)
+      ) {
+        closeModal();
       }
     }
 
-    if (isModalOpen) {
+    if (isModalOpen || isDeleteModalOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, isDeleteModalOpen]);
 
 // 메시지 상태 관리
 const [messages, setMessages] = useState([]); // api에서 가져온 메세지 저장
 const [loading, setLoading] = useState(true); // 로딩 상태 관리
+const [backgroundImage, setBackgroundImage] = useState(""); // 배경 이미지
+const [backgroundColor, setBackgroundColor] = useState(""); // 배경 색
 
 // 메시지 가져오기
 useEffect(() => {
@@ -352,28 +388,26 @@ useEffect(() => {
     return;
   }
 
-  const fetchMessages = async () => {
+  const fetchRecipientData = async () => {
     try {
       console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/`);
-      
+
       const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/`);
       console.log("📥 API 응답 데이터 (전체):", response.data);
 
-      // ✅ results 배열이 존재하는지 확인
       if (!response.data.results) {
         console.error("❌ API 응답에서 results 배열이 없습니다.");
         return;
       }
 
-      // ✅ recipientId와 일치하는 데이터 찾기
       const recipientData = response.data.results.find(r => r.id === parseInt(id));
       console.log("🔎 찾은 recipient 데이터:", recipientData);
 
-      // ✅ 해당 recipient의 recentMessages 가져오기
-      const recentMessages = recipientData ? recipientData.recentMessages || [] : [];
-      console.log("📩 저장할 messages:", recentMessages);
-
-      setMessages(recentMessages);
+      if (recipientData) {
+        setMessages(recipientData.recentMessages || []);
+        setBackgroundImage(recipientData.backgroundImageURL || ""); // 배경 이미지 설정
+        setBackgroundColor(recipientData.backgroundColor || "#fff"); // 배경 색 설정
+      }
     } catch (error) {
       console.error("❌ 메시지 불러오기 실패:", error);
     } finally {
@@ -381,7 +415,7 @@ useEffect(() => {
     }
   };
 
-  fetchMessages();
+  fetchRecipientData();
 }, [id]);
 
   return (
@@ -425,7 +459,21 @@ useEffect(() => {
           </div>
         </div>
       )}
-
+      {isDeleteModalOpen && (
+        <div class="modal deleteMessageWrap">
+          <div className="modalContents" ref={modalRef}>
+            <strong>메세지를 삭제하려면<br/>비밀번호를 입력해주세요.</strong>
+            <div className="">
+              <label for="pw"></label>
+              <input type="password" id="pw" placeholder="비밀번호 입력"/>
+            </div>
+            <div className="modalBtn">
+              <button className="">확인</button>
+              <button className="cancelBtn" onClick={closeModal}>취소</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <header>
         <div className="container">
@@ -518,7 +566,12 @@ useEffect(() => {
         {loading ? (
           <p>📩 메시지를 불러오는 중...</p>
         ) : (
-          <div className="post">
+          <div className="post"
+            style={{ 
+              backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
+              backgroundColor: backgroundColor || "var(--beige-200)"
+            }}
+          >
             <div className="container">
               {/* <p className="deletePostCard">
                 <button>삭제하기</button>
@@ -543,7 +596,12 @@ useEffect(() => {
                               <Badge type={msg.relationship} />
                             </div>
                           </div>
-                          <a className="btnDelete">
+                          <a className="btnDelete" 
+                            onClick={(e) => {
+                              e.stopPropagation(); // 💡 부모 클릭 이벤트 차단
+                              openDeleteModal();
+                            }}
+                          >
                             <img src={deleteIcon} alt="삭제하기" />
                           </a>
                         </div>
