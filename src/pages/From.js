@@ -127,7 +127,7 @@ const From = () => {
     const data = {
       team: "13-1",
       recipientId: id,
-      sender: name,
+      sender: name + pw,
       profileImageURL: profileImageURL,
       relationship: relationship,
       content: quillValue,
