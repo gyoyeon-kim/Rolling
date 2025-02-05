@@ -1,12 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import EmojiPicker, {
-  Theme,
-  EmojiStyle,
-  SuggestionMode,
-  SkinTonePickerLocation,
-} from "emoji-picker-react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import EmojiPicker, { Theme, EmojiStyle, SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
 import "./postHS.css";
+import axios from "axios";
 
 // 이미지 import
 import logo from "../images/logo.svg";
@@ -20,22 +16,23 @@ import deleteIcon from "../images/ico_delete.svg";
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
 
 // 이모티콘과 그에 대한 반응 카운트
-const EMOJI_DATA = [
-  { emoji: "🥰", count: 24 },
-  { emoji: "😂", count: 16 },
-  { emoji: "😎", count: 10 },
-];
+// const EMOJI_DATA = [
+//   { emoji: "🥰", count: 24 },
+//   { emoji: "😂", count: 16 },
+//   { emoji: "😎", count: 10 },
+// ];
 
 // 각 문장마다 다른 폰트 적용하기
 const FONT_STYLES = {
-  notoSans: { fontFamily: '"Noto-Sans", sans-serif' },
+  notoSans: { fontFamily: '"Noto Sans", sans-serif' },
   pretendard: { fontFamily: '"Pretendard", sans-serif' },
-  nanumMyeongjo: { fontFamily: '"NanumMyengjo", serif' },
+  nanumMyeongjo: { fontFamily: '"나눔명조", serif' },
   NanumSonPyeonJiCe: {
-    fontFamily: '"NanumSonPyeonJiCe", sans-serif',
+    fontFamily: '"나눔손글씨 손편지체", sans-serif',
     fontSize: "24px",
   },
 };
+
 
 // 배지 컴포넌트
 const Badge = ({ type }) => {
@@ -53,46 +50,53 @@ const Badge = ({ type }) => {
   );
 };
 
-const dummyData = [
-  {
-    id: 1,
-    name: "홍보희",
-    type: "친구",
-    message:
-      "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
-    date: "2023.07.08",
-    fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
-  },
-  {
-    id: 2,
-    name: "김경민",
-    type: "가족",
-    message: "요즘 날씨가 너무 덥죠? 건강 잘 챙기고 맛있는 것도 많이 먹어요!",
-    date: "2023.08.02",
-    fontStyle: "nanumMyeongjo",
-  },
-  {
-    id: 3,
-    name: "김교연",
-    type: "동료",
-    message: "새로운 프로젝트 시작하느라 고생 많아! 이번에도 화이팅!",
-    date: "2023.09.15",
-    fontStyle: "notoSans",
-  },
-  {
-    id: 4,
-    name: "이성준",
-    type: "친구",
-    message:
-      "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
-    date: "2023.07.08",
-    fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
-  },
-];
+// const dummyData = [
+//   {
+//     id: 1,
+//     name: "홍보희",
+//     type: "친구",
+//     message:
+//       "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+//     date: "2023.07.08",
+//     fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
+//   },
+//   {
+//     id: 2,
+//     name: "김경민",
+//     type: "가족",
+//     message: "요즘 날씨가 너무 덥죠? 건강 잘 챙기고 맛있는 것도 많이 먹어요!",
+//     date: "2023.08.02",
+//     fontStyle: "nanumMyeongjo",
+//   },
+//   {
+//     id: 3,
+//     name: "김교연",
+//     type: "동료",
+//     message: "새로운 프로젝트 시작하느라 고생 많아! 이번에도 화이팅!",
+//     date: "2023.09.15",
+//     fontStyle: "notoSans",
+//   },
+//   {
+//     id: 4,
+//     name: "이성준",
+//     type: "친구",
+//     message:
+//       "코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!",
+//     date: "2023.07.08",
+//     fontStyle: "NanumSonPyeonJiCe", // 폰트 스타일 추가
+//   },
+// ];
 
-function Post() {
+
+const Post = () => {
+  
   // useNavigate 훅 추가
   const navigate = useNavigate();
+
+
+  // api 데이터 저장 후 불러오기
+  const { id } = useParams(); // URL에서 recipientId 가져오기
+  console.log("🟢 Post_HS - URL에서 가져온 id:", id);
 
   // 공유 버튼 상태 관리
   const [isShareOpen, setIsShareOpen] = useState(false);
@@ -180,16 +184,19 @@ function Post() {
   };
 
   // 이모지 선택시 이모지 저장
-  const saveEmojiToLocal = (emoji) => {
-    let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || []; // 기존 데이터 불러오기
-    const existingEmoji = savedEmojis.find((item) => item.emoji === emoji);
-
+  const saveEmojiToLocal = (recipientId, emoji) => {
+    let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {}; // 객체 형태로 저장
+    const recipientEmojis = savedEmojis[recipientId] || []; // 해당 recipient의 이모지 데이터 가져오기
+  
+    const existingEmoji = recipientEmojis.find((item) => item.emoji === emoji);
+  
     if (existingEmoji) {
       existingEmoji.count += 1; // 이미 있는 이모지는 count 증가
     } else {
-      savedEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
+      recipientEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
     }
-
+  
+    savedEmojis[recipientId] = recipientEmojis; // recipientId별로 저장
     localStorage.setItem("savedEmojis", JSON.stringify(savedEmojis)); // localStorage에 저장
   };
 
@@ -197,34 +204,36 @@ function Post() {
   const [emojiList, setEmojiList] = useState([]);
 
   useEffect(() => {
-    const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || [];
-
-    // 🔥 count 기준으로 내림차순 정렬
-    storedEmojis.sort((a, b) => b.count - a.count);
-
-    setEmojiList(storedEmojis);
-  }, []);
+    const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {};
+    setEmojiList(storedEmojis[id] || []); // 해당 recipientId의 이모지만 불러오기
+  }, [id]);
 
   // 이모지 선택시 화면에 반영
-  const onEmojiClick = (emojiData) => {
-    saveEmojiToLocal(emojiData.emoji);
-
+  const onEmojiClick = async (recipientId, emojiData) => {
+    saveEmojiToLocal(recipientId, emojiData.emoji); // 이모지 저장
+  
     setEmojiList((prev) => {
       const updatedList = [...prev];
-      const existingEmoji = updatedList.find(
-        (item) => item.emoji === emojiData.emoji
-      );
-
+      const existingEmoji = updatedList.find((item) => item.emoji === emojiData.emoji);
+      
       if (existingEmoji) {
         existingEmoji.count += 1;
       } else {
         updatedList.push({ emoji: emojiData.emoji, count: 1 });
       }
-
-      // 🔥 count 기준으로 내림차순 정렬
-      return updatedList.sort((a, b) => b.count - a.count);
+  
+      return updatedList; // 🔥 정렬하지 않고 그대로 반환 (정렬을 useEffect에서 수행)
     });
   };
+  
+  // ✅ useEffect를 활용한 정렬 보장
+  useEffect(() => {
+    setEmojiList((prev) => [...prev].sort((a, b) => b.count - a.count));
+  }, [emojiList]); // 🔥 emojiList가 변경될 때마다 정렬 실행
+  
+  
+  
+  
 
   // 이모지 카운트 수 상위 3개만 가져오기
   const topEmojis = emojiList.slice(0, 3);
@@ -257,17 +266,30 @@ function Post() {
       return;
     }
 
+    // const finalImage = backgroundImage 
+    // ? backgroundImage 
+    // : `https://singlecolorimage.com/get/${backgroundColor.replace("#", "")}/500x500`;
+
     window.Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: "롤링페이퍼 공유하기",
-        description: "함께 롤링페이퍼를 만들어 보세요!",
-        imageUrl: "https://your-image-url.com/image.png", // 🔥 미리보기 이미지 수정 필요
+        title: "따뜻한 마음을 전해보세요",
+        description: "추억을 담은 롤링페이퍼로 소중한 사람에게 따뜻한 한마디를 남겨보세요!",
+        imageUrl: "https://rolling-navy.vercel.app/sharebg_kakao.png", // 미리보기 이미지
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,
         },
       },
+      buttons: [
+        {
+          title: "💌 마음 전하기 💌", // 버튼 이름
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+      ],
     });
   };
 
@@ -311,28 +333,90 @@ function Post() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const modalRef = useRef(null);
+  //삭제모달 상태 추가
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // 모달 토글 함수 (카드 정보와 함께 모달 열기)
   const openModal = (card) => {
     setSelectedCard(card);
     setIsModalOpen(true);
   };
+  // 삭제 모달 열기
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  // 모달 닫기 함수 (일반 모달 + 삭제 모달)
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsDeleteModalOpen(false); // 삭제 모달도 닫기
+  };
+
 
   // 외부 클릭 감지하여 모달 닫기
   useEffect(() => {
     function handleClickOutside(event) {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setIsModalOpen(false);
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target)
+      ) {
+        closeModal();
       }
     }
 
-    if (isModalOpen) {
+    if (isModalOpen || isDeleteModalOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, isDeleteModalOpen]);
+
+// 메시지 상태 관리
+const [messages, setMessages] = useState([]); // api에서 가져온 메세지 저장
+const [loading, setLoading] = useState(true); // 로딩 상태 관리
+const [backgroundImage, setBackgroundImage] = useState(""); // 배경 이미지
+const [backgroundColor, setBackgroundColor] = useState(""); // 배경 색
+
+// 메시지 가져오기
+useEffect(() => {
+  console.log("📌 recipientId:", id);
+
+  if (!id) {
+    console.error("❌ recipientId가 없습니다.");
+    setLoading(false);
+    return;
+  }
+
+  const fetchRecipientData = async () => {
+    try {
+      console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/`);
+
+      const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/`);
+      console.log("📥 API 응답 데이터 (전체):", response.data);
+
+      if (!response.data.results) {
+        console.error("❌ API 응답에서 results 배열이 없습니다.");
+        return;
+      }
+
+      const recipientData = response.data.results.find(r => r.id === parseInt(id));
+      console.log("🔎 찾은 recipient 데이터:", recipientData);
+
+      if (recipientData) {
+        setMessages(recipientData.recentMessages || []);
+        setBackgroundImage(recipientData.backgroundImageURL || ""); // 배경 이미지 설정
+        setBackgroundColor(recipientData.backgroundColor || "#fff"); // 배경 색 설정
+      }
+    } catch (error) {
+      console.error("❌ 메시지 불러오기 실패:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchRecipientData();
+}, [id]);
 
   return (
     <>
@@ -341,26 +425,51 @@ function Post() {
           <div className="modalContents" ref={modalRef}>
             <div className="modalHeader">
               <div>
-                <div className="photo"></div>
+                <div className="photo" style={{ backgroundImage: `url(${selectedCard.profileImageURL})` }}></div>
                 <div className="fromName">
                   <span>
-                    From. <em>{selectedCard.name}</em>
+                    From. <em>{selectedCard.sender}</em>
                   </span>
-                  <Badge type={selectedCard.type} />
+                  <Badge type={selectedCard.relationship} />
                 </div>
               </div>
-              <span className="date">{selectedCard.date}</span>
+              <span className="date">
+                {new Date(selectedCard.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
+              </span>
             </div>
+
             <div className="modalBody">
               <p
                 className="content"
-                style={FONT_STYLES[selectedCard.fontStyle]}
+                style={{ 
+                  fontFamily: selectedCard.font, 
+                  color: selectedCard.textColor || "#000",
+                  fontSize: selectedCard.font === "나눔손글씨 손편지체" ? "24px" : selectedCard.fontSize || "18px",
+                  fontWeight: selectedCard.fontWeight || "normal", 
+                  fontStyle: selectedCard.fontStyle || "normal"
+                }}
               >
-                {selectedCard.message}
+                {selectedCard.content.replace(/<[^>]+>/g, '')}
               </p>
             </div>
+
             <div className="modalBtn">
               <button onClick={() => setIsModalOpen(false)}>확인</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {isDeleteModalOpen && (
+        <div class="modal deleteMessageWrap">
+          <div className="modalContents" ref={modalRef}>
+            <strong>메세지를 삭제하려면<br/>비밀번호를 입력해주세요.</strong>
+            <div className="">
+              <label for="pw"></label>
+              <input type="password" id="pw" placeholder="비밀번호 입력"/>
+            </div>
+            <div className="modalBtn">
+              <button className="">확인</button>
+              <button className="cancelBtn" onClick={closeModal}>취소</button>
             </div>
           </div>
         </div>
@@ -380,18 +489,20 @@ function Post() {
         <div className="postHeader">
           <div className="container">
             <div className="leftWrap">
-              <p>To. Ashley Kim</p>
+              <p>To. {id}</p>
             </div>
             <div className="rightWrap">
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
                   <ul className="emojiTop3List">
-                    {topEmojis.map((emoji, index) => (
+                  <ul className="emojiTop3List">
+                    {emojiList.slice(0, 3).map((emoji, index) => (
                       <li key={index}>
                         <span>{emoji.emoji}</span>
                         <span>{emoji.count}</span>
                       </li>
                     ))}
+                  </ul>
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
@@ -419,7 +530,7 @@ function Post() {
                   {isEmojiPickerOpen && (
                     <div className="emojiPickerDiv">
                       <EmojiPicker
-                        onEmojiClick={onEmojiClick}
+                        onEmojiClick={(emojiData) => onEmojiClick(id, emojiData)}
                         searchDisabled={false} // 검색 활성화
                         previewConfig={{ showPreview: false }} // 미리보기 비활성화
                         theme={Theme.LIGHT}
@@ -451,20 +562,70 @@ function Post() {
         </div>
         {/* postHeader 끝 */}
 
-        <div className="post">
-          <div className="container">
-            <p className="deletePostCard">
-              <button>삭제하기</button>
-            </p>
-            <ul className="postCard">
-              <li className="addPostCard">
-                <Link to="/post/message">
-                  <span>
-                    <img src={plusIcon} alt="이모지 추가하기" />
-                  </span>
-                </Link>
-              </li>
-              {dummyData.map((card) => (
+        {/* 🔥 2️⃣ 메시지 로딩 상태 표시 */}
+        {loading ? (
+          <p>📩 메시지를 불러오는 중...</p>
+        ) : (
+          <div className="post"
+            style={{ 
+              backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
+              backgroundColor: backgroundColor || "var(--beige-200)"
+            }}
+          >
+            <div className="container">
+              {/* <p className="deletePostCard">
+                <button>삭제하기</button>
+              </p> */}
+              <ul className="postCard">
+                <li className="addPostCard">
+                  <Link to={`/post/${id}/message`}>
+                    <span><img src={plusIcon} alt="추가하기" /></span>
+                  </Link>
+                </li>
+
+                {/* 🔥 3️⃣ API에서 불러온 메시지 리스트 출력 */}
+                {Array.isArray(messages) && messages.length > 0 && (
+                  messages.map((msg) => (
+                    <li key={msg.id} className="savedPostCard">
+                      <a role="button" onClick={() => openModal(msg)}>
+                        <div className="cardInfo">
+                          <div>
+                            <div className="photo" style={{ backgroundImage: `url(${msg.profileImageURL})`}}></div>
+                            <div className="fromName">
+                              <span>From. <em>{msg.sender}</em></span>
+                              <Badge type={msg.relationship} />
+                            </div>
+                          </div>
+                          <a className="btnDelete" 
+                            onClick={(e) => {
+                              e.stopPropagation(); // 💡 부모 클릭 이벤트 차단
+                              openDeleteModal();
+                            }}
+                          >
+                            <img src={deleteIcon} alt="삭제하기" />
+                          </a>
+                        </div>
+                        <p 
+                          className="content"
+                          style={{ fontFamily: msg.font, 
+                            color: msg.textColor || "#000", 
+                            fontSize: msg.font === "나눔손글씨 손편지체" ? "24px" : msg.fontSize || "18px",
+                            fontWeight: msg.fontWeight || "normal", 
+                            fontStyle: msg.fontStyle || "normal"
+                          }}
+                        >
+                          {msg.content.replace(/<[^>]+>/g, '')}
+                        </p>
+
+                        <span className="date">
+                          {new Date(msg.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
+                        </span>
+                      </a>
+                    </li>
+                  ))
+                )}
+
+              {/* {dummyData.map((card) => (
                 <li key={card.id} className="savedPostCard">
                   <a role="button" onClick={() => openModal(card)}>
                     <div className="cardInfo">
@@ -477,9 +638,9 @@ function Post() {
                           <Badge type={card.type} />
                         </div>
                       </div>
-                      {/* <a className="btnDelete">
+                      <a className="btnDelete">
                         <img src={deleteIcon} alt="삭제하기" />
-                      </a> */}
+                      </a>
                     </div>
                     <p className="content" style={FONT_STYLES[card.fontStyle]}>
                       {card.message}
@@ -487,7 +648,7 @@ function Post() {
                     <span className="date">{card.date}</span>
                   </a>
                 </li>
-              ))}
+              ))} */}
               {/* <li className="savedPostCard">
                 <a role="button">
                   <div className="cardInfo">
@@ -518,6 +679,7 @@ function Post() {
             </ul>
           </div>
         </div>
+        )}
       </main>
     </>
   );
