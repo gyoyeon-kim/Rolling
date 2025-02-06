@@ -1,7 +1,7 @@
 .card {
   width: 275px;
   height: 260px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--gray-300);
   border-radius: 16px;
   overflow: hidden;
   text-align: center;
