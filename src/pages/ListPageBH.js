@@ -21,7 +21,7 @@ function ListPageBH() {
 
   // 테스트 데이터
   const defaultPopularItems = [
-    { id: 1, title: "테스트 인기 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
+    { id: 10, title: "테스트 인기 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
     { id: 2, title: "테스트 인기 카드 2", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
     { id: 3, title: "테스트 인기 카드 3", image: "/image3.jpg", stats: "3명이 작성했어요!" },
     { id: 4, title: "테스트 인기 카드 4", image: "/image4.jpg", stats: "1명이 작성했어요!" },
@@ -30,9 +30,9 @@ function ListPageBH() {
   ];
 
   const defaultRecentItems = [
-    { id: 5, title: "테스트 최근 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
-    { id: 6, title: "테스트 최근 카드 2", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
-    { id: 7, title: "테스트 최근 카드 3", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 8, title: "테스트 최근 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
+    { id: 9, title: "테스트 최근 카드 2", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
+    { id: 10, title: "테스트 최근 카드 3", image: "/image3.jpg", stats: "3명이 작성했어요!" },
   ];
 
   // 반응형 디바이스 감지
