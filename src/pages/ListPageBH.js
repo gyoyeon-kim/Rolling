@@ -21,12 +21,30 @@ function ListPageBH() {
 
   // 테스트 데이터
   const defaultPopularItems = [
-    { id: 10, title: "테스트 인기 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
+    { id: 1, title: "테스트 인기 카드 1", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
     { id: 2, title: "테스트 인기 카드 2", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
     { id: 3, title: "테스트 인기 카드 3", image: "/image3.jpg", stats: "3명이 작성했어요!" },
     { id: 4, title: "테스트 인기 카드 4", image: "/image4.jpg", stats: "1명이 작성했어요!" },
     { id: 5, title: "테스트 인기 카드 5", image: "/image3.jpg", stats: "3명이 작성했어요!" },
     { id: 6, title: "테스트 인기 카드 6", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    { id: 7, title: "테스트 인기 카드 7", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
+    { id: 8, title: "테스트 인기 카드 8", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
+    { id: 9, title: "테스트 인기 카드 9", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 10, title: "테스트 인기 카드 10", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    { id: 11, title: "테스트 인기 카드 11", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 12, title: "테스트 인기 카드 12", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    { id: 13, title: "테스트 인기 카드 13", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
+    { id: 14, title: "테스트 인기 카드 14", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
+    { id: 15, title: "테스트 인기 카드 15", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 16, title: "테스트 인기 카드 16", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    { id: 17, title: "테스트 인기 카드 17", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 18, title: "테스트 인기 카드 18", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    { id: 19, title: "테스트 인기 카드 19", image: "/image1.jpg", stats: "10명이 좋아했어요!" },
+    { id: 20, title: "테스트 인기 카드 20", image: "/image2.jpg", stats: "5명이 좋아했어요!" },
+    { id: 21, title: "테스트 인기 카드 21", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    { id: 22, title: "테스트 인기 카드 22", image: "/image4.jpg", stats: "1명이 작성했어요!" },
+    // { id: 23, title: "테스트 인기 카드 23", image: "/image3.jpg", stats: "3명이 작성했어요!" },
+    // { id: 24, title: "테스트 인기 카드 24", image: "/image4.jpg", stats: "1명이 작성했어요!" },
   ];
 
   const defaultRecentItems = [
@@ -75,25 +93,46 @@ function ListPageBH() {
   if (error) return <p>❌ {error}</p>;
 
   // 스크롤 핸들러
-  const scrollLeft = (section) => {
-    if (section === "popular") {
-      setPopularStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    } else if (section === "recent") {
-      setRecentStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    }
-  };
+  // const scrollLeft = (section) => {
+  //   if (section === "popular") {
+  //     setPopularStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  //   } else if (section === "recent") {
+  //     setRecentStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  //   }
+  // };
 
-  const scrollRight = (section, itemsLength) => {
-    if (section === "popular") {
-      setPopularStartIndex((prevIndex) =>
-        Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
-      );
-    } else if (section === "recent") {
-      setRecentStartIndex((prevIndex) =>
-        Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
-      );
-    }
-  };
+  // const scrollRight = (section, itemsLength) => {
+  //   if (section === "popular") {
+  //     setPopularStartIndex((prevIndex) =>
+  //       Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
+  //     );
+  //   } else if (section === "recent") {
+  //     setRecentStartIndex((prevIndex) =>
+  //       Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
+  //     );
+  //   }
+  // };
+
+  // 스크롤 핸들러 (4개씩 이동하도록 수정)
+const scrollLeft = (section) => {
+  if (section === "popular") {
+    setPopularStartIndex((prevIndex) => Math.max(prevIndex - maxVisibleCards, 0));
+  } else if (section === "recent") {
+    setRecentStartIndex((prevIndex) => Math.max(prevIndex - maxVisibleCards, 0));
+  }
+};
+
+const scrollRight = (section, itemsLength) => {
+  if (section === "popular") {
+    setPopularStartIndex((prevIndex) =>
+      Math.min(prevIndex + maxVisibleCards, itemsLength - maxVisibleCards)
+    );
+  } else if (section === "recent") {
+    setRecentStartIndex((prevIndex) =>
+      Math.min(prevIndex + maxVisibleCards, itemsLength - maxVisibleCards)
+    );
+  }
+};
 
   return (
     <div className="list-page">

@@ -17,7 +17,6 @@
   max-width: 1207px; /* 최대 너비 설정 */
   width: 100%; /* 전체 화면을 차지하도록 */
   margin: 0 auto; /* 가로 중앙 정렬 */
-  padding: 20px 40px; /* 적절한 여백 추가 */
   height: 40px; /* 컨테이너 높이 설정 */
 }
 
@@ -39,10 +38,10 @@
 
 .logo-text {
   font-size: var(--font-size-20);
-  font-weight: 700px;
+  font-weight: 700;
   color: #4a494f;
-  font-family: poppins;
-  align-items: center;
+  font-family: "poppins";
+  line-height: 30px;
 }
 
 /* 버튼 스타일 */
