@@ -97,6 +97,8 @@ const Post = () => {
 
   // api 데이터 저장 후 불러오기
   const { id } = useParams(); // URL에서 recipientId 가져오기
+  const nameOnly = id.replace(/\d{4}$/, ""); // 이름 뒤 4자리 숫자 제거
+
   console.log("🟢 Post_HS - URL에서 가져온 id:", id);
 
   // 공유 버튼 상태 관리
@@ -509,7 +511,7 @@ const Post = () => {
         <div className="postHeader">
           <div className="container">
             <div className="leftWrap">
-              <p>To. {id}</p>
+              <p>To. {nameOnly}</p>
             </div>
             <div className="rightWrap">
               <div className="emojiReactionWrap">
