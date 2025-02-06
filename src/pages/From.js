@@ -135,8 +135,8 @@ const From = () => {
     };
 
     try {
-      console.log("Sending request to:", url);
-      console.log("Payload:", data);
+      console.log("url:", url);
+      console.log("값:", data);
 
       const response = await axios.post(url, data, {
         headers: {
@@ -144,11 +144,11 @@ const From = () => {
         },
       });
 
-      console.log("Message sent successfully:", response.data);
+      console.log("메세지가 성공적으로 생성되었습니다.:", response.data);
       navigate(`/post/${id}`);
     } catch (error) {
       console.error(
-        "Error sending message:",
+        "메세지 전송 오류:",
         error.response ? error.response.data : error.message
       );
     }
