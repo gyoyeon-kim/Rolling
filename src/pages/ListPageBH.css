@@ -1,5 +1,5 @@
 .list-page {
-  background-color: #f9f9f9; /* 페이지 배경색 */
+  background-color: var(--white); 
 }
 
 .list-content {
@@ -10,7 +10,7 @@
 
 .list-section {
   margin-bottom: 40px;
-  background-color: #fff;
+  background-color: var(--white);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -21,7 +21,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--black);
 }
 
 /* ✅ 좌/우 스크롤 버튼 */
