@@ -74,8 +74,8 @@ function ListPageBH() {
         const recentResponse = await fetch("https://rolling-api.vercel.app/13-1/recipients/");
         const recentData = await recentResponse.json();
 
-        setPopularItems(popularData?.data?.length ? popularData.data : defaultPopularItems);
-        setRecentItems(recentData?.data?.length ? recentData.data : defaultRecentItems);
+        setPopularItems(popularData?.results?.length ? popularData.results : defaultPopularItems);
+        setRecentItems(recentData?.results?.length ? recentData.results : defaultRecentItems);
       } catch (err) {
         console.error("Fetch Error:", err);
         setError("데이터를 불러오는 중 오류가 발생했습니다.");
