@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
 import EmojiButton from "../component/EmojiButton";
+import point02 from "../images/point02.png";
 
 function Home() {
   return (
@@ -73,14 +74,7 @@ function Home() {
             <p className="point-description">
               롤링 페이퍼에 이모지를 추가할 수 있어요!
             </p>
-
-            <div className="emoji-preview">
-              <EmojiButton emoji="👍" count={10} />
-              <EmojiButton emoji="😍" count={24} />
-              <EmojiButton emoji="🥺" count={10} />
-              <EmojiButton emoji="👏" count={8} />
-              <EmojiButton emoji="..." count={0} />
-            </div>
+            <img src={point02} alt="이모티콘 이미지" />
           </div>
         </section>
         <section className="explore section">

@@ -20,6 +20,16 @@
   /* 모바일 전용 스타일 (flex 방향 전환 등) */
 }
 
+/* 카드들을 감싸는 전체 컨테이너 */
+.point-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
+  padding: 40px 20px; /* 필요에 따라 조정 */
+  background-color: #f6f8ff;
+  border-radius: 4px;
+}
+
 /* 제목, 부제목, 설명 */
 .point-title {
   background-color: #a74bff;
@@ -32,16 +42,6 @@
   outline: none;
   display: inline-block;
   align-self: flex-start; /* 추가 */
-}
-
-/* 카드들을 감싸는 전체 컨테이너 */
-.point-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
-  padding: 40px 20px; /* 필요에 따라 조정 */
-  background-color: #f6f8ff;
-  border-radius: 4px;
 }
 
 .point-subtitle {
@@ -173,7 +173,7 @@
   background-color: #eaeaea;
 }
 
-/* 이모지 영역 */
+/* 이모지 영역 
 .emoji-section .emoji-preview {
   display: flex;
   align-items: center;
@@ -195,6 +195,7 @@
   border: none;
   cursor: pointer;
 }
+*/
 
 /* 구경해보기 버튼 섹션 */
 .explore.section {
