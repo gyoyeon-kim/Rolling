@@ -52,6 +52,11 @@ function CardBH({
   const { pattern: patternImage, bgColor } =
     patterns[backgroundColor] || { pattern: null, bgColor: backgroundColor };
 
+  // 가장 많이 달린 리액션 3개 가져오기
+  const topThreeReactions = [...topReactions]
+    .sort((a, b) => b.count - a.count) // count 기준 내림차순 정렬
+    .slice(0, 3); // 상위 3개 추출
+
   return (
     <div
       className="BHcard"
@@ -66,7 +71,7 @@ function CardBH({
         <h3>{title}</h3>
         <p>{totalSenders}명이 작성했어요!</p>
         <div className="reactions">
-          {topReactions.map((reaction, index) => (
+          {topThreeReactions.map((reaction, index) => (
             <span key={index} className="reaction">
               {reaction.emoji} {reaction.count}
             </span>

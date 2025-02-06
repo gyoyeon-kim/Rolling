@@ -85,6 +85,8 @@
   margin-left: -10px; /* 겹치도록 설정 */
 }
 
+
+
 /* ✅ 태블릿 크기를 먼저 적용 (768px ~ 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
   .BHcard {
