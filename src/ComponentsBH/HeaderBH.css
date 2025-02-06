@@ -1,6 +1,6 @@
 /* 기본 헤더 스타일 */
 .header {
-  background-color: #f8f9fa; /* 헤더 배경색 */
+  background-color: var(--white); /* 헤더 배경색 */
   border-bottom: 1px solid #ddd; /* 헤더 하단 경계선 */
   width: 100%; /* 전체 너비를 100%로 설정 */
   height: 64px; /* 높이를 64px로 설정 */
@@ -17,35 +17,40 @@
   max-width: 1207px; /* 최대 너비 설정 */
   width: 100%; /* 전체 화면을 차지하도록 */
   margin: 0 auto; /* 가로 중앙 정렬 */
-  padding: 20px 40px; /* 적절한 여백 추가 */
-  height: 64px; /* 컨테이너 높이 설정 */
+  height: 40px; /* 컨테이너 높이 설정 */
 }
 
 /* 로고 스타일 */
 .header-logo {
   display: flex;
+  justify-content: space-between; 
   align-items: center;
   cursor: pointer;
+  width: 106px;
+  height: 30px;
 }
 
 .logo-image {
+  width: 28px;
   height: 28px;
-  margin-right: 8px;
+  margin-right: 2px;
 }
 
 .logo-text {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: var(--font-size-20);
+  font-weight: 700;
   color: #4a494f;
+  font-family: "poppins";
+  line-height: 30px;
 }
 
 /* 버튼 스타일 */
 .create-paper-button {
   padding: 8px 16px;
-  background-color: #fff;
-  color: #181818;
-  border: 1px solid #cccccc;
-  font-size: 16px;
+  background-color: var(--white);
+  color: var(--gray-900);
+  border: 1px solid var(--gray-300);
+  font-size: var(-font-size-16);
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
@@ -55,14 +60,14 @@
 }
 
 .create-paper-button:hover {
-  background-color: #181818;
-  color: #fff;
+  background-color: var(--gray-900);
+  color: var(--white);
   transform: scale(1.05);
 }
 
 .create-paper-button:active {
-  background-color: #4839a1;
-  color: #fff;
+  background-color: var(--gray-700);
+  color: var(--white);
   transform: scale(0.98);
 }
 
