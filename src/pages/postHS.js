@@ -8,6 +8,7 @@ import EmojiPicker, {
 } from "emoji-picker-react";
 import "./postHS.css";
 import axios from "axios";
+import CursorEffect from "./CursorEffect";
 
 // 이미지 import
 import logo from "../images/logo.svg";
@@ -16,6 +17,7 @@ import addEmoji from "../images/ico_add.svg";
 import shareIcon from "../images/share-24.svg";
 import plusIcon from "../images/plus.svg";
 import deleteIcon from "../images/ico_delete.svg";
+
 
 // .env에서 키 불러오기
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
@@ -374,55 +376,61 @@ const Post = () => {
   const [backgroundImage, setBackgroundImage] = useState(""); // 배경 이미지
   const [backgroundColor, setBackgroundColor] = useState(""); // 배경 색
 
-  // 메시지 가져오기
-  useEffect(() => {
-    console.log("📌 recipientId:", id);
+// 메시지 가져오기 (GET 요청)
+const fetchMessages = async () => {
+  try {
+    console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=8`);
 
-    if (!id) {
-      console.error("❌ recipientId가 없습니다.");
-      setLoading(false);
-      return;
+    const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=8`);
+    console.log("📩 API 응답 데이터:", response.data);
+
+    if (response.data.results) {
+      setMessages(response.data.results);
+    } else {
+      console.error("❌ API 응답에서 results 배열이 없습니다.");
     }
+  } catch (error) {
+    console.error("❌ 메시지 불러오기 실패:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
-    const fetchRecipientData = async () => {
-      try {
-        console.log(
-          "🟢 API 요청 URL:",
-          `https://rolling-api.vercel.app/13-1/recipients/`
-        );
+//수신자 정보 가져오기 별도
+const fetchRecipientData = async () => {
+  try {
+    console.log("🎯 수신자 정보 API 요청:", `https://rolling-api.vercel.app/13-1/recipients/${id}/`);
+    
+    const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/`);
+    console.log("📥 수신자 데이터:", response.data);
 
-        const response = await axios.get(
-          `https://rolling-api.vercel.app/13-1/recipients/`
-        );
-        console.log("📥 API 응답 데이터 (전체):", response.data);
+    // 배경 이미지와 색상 설정
+    setBackgroundImage(response.data.backgroundImageURL || "");
+    setBackgroundColor(response.data.backgroundColor || "var(--beige-200)");
 
-        if (!response.data.results) {
-          console.error("❌ API 응답에서 results 배열이 없습니다.");
-          return;
-        }
+  } catch (error) {
+    console.error("❌ 수신자 정보 불러오기 실패:", error);
+  }
+};
 
-        const recipientData = response.data.results.find(
-          (r) => r.id === parseInt(id)
-        );
-        console.log("🔎 찾은 recipient 데이터:", recipientData);
 
-        if (recipientData) {
-          setMessages(recipientData.recentMessages || []);
-          setBackgroundImage(recipientData.backgroundImageURL || ""); // 배경 이미지 설정
-          setBackgroundColor(recipientData.backgroundColor || "#fff"); // 배경 색 설정
-        }
-      } catch (error) {
-        console.error("❌ 메시지 불러오기 실패:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+// useEffect에서 메시지 불러오기 실행
+useEffect(() => {
+  if (!id) {
+    console.error("❌ recipientId가 없습니다.");
+    setLoading(false);
+    return;
+  }
 
-    fetchRecipientData();
-  }, [id]);
+  fetchRecipientData();  // 배경 이미지 및 색상 가져오기
+  fetchMessages();       // 메시지 가져오기
+}, [id]);
+
+
 
   return (
     <>
+      <CursorEffect /> 
       {isModalOpen && selectedCard && (
         <div className="modal">
           <div className="modalContents" ref={modalRef}>
@@ -641,28 +649,21 @@ const Post = () => {
                             <img src={deleteIcon} alt="삭제하기" />
                           </a>
                         </div>
-                        <p
-                          className="content"
-                          style={{
-                            fontFamily: msg.font,
-                            color: msg.textColor || "#000",
-                            fontSize:
-                              msg.font === "나눔손글씨 손편지체"
-                                ? "24px"
-                                : msg.fontSize || "18px",
-                            fontWeight: msg.fontWeight || "normal",
-                            fontStyle: msg.fontStyle || "normal",
-                          }}
-                        >
-                          {msg.content.replace(/<[^>]+>/g, "")}
-                        </p>
+                          <p 
+                            className="content"
+                            style={{ fontFamily: msg.font, 
+                              color: msg.textColor || "#000", 
+                              fontSize: msg.font === "나눔손글씨 손편지체" ? "24px" : msg.fontSize || "18px",
+                              fontWeight: msg.fontWeight || "normal", 
+                              fontStyle: msg.fontStyle || "normal"
+                            }}
+                          >
+                            {msg.content.replace(/<[^>]+>/g, '')}
+                          </p>
 
-                        <span className="date">
-                          {new Date(msg.createdAt)
-                            .toISOString()
-                            .split("T")[0]
-                            .replace(/-/g, ".")}
-                        </span>
+                          <span className="date">
+                            {new Date(msg.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
+                          </span>
                       </a>
                     </li>
                   ))}
