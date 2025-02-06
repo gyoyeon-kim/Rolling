@@ -388,11 +388,11 @@ const Post = () => {
       try {
         console.log(
           "🟢 API 요청 URL:",
-          `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`
+          `https://rolling-api.vercel.app/13-1/recipients/`
         );
 
         const response = await axios.get(
-          `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`
+          `https://rolling-api.vercel.app/13-1/recipients/`
         );
         console.log("📥 API 응답 데이터 (전체):", response.data);
 
