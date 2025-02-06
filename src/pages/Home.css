@@ -27,7 +27,7 @@
   gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
   padding: 40px 20px; /* 필요에 따라 조정 */
   background-color: #f6f8ff;
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 /* 제목, 부제목, 설명 */
@@ -203,6 +203,7 @@
   flex-direction: column;
   text-align: center;
   align-self: center;
+  margin-top: 30px;
 }
 .explore-button {
   color: #fff;
@@ -223,6 +224,10 @@
     width: 100%; /* 컨테이너 전체 너비 */
     padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
     box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 

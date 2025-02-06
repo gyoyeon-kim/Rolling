@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
-import EmojiButton from "../component/EmojiButton";
+/*import EmojiButton from "../component/EmojiButton";*/
 import point02 from "../images/point02.png";
 
 function Home() {
@@ -59,7 +59,9 @@ function Home() {
               </div>
 
               {/* + 버튼 카드 , To page연결*/}
-              <div className="card-placeholder">+</div>
+              <Link to="/post" className="card-placeholder">
+                +
+              </Link>
             </div>
           </div>
         </section>
@@ -76,11 +78,11 @@ function Home() {
             </p>
             <img src={point02} alt="이모티콘 이미지" />
           </div>
-        </section>
-        <section className="explore section">
-          <Link to="/list" className="explore-button">
-            구경하러 가기
-          </Link>
+          <div className="explore section">
+            <Link to="/list" className="explore-button">
+              구경하러 가기
+            </Link>
+          </div>
         </section>
       </main>
     </>
