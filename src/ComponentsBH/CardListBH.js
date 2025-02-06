@@ -11,7 +11,7 @@ function CardListBH({ items }) {
           id={item.id}
           title={`To. ${item.name}`}
           backgroundImageURL={item.backgroundImageURL}
-          backgroundColor={item.backgroundColor} // 컬러 추가
+          backgroundColor={item.backgroundColor} 
           stats={`${item.messageCount}명이 작성했어요!`}
           topReactions={item.topReactions}
         />
