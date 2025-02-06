@@ -1,6 +1,11 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import EmojiPicker, { Theme, EmojiStyle, SuggestionMode, SkinTonePickerLocation,} from "emoji-picker-react";
+import EmojiPicker, {
+  Theme,
+  EmojiStyle,
+  SuggestionMode,
+  SkinTonePickerLocation,
+} from "emoji-picker-react";
 import "./postHS.css";
 import axios from "axios";
 import CursorEffect from "./CursorEffect";
@@ -34,7 +39,6 @@ const FONT_STYLES = {
     fontSize: "24px",
   },
 };
-
 
 // 배지 컴포넌트
 const Badge = ({ type }) => {
@@ -89,12 +93,9 @@ const Badge = ({ type }) => {
 //   },
 // ];
 
-
 const Post = () => {
-  
   // useNavigate 훅 추가
   const navigate = useNavigate();
-
 
   // api 데이터 저장 후 불러오기
   const { id } = useParams(); // URL에서 recipientId 가져오기
@@ -189,15 +190,15 @@ const Post = () => {
   const saveEmojiToLocal = (recipientId, emoji) => {
     let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {}; // 객체 형태로 저장
     const recipientEmojis = savedEmojis[recipientId] || []; // 해당 recipient의 이모지 데이터 가져오기
-  
+
     const existingEmoji = recipientEmojis.find((item) => item.emoji === emoji);
-  
+
     if (existingEmoji) {
       existingEmoji.count += 1; // 이미 있는 이모지는 count 증가
     } else {
       recipientEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
     }
-  
+
     savedEmojis[recipientId] = recipientEmojis; // recipientId별로 저장
     localStorage.setItem("savedEmojis", JSON.stringify(savedEmojis)); // localStorage에 저장
   };
@@ -213,29 +214,27 @@ const Post = () => {
   // 이모지 선택시 화면에 반영
   const onEmojiClick = async (recipientId, emojiData) => {
     saveEmojiToLocal(recipientId, emojiData.emoji); // 이모지 저장
-  
+
     setEmojiList((prev) => {
       const updatedList = [...prev];
-      const existingEmoji = updatedList.find((item) => item.emoji === emojiData.emoji);
-      
+      const existingEmoji = updatedList.find(
+        (item) => item.emoji === emojiData.emoji
+      );
+
       if (existingEmoji) {
         existingEmoji.count += 1;
       } else {
         updatedList.push({ emoji: emojiData.emoji, count: 1 });
       }
-  
+
       return updatedList; // 🔥 정렬하지 않고 그대로 반환 (정렬을 useEffect에서 수행)
     });
   };
-  
+
   // ✅ useEffect를 활용한 정렬 보장
   useEffect(() => {
     setEmojiList((prev) => [...prev].sort((a, b) => b.count - a.count));
   }, [emojiList]); // 🔥 emojiList가 변경될 때마다 정렬 실행
-  
-  
-  
-  
 
   // 이모지 카운트 수 상위 3개만 가져오기
   const topEmojis = emojiList.slice(0, 3);
@@ -268,15 +267,16 @@ const Post = () => {
       return;
     }
 
-    // const finalImage = backgroundImage 
-    // ? backgroundImage 
+    // const finalImage = backgroundImage
+    // ? backgroundImage
     // : `https://singlecolorimage.com/get/${backgroundColor.replace("#", "")}/500x500`;
 
     window.Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
         title: "따뜻한 마음을 전해보세요",
-        description: "추억을 담은 롤링페이퍼로 소중한 사람에게 따뜻한 한마디를 남겨보세요!",
+        description:
+          "추억을 담은 롤링페이퍼로 소중한 사람에게 따뜻한 한마디를 남겨보세요!",
         imageUrl: "https://rolling-navy.vercel.app/sharebg_kakao.png", // 미리보기 이미지
         link: {
           mobileWebUrl: window.location.href,
@@ -354,14 +354,10 @@ const Post = () => {
     setIsDeleteModalOpen(false); // 삭제 모달도 닫기
   };
 
-
   // 외부 클릭 감지하여 모달 닫기
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target)
-      ) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
         closeModal();
       }
     }
@@ -374,11 +370,11 @@ const Post = () => {
     };
   }, [isModalOpen, isDeleteModalOpen]);
 
-// 메시지 상태 관리
-const [messages, setMessages] = useState([]); // api에서 가져온 메세지 저장
-const [loading, setLoading] = useState(true); // 로딩 상태 관리
-const [backgroundImage, setBackgroundImage] = useState(""); // 배경 이미지
-const [backgroundColor, setBackgroundColor] = useState(""); // 배경 색
+  // 메시지 상태 관리
+  const [messages, setMessages] = useState([]); // api에서 가져온 메세지 저장
+  const [loading, setLoading] = useState(true); // 로딩 상태 관리
+  const [backgroundImage, setBackgroundImage] = useState(""); // 배경 이미지
+  const [backgroundColor, setBackgroundColor] = useState(""); // 배경 색
 
 // 메시지 가져오기 (GET 요청)
 const fetchMessages = async () => {
@@ -440,7 +436,12 @@ useEffect(() => {
           <div className="modalContents" ref={modalRef}>
             <div className="modalHeader">
               <div>
-                <div className="photo" style={{ backgroundImage: `url(${selectedCard.profileImageURL})` }}></div>
+                <div
+                  className="photo"
+                  style={{
+                    backgroundImage: `url(${selectedCard.profileImageURL})`,
+                  }}
+                ></div>
                 <div className="fromName">
                   <span>
                     From. <em>{selectedCard.sender}</em>
@@ -449,22 +450,28 @@ useEffect(() => {
                 </div>
               </div>
               <span className="date">
-                {new Date(selectedCard.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
+                {new Date(selectedCard.createdAt)
+                  .toISOString()
+                  .split("T")[0]
+                  .replace(/-/g, ".")}
               </span>
             </div>
 
             <div className="modalBody">
               <p
                 className="content"
-                style={{ 
-                  fontFamily: selectedCard.font, 
+                style={{
+                  fontFamily: selectedCard.font,
                   color: selectedCard.textColor || "#000",
-                  fontSize: selectedCard.font === "나눔손글씨 손편지체" ? "24px" : selectedCard.fontSize || "18px",
-                  fontWeight: selectedCard.fontWeight || "normal", 
-                  fontStyle: selectedCard.fontStyle || "normal"
+                  fontSize:
+                    selectedCard.font === "나눔손글씨 손편지체"
+                      ? "24px"
+                      : selectedCard.fontSize || "18px",
+                  fontWeight: selectedCard.fontWeight || "normal",
+                  fontStyle: selectedCard.fontStyle || "normal",
                 }}
               >
-                {selectedCard.content.replace(/<[^>]+>/g, '')}
+                {selectedCard.content.replace(/<[^>]+>/g, "")}
               </p>
             </div>
 
@@ -477,14 +484,20 @@ useEffect(() => {
       {isDeleteModalOpen && (
         <div class="modal deleteMessageWrap">
           <div className="modalContents" ref={modalRef}>
-            <strong>메세지를 삭제하려면<br/>비밀번호를 입력해주세요.</strong>
+            <strong>
+              메세지를 삭제하려면
+              <br />
+              비밀번호를 입력해주세요.
+            </strong>
             <div className="">
               <label for="pw"></label>
-              <input type="password" id="pw" placeholder="비밀번호 입력"/>
+              <input type="password" id="pw" placeholder="비밀번호 입력" />
             </div>
             <div className="modalBtn">
               <button className="">확인</button>
-              <button className="cancelBtn" onClick={closeModal}>취소</button>
+              <button className="cancelBtn" onClick={closeModal}>
+                취소
+              </button>
             </div>
           </div>
         </div>
@@ -510,14 +523,14 @@ useEffect(() => {
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
                   <ul className="emojiTop3List">
-                  <ul className="emojiTop3List">
-                    {emojiList.slice(0, 3).map((emoji, index) => (
-                      <li key={index}>
-                        <span>{emoji.emoji}</span>
-                        <span>{emoji.count}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="emojiTop3List">
+                      {emojiList.slice(0, 3).map((emoji, index) => (
+                        <li key={index}>
+                          <span>{emoji.emoji}</span>
+                          <span>{emoji.count}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
@@ -545,7 +558,9 @@ useEffect(() => {
                   {isEmojiPickerOpen && (
                     <div className="emojiPickerDiv">
                       <EmojiPicker
-                        onEmojiClick={(emojiData) => onEmojiClick(id, emojiData)}
+                        onEmojiClick={(emojiData) =>
+                          onEmojiClick(id, emojiData)
+                        }
                         searchDisabled={false} // 검색 활성화
                         previewConfig={{ showPreview: false }} // 미리보기 비활성화
                         theme={Theme.LIGHT}
@@ -581,10 +596,13 @@ useEffect(() => {
         {loading ? (
           <p>📩 메시지를 불러오는 중...</p>
         ) : (
-          <div className="post"
-            style={{ 
-              backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
-              backgroundColor: backgroundColor || "var(--beige-200)"
+          <div
+            className="post"
+            style={{
+              backgroundImage: backgroundImage
+                ? `url(${backgroundImage})`
+                : "none",
+              backgroundColor: backgroundColor || "var(--beige-200)",
             }}
           >
             <div className="container">
@@ -594,24 +612,35 @@ useEffect(() => {
               <ul className="postCard">
                 <li className="addPostCard">
                   <Link to={`/post/${id}/message`}>
-                    <span><img src={plusIcon} alt="추가하기" /></span>
+                    <span>
+                      <img src={plusIcon} alt="추가하기" />
+                    </span>
                   </Link>
                 </li>
 
                 {/* 🔥 3️⃣ API에서 불러온 메시지 리스트 출력 */}
-                {Array.isArray(messages) && messages.length > 0 && (
+                {Array.isArray(messages) &&
+                  messages.length > 0 &&
                   messages.map((msg) => (
                     <li key={msg.id} className="savedPostCard">
                       <a role="button" onClick={() => openModal(msg)}>
                         <div className="cardInfo">
                           <div>
-                            <div className="photo" style={{ backgroundImage: `url(${msg.profileImageURL})`}}></div>
+                            <div
+                              className="photo"
+                              style={{
+                                backgroundImage: `url(${msg.profileImageURL})`,
+                              }}
+                            ></div>
                             <div className="fromName">
-                              <span>From. <em>{msg.sender}</em></span>
+                              <span>
+                                From. <em>{msg.sender}</em>
+                              </span>
                               <Badge type={msg.relationship} />
                             </div>
                           </div>
-                          <a className="btnDelete" 
+                          <a
+                            className="btnDelete"
                             onClick={(e) => {
                               e.stopPropagation(); // 💡 부모 클릭 이벤트 차단
                               openDeleteModal();
@@ -637,10 +666,9 @@ useEffect(() => {
                           </span>
                       </a>
                     </li>
-                  ))
-                )}
+                  ))}
 
-              {/* {dummyData.map((card) => (
+                {/* {dummyData.map((card) => (
                 <li key={card.id} className="savedPostCard">
                   <a role="button" onClick={() => openModal(card)}>
                     <div className="cardInfo">
@@ -664,7 +692,7 @@ useEffect(() => {
                   </a>
                 </li>
               ))} */}
-              {/* <li className="savedPostCard">
+                {/* <li className="savedPostCard">
                 <a role="button">
                   <div className="cardInfo">
                     <div>
@@ -691,13 +719,13 @@ useEffect(() => {
                   <span className="date">2023.07.08</span>
                 </a>
               </li> */}
-            </ul>
+              </ul>
+            </div>
           </div>
-        </div>
         )}
       </main>
     </>
   );
-}
+};
 
 export default Post;

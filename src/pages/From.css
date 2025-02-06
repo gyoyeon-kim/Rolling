@@ -41,7 +41,7 @@ p {
 
 .from_main {
   width: 720px;
-  height: 944px;
+  height: 1080px;
   margin: 20px auto;
 }
 
@@ -85,6 +85,27 @@ p {
   margin-left: 5px;
   margin-top: -5px;
 }
+
+.pw_input {
+  width: 100%;
+  height: 50px;
+  padding: 1.2rem 1.6rem;
+  border-radius: 0.8rem;
+  border: none;
+  outline: 0.1rem solid var(--gray-300);
+  background: var(--white);
+  font-size: var(--font-size-16);
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.pw-error_message {
+  color: var(--error);
+  font-size: 14px;
+  margin-left: 5px;
+  margin-top: -5px;
+}
+
 .profileimg {
   width: 717px;
   height: 142px;
@@ -155,6 +176,42 @@ p {
   flex-direction: column;
   height: 98px;
   gap: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.message_pw {
+  width: 320px;
+  height: 98px;
+  display: flex;
+  flex-direction: column;
+  height: 98px;
+  gap: 1.2rem;
+}
+
+/* font 적용 */
+@font-face {
+  font-family: Noto-Sans;
+  src: url(../fonts//NotoSansKR-Regular.ttf);
+}
+
+@font-face {
+  font-family: NanumMyengjo;
+  src: url(../fonts//NanumMyeongjo.ttf);
+}
+
+@font-face {
+  font-family: 나눔명조;
+  src: url(../fonts//NanumMyeongjo.ttf);
+}
+
+@font-face {
+  font-family: NanumSonPyeonJiCe;
+  src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf);
+}
+
+@font-face {
+  font-family: 나눔손글씨 손편지체;
+  src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf);
 }
 
 .selection {
@@ -223,7 +280,7 @@ p {
   font-weight: 500;
   border: none;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 /* 비활성화 상태일 때 */

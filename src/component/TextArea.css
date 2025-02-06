@@ -1,3 +1,7 @@
+em {
+  font-style: italic !important;
+}
+
 .ql-toolbar {
   width: 100%;
   background: var(--gray-200, #eee);

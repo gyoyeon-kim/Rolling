@@ -50,11 +50,15 @@ const From = () => {
   const [isOpen2, setIsOpen2] = useState(false);
   const [font, setFont] = useState("Noto Sans");
   const font_options = [
-    "Pretendard",
-    "Noto Sans",
-    "나눔명조",
-    "나눔손글씨 손편지체",
+    { label: "Noto Sans", value: "Noto Sans" },
+    { label: "Pretendard", value: "Pretendard" },
+    { label: "나눔명조", value: "NanumMyengjo" },
+    { label: "나눔손글씨 손편지체", value: "NanumSonPyeonJiCe" },
   ];
+
+  /* 비밀번호 */
+  const [pw, setPw] = useState("");
+  const [pwError, setPwError] = useState(""); // pw 에러 상태
 
   /* 이름 입력 처리 */
   const handleNameChange = (e) => {
@@ -67,6 +71,24 @@ const From = () => {
       setNameError("값을 입력해 주세요!");
     } else {
       setNameError(""); // 값이 있으면 에러 메시지 초기화
+    }
+  };
+
+  /* 비밀번호 입력 처리 */
+  // 숫자만 허용
+  const handlePwChange = (e) => {
+    const input = e.target.value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+    if (input.length <= 4) {
+      setPw(input); // 4자리 이하만 업데이트
+    }
+  };
+
+  // 비번 입력 필드에서 포커스를 잃었을 때 에러 상태 처리
+  const handlePwBlur = () => {
+    if (!pw) {
+      setPwError("비밀번호를 입력해주세요!");
+    } else {
+      setPwError(""); // 값이 있으면 에러 메시지 초기화
     }
   };
 
@@ -90,7 +112,7 @@ const From = () => {
 
   /* 데이터 테스트용 */
   const handleSubmit = () => {
-    console.log("아아디:", id);
+    console.log("아이디:", id);
     console.log("이름:", name);
     console.log("선택된 프로필:", profileImageURL);
     console.log("선택된 관계:", relationship);
@@ -105,7 +127,7 @@ const From = () => {
     const data = {
       team: "13-1",
       recipientId: id,
-      sender: name,
+      sender: name + pw,
       profileImageURL: profileImageURL,
       relationship: relationship,
       content: quillValue,
@@ -230,7 +252,7 @@ const From = () => {
         <div className="font">
           <p className="title">폰트 선택</p>
           <div className="selection" onClick={() => setIsOpen2(!isOpen2)}>
-            {font}
+            <div style={{ fontFamily: font }}>{font}</div>
             <img
               src={isOpen2 ? arrowTop : arrowDown}
               className="btn_selection"
@@ -241,11 +263,12 @@ const From = () => {
                   <li
                     key={index}
                     onClick={() => {
-                      setFont(font_options);
+                      setFont(font_options.label);
                       setIsOpen2(false);
                     }}
+                    style={{ fontFamily: font_options.value }}
                   >
-                    {font_options}
+                    {font_options.label}
                   </li>
                 ))}
               </ul>
@@ -253,11 +276,25 @@ const From = () => {
           </div>
         </div>
 
+        <div className="message_pw">
+          <p className="title">비밀번호</p>
+          <input
+            className={`pw_input ${pwError ? "error" : ""}`}
+            placeholder="비밀번호 4자리를 입력해 주세요."
+            value={pw}
+            onChange={handlePwChange}
+            maxLength={4} // 최대 4자리 제한
+            inputMode="numeric"
+            onBlur={handlePwBlur} // 포커스 아웃 시 에러 체크
+          />
+          {pwError && <p className="pw-error_message">{pwError}</p>}{" "}
+        </div>
+
         <div>
           <button
             className="btn_send"
             onClick={sendMessage}
-            disabled={!name || !quillValue}
+            disabled={!name || !quillValue || pw.length !== 4}
           >
             보내기
           </button>
