@@ -294,7 +294,7 @@ const From = () => {
           <button
             className="btn_send"
             onClick={sendMessage}
-            disabled={!name || !quillValue || !pw}
+            disabled={!name || !quillValue || pw.length !== 4}
           >
             보내기
           </button>
