@@ -17,9 +17,9 @@
   position: absolute !important; /* 부모 요소를 기준으로 위치 지정 */
   bottom: 0 !important; /* 아래쪽 끝에 붙이기 */
   right: 0 !important; /* 오른쪽 끝에 붙이기 */
-  width: 135px; /* 필요에 따라 크기 조절 */
-  height: auto;
-  opacity: 0.5; /* 살짝 투명하게 */
+  width: 142px; /* 필요에 따라 크기 조절 */
+  height: 142PX;
+  
   display: block; /* img 기본 inline 속성을 block으로 변경 */
   margin: 0; /* 추가 여백 제거 */
   padding: 0; /* 추가 패딩 제거 */

@@ -20,25 +20,26 @@ function CardBH({
     navigate(`/post/${id}`); // 동적 경로로 이동
   };
 
-// 배경 이미지 선택 함수 수정
-const getPatternImage = (color) => {
-  switch (color) {
-    case "beige":
-      return pattern02;
-    case "purple":
-      return pattern01;
-    case "blue":
-      return pattern03;
-    case "green":
-      return pattern04;
-    default:
-      return null;
-  }
-};
+  // 배경 이미지와 컬러를 선택하는 함수
+  const getPatternAndBackgroundColor = (color) => {
+    switch (color) {
+      case "beige":
+        return { pattern: pattern02, bgColor: "#FFE2AD" };
+      case "purple":
+        return { pattern: pattern01, bgColor: "#ECD9FF" };
+      case "blue":
+        return { pattern: pattern03, bgColor: "#B1E4FF" };
+      case "green":
+        return { pattern: pattern04, bgColor: "#D0F5C3" };
+      default:
+        return { pattern: null, bgColor: backgroundColor };
+    }
+  };
 
-  const patternImage = backgroundImageURL
-    ? null
-    : getPatternImage(backgroundColor);
+  // 배경 이미지와 컬러 값을 가져옴
+  const { pattern: patternImage, bgColor } = getPatternAndBackgroundColor(
+    backgroundColor
+  );
 
   return (
     <div
@@ -47,7 +48,7 @@ const getPatternImage = (color) => {
       style={{
         background: backgroundImageURL
           ? `url(${backgroundImageURL}) center/cover no-repeat`
-          : backgroundColor, // 배경 이미지가 없으면 컬러 사용
+          : bgColor, // 배경 이미지가 없으면 컬러 사용
       }}
     >
       <div className="card-content">
