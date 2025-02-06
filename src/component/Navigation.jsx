@@ -8,15 +8,17 @@ function Navigation() {
   return (
     <header className="nav-container">
       {/* 로고 버튼 */}
-      <Link to="/" className="logo">
-        <img src={logo} alt="Rolling Logo" className="logo-img" />
-        {/* 텍스트로 된 로고라면 <span>으로도 가능 */}
-      </Link>
+      <div className="nav">
+        <Link to="/" className="logo">
+          <img src={logo} alt="Rolling Logo" className="logo-img" />
+          {/* 텍스트로 된 로고라면 <span>으로도 가능 */}
+        </Link>
 
-      {/* 롤링 페이퍼 만들기 버튼 */}
-      <Link to="/post/123" className="rolling-button">
-        롤링 페이퍼 만들기
-      </Link>
+        {/* 롤링 페이퍼 만들기 버튼 */}
+        <Link to="/post/123" className="rolling-button">
+          롤링 페이퍼 만들기
+        </Link>
+      </div>
     </header>
   );
 }

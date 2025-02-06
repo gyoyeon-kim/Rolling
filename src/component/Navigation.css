@@ -2,14 +2,19 @@
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
-  max-width: 1248px;
-  margin: 0 auto;
-  padding: 0 24px;
   height: 64px;
-  box-sizing: border-box;
   border-bottom: 1px solid #ddd;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1207px;
+  width: 100%;
+  margin: 0 auto;
+  height: 40px;
 }
 
 /* 로고 */
