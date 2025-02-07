@@ -7,6 +7,11 @@
   border-bottom: 1px solid #ddd;
   /* 데스크탑 기본 여백: 화면이 충분히 클 때는 중앙 정렬 */
   padding: 0 24px;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: border-bottom 0.3s;
 }
 
 .nav {
