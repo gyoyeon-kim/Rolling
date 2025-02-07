@@ -584,7 +584,12 @@ const Post = () => {
             </strong>
             <div className="">
               <label for="pw"></label>
-              <input type="password" id="pw" placeholder="비밀번호 입력" />
+              <input
+                type="password"
+                id="pw"
+                maxLength={4}
+                placeholder="비밀번호 입력" // 최대 4자리 제한
+              />
             </div>
             <div className="modalBtn">
               <button onClick={handleDelete}>확인</button>
