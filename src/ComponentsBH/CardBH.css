@@ -27,26 +27,18 @@
   pointer-events: none;
 }
 
-.card-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0 0 12px 0;
-  color: var(--gray-800);
-  z-index: 2;
-}
 
-/* ✅ 태블릿 크기를 먼저 적용 (768px ~ 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .BHcard {
-    width: 275px !important; /* 태블릿 크기 강제 적용 */
-    height: 260px !important; /* 태블릿 크기 강제 적용 */
-  }
-}
+
 
 /* ✅ 모바일 화면에서만 208x232 적용 (768px 이하) */
 @media (max-width: 767px) {
-  .BHcard {
+  .BHcard  {
     width: 208px !important; /* 모바일 크기 강제 적용 */
     height: 232px !important; /* 모바일 크기 강제 적용 */
+  }
+
+  .card-pattern {
+    width: 107px; /* 모바일 크기에 맞게 조정 */
+    height: 114px;
   }
 }
