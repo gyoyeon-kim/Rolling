@@ -19,7 +19,6 @@ function CardBH({
   const [extraCount, setExtraCount] = useState(0);
   const [totalSenders, setTotalSenders] = useState(0);
 
-  // 데이터 fetch 로직
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -41,7 +40,6 @@ function CardBH({
     fetchMessages();
   }, [id]);
 
-  // 배경 패턴 매핑
   const patterns = {
     beige: { pattern: pattern02, bgColor: "#FFE2AD" },
     purple: { pattern: pattern01, bgColor: "#ECD9FF" },
@@ -67,8 +65,8 @@ function CardBH({
       {patternImage && (
         <img src={patternImage} alt="pattern" className="card-pattern" />
       )}
-      <h3 className="card-title">{title}</h3>
       <CardDataBH
+        title={title} // 타이틀 전달
         totalSenders={totalSenders}
         topReactions={topReactions}
         displaySenders={displaySenders}
