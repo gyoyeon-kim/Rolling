@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useRef } from "react";
 import axios from "axios";
 import "./From.css";
+import debounce from "lodash.debounce";
 
 import rolling_icon from "../images/logo.svg";
 //import default_profile from "../images/From_img/profile.svg";
@@ -100,25 +101,32 @@ const From = () => {
   }, []);
 
   /* 이미지 업로드*/
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImageURL(reader.result); // 업로드한 이미지 URL을 상태로 저장
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const CLOUD_NAME = "dq7m9soc7";
+  const UPLOAD_PRESET = "rollingimg";
 
-  /* 데이터 테스트용 */
-  const handleSubmit = () => {
-    console.log("아이디:", id);
-    console.log("이름:", name);
-    console.log("선택된 프로필:", profileImageURL);
-    console.log("선택된 관계:", relationship);
-    console.log("에디터 내용:", quillValue);
-    console.log("선택된 폰트:", font);
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      console.log("업로드 성공:", data.secure_url);
+      setProfileImageURL(data.secure_url); // 업로드된 이미지 URL 저장
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+    }
   };
 
   /* 메시지 생성 API */
