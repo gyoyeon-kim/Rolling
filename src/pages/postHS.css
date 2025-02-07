@@ -193,6 +193,7 @@ textarea {
 
 em {
   font-style: normal !important;
+  display: inline-block;
 }
 
 /*reset end*/

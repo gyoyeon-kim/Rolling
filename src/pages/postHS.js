@@ -438,9 +438,9 @@ const Post = () => {
 // 메시지 가져오기 (GET 요청)
 const fetchMessages = async () => {
   try {
-    console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=8`);
+    console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
 
-    const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=8`);
+    const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
     console.log("📩 API 응답 데이터:", response.data);
 
     if (response.data.results) {
