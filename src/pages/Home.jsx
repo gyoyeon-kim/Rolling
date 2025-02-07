@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
 /*import EmojiButton from "../component/EmojiButton";*/
-import point02 from "../images/point02.png";
+import point02 from "../images/Point02.png";
 
 function Home() {
   return (
