@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
-import EmojiButton from "../component/EmojiButton";
+/*import EmojiButton from "../component/EmojiButton";*/
+import point02 from "../images/Point02.png";
 
 function Home() {
   return (
@@ -58,7 +59,9 @@ function Home() {
               </div>
 
               {/* + 버튼 카드 , To page연결*/}
-              <div className="card-placeholder">+</div>
+              <Link to="/post" className="card-placeholder">
+                +
+              </Link>
             </div>
           </div>
         </section>
@@ -73,20 +76,13 @@ function Home() {
             <p className="point-description">
               롤링 페이퍼에 이모지를 추가할 수 있어요!
             </p>
-
-            <div className="emoji-preview">
-              <EmojiButton emoji="👍" count={10} />
-              <EmojiButton emoji="😍" count={24} />
-              <EmojiButton emoji="🥺" count={10} />
-              <EmojiButton emoji="👏" count={8} />
-              <EmojiButton emoji="..." count={0} />
-            </div>
+            <img src={point02} alt="이모티콘 이미지" />
           </div>
-        </section>
-        <section className="explore section">
-          <Link to="/list" className="explore-button">
-            구경하러 가기
-          </Link>
+          <div className="explore section">
+            <Link to="/list" className="explore-button">
+              구경하러 가기
+            </Link>
+          </div>
         </section>
       </main>
     </>

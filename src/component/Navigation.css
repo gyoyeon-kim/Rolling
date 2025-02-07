@@ -1,61 +1,74 @@
+/* 네비게이션 컨테이너 */
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  /* PC 기본값은 중앙정렬 + 적절한 양옆 여백 */
   width: 100%;
-  max-width: 1248px;
-  margin: 0 auto;
+  height: 64px;
+  border-bottom: 1px solid #ddd;
+  /* 데스크탑 기본 여백: 화면이 충분히 클 때는 중앙 정렬 */
   padding: 0 24px;
-  height: 80px;
-  box-sizing: border-box;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: border-bottom 0.3s;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* 최대 너비를 지정해 중앙 정렬하되, 화면이 좁아지면 유동적으로 변경 */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  height: 40px;
+  /* 기본적으로 적당한 여백 유지 (필요에 따라 조정) */
+  gap: 16px;
 }
 
 /* 로고 */
 .logo {
-  text-decoration: none;
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 .logo-img {
-  height: 40px;
+  height: 30px;
 }
 
 /* 롤링 페이퍼 만들기 버튼 */
 .rolling-button {
-  background-color: #5b67f1;
-  color: #fff;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ccc;
   padding: 12px 20px;
   border-radius: 6px;
-  text-decoration: none;
   font-size: 16px;
-  transition: 0.2s;
-  margin-top: 16px;
-  flex-wrap: nowrap;
+  font-weight: bold;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
 }
 .rolling-button:hover {
   opacity: 0.8;
+  background: #f7f7f7; /* 살짝 회색으로 변경 */
+  color: #333; /* 글자색도 조금 어둡게 */
 }
 
-/* 1248px 이하에서 로고와 버튼의 간격이 조금 줄어들도록 */
+/* 반응형 스타일 */
 @media (max-width: 1248px) {
-  .nav-container {
-    padding: 0 24px;
-  }
   .rolling-button {
     padding: 10px 16px;
-    font-size: 18px;
   }
 }
 @media (max-width: 375px) {
   .nav-container {
-    padding: 0 24px;
     flex-direction: row;
-    align-items: flex-end;
-    align-items: center;
   }
   .rolling-button {
-    padding: 10px 16px;
-    font-size: 16px;
+    padding: 10px 14px;
+    background: rgba(2, 32, 71, 0.05);
+    transform: scale(0.95); /* 버튼이 약간 눌리는 효과 */
   }
 }

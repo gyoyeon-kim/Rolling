@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useRef } from "react";
 import axios from "axios";
 import "./From.css";
+import debounce from "lodash.debounce";
 
 import rolling_icon from "../images/logo.svg";
-import default_profile from "../images/From_img/profile.svg";
+//import default_profile from "../images/From_img/profile.svg";
 import btn_plus from "../images/From_img/Btn_plus.svg";
 
 /* 텍스트 에디터 */
@@ -35,6 +36,7 @@ const From = () => {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(""); // name 에러 상태
 
+  const default_profile = "https://i.ibb.co/YBLJML7/Frame-2593.png";
   const [profileImageURL, setProfileImageURL] = useState(default_profile);
 
   /* 관계 */
@@ -99,25 +101,32 @@ const From = () => {
   }, []);
 
   /* 이미지 업로드*/
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImageURL(reader.result); // 업로드한 이미지 URL을 상태로 저장
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const CLOUD_NAME = "dq7m9soc7";
+  const UPLOAD_PRESET = "rollingimg";
 
-  /* 데이터 테스트용 */
-  const handleSubmit = () => {
-    console.log("아이디:", id);
-    console.log("이름:", name);
-    console.log("선택된 프로필:", profileImageURL);
-    console.log("선택된 관계:", relationship);
-    console.log("에디터 내용:", quillValue);
-    console.log("선택된 폰트:", font);
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      console.log("업로드 성공:", data.secure_url);
+      setProfileImageURL(data.secure_url); // 업로드된 이미지 URL 저장
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+    }
   };
 
   /* 메시지 생성 API */
@@ -135,8 +144,8 @@ const From = () => {
     };
 
     try {
-      console.log("Sending request to:", url);
-      console.log("Payload:", data);
+      console.log("url:", url);
+      console.log("값:", data);
 
       const response = await axios.post(url, data, {
         headers: {
@@ -144,11 +153,11 @@ const From = () => {
         },
       });
 
-      console.log("Message sent successfully:", response.data);
+      console.log("메세지가 성공적으로 생성되었습니다.:", response.data);
       navigate(`/post/${id}`);
     } catch (error) {
       console.error(
-        "Error sending message:",
+        "메세지 전송 오류:",
         error.response ? error.response.data : error.message
       );
     }
