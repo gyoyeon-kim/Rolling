@@ -538,7 +538,7 @@ const Post = () => {
                 ></div>
                 <div className="fromName">
                   <span>
-                    From. <em>{selectedCard.sender}</em>
+                    From. <em>{msg.sender.replace(/\d{4}$/, "")}</em>
                   </span>
                   <Badge type={selectedCard.relationship} />
                 </div>
