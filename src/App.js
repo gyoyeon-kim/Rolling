@@ -13,16 +13,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/list" element={<ListPageBH />} />
-        <Route path="/post/123" element={<Post_HS />} />
-
-        {/*동적 라우팅 */}
-        <Route path="/post/:id" element={<Post_HS />} />
-        <Route path="/post/message" element={<From />} />
-        <Route path="/post/:id/message" element={<From />} />
-
-        <Route path="/post" element={<ToPageKM />} />
+        <Route path="/" element={<Home />} /> {/* 홈 페이지 */}
+        <Route path="/list" element={<ListPageBH />} /> {/* 리스트 페이지 */}
+        <Route path="/post/:id" element={<Post_HS />} /> {/* 동적 라우팅 */}
+        <Route path="/post/message" element={<From />} /> {/* 공통 메시지 */}
+        <Route path="/post/:id/message" element={<From />} /> {/* 특정 ID 메시지 */}
+        <Route path="/post" element={<ToPageKM />} /> {/* 나도만들기 페이지*/}
       </Routes>
     </Router>
   );

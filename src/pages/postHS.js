@@ -230,10 +230,12 @@ const Post = () => {
     });
   };
 
-  // ✅ useEffect를 활용한 정렬 보장
+  // ✅ useEffect를 활용한 정렬 보장 (무한 루프 방지)
   useEffect(() => {
     setEmojiList((prev) => [...prev].sort((a, b) => b.count - a.count));
-  }, [emojiList]); // 🔥 emojiList가 변경될 때마다 정렬 실행
+  }, []);
+  ; // 🔥 emojiList가 변경될 때마다 정렬 실행
+
 
   // 이모지 카운트 수 상위 3개만 가져오기
   const topEmojis = emojiList.slice(0, 3);
