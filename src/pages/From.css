@@ -22,10 +22,9 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: auto; /* 내용이 넘칠 경우 스크롤이 생기도록 설정 */
 }
 
-.logo {
+.fromlogo {
   margin-top: 15px;
 }
 
@@ -42,7 +41,7 @@ p {
 
 .from_main {
   width: 720px;
-  height: 944px;
+  height: 1080px;
   margin: 20px auto;
 }
 
@@ -80,6 +79,33 @@ p {
   line-height: 150%;
 }
 
+.name-error_message {
+  color: var(--error);
+  font-size: 14px;
+  margin-left: 5px;
+  margin-top: -5px;
+}
+
+.pw_input {
+  width: 100%;
+  height: 50px;
+  padding: 1.2rem 1.6rem;
+  border-radius: 0.8rem;
+  border: none;
+  outline: 0.1rem solid var(--gray-300);
+  background: var(--white);
+  font-size: var(--font-size-16);
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.pw-error_message {
+  color: var(--error);
+  font-size: 14px;
+  margin-left: 5px;
+  margin-top: -5px;
+}
+
 .profileimg {
   width: 717px;
   height: 142px;
@@ -88,7 +114,7 @@ p {
   height: 98px;
   gap: 1.2rem;
   margin-top: 40px; /* name과 profileimg 사이 여백 추가 */
-  margin-bottom: 65px;
+  margin-bottom: 75px;
 }
 
 .profile_content {
@@ -107,7 +133,7 @@ p {
 
 .profile_list_image {
   display: flex;
-  gap: 1rem;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
@@ -115,12 +141,23 @@ p {
   width: 80px;
   height: 80px;
   object-fit: cover; /* 이미지가 비율에 맞게 잘리도록 설정 */
+  border-radius: 50%; /* 동그라미로 만들기 */
+}
+
+.custom_image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .list_image {
   width: 56px;
   height: 56px;
-  object-fit: cover; /* 이미지가 비율에 맞게 잘리도록 설정 */
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .relation {
@@ -139,6 +176,42 @@ p {
   flex-direction: column;
   height: 98px;
   gap: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.message_pw {
+  width: 320px;
+  height: 98px;
+  display: flex;
+  flex-direction: column;
+  height: 98px;
+  gap: 1.2rem;
+}
+
+/* font 적용 */
+@font-face {
+  font-family: Noto-Sans;
+  src: url(../fonts//NotoSansKR-Regular.ttf);
+}
+
+@font-face {
+  font-family: NanumMyengjo;
+  src: url(../fonts//NanumMyeongjo.ttf);
+}
+
+@font-face {
+  font-family: 나눔명조;
+  src: url(../fonts//NanumMyeongjo.ttf);
+}
+
+@font-face {
+  font-family: NanumSonPyeonJiCe;
+  src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf);
+}
+
+@font-face {
+  font-family: 나눔손글씨 손편지체;
+  src: url(../fonts//NanumSonPyeonJiCe-Regular.ttf);
 }
 
 .selection {
@@ -154,17 +227,45 @@ p {
   font-weight: 400;
   line-height: 150%;
   color: var(--gray-500);
+  cursor: pointer;
+}
 
-  /* 기본 화살표 제거 */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.btn_selection {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
 
-  /* 화살표 이미지 추가 */
-  background-image: url("../images/From_img/arrow_bottom.svg");
-  background-position: right 1rem center;
-  background-repeat: no-repeat;
-  background-size: 16px;
+.selection_list {
+  position: absolute;
+  top: 100%; /* selection 아래 배치 */
+  left: 0;
+  width: 320px;
+  height: 180px;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: var(--font-size-16);
+  border: 1px solid var(--gray-300);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.selection_list li {
+  padding: 10px 16px;
+  font-size: var(--font-size-16);
+  color: var(--gray-500);
+  font-size: var(--font-size-16);
+  cursor: pointer;
+  display: block;
+}
+.selection_list li:hover {
+  background: #f3f4f6; /* hover 시 회색 배경 */
 }
 
 .btn_send {
@@ -179,5 +280,84 @@ p {
   font-weight: 500;
   border: none;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 40px;
+}
+
+/* 비활성화 상태일 때 */
+.btn_send:disabled {
+  background: var(--gray-400);
+  cursor: not-allowed;
+}
+
+/* 태블릿 */
+@media screen and (max-width: 1024px) {
+  .fromlogo {
+    margin-top: 15px;
+    padding-left: 20px;
+    position: relative;
+    top: 0; /* 위로 이동시키지 않도록 조정 */
+  }
+
+  .fromheader {
+    padding-left: 20px;
+  }
+
+  .from_main {
+    width: 90%;
+    height: auto;
+  }
+
+  .btn_send {
+    width: 90%;
+    padding: 12px 20px;
+  }
+
+  .ql-container {
+    width: 90%;
+    height: 150px;
+  }
+}
+
+/* 모바일 */
+@media screen and (max-width: 768px) {
+  .fromlogo {
+    display: none; /* 모바일 화면에서 logo를 숨김 */
+  }
+
+  .from_main {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .btn_send {
+    width: 100%;
+    padding: 10px 18px;
+  }
+
+  .name_input,
+  .selection {
+    width: 100%;
+  }
+
+  .profile_list_image {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    justify-content: center;
+  }
+
+  .profile_content {
+    width: 100%;
+    max-width: 100%;
+  }
+  .profileimg {
+    width: 100%;
+    max-width: 100%;
+  }
+  .list_image,
+  .custom_image {
+    width: 40px;
+    height: 40px;
+  }
 }

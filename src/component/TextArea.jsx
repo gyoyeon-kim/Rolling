@@ -6,6 +6,7 @@ import QuillToolbar from "./QuillToolBar";
 
 const formats = [
   "font",
+  "size",
   "header",
   "bold",
   "italic",
@@ -19,7 +20,6 @@ const formats = [
   "align",
   "color",
   "background",
-  "size",
   "h1",
 ];
 

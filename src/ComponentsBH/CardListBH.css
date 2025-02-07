@@ -1,11 +1,14 @@
 .card-list {
   display: flex;
   gap: 20px;
-  overflow: hidden; /* 기본적으로 스크롤 비활성화 */
+  overflow: hidden;
   padding: 10px;
   flex-shrink: 0;
   justify-content: flex-start;
+  max-width: 1160px; /* 최대 크기만 제한 */
+  height: 270px;
 }
+
 
 /* ✅ PC 모드 (1025px 이상) */
 @media (min-width: 1025px) {
