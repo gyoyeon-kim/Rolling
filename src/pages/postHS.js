@@ -9,6 +9,9 @@ import EmojiPicker, {
 import "./postHS.css";
 import axios from "axios";
 import CursorEffect from "./CursorEffect";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 // 이미지 import
 import logo from "../images/logo.svg";
@@ -233,6 +236,29 @@ const Post = () => {
     }
   };
 
+
+  //이모지 데이터 가져오기
+  const fetchEmojiReactions = async () => {
+    try {
+      const response = await axios.get(
+        `https://rolling-api.vercel.app/13-1/recipients/${id}/reactions/`
+      );
+      console.log("🎯 이모지 데이터:", response.data);  // ✅ 응답 데이터 확인
+  
+      if (Array.isArray(response.data)) {
+        setEmojiList(response.data); // 배열인 경우에만 저장
+      } else if (Array.isArray(response.data.results)) {
+        setEmojiList(response.data.results); // results 배열이 있는 경우
+      } else {
+        console.error("❌ 예상하지 못한 데이터 형식:", response.data);
+        setEmojiList([]); // 데이터가 배열이 아니면 빈 배열로 초기화
+      }
+    } catch (error) {
+      console.error("❌ 이모지 데이터 불러오기 실패:", error);
+      setEmojiList([]); // 에러 발생 시 빈 배열로 설정
+    }
+  };
+
   
   // 이모지 선택시 화면에 반영
   const onEmojiClick = async (recipientId, emojiData) => {
@@ -242,7 +268,8 @@ const Post = () => {
     saveEmojiToLocal(recipientId, emoji);
   
     // ✅ API로 전송
-    await sendEmojiReaction(recipientId, emoji, "increase");
+    await sendEmojiReaction(recipientId, emoji, "increase");  // 이모지 전송
+    fetchEmojiReactions(); // ✅ 이모지 데이터를 새로 불러오기
   
     // ✅ 화면 업데이트
     setEmojiList((prev) => {
@@ -258,18 +285,6 @@ const Post = () => {
       return updatedList.sort((a, b) => b.count - a.count);
     });
   };
-  
-
-  
-
-  // ✅ useEffect를 활용한 정렬 보장
-  // useEffect(() => {
-  //   setEmojiList((prev) => [...prev].sort((a, b) => b.count - a.count));
-  // }, [emojiList]); // 🔥 emojiList가 변경될 때마다 정렬 실행
-  // 1. 컴포넌트가 마운트 됐을 때 , setEmojiList 실행
-  // 2. 정렬이 최초로 된다.
-  // 3. 정렬된 리스트로 emojiList의 상태가 변경이 된다.
-  // 4. 변경 감지해서 다시, 실행한다.
 
   // 이모지 카운트 수 상위 3개만 가져오기
   const topEmojis = emojiList.slice(0, 3);
@@ -363,9 +378,20 @@ const Post = () => {
   // 3. URL 복사 기능
   const copyURL = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
-      alert("URL이 복사되었습니다!");
+      toast.success("URL이 복사되었습니다!", {
+        position: "bottom-center",
+        autoClose: 3000, // 3초 후 자동 닫힘
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        className: "custom-toast", // 커스텀 스타일
+      });
     });
   };
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -458,9 +484,12 @@ useEffect(() => {
 
   fetchRecipientData();  // 배경 이미지 및 색상 가져오기
   fetchMessages();       // 메시지 가져오기
+  fetchEmojiReactions();
 }, [id]);
 
 // <!--------------------------- 메세지 삭제 기능 ------------------------->
+const [passwordError, setPasswordError] = useState("");
+
 const deleteMessage = async (messageId, password) => {
   try {
     const response = await axios.delete(
@@ -492,9 +521,14 @@ const openDeleteModal = (msg) => {
 };
 
 // 삭제 처리 함수
-// 삭제 처리 함수
 const handleDelete = async () => {
   const enteredPassword = document.getElementById("pw").value; // 사용자가 입력한 비밀번호
+
+  if (!enteredPassword) {
+    setPasswordError(true); // 비번 입력 안 했을 때 오류 표시
+    return; // 중단
+  }
+
   const senderPassword = selectedCard.sender.slice(-4);         // sender의 마지막 4자리
 
   if (enteredPassword === senderPassword) {
@@ -513,7 +547,7 @@ const handleDelete = async () => {
       alert("❌ 메시지 삭제에 실패했습니다.");
     }
   } else {
-    alert("❌ 비밀번호가 일치하지 않습니다.");
+    setPasswordError("비밀번호가 틀렸습니다."); // 비밀번호 틀렸을 때 오류 표시
   }
 };
 
@@ -521,6 +555,7 @@ const handleDelete = async () => {
 
   return (
     <>
+      <ToastContainer />
       <CursorEffect /> 
       {isModalOpen && selectedCard && (
         <div className="modal">
@@ -573,7 +608,7 @@ const handleDelete = async () => {
       )}
       {isDeleteModalOpen && (
         <div class="modal deleteMessageWrap">
-          <div className="modalContents" ref={modalRef}>
+          <div className={`modalContents ${passwordError ? "fail" : ""}`} ref={modalRef}>
             <strong>
               메세지를 삭제하려면
               <br />
@@ -581,7 +616,15 @@ const handleDelete = async () => {
             </strong>
             <div className="">
               <label for="pw"></label>
-              <input type="password" id="pw" placeholder="비밀번호 입력" />
+              <input type="password" id="pw" placeholder="비밀번호 입력" 
+                onFocus={() => setPasswordError("")}
+                onBlur={(e) => {
+                  if (!e.target.value) {
+                    setPasswordError("비밀번호를 입력해주세요.");
+                  }
+                }}
+              />
+              {passwordError && <p className="error-message">{passwordError}</p>}
             </div>
             <div className="modalBtn">
               <button onClick={handleDelete}>확인</button>
@@ -614,12 +657,13 @@ const handleDelete = async () => {
                 <div className="emojiCollection">
                   <ul className="emojiTop3List">
                     <ul className="emojiTop3List">
-                      {emojiList.sort((a, b) => b.count - a.count).slice(0, 3).map((emoji, index) => (
+                    {Array.isArray(emojiList) &&
+                      emojiList.sort((a, b) => b.count - a.count).slice(0, 3).map((emoji, index) => (
                         <li key={index}>
                           <span>{emoji.emoji}</span>
                           <span>{emoji.count}</span>
                         </li>
-                      ))}
+                    ))}
                     </ul>
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>

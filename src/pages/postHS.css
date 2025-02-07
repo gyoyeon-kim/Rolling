@@ -800,6 +800,9 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     max-width: calc(33.333% - 11px);
     /* 부모 크기 초과 방지 */
   }
+  .post .container .postCard li.savedPostCard>a .content {
+    max-height: calc(2.0em * 3);
+  }
 }
 
 /* 모달창 */
@@ -1004,6 +1007,58 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 
 ::-webkit-scrollbar-corner {
   display: none;
+}
+
+/* url 복사시 toast 창 */
+.custom-toast {
+  background-color: #851deecd!important;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.custom-toast svg {
+  fill: hsl(270, 100%, 84%);
+}
+
+.Toastify__progress-bar--success {
+  background-color: var(--purple-800) !important;
+}
+
+@keyframes error {
+  0% {
+      transform: translate(0)
+  }
+
+  25% {
+      transform: translate(-5px)
+  }
+
+  50% {
+      transform: translate(0)
+  }
+
+  75% {
+      transform: translate(-5px)
+  }
+
+  100% {
+      transform: translate(0)
+  }
+}
+
+.fail {
+  color: #dc3a3a;
+  animation: error .3s ease-in-out 2;
+}
+
+.error-message {
+  color: #e70000;
+  font-size: 12px;
+  margin-top: 5px;
+  transition: opacity 0.3s ease-in-out;
 }
 
 /*이현선 작업 끝*/
