@@ -3,7 +3,7 @@ import axios from "axios";
 import "./From.css";
 
 import rolling_icon from "../images/logo.svg";
-import default_profile from "../images/From_img/profile.svg";
+//import default_profile from "../images/From_img/profile.svg";
 import btn_plus from "../images/From_img/Btn_plus.svg";
 
 /* 텍스트 에디터 */
@@ -35,6 +35,7 @@ const From = () => {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(""); // name 에러 상태
 
+  const default_profile = "https://i.ibb.co/YBLJML7/Frame-2593.png";
   const [profileImageURL, setProfileImageURL] = useState(default_profile);
 
   /* 관계 */
