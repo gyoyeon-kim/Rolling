@@ -47,6 +47,8 @@
 }
 .rolling-button:hover {
   opacity: 0.8;
+  background: #f7f7f7; /* 살짝 회색으로 변경 */
+  color: #333; /* 글자색도 조금 어둡게 */
 }
 
 /* 반응형 스타일 */
@@ -61,5 +63,7 @@
   }
   .rolling-button {
     padding: 10px 14px;
+    background: rgba(2, 32, 71, 0.05);
+    transform: scale(0.95); /* 버튼이 약간 눌리는 효과 */
   }
 }
