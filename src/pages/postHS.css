@@ -790,9 +790,9 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 
 /* 미디어 쿼리: 화면 너비가 1248px 이하일 때 */
 @media all and (min-width: 1248px) {
-  .post .container .postCard {
+  /* .post .container .postCard {
     max-height: 700px;
-  }
+  } */
 
   .post .container .postCard li {
     flex-basis: calc(33.333% - 11px);
