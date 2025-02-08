@@ -89,13 +89,19 @@
 }
 
 /* 개별 카드 스타일 */
-.card {
+.home-card {
   flex: 1;
+  width: 275px;
+  height: 260px;
+  border: 1px solid var(--gray-300);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  box-sizing: border-box;
   background-color: #fff;
-  border: 1px solid #ebebeb;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.home-card:hover {
+  transform: scale(1.05);
 }
 @media (max-width: 768px) {
   @media (max-width: 768px) {
@@ -113,7 +119,7 @@
       display: none;
     }
 
-    .card {
+    .home-card {
       flex: 0 0 auto; /* 아이템이 줄바꿈되지 않고 고정된 크기 */
       min-width: 240px; /* 원하는 만큼 최소 너비 설정 */
       scroll-snap-align: start; /* 스크롤 스냅 포인트 (옵션) */
@@ -175,9 +181,10 @@
 }
 
 /* 카드 본문 내용 */
-.card-content {
+.home-card-content {
   font-size: 0.95rem;
   line-height: 1.4;
+  padding: 10px;
 }
 
 /* + 버튼 카드 스타일 */

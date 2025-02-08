@@ -25,7 +25,7 @@ function Home() {
             {/* 왼쪽에 카드 2개 + 버튼이 있는 형태 */}
             <div className="card-wrapper">
               {/* 첫 번째 카드 */}
-              <div className="card">
+              <div className="home-card">
                 <div className="card-header">
                   <div className="card-profile-image">
                     {/* 여기서 실제 이미지 경로나 URL로 변경 */}
@@ -39,11 +39,11 @@ function Home() {
                     <span className="card-date">2025.1.29</span>
                   </div>
                 </div>
-                <p className="card-content">곰 곰</p>
+                <p className="home-card-content">곰 곰</p>
               </div>
 
               {/* 두 번째 카드 */}
-              <div className="card">
+              <div className="home-card">
                 <div className="card-header">
                   <div className="card-profile-image">
                     <img src={main_ex2} alt="프로필2" />
@@ -56,7 +56,7 @@ function Home() {
                     <span className="card-date">2025.01.30</span>
                   </div>
                 </div>
-                <p className="card-content">아 당 떨어진다</p>
+                <p className="home-card-content">아 당 떨어진다</p>
               </div>
 
               {/* + 버튼 카드 , To page연결*/}
