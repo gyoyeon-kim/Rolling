@@ -192,7 +192,7 @@ textarea {
 }
 
 em {
-  font-style: normal !important;
+  font-style: normal;
   display: inline-block;
 }
 
@@ -299,12 +299,25 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection {
   margin-right: 10px;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiTop3List {
   display: flex;
   gap: 8px;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List li {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiTop3List
+  li {
   padding: 4px 8px;
   border-radius: 32px;
   background-color: #0000008a;
@@ -324,14 +337,28 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emoj
   position: relative;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList button {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList
+  button {
   border: none;
   background: none;
   padding: 0;
   width: 24px;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList
+  ul {
   position: absolute;
   top: 35px;
   left: 0;
@@ -350,7 +377,15 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emoj
   grid-template-rows: 1fr 1fr;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul li {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiCollection
+  .emojiAllList
+  ul
+  li {
   /* flex: 1 1 calc(33.333% - 10px); */
   display: inline-flex;
   padding: 4px 8px;
@@ -367,18 +402,37 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker {
   position: relative;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker>button {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiPicker
+  > button {
   border: 1px solid #ccc;
   border-radius: 6px;
   background: none;
   padding: 6px 8px;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button span {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiPicker
+  button
+  span {
   display: none;
 }
 
-main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker .emojiPickerDiv {
+main
+  .postHeader
+  .container
+  .rightWrap
+  .emojiReactionWrap
+  .emojiPicker
+  .emojiPickerDiv {
   position: absolute;
   left: -100px;
   /* right: 0; */
@@ -403,7 +457,7 @@ main .postHeader .container .rightWrap .shareSnsWrap:before {
   transform: translateY(-50%);
 }
 
-main .postHeader .container .rightWrap .shareSnsWrap>button {
+main .postHeader .container .rightWrap .shareSnsWrap > button {
   transition: 0.2s;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -411,7 +465,7 @@ main .postHeader .container .rightWrap .shareSnsWrap>button {
   padding: 6px 8px;
 }
 
-main .postHeader .container .rightWrap .shareSnsWrap>button:hover {
+main .postHeader .container .rightWrap .shareSnsWrap > button:hover {
   background-color: #f6f6f6;
   border: 1px solid #ccc;
   transition: 0.2s;
@@ -518,7 +572,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 }
 
 /* .post .container .postCard li:last-child {margin-bottom: 30px;} */
-.post .container .postCard li>a {
+.post .container .postCard li > a {
   display: flex;
   height: 230px;
   justify-content: center;
@@ -530,7 +584,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   transition: all 0.1s linear;
 }
 
-.post .container .postCard li>a:hover {
+.post .container .postCard li > a:hover {
   transform: scale(1.03);
   transition: all 0.1s linear;
 }
@@ -550,9 +604,10 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   transform: rotate(90deg);
 }
 
-.post .container .postCard li.savedPostCard {}
+.post .container .postCard li.savedPostCard {
+}
 
-.post .container .postCard li.savedPostCard>a {
+.post .container .postCard li.savedPostCard > a {
   flex-wrap: wrap;
   padding: 24px;
   justify-content: flex-start;
@@ -560,7 +615,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   align-items: flex-start;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo {
+.post .container .postCard li.savedPostCard > a .cardInfo {
   display: flex;
   align-items: flex-start;
   width: 100%;
@@ -571,13 +626,13 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   margin-bottom: 10px;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo div {
+.post .container .postCard li.savedPostCard > a .cardInfo div {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo div .photo {
+.post .container .postCard li.savedPostCard > a .cardInfo div .photo {
   min-width: 56px;
   min-height: 56px;
   border-radius: 28px;
@@ -589,13 +644,13 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   background-size: cover;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo div .fromName {
+.post .container .postCard li.savedPostCard > a .cardInfo div .fromName {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo div .fromName span {
+.post .container .postCard li.savedPostCard > a .cardInfo div .fromName span {
   color: #000;
   word-break: keep-all;
   width: 100%;
@@ -603,11 +658,20 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   font-weight: 400;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo div .fromName span em {
+.post
+  .container
+  .postCard
+  li.savedPostCard
+  > a
+  .cardInfo
+  div
+  .fromName
+  span
+  em {
   font-weight: 700;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo div .fromName .badge {
+.post .container .postCard li.savedPostCard > a .cardInfo div .fromName .badge {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 4px;
@@ -616,7 +680,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   letter-spacing: calc(var(--font-size) * 0.005);
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo .btnDelete {
+.post .container .postCard li.savedPostCard > a .cardInfo .btnDelete {
   transition: 0.2s;
   min-width: 40px;
   min-height: 40px;
@@ -627,13 +691,13 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   border: 1px solid #ccc;
 }
 
-.post .container .postCard li.savedPostCard>a .cardInfo .btnDelete:hover {
+.post .container .postCard li.savedPostCard > a .cardInfo .btnDelete:hover {
   background-color: #f6f6f6;
   border: 1px solid #ccc;
   transition: 0.2s;
 }
 
-.post .container .postCard li.savedPostCard>a .content {
+.post .container .postCard li.savedPostCard > a .content {
   text-align: left;
   line-height: 1.2;
   font-weight: 400;
@@ -648,11 +712,11 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   font-size: var(--font-size-15);
   color: #4a4a4a;
   letter-spacing: calc(var(--font-size) * 0.005);
-  min-height: calc(1em* 3);
-  max-height: calc(1.5em* 3);
+  min-height: calc(1em * 3);
+  max-height: calc(1.5em * 3);
 }
 
-.post .container .postCard li.savedPostCard>a .date {
+.post .container .postCard li.savedPostCard > a .date {
   text-align: left;
   color: #999;
   font-size: var(--font-size-12);
@@ -716,41 +780,88 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     padding: 0;
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List li {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiCollection
+    .emojiTop3List
+    li {
     padding: 8px 12px;
     font-size: var(--font-size-16);
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiCollection
+    .emojiAllList
+    ul {
     left: auto;
     right: 0;
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul li {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiCollection
+    .emojiAllList
+    ul
+    li {
     padding: 8px 12px;
     font-size: var(--font-size-16);
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    button {
     display: flex;
     gap: 4px;
     align-items: center;
     transition: 0.2s;
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker>button:hover {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    > button:hover {
     background-color: #f6f6f6;
     border: 1px solid #ccc;
     transition: 0.2s;
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button span {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    button
+    span {
     display: inline-block;
     font-size: var(--font-size-16);
     line-height: 1;
   }
 
-  main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker .emojiPickerDiv {
+  main
+    .postHeader
+    .container
+    .rightWrap
+    .emojiReactionWrap
+    .emojiPicker
+    .emojiPickerDiv {
     left: auto;
     right: 0;
   }
@@ -762,7 +873,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     /* 부모 크기 초과 방지 */
   }
 
-  .post .container .postCard li>a {
+  .post .container .postCard li > a {
     height: 280px;
   }
 
@@ -771,11 +882,11 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     align-items: flex-start;
   } */
 
-  .post .container .postCard li.savedPostCard>a .cardInfo div .fromName span {
+  .post .container .postCard li.savedPostCard > a .cardInfo div .fromName span {
     font-size: var(--font-size-20);
   }
 
-  .post .container .postCard li.savedPostCard>a .content {
+  .post .container .postCard li.savedPostCard > a .content {
     font-size: var(--font-size-18);
     /* min-height: calc(1em * 3); */
     /* 한 줄 높이 * 3줄 */
@@ -806,8 +917,8 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
     max-width: calc(33.333% - 11px);
     /* 부모 크기 초과 방지 */
   }
-  .post .container .postCard li.savedPostCard>a .content {
-    max-height: calc(2.0em * 3);
+  .post .container .postCard li.savedPostCard > a .content {
+    max-height: calc(2em * 3);
   }
 
   .rightWrap {align-items: center;}
@@ -880,13 +991,13 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   font-size: var(--font-size-12);
 }
 
-.modalContents .modalHeader>div {
+.modalContents .modalHeader > div {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.modalContents .modalHeader>div .photo {
+.modalContents .modalHeader > div .photo {
   min-width: 56px;
   min-height: 56px;
   border-radius: 28px;
@@ -898,13 +1009,13 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   background-size: cover;
 }
 
-.modalContents .modalHeader>div .fromName {
+.modalContents .modalHeader > div .fromName {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.modalContents .modalHeader>div .fromName span {
+.modalContents .modalHeader > div .fromName span {
   color: #000;
   word-break: keep-all;
   width: 100%;
@@ -912,11 +1023,11 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   font-weight: 400;
 }
 
-.modalContents .modalHeader>div .fromName span em {
+.modalContents .modalHeader > div .fromName span em {
   font-weight: 700;
 }
 
-.modalContents .modalHeader>div .fromName .badge {
+.modalContents .modalHeader > div .fromName .badge {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 4px;
@@ -956,7 +1067,6 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   background-color: var(--purple-700);
   transition: 0.2s;
 }
-
 
 .modal.deleteMessageWrap .modalContents {
   height: auto;
@@ -1010,7 +1120,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 }
 
 @media all and (min-width: 768px) {
-  .modalContents .modalHeader>div .fromName span {
+  .modalContents .modalHeader > div .fromName span {
     font-size: var(--font-size-20);
   }
 
@@ -1044,7 +1154,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 
 /* url 복사시 toast 창 */
 .custom-toast {
-  background-color: #851deecd!important;
+  background-color: #851deecd !important;
   color: #fff;
   font-weight: bold;
   border-radius: 8px;
@@ -1062,29 +1172,29 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 
 @keyframes error {
   0% {
-      transform: translate(0)
+    transform: translate(0);
   }
 
   25% {
-      transform: translate(-5px)
+    transform: translate(-5px);
   }
 
   50% {
-      transform: translate(0)
+    transform: translate(0);
   }
 
   75% {
-      transform: translate(-5px)
+    transform: translate(-5px);
   }
 
   100% {
-      transform: translate(0)
+    transform: translate(0);
   }
 }
 
 .fail {
   color: #dc3a3a;
-  animation: error .3s ease-in-out 2;
+  animation: error 0.3s ease-in-out 2;
 }
 
 .error-message {
