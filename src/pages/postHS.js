@@ -12,7 +12,6 @@ import CursorEffect from "./CursorEffect";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 // 이미지 import
 import logo from "../images/logo.svg";
 import arrowBottom from "../images/arrow_bottom.svg";
@@ -20,7 +19,6 @@ import addEmoji from "../images/ico_add.svg";
 import shareIcon from "../images/share-24.svg";
 import plusIcon from "../images/plus.svg";
 import deleteIcon from "../images/ico_delete.svg";
-
 
 // .env에서 키 불러오기
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
@@ -229,13 +227,12 @@ const Post = () => {
           },
         }
       );
-  
+
       console.log("✅ 이모지 반응 전송 성공:", response.data);
     } catch (error) {
       console.error("❌ 이모지 반응 전송 실패:", error);
     }
   };
-
 
   //이모지 데이터 가져오기
   const fetchEmojiReactions = async () => {
@@ -243,8 +240,8 @@ const Post = () => {
       const response = await axios.get(
         `https://rolling-api.vercel.app/13-1/recipients/${id}/reactions/`
       );
-      console.log("🎯 이모지 데이터:", response.data);  // ✅ 응답 데이터 확인
-  
+      console.log("🎯 이모지 데이터:", response.data); // ✅ 응답 데이터 확인
+
       if (Array.isArray(response.data)) {
         setEmojiList(response.data); // 배열인 경우에만 저장
       } else if (Array.isArray(response.data.results)) {
@@ -259,29 +256,28 @@ const Post = () => {
     }
   };
 
-  
   // 이모지 선택시 화면에 반영
   const onEmojiClick = async (recipientId, emojiData) => {
     const emoji = emojiData.emoji;
-  
+
     // ✅ 로컬 저장
     saveEmojiToLocal(recipientId, emoji);
-  
+
     // ✅ API로 전송
-    await sendEmojiReaction(recipientId, emoji, "increase");  // 이모지 전송
+    await sendEmojiReaction(recipientId, emoji, "increase"); // 이모지 전송
     fetchEmojiReactions(); // ✅ 이모지 데이터를 새로 불러오기
-  
+
     // ✅ 화면 업데이트
     setEmojiList((prev) => {
       const updatedList = [...prev];
       const existingEmoji = updatedList.find((item) => item.emoji === emoji);
-  
+
       if (existingEmoji) {
         existingEmoji.count += 1;
       } else {
         updatedList.push({ emoji: emoji, count: 1 });
       }
-  
+
       return updatedList.sort((a, b) => b.count - a.count);
     });
   };
@@ -318,8 +314,8 @@ const Post = () => {
     }
 
     const finalImage = backgroundImage
-    ? backgroundImage
-    : `https://singlecolorimage.com/get/${backgroundColor.replace("#", "")}/500x500`;
+      ? backgroundImage
+      : `https://singlecolorimage.com/get/${backgroundColor.replace("#", "")}/500x500`;
 
     window.Kakao.Share.sendDefault({
       objectType: "feed",
@@ -391,7 +387,6 @@ const Post = () => {
       });
     });
   };
-  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -434,141 +429,149 @@ const Post = () => {
   const [backgroundColor, setBackgroundColor] = useState(""); // 배경 색
   const [recipientName, setRecipientName] = useState(""); // 💡 수신자 이름 상태 추가
 
-
-// 메시지 가져오기 (GET 요청)
-const fetchMessages = async () => {
-  try {
-    console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
-
-    const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
-    console.log("📩 API 응답 데이터:", response.data);
-
-    if (response.data.results) {
-      setMessages(response.data.results);
-    } else {
-      console.error("❌ API 응답에서 results 배열이 없습니다.");
-    }
-  } catch (error) {
-    console.error("❌ 메시지 불러오기 실패:", error);
-  } finally {
-    setLoading(false);
-  }
-};
-
-//수신자 정보 가져오기 별도
-const fetchRecipientData = async () => {
-  try {
-    console.log("🎯 수신자 정보 API 요청:", `https://rolling-api.vercel.app/13-1/recipients/${id}/`);
-    
-    const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/`);
-    console.log("📥 수신자 데이터:", response.data);
-
-    // 배경 이미지와 색상 설정 이름 저장
-    setRecipientName(response.data.name);
-    setBackgroundImage(response.data.backgroundImageURL || "");
-    setBackgroundColor(response.data.backgroundColor || "var(--beige-200)");
-
-  } catch (error) {
-    console.error("❌ 수신자 정보 불러오기 실패:", error);
-  }
-};
-
-
-// useEffect에서 메시지 불러오기 실행
-useEffect(() => {
-  if (!id) {
-    console.error("❌ recipientId가 없습니다.");
-    setLoading(false);
-    return;
-  }
-
-  fetchRecipientData();  // 배경 이미지 및 색상 가져오기
-  fetchMessages();       // 메시지 가져오기
-  fetchEmojiReactions();
-}, [id]);
-
-// 총 작성자 수 계산
-const totalWriters = messages.length;
-
-// 최신 3개의 메시지 가져오기 (최신순으로 정렬 후 slice)
-const latestProfiles = [...messages]
-  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-  .slice(0, 3);
-
-// 초과 인원 수 계산
-const extraWriters = totalWriters - latestProfiles.length;
-
-// <!--------------------------- 메세지 삭제 기능 ------------------------->
-const [passwordError, setPasswordError] = useState("");
-
-const deleteMessage = async (messageId, password) => {
-  try {
-    const response = await axios.delete(
-      `https://rolling-api.vercel.app/13-1/recipients/messages/${messageId}/`,
-      {
-        data: { password: password }, // API에 비밀번호 전달
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log("✅ 메시지 삭제 성공:", response.data);
-    return true;
-  } catch (error) {
-    console.error("❌ 메시지 삭제 실패:", error.response?.data || error.message);
-    return false;
-  }
-};
-
-// 삭제 모달 열기 (선택된 메시지 정보 저장)
-const openDeleteModal = (msg) => {
-  setIsDeleteModalOpen(true);
-  setSelectedCard(msg);
-  setPasswordError("");
-
-  // 💡 sender의 끝 4자리를 비밀번호로 사용
-  const password = msg.sender.slice(-4); 
-  // console.log("📌 추출된 비밀번호:", password); // 확인용 로그
-  setSelectedCard((prev) => ({ ...prev, password }));  // 선택된 카드에 비밀번호 저장
-};
-
-// 삭제 처리 함수
-const handleDelete = async () => {
-  const enteredPassword = document.getElementById("pw").value; // 사용자가 입력한 비밀번호
-
-  if (!enteredPassword) {
-    setPasswordError(true); // 비번 입력 안 했을 때 오류 표시
-    return; // 중단
-  }
-
-  const senderPassword = selectedCard.sender.slice(-4);         // sender의 마지막 4자리
-
-  if (enteredPassword === senderPassword) {
+  // 메시지 가져오기 (GET 요청)
+  const fetchMessages = async () => {
     try {
-      // ✅ API로 삭제 요청 보내기
-      await axios.delete(
-        `https://rolling-api.vercel.app/13-1/messages/${selectedCard.id}/`
+      console.log(
+        "🟢 API 요청 URL:",
+        `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`
       );
 
-      // ✅ 삭제 성공 시 UI에서도 제거
-      setMessages((prev) => prev.filter((msg) => msg.id !== selectedCard.id));
-      closeModal();
-      alert("✅ 메시지가 성공적으로 삭제되었습니다.");
+      const response = await axios.get(
+        `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`
+      );
+      console.log("📩 API 응답 데이터:", response.data);
+
+      if (response.data.results) {
+        setMessages(response.data.results);
+      } else {
+        console.error("❌ API 응답에서 results 배열이 없습니다.");
+      }
     } catch (error) {
-      console.error("❌ API 삭제 실패:", error);
-      alert("❌ 메시지 삭제에 실패했습니다.");
+      console.error("❌ 메시지 불러오기 실패:", error);
+    } finally {
+      setLoading(false);
     }
-  } else {
-    setPasswordError("비밀번호가 틀렸습니다."); // 비밀번호 틀렸을 때 오류 표시
-  }
-};
+  };
 
+  //수신자 정보 가져오기 별도
+  const fetchRecipientData = async () => {
+    try {
+      console.log(
+        "🎯 수신자 정보 API 요청:",
+        `https://rolling-api.vercel.app/13-1/recipients/${id}/`
+      );
 
+      const response = await axios.get(
+        `https://rolling-api.vercel.app/13-1/recipients/${id}/`
+      );
+      console.log("📥 수신자 데이터:", response.data);
+
+      // 배경 이미지와 색상 설정 이름 저장
+      setRecipientName(response.data.name);
+      setBackgroundImage(response.data.backgroundImageURL || "");
+      setBackgroundColor(response.data.backgroundColor || "var(--beige-200)");
+    } catch (error) {
+      console.error("❌ 수신자 정보 불러오기 실패:", error);
+    }
+  };
+
+  // useEffect에서 메시지 불러오기 실행
+  useEffect(() => {
+    if (!id) {
+      console.error("❌ recipientId가 없습니다.");
+      setLoading(false);
+      return;
+    }
+
+    fetchRecipientData(); // 배경 이미지 및 색상 가져오기
+    fetchMessages(); // 메시지 가져오기
+    fetchEmojiReactions();
+  }, [id]);
+
+  // 총 작성자 수 계산
+  const totalWriters = messages.length;
+
+  // 최신 3개의 메시지 가져오기 (최신순으로 정렬 후 slice)
+  const latestProfiles = [...messages]
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 3);
+
+  // 초과 인원 수 계산
+  const extraWriters = totalWriters - latestProfiles.length;
+
+  // <!--------------------------- 메세지 삭제 기능 ------------------------->
+  const [passwordError, setPasswordError] = useState("");
+
+  const deleteMessage = async (messageId, password) => {
+    try {
+      const response = await axios.delete(
+        `https://rolling-api.vercel.app/13-1/recipients/messages/${messageId}/`,
+        {
+          data: { password: password }, // API에 비밀번호 전달
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("✅ 메시지 삭제 성공:", response.data);
+      return true;
+    } catch (error) {
+      console.error(
+        "❌ 메시지 삭제 실패:",
+        error.response?.data || error.message
+      );
+      return false;
+    }
+  };
+
+  // 삭제 모달 열기 (선택된 메시지 정보 저장)
+  const openDeleteModal = (msg) => {
+    setIsDeleteModalOpen(true);
+    setSelectedCard(msg);
+    setPasswordError("");
+
+    // 💡 sender의 끝 4자리를 비밀번호로 사용
+    const password = msg.sender.slice(-4);
+    // console.log("📌 추출된 비밀번호:", password); // 확인용 로그
+    setSelectedCard((prev) => ({ ...prev, password })); // 선택된 카드에 비밀번호 저장
+  };
+
+  // 삭제 처리 함수
+  const handleDelete = async () => {
+    const enteredPassword = document.getElementById("pw").value; // 사용자가 입력한 비밀번호
+
+    if (!enteredPassword) {
+      setPasswordError(true); // 비번 입력 안 했을 때 오류 표시
+      return; // 중단
+    }
+
+    const senderPassword = selectedCard.sender.slice(-4); // sender의 마지막 4자리
+
+    if (enteredPassword === senderPassword) {
+      try {
+        // ✅ API로 삭제 요청 보내기
+        await axios.delete(
+          `https://rolling-api.vercel.app/13-1/messages/${selectedCard.id}/`
+        );
+
+        // ✅ 삭제 성공 시 UI에서도 제거
+        setMessages((prev) => prev.filter((msg) => msg.id !== selectedCard.id));
+        closeModal();
+        alert("✅ 메시지가 성공적으로 삭제되었습니다.");
+      } catch (error) {
+        console.error("❌ API 삭제 실패:", error);
+        alert("❌ 메시지 삭제에 실패했습니다.");
+      }
+    } else {
+      setPasswordError("비밀번호가 틀렸습니다."); // 비밀번호 틀렸을 때 오류 표시
+    }
+  };
 
   return (
     <>
       <ToastContainer />
-      <CursorEffect /> 
+      <CursorEffect />
       {isModalOpen && selectedCard && (
         <div className="modal">
           <div className="modalContents" ref={modalRef}>
@@ -582,7 +585,7 @@ const handleDelete = async () => {
                 ></div>
                 <div className="fromName">
                   <span>
-                    From. <em>{selectedCard.sender}</em>
+                    From. <em>{selectedCard.sender.replace(/\d{4}$/, "")}</em>
                   </span>
                   <Badge type={selectedCard.relationship} />
                 </div>
@@ -596,20 +599,20 @@ const handleDelete = async () => {
             </div>
 
             <div className="modalBody">
-            <p className="content"
-              style={{
-                fontFamily: selectedCard.font,
-                color: selectedCard.textColor || "#000",
-                fontSize:
-                  selectedCard.font === "나눔손글씨 손편지체"
-                    ? "24px"
-                    : selectedCard.fontSize || "18px",
-                fontWeight: selectedCard.fontWeight || "normal",
-                fontStyle: selectedCard.fontStyle || "normal",
-              }}
-              dangerouslySetInnerHTML={{ __html: selectedCard.content }} // ⭐ HTML 렌더링 추가
-            />
-
+              <p
+                className="content"
+                style={{
+                  fontFamily: selectedCard.font,
+                  color: selectedCard.textColor || "#000",
+                  fontSize:
+                    selectedCard.font === "나눔손글씨 손편지체"
+                      ? "24px"
+                      : selectedCard.fontSize || "18px",
+                  fontWeight: selectedCard.fontWeight || "normal",
+                  fontStyle: selectedCard.fontStyle || "normal",
+                }}
+                dangerouslySetInnerHTML={{ __html: selectedCard.content }} // ⭐ HTML 렌더링 추가
+              />
             </div>
 
             <div className="modalBtn">
@@ -620,7 +623,10 @@ const handleDelete = async () => {
       )}
       {isDeleteModalOpen && (
         <div class="modal deleteMessageWrap">
-          <div className={`modalContents ${passwordError ? "fail" : ""}`} ref={modalRef}>
+          <div
+            className={`modalContents ${passwordError ? "fail" : ""}`}
+            ref={modalRef}
+          >
             <strong>
               메세지를 삭제하려면
               <br />
@@ -628,7 +634,11 @@ const handleDelete = async () => {
             </strong>
             <div className="">
               <label for="pw"></label>
-              <input type="password" id="pw" placeholder="비밀번호 입력" 
+              <input
+                type="password"
+                id="pw"
+                placeholder="비밀번호 입력"
+                maxLength={4}
                 onFocus={() => setPasswordError("")}
                 onBlur={(e) => {
                   if (!e.target.value) {
@@ -636,7 +646,9 @@ const handleDelete = async () => {
                   }
                 }}
               />
-              {passwordError && <p className="error-message">{passwordError}</p>}
+              {passwordError && (
+                <p className="error-message">{passwordError}</p>
+              )}
             </div>
             <div className="modalBtn">
               <button onClick={handleDelete}>확인</button>
@@ -683,19 +695,19 @@ const handleDelete = async () => {
               </div>
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
-                <ul className="emojiTop3List">
-                  {emojiList.length === 0 ? (
-                    <li className="emojiNodata">이모티콘을 선택해 주세요!</li>
+                  <ul className="emojiTop3List">
+                    {emojiList.length === 0 ? (
+                      <li className="emojiNodata">이모티콘을 선택해 주세요!</li>
                     ) : (
-                    emojiList
-                      .sort((a, b) => b.count - a.count)
-                      .slice(0, 3)
-                      .map((emoji, index) => (
-                        <li key={index}>
-                          <span>{emoji.emoji}</span>
-                          <span>{emoji.count}</span>
-                        </li>
-                      ))
+                      emojiList
+                        .sort((a, b) => b.count - a.count)
+                        .slice(0, 3)
+                        .map((emoji, index) => (
+                          <li key={index}>
+                            <span>{emoji.emoji}</span>
+                            <span>{emoji.count}</span>
+                          </li>
+                        ))
                     )}
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
@@ -802,12 +814,16 @@ const handleDelete = async () => {
                             ></div>
                             <div className="fromName">
                               <span>
-                                From. <em>{msg.sender}</em>
+                                From.{" "}
+                                <em>{msg.sender.replace(/\d{4}$/, "")}</em>
                               </span>
-                              <Badge type={msg.relationship} />
+                              <Badge
+                                type={msg.relationship.replace(/\d{4}$/, "")}
+                              />
                             </div>
                           </div>
-                          <a className="btnDelete"
+                          <a
+                            className="btnDelete"
                             onClick={(e) => {
                               e.stopPropagation(); // 💡 부모 클릭 이벤트 방지
                               openDeleteModal(msg); // 삭제 모달 열기 + 메시지 정보 전달
@@ -816,20 +832,27 @@ const handleDelete = async () => {
                             <img src={deleteIcon} alt="삭제하기" />
                           </a>
                         </div>
-                        <p className="content"
+                        <p
+                          className="content"
                           style={{
                             fontFamily: msg.font,
                             color: msg.textColor || "#000",
-                            fontSize: msg.font === "나눔손글씨 손편지체" ? "24px" : msg.fontSize || "18px",
+                            fontSize:
+                              msg.font === "나눔손글씨 손편지체"
+                                ? "24px"
+                                : msg.fontSize || "18px",
                             fontWeight: msg.fontWeight || "normal",
                             fontStyle: msg.fontStyle || "normal",
                           }}
                           dangerouslySetInnerHTML={{ __html: msg.content }} // ⭐ HTML 그대로 렌더링
                         />
 
-                          <span className="date">
-                            {new Date(msg.createdAt).toISOString().split("T")[0].replace(/-/g, ".")}
-                          </span>
+                        <span className="date">
+                          {new Date(msg.createdAt)
+                            .toISOString()
+                            .split("T")[0]
+                            .replace(/-/g, ".")}
+                        </span>
                       </a>
                     </li>
                   ))}
