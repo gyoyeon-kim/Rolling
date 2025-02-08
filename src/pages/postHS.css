@@ -329,13 +329,11 @@ main
   letter-spacing: calc(var(--font-size) * 0.005);
 }
 
-main
-  .postHeader
-  .container
-  .rightWrap
-  .emojiReactionWrap
-  .emojiCollection
-  .emojiAllList {
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiTop3List .emojiNodata {
+  padding: 0; background: none; color: #000; font-weight: 500; color: #0000008a;
+}
+
+main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList {
   position: relative;
 }
 
@@ -739,6 +737,7 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   display: none;
 }
 
+.postWriterWrap {display: none;}
 /*=================
 태블릿 기본 세팅
 ===================*/
@@ -921,6 +920,33 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   .post .container .postCard li.savedPostCard > a .content {
     max-height: calc(2em * 3);
   }
+
+  .rightWrap {align-items: center;}
+  .postWriterWrap {display: block; padding-right: 20px; position: relative; display: flex; align-items: center; gap: 11px;}
+  .postWriterWrap:before {
+    position: absolute;
+    content: "";
+    background-color: #eee;
+    height: 28px;
+    width: 1px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .postWriterWrap .writerProfile {display: flex;}
+  .postWriterWrap > p {color: #000; font-size: var(--font-size-18);}
+  .postWriterWrap > p em {font-weight: 700;}
+  .postWriterWrap .writerProfile .profileImage {
+    width: 28px; height: 28px; border: 1.4px solid #fff; border-radius: 14px;
+    background-color: #ddd;
+    background-image: url(https://picsum.photos/300/300);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: -10px;
+  }
+  .postWriterWrap .writerProfile > span {color: #484848; font-weight: 500; font-size: 12px; border: 1px solid #e3e3e3; display: flex; width: 28px; height: 28px; justify-content: center; align-items: center; border-radius: 14px; margin-left: -10px; background-color: #fff;}
+
 }
 
 /* 모달창 */
@@ -1179,3 +1205,32 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 }
 
 /*이현선 작업 끝*/
+
+/* 로딩 스피너 스타일 */
+.loader {
+  border: 8px solid #f3f3f3;       /* 스피너 배경 */
+  border-top: 8px solid rgb(166 78 255);   /* 스피너 색상 */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;  /* 회전 애니메이션 */
+  margin: 100px auto; /* 중앙 정렬 */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
