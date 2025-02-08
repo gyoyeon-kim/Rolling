@@ -25,6 +25,7 @@ function CardBH({
         const response = await fetch(
           `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`
         );
+        if (!response.ok) throw new Error("Failed to fetch messages");
         const data = await response.json();
         const uniqueSenders = [
           ...new Map(data.results.map((msg) => [msg.sender, msg])).values(),
@@ -47,9 +48,10 @@ function CardBH({
     green: { pattern: pattern04, bgColor: "#D0F5C3" },
   };
 
+  // 패턴과 배경색 결정
   const { pattern: patternImage, bgColor } = patterns[backgroundColor] || {
     pattern: null,
-    bgColor: backgroundColor,
+    bgColor: backgroundColor || "#FFFFFF", // 기본값 설정
   };
 
   return (
@@ -62,11 +64,12 @@ function CardBH({
           : bgColor,
       }}
     >
-      {patternImage && (
+      {/* backgroundImageURL이 없고 패턴 이미지가 있는 경우만 렌더링 */}
+      {!backgroundImageURL && patternImage && (
         <img src={patternImage} alt="pattern" className="card-pattern" />
       )}
       <CardDataBH
-        title={title} // 타이틀 전달
+        title={title}
         totalSenders={totalSenders}
         topReactions={topReactions}
         displaySenders={displaySenders}
