@@ -1,0 +1,163 @@
+.card-data {
+  position: relative;
+  z-index: 2;
+}
+
+/* 카드 제목 */
+.card-title {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  font-family: Pretendard, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+/* 프로필 이미지 섹션 */
+.profile-images {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  margin-bottom: 12px;
+}
+
+.profile-image {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: -10px;
+}
+
+.profile-images .profile-image:first-child {
+  margin-left: 0;
+}
+
+.extra-count {
+  width: 33px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #555555;
+  border: 1.5px solid white;
+  margin-left: -10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 카드 텍스트 */
+.card-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  margin-bottom: 43px;
+}
+
+.bold-text {
+  font-family: Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+  color: #3a3a3a;
+}
+
+.light-text {
+  font-family: Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+  color: #3a3a3a;
+}
+
+/* 카드 데이터 구분선 */
+.divider {
+  width: 100%; /* 너비를 명확히 설정 */
+  height: 1px;
+  background-color: #0000001f;
+  margin-bottom: 17px;
+}
+
+/* 리액션 섹션 */
+.card-reactions {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  gap: 8px;
+}
+
+.reaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  border-radius: 32px;
+  background: #0000008a;
+  opacity: 1;
+  gap: 2px;
+}
+
+.reaction-emoji {
+  width: 20px;
+  height: 20px;
+  font-family: Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.reaction-count {
+  font-family: Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #fff;
+}
+
+/* ✅ 모바일 화면에서 크기를 조정 (768px 이하) */
+@media (max-width: 767px) {
+  .card-title {
+    font-size: 18px; /* 카드 제목 크기 줄이기 */
+    line-height: 28px;
+    margin-bottom: 12px;
+  }
+
+  .card-text {
+    margin-bottom: 33px; /* 카드 텍스트 간격 줄이기 */
+  }
+
+  .bold-text,
+  .light-text {
+    font-size: 14px; /* 텍스트 크기 줄이기 */
+    line-height: 20px;
+  }
+
+  .card-reactions {
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .reaction-item {
+    padding: 6px 8px; /* 리액션 크기 줄이기 */
+    border-radius: 32px;
+  }
+
+  .reaction-emoji {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1;
+  }
+
+  .reaction-count {
+    font-size: 14px; /* 카운트 크기 줄이기 */
+    line-height: 20px;
+  }
+}
