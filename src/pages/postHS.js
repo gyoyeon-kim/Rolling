@@ -487,6 +487,17 @@ useEffect(() => {
   fetchEmojiReactions();
 }, [id]);
 
+// 총 작성자 수 계산
+const totalWriters = messages.length;
+
+// 최신 3개의 메시지 가져오기 (최신순으로 정렬 후 slice)
+const latestProfiles = [...messages]
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  .slice(0, 3);
+
+// 초과 인원 수 계산
+const extraWriters = totalWriters - latestProfiles.length;
+
 // <!--------------------------- 메세지 삭제 기능 ------------------------->
 const [passwordError, setPasswordError] = useState("");
 
@@ -513,6 +524,7 @@ const deleteMessage = async (messageId, password) => {
 const openDeleteModal = (msg) => {
   setIsDeleteModalOpen(true);
   setSelectedCard(msg);
+  setPasswordError("");
 
   // 💡 sender의 끝 4자리를 비밀번호로 사용
   const password = msg.sender.slice(-4); 
@@ -653,18 +665,38 @@ const handleDelete = async () => {
               <p>To. {recipientName || "수신자"}</p>
             </div>
             <div className="rightWrap">
+              <div className="postWriterWrap">
+                <div className="writerProfile">
+                  {latestProfiles.map((msg, index) => (
+                    <div
+                      key={index}
+                      className="profileImage"
+                      style={{ backgroundImage: `url(${msg.profileImageURL})` }}
+                    ></div>
+                  ))}
+
+                  {extraWriters > 0 && <span>+{extraWriters}</span>}
+                </div>
+                <p>
+                  <em>{totalWriters}</em>명이 작성했어요!
+                </p>
+              </div>
               <div className="emojiReactionWrap">
                 <div className="emojiCollection">
-                  <ul className="emojiTop3List">
-                    <ul className="emojiTop3List">
-                    {Array.isArray(emojiList) &&
-                      emojiList.sort((a, b) => b.count - a.count).slice(0, 3).map((emoji, index) => (
+                <ul className="emojiTop3List">
+                  {emojiList.length === 0 ? (
+                    <li className="emojiNodata">이모티콘을 선택해 주세요!</li>
+                    ) : (
+                    emojiList
+                      .sort((a, b) => b.count - a.count)
+                      .slice(0, 3)
+                      .map((emoji, index) => (
                         <li key={index}>
                           <span>{emoji.emoji}</span>
                           <span>{emoji.count}</span>
                         </li>
-                    ))}
-                    </ul>
+                      ))
+                    )}
                   </ul>
                   <div className="emojiAllList" ref={emojiListRef}>
                     <button onClick={toggleEmojiList}>
@@ -728,7 +760,9 @@ const handleDelete = async () => {
 
         {/* 🔥 2️⃣ 메시지 로딩 상태 표시 */}
         {loading ? (
-          <p>📩 메시지를 불러오는 중...</p>
+          <div className="loader-container">
+            <div className="loader"></div>
+          </div>
         ) : (
           <div
             className="post"
