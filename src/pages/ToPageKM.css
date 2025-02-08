@@ -9,17 +9,9 @@
   padding: 0 24px;
 }
 
-
-.logo {
-  width: 106px;
-  height: 42px;
-  max-width: 1920px;
-  margin: 11px 0;
-  position: fixed;
-  top: 11px;
-  left: 24px;    
+.tologo {
+  margin-top: 15px;  
 }
-
 
 .to-content {
   display: flex;
@@ -29,10 +21,11 @@
   height: auto;
   margin: 12px auto;
   padding: 20px;
-}
+} 
 
-.to-content section {
+.to-content section  {
   margin: 40px 0;
+
 }
 
 .background-selection {
@@ -61,7 +54,7 @@
   line-height: 150%;
   outline: none;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom:  20px;
 }
 
 .selection-text {
@@ -100,8 +93,17 @@
 
 .image-preview {
   display: flex;
-  gap: 16px; 
+  gap: 16px;
+  margin-top: 40px;
 }
+
+.image-container {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+}
+
 
 .preview-image {
   border-radius: 8px;
@@ -116,6 +118,7 @@
   text-align: left;
   align-items: flex-start;
 }
+
 
 .background-selection-header {
   font-size: 24px;
@@ -158,12 +161,23 @@
 .tab.active {
   border: 2px solid #9935FF;
   color: #9935FF;
+  background-color: rgba(153, 53, 255, 0.1);
+  opacity: 1;
 }
+
+.tab:not(.active) {
+  background-color: #ccc;
+}
+
+.tab:not(.active):hover {
+  opacity: 1;
+}
+
 
 .create-button {
   width: 720px;
   height: 56px;
-  background-color: #8c4bff;
+  background-color: #8C4BFF;
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -191,7 +205,6 @@
   width: 40px;
   height: 40px;
 }
-
 .preview-image {
   width: 168px;
   height: 168px;
@@ -206,3 +219,5 @@
   border-radius: 12px;
   overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
 }
+
+
