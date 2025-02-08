@@ -38,7 +38,7 @@ function ListPageBH() {
         const popularData = await popularResponse.json();
 
         const recentResponse = await fetch(
-          "https://rolling-api.vercel.app/13-1/recipients/"
+          "https://rolling-api.vercel.app/13-1/recipients/?limit=1000"
         );
         const recentData = await recentResponse.json();
 
@@ -87,22 +87,29 @@ function ListPageBH() {
         {/* 인기 섹션 */}
         <section className="list-section">
           <h2 className="section-title">인기 롤링 페이퍼 🔥</h2>
-          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
+          <div
+            className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}
+          >
             {/* 좌측 버튼 (첫 번째 카드일 때 숨김) */}
-            {!isMobileOrTablet && popularStartIndex > 0 && popularItems.length > maxVisibleCards && (
-              <button
-                className="scroll-button left"
-                onClick={() => scrollLeft("popular")}
-                aria-label="Scroll Left"
-              >
-                <img src={arrowLeft} alt="Scroll Left" />
-              </button>
-            )}
+            {!isMobileOrTablet &&
+              popularStartIndex > 0 &&
+              popularItems.length > maxVisibleCards && (
+                <button
+                  className="scroll-button left"
+                  onClick={() => scrollLeft("popular")}
+                  aria-label="Scroll Left"
+                >
+                  <img src={arrowLeft} alt="Scroll Left" />
+                </button>
+              )}
             <CardListBH
               items={
                 isMobileOrTablet
                   ? popularItems
-                  : popularItems.slice(popularStartIndex, popularStartIndex + maxVisibleCards)
+                  : popularItems.slice(
+                      popularStartIndex,
+                      popularStartIndex + maxVisibleCards
+                    )
               }
             />
             {/* 우측 버튼 (마지막 카드일 때 숨김) */}
@@ -123,22 +130,29 @@ function ListPageBH() {
         {/* 최근 섹션 */}
         <section className="list-section">
           <h2 className="section-title">최근에 만든 롤링 페이퍼 ⭐</h2>
-          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
+          <div
+            className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}
+          >
             {/* 좌측 버튼 (첫 번째 카드일 때 숨김) */}
-            {!isMobileOrTablet && recentStartIndex > 0 && recentItems.length > maxVisibleCards && (
-              <button
-                className="scroll-button left"
-                onClick={() => scrollLeft("recent")}
-                aria-label="Scroll Left"
-              >
-                <img src={arrowLeft} alt="Scroll Left" />
-              </button>
-            )}
+            {!isMobileOrTablet &&
+              recentStartIndex > 0 &&
+              recentItems.length > maxVisibleCards && (
+                <button
+                  className="scroll-button left"
+                  onClick={() => scrollLeft("recent")}
+                  aria-label="Scroll Left"
+                >
+                  <img src={arrowLeft} alt="Scroll Left" />
+                </button>
+              )}
             <CardListBH
               items={
                 isMobileOrTablet
                   ? recentItems
-                  : recentItems.slice(recentStartIndex, recentStartIndex + maxVisibleCards)
+                  : recentItems.slice(
+                      recentStartIndex,
+                      recentStartIndex + maxVisibleCards
+                    )
               }
             />
             {/* 우측 버튼 (마지막 카드일 때 숨김) */}
