@@ -86,7 +86,6 @@ function Home() {
                 롤링 페이퍼에 이모지를 추가할 수 있어요!
               </p>
             </div>
-            <div className="card-placeholder">+</div>
           </div>
           <div className="explore section">
             <Link to="/list" className="explore-button">
