@@ -20,6 +20,42 @@
   /* 모바일 전용 스타일 (flex 방향 전환 등) */
 }
 
+/* 카드들을 감싸는 전체 컨테이너 */
+.point-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 상하 블록 간격을 조금 여유 있게 */
+  padding: 40px 20px; /* 필요에 따라 조정 */
+  background-color: #f6f8ff;
+  border-radius: 16px;
+}
+
+/* 이모지 섹션에 한해서 .emoji-layout 클래스를 사용해 가로 배치 적용 */
+.emoji-section .point-container.emoji-layout {
+  flex-direction: row; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 24px; /* 이미지와 텍스트 사이 간격 */
+}
+
+/* 이미지 영역 스타일 */
+.emoji-section .emoji-layout .emoji-image {
+  flex-shrink: 0; /* 텍스트 영역이 확장되어도 이미지 크기 유지 */
+}
+
+/* 이미지 크기 및 스타일 조절 */
+.emoji-section .emoji-layout .emoji-image img {
+  width: 600px; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
+  height: auto; /* 원본 비율 유지 */
+  object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
+}
+
+/* 텍스트 영역은 남은 공간 모두 차지 */
+.emoji-section .emoji-layout .emoji-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 /* 제목, 부제목, 설명 */
 .point-title {
   background-color: #a74bff;
@@ -32,16 +68,6 @@
   outline: none;
   display: inline-block;
   align-self: flex-start; /* 추가 */
-}
-
-/* 카드들을 감싸는 전체 컨테이너 */
-.point-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px; /* 상하 블록 간격을 조금 여유 있게 */
-  padding: 40px 20px; /* 필요에 따라 조정 */
-  background-color: #f6f8ff;
-  border-radius: 4px;
 }
 
 .point-subtitle {
@@ -173,7 +199,7 @@
   background-color: #eaeaea;
 }
 
-/* 이모지 영역 */
+/* 이모지 영역 
 .emoji-section .emoji-preview {
   display: flex;
   align-items: center;
@@ -195,6 +221,7 @@
   border: none;
   cursor: pointer;
 }
+*/
 
 /* 구경해보기 버튼 섹션 */
 .explore.section {
@@ -202,6 +229,7 @@
   flex-direction: column;
   text-align: center;
   align-self: center;
+  margin-top: 30px;
 }
 .explore-button {
   color: #fff;
@@ -222,6 +250,11 @@
     width: 100%; /* 컨테이너 전체 너비 */
     padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
     box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0px;
   }
 }
 
@@ -230,5 +263,29 @@
     width: 100%; /* 컨테이너 전체 너비 */
     padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
     box-sizing: border-box;
+  }
+}
+/* --- 반응형 미디어 쿼리: 화면 너비 768px 미만일 때 적용 --- */
+@media (max-width: 768px) {
+  /* 포인트1과 동일한 전체 컨테이너 패딩 적용 */
+  .home-container {
+    padding: 0 24px;
+  }
+
+  /* 이모지 섹션: 가로 레이아웃을 세로 레이아웃으로 변경 */
+  .emoji-section .point-container.emoji-layout {
+    flex-direction: column;
+  }
+
+  /* 이미지 영역: 이미지가 컨테이너 너비에 맞게 조정 */
+  .emoji-section .point-container.emoji-layout .emoji-image {
+    width: 100%;
+    margin-bottom: 16px; /* 이미지와 텍스트 사이에 여백 추가 */
+  }
+
+  /* 이미지: 너비 100%로 적용하여 반응형으로 조정 */
+  .emoji-section .point-container.emoji-layout .emoji-image img {
+    width: 100%;
+    height: auto;
   }
 }

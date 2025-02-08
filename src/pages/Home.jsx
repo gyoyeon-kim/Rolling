@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
-import EmojiButton from "../component/EmojiButton";
+/*import EmojiButton from "../component/EmojiButton";*/
+import point02 from "../images/Point02.png";
+import main_ex from "../images/main-ex1.jpg";
+import main_ex2 from "../images/main-ex2.jpg";
 
 function Home() {
   return (
@@ -25,7 +28,7 @@ function Home() {
                 <div className="card-header">
                   <div className="card-profile-image">
                     {/* 여기서 실제 이미지 경로나 URL로 변경 */}
-                    <img src="/path/to/profile1.jpg" alt="프로필1" />
+                    <img src={main_ex} alt="프로필1" />
                   </div>
                   <div className="card-author-info">
                     <span className="card-author">
@@ -35,14 +38,14 @@ function Home() {
                     <span className="card-date">2025.1.29</span>
                   </div>
                 </div>
-                <p className="card-content">여러분의 치아는 안녕하신가요?</p>
+                <p className="card-content">곰 곰</p>
               </div>
 
               {/* 두 번째 카드 */}
               <div className="card">
                 <div className="card-header">
                   <div className="card-profile-image">
-                    <img src="/path/to/profile2.jpg" alt="프로필2" />
+                    <img src={main_ex2} alt="프로필2" />
                   </div>
                   <div className="card-author-info">
                     <span className="card-author">
@@ -52,41 +55,42 @@ function Home() {
                     <span className="card-date">2025.01.30</span>
                   </div>
                 </div>
-                <p className="card-content">
-                  일교차가 큰 시기입니다. 모두 건강 잘 챙기세요!
-                </p>
+                <p className="card-content">아 당 떨어진다</p>
               </div>
 
               {/* + 버튼 카드 , To page연결*/}
-              <div className="card-placeholder">+</div>
+              <Link to="/post" className="card-placeholder">
+                +
+              </Link>
             </div>
           </div>
         </section>
 
         {/* 이모지 섹션 */}
-        <section className="emoji-section">
-          <div className="point-container">
-            <h2 className="point-title">Point.02</h2>
-            <h3 className="point-subtitle">
-              서로에게 이모지로 감정을 표현해보세요
-            </h3>
-            <p className="point-description">
-              롤링 페이퍼에 이모지를 추가할 수 있어요!
-            </p>
 
-            <div className="emoji-preview">
-              <EmojiButton emoji="👍" count={10} />
-              <EmojiButton emoji="😍" count={24} />
-              <EmojiButton emoji="🥺" count={10} />
-              <EmojiButton emoji="👏" count={8} />
-              <EmojiButton emoji="..." count={0} />
+        <section className="emoji-section">
+          {/* 추가된 클래스 'emoji-layout'를 통해 별도 스타일 적용 */}
+          <div className="point-container emoji-layout">
+            {/* 왼쪽에 위치할 이미지 영역 */}
+            <div className="emoji-image">
+              <img src={point02} alt="이모티콘 이미지" />
+            </div>
+            {/* 오른쪽에 위치할 텍스트 영역 */}
+            <div className="emoji-text">
+              <h2 className="point-title">Point.02</h2>
+              <h3 className="point-subtitle">
+                서로에게 이모지로 감정을 표현해보세요
+              </h3>
+              <p className="point-description">
+                롤링 페이퍼에 이모지를 추가할 수 있어요!
+              </p>
             </div>
           </div>
-        </section>
-        <section className="explore section">
-          <Link to="/list" className="explore-button">
-            구경하러 가기
-          </Link>
+          <div className="explore section">
+            <Link to="/list" className="explore-button">
+              구경하러 가기
+            </Link>
+          </div>
         </section>
       </main>
     </>
