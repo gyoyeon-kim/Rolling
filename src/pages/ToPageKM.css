@@ -9,6 +9,10 @@
   padding: 0 24px;
 }
 
+.tologo {
+  margin-top: 15px;  
+}
+
 .to-content {
   display: flex;
   flex-direction: column;
@@ -17,10 +21,11 @@
   height: auto;
   margin: 12px auto;
   padding: 20px;
-}
+} 
 
-.to-content section {
+.to-content section  {
   margin: 40px 0;
+
 }
 
 .background-selection {
@@ -49,7 +54,7 @@
   line-height: 150%;
   outline: none;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom:  20px;
 }
 
 .selection-text {
@@ -89,7 +94,16 @@
 .image-preview {
   display: flex;
   gap: 16px;
+  margin-top: 40px;
 }
+
+.image-container {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+}
+
 
 .preview-image {
   border-radius: 8px;
@@ -104,6 +118,7 @@
   text-align: left;
   align-items: flex-start;
 }
+
 
 .background-selection-header {
   font-size: 24px;
@@ -139,18 +154,30 @@
   align-items: center;
   cursor: pointer;
   background: none;
-  opacity: 1;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
 .tab.active {
-  border: 2px solid #9935ff;
-  color: #9935ff;
+  border: 2px solid #9935FF;
+  color: #9935FF;
+  background-color: rgba(153, 53, 255, 0.1);
+  opacity: 1;
 }
+
+.tab:not(.active) {
+  background-color: #ccc;
+}
+
+.tab:not(.active):hover {
+  opacity: 1;
+}
+
 
 .create-button {
   width: 720px;
   height: 56px;
-  background-color: #8c4bff;
+  background-color: #8C4BFF;
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -162,3 +189,35 @@
   justify-content: center;
   align-items: center;
 }
+/*이미지 탭 체크아이콘 중앙으로*/
+.image-container {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 40px;
+  height: 40px;
+}
+.preview-image {
+  width: 168px;
+  height: 168px;
+  border-radius: 8px;
+  object-fit: cover; /* 이미지를 컨테이너에 맞게 크기 조절 */
+}
+
+.image-container {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+  overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
+}
+
+
