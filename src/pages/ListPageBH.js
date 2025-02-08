@@ -59,27 +59,23 @@ function ListPageBH() {
     return <p>⏳ 데이터 불러오는 중입니다. 잠시만 기다려 주세요...</p>;
   if (error) return <p>❌ {error}</p>;
 
-  // 스크롤 핸들러 (4개씩 이동)
+  // 🔹 한 장씩 좌우 이동
   const scrollLeft = (section) => {
     if (section === "popular") {
-      setPopularStartIndex((prevIndex) =>
-        Math.max(prevIndex - maxVisibleCards, 0)
-      );
+      setPopularStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     } else if (section === "recent") {
-      setRecentStartIndex((prevIndex) =>
-        Math.max(prevIndex - maxVisibleCards, 0)
-      );
+      setRecentStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     }
   };
 
   const scrollRight = (section, itemsLength) => {
     if (section === "popular") {
       setPopularStartIndex((prevIndex) =>
-        Math.min(prevIndex + maxVisibleCards, itemsLength - maxVisibleCards)
+        Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
       );
     } else if (section === "recent") {
       setRecentStartIndex((prevIndex) =>
-        Math.min(prevIndex + maxVisibleCards, itemsLength - maxVisibleCards)
+        Math.min(prevIndex + 1, itemsLength - maxVisibleCards)
       );
     }
   };
@@ -91,11 +87,9 @@ function ListPageBH() {
         {/* 인기 섹션 */}
         <section className="list-section">
           <h2 className="section-title">인기 롤링 페이퍼 🔥</h2>
-          <div
-            className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}
-          >
-            {/* 좌측 버튼 */}
-            {!isMobileOrTablet && popularStartIndex > 0 && (
+          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
+            {/* 좌측 버튼 (첫 번째 카드일 때 숨김) */}
+            {!isMobileOrTablet && popularStartIndex > 0 && popularItems.length > maxVisibleCards && (
               <button
                 className="scroll-button left"
                 onClick={() => scrollLeft("popular")}
@@ -108,15 +102,13 @@ function ListPageBH() {
               items={
                 isMobileOrTablet
                   ? popularItems
-                  : popularItems.slice(
-                      popularStartIndex,
-                      popularStartIndex + maxVisibleCards
-                    )
+                  : popularItems.slice(popularStartIndex, popularStartIndex + maxVisibleCards)
               }
             />
-            {/* 우측 버튼 */}
+            {/* 우측 버튼 (마지막 카드일 때 숨김) */}
             {!isMobileOrTablet &&
-              popularStartIndex + maxVisibleCards < popularItems.length && (
+              popularStartIndex + maxVisibleCards < popularItems.length &&
+              popularItems.length > maxVisibleCards && (
                 <button
                   className="scroll-button right"
                   onClick={() => scrollRight("popular", popularItems.length)}
@@ -131,11 +123,9 @@ function ListPageBH() {
         {/* 최근 섹션 */}
         <section className="list-section">
           <h2 className="section-title">최근에 만든 롤링 페이퍼 ⭐</h2>
-          <div
-            className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}
-          >
-            {/* 좌측 버튼 */}
-            {!isMobileOrTablet && recentStartIndex > 0 && (
+          <div className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}>
+            {/* 좌측 버튼 (첫 번째 카드일 때 숨김) */}
+            {!isMobileOrTablet && recentStartIndex > 0 && recentItems.length > maxVisibleCards && (
               <button
                 className="scroll-button left"
                 onClick={() => scrollLeft("recent")}
@@ -148,15 +138,13 @@ function ListPageBH() {
               items={
                 isMobileOrTablet
                   ? recentItems
-                  : recentItems.slice(
-                      recentStartIndex,
-                      recentStartIndex + maxVisibleCards
-                    )
+                  : recentItems.slice(recentStartIndex, recentStartIndex + maxVisibleCards)
               }
             />
-            {/* 우측 버튼 */}
+            {/* 우측 버튼 (마지막 카드일 때 숨김) */}
             {!isMobileOrTablet &&
-              recentStartIndex + maxVisibleCards < recentItems.length && (
+              recentStartIndex + maxVisibleCards < recentItems.length &&
+              recentItems.length > maxVisibleCards && (
                 <button
                   className="scroll-button right"
                   onClick={() => scrollRight("recent", recentItems.length)}
