@@ -604,8 +604,6 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
   transform: rotate(90deg);
 }
 
-.post .container .postCard li.savedPostCard {
-}
 
 .post .container .postCard li.savedPostCard > a {
   flex-wrap: wrap;
@@ -1205,32 +1203,3 @@ main .postHeader .container .rightWrap .shareSnsWrap ul li button:hover {
 }
 
 /*이현선 작업 끝*/
-
-/* 로딩 스피너 스타일 */
-.loader {
-  border: 8px solid #f3f3f3;       /* 스피너 배경 */
-  border-top: 8px solid rgb(166 78 255);   /* 스피너 색상 */
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;  /* 회전 애니메이션 */
-  margin: 100px auto; /* 중앙 정렬 */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loader-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 9999;
-}
