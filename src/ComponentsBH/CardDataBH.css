@@ -20,6 +20,7 @@
   display: flex;
   justify-content: flex-start; /* 왼쪽 정렬 */
   margin-bottom: 12px;
+  min-height: 28px;
 }
 
 .profile-image {
@@ -128,6 +129,10 @@
     font-size: 18px; /* 카드 제목 크기 줄이기 */
     line-height: 28px;
     margin-bottom: 12px;
+  }
+
+  .profile-images {
+    min-height: 28px;
   }
 
   .card-text {

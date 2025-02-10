@@ -43,7 +43,9 @@ const ToPageKM = () => {
       return;
     }
 
-    const isColor = ["beige", "purple", "blue", "green"].includes(selectedBackground);
+    const isColor = ["beige", "purple", "blue", "green"].includes(
+      selectedBackground
+    );
     const isImage = selectedBackground && selectedBackground.startsWith("http");
 
     const data = {
@@ -61,14 +63,20 @@ const ToPageKM = () => {
     console.log("📡 API 요청 데이터:", data);
 
     try {
-      const response = await axios.post(`https://rolling-api.vercel.app/13-1/recipients/`, data, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        `https://rolling-api.vercel.app/13-1/recipients/`,
+        data,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       navigate(`/post/${response.data.id}`);
     } catch (error) {
       console.error("API 요청 중 에러 발생:", error.response?.data || error);
-      alert(`오류 발생: ${error.response?.data?.message || "다시 시도해주세요."}`);
+      alert(
+        `오류 발생: ${error.response?.data?.message || "다시 시도해주세요."}`
+      );
     }
   };
 
@@ -92,8 +100,12 @@ const ToPageKM = () => {
         {error && <p className="error-message">받는 사람을 입력하세요.</p>}
 
         <div className="background-selection-text">
-          <p className="background-selection-header">배경화면을 선택해 주세요.</p>
-          <p className="background-selection-p">컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
+          <p className="background-selection-header">
+            배경화면을 선택해 주세요.
+          </p>
+          <p className="background-selection-p">
+            컬러를 선택하거나, 이미지를 선택할 수 있습니다.
+          </p>
         </div>
 
         <div className="background-selection">
@@ -153,9 +165,15 @@ const ToPageKM = () => {
           )}
         </div>
 
-        {backgroundError && <p className="error-message">배경을 선택해주세요.</p>}
+        {backgroundError && (
+          <p className="error-message">배경을 선택해주세요.</p>
+        )}
 
-        <button className="create-button" onClick={handleSubmit} disabled={!recipient.trim()}>
+        <button
+          className="create-button"
+          onClick={handleSubmit}
+          disabled={!recipient.trim()}
+        >
           생성하기
         </button>
       </div>

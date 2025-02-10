@@ -1,0 +1,8 @@
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    letter-spacing: calc(var(--font-size) * 0.005);
+  }

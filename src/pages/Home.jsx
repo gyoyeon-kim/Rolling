@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Navigation from "../component/Navigation";
+/* import HeaderBH from "../ComponentsBH/HeaderBH";
 /*import EmojiButton from "../component/EmojiButton";*/
 import point02 from "../images/Point02.png";
 import main_ex from "../images/main-ex1.jpg";
