@@ -12,14 +12,6 @@
   margin: 40px 0;
 }
 
-/* 모바일 이하에서 적용: 768px 미만 */
-@media (max-width: 768px) {
-  .home-container {
-    padding: 0 24px; /* 모바일에서 24px로 고정 */
-  }
-  /* 모바일 전용 스타일 (flex 방향 전환 등) */
-}
-
 /* 카드들을 감싸는 전체 컨테이너 */
 .point-container {
   display: flex;
@@ -28,6 +20,8 @@
   padding: 40px 20px; /* 필요에 따라 조정 */
   background-color: #f6f8ff;
   border-radius: 16px;
+  height: 400px;
+  max-height: 500px;
 }
 
 /* 이모지 섹션에 한해서 .emoji-layout 클래스를 사용해 가로 배치 적용 */
@@ -44,13 +38,40 @@
 
 /* 이미지 크기 및 스타일 조절 */
 .emoji-section .emoji-layout .emoji-image img {
-  width: 600px; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
+  width: 640px; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
   height: auto; /* 원본 비율 유지 */
   object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
 }
 
 /* 텍스트 영역은 남은 공간 모두 차지 */
 .emoji-section .emoji-layout .emoji-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 이모지 섹션에 한해서 .emoji-layout 클래스를 사용해 가로 배치 적용 */
+.emoji-section .point-container.emoji-layout2 {
+  flex-direction: row-reverse; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 24px; /* 이미지와 텍스트 사이 간격 */
+  justify-content: space-evenly;
+}
+
+/* 이미지 영역 스타일 */
+.emoji-section .emoji-layout2 .emoji-image {
+  flex-shrink: 0; /* 텍스트 영역이 확장되어도 이미지 크기 유지 */
+}
+
+/* 이미지 크기 및 스타일 조절 */
+.emoji-section .emoji-layout2 .emoji-image img {
+  width: 100%; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
+  height: auto; /* 원본 비율 유지 */
+  object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
+}
+
+/* 텍스트 영역은 남은 공간 모두 차지 */
+.emoji-section .emoji-layout2 .emoji-text {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -81,177 +102,6 @@
   margin-bottom: 24px;
 }
 
-/* 카드가 나란히 배치되는 래퍼 */
-.card-wrapper {
-  display: flex;
-  gap: 16px;
-  flex-direction: row;
-}
-
-/* 개별 카드 스타일 */
-.home-card {
-  flex: 1;
-  width: 275px;
-  height: 260px;
-  border: 1px solid var(--gray-300);
-  border-radius: 16px;
-  background-color: #fff;
-  padding: 16px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-  background-color: #fff;
-}
-
-.home-card:hover {
-  transform: scale(1.05);
-}
-@media (max-width: 768px) {
-  @media (max-width: 768px) {
-    .card-wrapper {
-      /* 수평 스크롤을 가능하게 하는 핵심 */
-      display: flex;
-      flex-direction: row; /* 필요 시 제거 가능 */
-      overflow-x: auto; /* 수평 스크롤 표시 */
-      scroll-snap-type: x mandatory; /* 부드러운 스크롤 경험을 위해 추가 (옵션) */
-      -webkit-overflow-scrolling: touch; /* iOS에서 부드럽게 스크롤 되도록 */
-      gap: 16px; /* 카드 간격 */
-    }
-    .card-wrapper.card-wrapper::-webkit-scrollbar {
-      /* 크롬,사파리에서만 밑 스크롤 숨김*/
-      display: none;
-    }
-
-    .home-card {
-      flex: 0 0 auto; /* 아이템이 줄바꿈되지 않고 고정된 크기 */
-      min-width: 240px; /* 원하는 만큼 최소 너비 설정 */
-      scroll-snap-align: start; /* 스크롤 스냅 포인트 (옵션) */
-    }
-
-    /* + 버튼 카드도 동일한 규칙 */
-    .card-placeholder {
-      flex: 0 0 auto;
-      min-width: 100px; /* 원하는 만큼 조정 */
-      scroll-snap-align: start;
-    }
-  }
-}
-
-/* 카드의 헤더 영역 (프로필, 작성자 정보 등) */
-.card-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-/* 프로필 이미지를 원 모양으로 보여주기 */
-.card-profile-image {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 12px;
-}
-
-.card-profile-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 작성자 정보 */
-.card-author-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.card-author {
-  font-weight: 400px;
-  font-size: 0.95rem;
-  margin-bottom: 4px;
-}
-.card-user {
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-bottom: 4px;
-}
-
-.card-relationship {
-  font-weight: normal;
-  font-size: 0.85rem;
-  color: #861dee;
-  margin-left: 8px;
-  background-color: #ecd9ff;
-  padding: 2px 5px;
-  gap: 5px;
-  border-radius: 3px;
-}
-
-.card-relationship-friend {
-  font-weight: normal;
-  font-size: 0.85rem;
-  color: #00a2fe;
-  margin-left: 8px;
-  background-color: #e2f5ff;
-  padding: 2px 5px;
-  gap: 5px;
-  border-radius: 3px;
-}
-
-.card-date {
-  font-size: 0.8rem;
-  color: #999;
-}
-
-/* 카드 본문 내용 */
-.Home-card-content {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  padding: 10px;
-}
-
-/* + 버튼 카드 스타일 */
-.card-placeholder {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f3f3f3;
-  border: 1px dashed #ccc;
-  border-radius: 8px;
-  color: #aaa;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-}
-
-.card-placeholder:hover {
-  background-color: #eaeaea;
-}
-
-/* 이모지 영역 
-.emoji-section .emoji-preview {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.emoji-display button {
-  margin-right: 8px;
-  background-color: #ededed;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.emoji-add-btn {
-  background-color: #5b67f1;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-*/
-
 /* 구경해보기 버튼 섹션 */
 .explore.section {
   display: flex;
@@ -273,8 +123,8 @@
 .explore-button:hover {
   opacity: 0.8;
 }
-/* 태블릿 및 모바일 (769px 미만)에서 구경해보기 버튼 전체 너비 적용 */
-@media (max-width: 768px) {
+/* 태블릿 및 모바일 (768px 미만)에서 구경해보기 버튼 전체 너비 적용 */
+@media (max-width: 767px) {
   .explore-button {
     width: 100%; /* 컨테이너 전체 너비 */
     padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
@@ -287,23 +137,8 @@
   }
 }
 
-@media (max-width: 1248px) {
-  .emoji-section .point-container.emoji-layout {
-    flex-direction: column; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
-    align-items: center; /* 수직 중앙 정렬 */
-    gap: 24px; /* 이미지와 텍스트 사이 간격 */
-  }
-}
-
-@media (max-width: 1370px) {
-  .explore-button {
-    width: 100%; /* 컨테이너 전체 너비 */
-    padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
-    box-sizing: border-box;
-  }
-}
 /* --- 반응형 미디어 쿼리: 화면 너비 768px 미만일 때 적용 --- */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* 포인트1과 동일한 전체 컨테이너 패딩 적용 */
   .home-container {
     padding: 0 24px;
@@ -324,5 +159,86 @@
   .emoji-section .point-container.emoji-layout .emoji-image img {
     width: 100%;
     height: auto;
+  }
+}
+/* --- 반응형 미디어 쿼리: 화면 너비 768px 미만일 때 적용 --- */
+@media (max-width: 767px) {
+  /* 이모지 섹션: 가로 레이아웃을 세로 레이아웃으로 변경 */
+  .emoji-section .point-container.emoji-layout2 {
+    flex-direction: column-reverse;
+  }
+
+  /* 이미지 영역: 이미지가 컨테이너 너비에 맞게 조정 */
+  .emoji-section .point-container.emoji-layout2 .emoji-image {
+    display: flex;
+    flex-direction: row; /* 필요 시 제거 가능 */
+    overflow-x: auto; /* 수평 스크롤 표시 */
+    scroll-snap-type: x mandatory; /* 부드러운 스크롤 경험을 위해 추가 (옵션) */
+    -webkit-overflow-scrolling: touch; /* iOS에서 부드럽게 스크롤 되도록 */
+    gap: 16px;
+  }
+  .emoji-section
+    .point-container.emoji-layout2
+    .emoji-image::-webkit-scrollbar {
+    /* 크롬,사파리에서만 밑 스크롤 숨김*/
+    display: none;
+  }
+  /* 이미지: 너비 100%로 적용하여 반응형으로 조정 */
+  .emoji-section .point-container.emoji-layout2 .emoji-image img {
+    width: 150%;
+    max-width: none;
+    display: block;
+  }
+  .emoji-section .point-container.emoji-layout2 .point-subtitle {
+    font-size: 1.5rem;
+  }
+  .emoji-section .point-container.emoji-layout .point-subtitle {
+    font-size: 1.5rem;
+  }
+}
+/* 모바일 이하에서 적용: 768px 미만 */
+@media (max-width: 767px) {
+  .home-container {
+    padding: 0 24px; /* 모바일에서 24px로 고정 */
+  }
+  /* 모바일 전용 스타일 (flex 방향 전환 등) */
+}
+@media (max-width: 1024px) {
+  .emoji-section .point-container.emoji-layout {
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 24px; /* 이미지와 텍스트 사이 간격 */
+    flex-direction: column-reverse;
+    height: 440px;
+  }
+  .emoji-text {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .emoji-section .point-container.emoji-layout2 {
+    gap: 24px; /* 이미지와 텍스트 사이 간격 */
+    height: 440px;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 1024px) {
+  .explore-button {
+    width: 100%; /* 컨테이너 전체 너비 */
+    padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 1024px) {
+  .emoji-section .emoji-layout2 .emoji-image img {
+    width: 100%; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
+    height: auto; /* 원본 비율 유지 */
+    object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
+  }
+  .emoji-section .emoji-layout .emoji-image img {
+    width: 100%; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
+    height: auto; /* 원본 비율 유지 */
+    object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
   }
 }
