@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import HeaderBH from "../ComponentsBH/HeaderBH";
+//import HeaderBH from "../ComponentsBH/HeaderBH";
+import Navigation from "../component/Navigation";
 import CardListBH from "../ComponentsBH/CardListBH";
 import FooterBtnBH from "../ComponentsBH/FooterBtnBH";
 import "./ListPageBH.css";
@@ -92,7 +93,7 @@ function ListPageBH() {
 
   return (
     <div className="list-page">
-      <HeaderBH />
+      <Navigation />
       <main className="list-content">
         {/* 인기 섹션 */}
         <section className="list-section">
@@ -182,6 +183,7 @@ function ListPageBH() {
         <FooterBtnBH />
       </main>
     </div>
+    
   );
 }
 
