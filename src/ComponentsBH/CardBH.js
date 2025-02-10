@@ -13,6 +13,8 @@ function CardBH({
   backgroundImageURL,
   backgroundColor,
   topReactions,
+  recentMessages,
+  messageCount,
 }) {
   const navigate = useNavigate();
   const [displaySenders, setDisplaySenders] = useState([]);
@@ -20,24 +22,38 @@ function CardBH({
   const [totalSenders, setTotalSenders] = useState(0);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const fetchMessages = async () => {
       try {
-        const response = await fetch(
-          `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`
+        console.log(`Fetching messages for ID: ${id}`);
+
+        setDisplaySenders((prev) =>
+          recentMessages.map((recentMessage) => ({
+            sender: recentMessage.sender,
+            profileImageURL: recentMessage.profileImageURL,
+          }))
         );
-        const data = await response.json();
-        const uniqueSenders = [
-          ...new Map(data.results.map((msg) => [msg.sender, msg])).values(),
-        ];
-        setDisplaySenders(uniqueSenders.slice(0, 3));
-        setExtraCount(Math.max(uniqueSenders.length - 3, 0));
-        setTotalSenders(uniqueSenders.length);
+        setExtraCount((prev) =>
+          prev !== Math.max(messageCount - 3, 0)
+            ? Math.max(messageCount - 3, 0)
+            : prev
+        );
+        setTotalSenders((prev) =>
+          prev !== messageCount ? messageCount : prev
+        );
+
+        console.log("$$ recentMessages", recentMessages);
       } catch (error) {
-        console.error("Error fetching messages:", error);
+        if (error.name !== "AbortError") {
+          console.error("Error fetching messages:", error);
+        }
       }
     };
 
     fetchMessages();
+    return () => controller.abort();
   }, [id]);
 
   const patterns = {
@@ -49,7 +65,7 @@ function CardBH({
 
   const { pattern: patternImage, bgColor } = patterns[backgroundColor] || {
     pattern: null,
-    bgColor: backgroundColor,
+    bgColor: backgroundColor || "#FFFFFF",
   };
 
   return (
@@ -58,20 +74,24 @@ function CardBH({
       onClick={() => navigate(`/post/${id}`)}
       style={{
         background: backgroundImageURL
-          ? `url(${backgroundImageURL}) center/cover no-repeat`
+          ? `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${backgroundImageURL}) center/cover no-repeat`
           : bgColor,
       }}
     >
-      {patternImage && (
+      {!backgroundImageURL && patternImage && (
         <img src={patternImage} alt="pattern" className="card-pattern" />
       )}
-      <CardDataBH
-        title={title} // 타이틀 전달
-        totalSenders={totalSenders}
-        topReactions={topReactions}
-        displaySenders={displaySenders}
-        extraCount={extraCount}
-      />
+      <div
+        className={`card-content ${backgroundImageURL ? "dark-overlay" : ""}`}
+      >
+        <CardDataBH
+          title={title}
+          totalSenders={totalSenders}
+          topReactions={topReactions}
+          displaySenders={displaySenders}
+          extraCount={extraCount}
+        />
+      </div>
     </div>
   );
 }
