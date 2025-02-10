@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardBH.css";
 import CardDataBH from "./CardDataBH";
@@ -18,10 +18,12 @@ function CardBH({
   const [displaySenders, setDisplaySenders] = useState([]);
   const [extraCount, setExtraCount] = useState(0);
   const [totalSenders, setTotalSenders] = useState(0);
-  const [fetchedIds, setFetchedIds] = useState(new Set()); // ✅ 이미 요청한 ID 추적
+  const fetchedIds = useRef(new Set()); // ✅ useRef로 저장하여 상태 변경 없이 유지
 
   useEffect(() => {
-    if (!id || fetchedIds.has(id)) return; // ✅ 이미 가져온 ID면 실행 안 함
+    if (!id || fetchedIds.current.has(id)) return; // ✅ 이미 가져온 ID면 실행 안 함
+
+    fetchedIds.current.add(id); // ✅ 가져온 ID 저장
 
     const controller = new AbortController();
     const { signal } = controller;
@@ -49,19 +51,9 @@ function CardBH({
         const newExtraCount = Math.max(uniqueSenders.length - 3, 0);
         const newTotalSenders = uniqueSenders.length;
 
-        setDisplaySenders((prev) =>
-          JSON.stringify(prev) !== JSON.stringify(newDisplaySenders)
-            ? newDisplaySenders
-            : prev
-        );
-        setExtraCount((prev) =>
-          prev !== newExtraCount ? newExtraCount : prev
-        );
-        setTotalSenders((prev) =>
-          prev !== newTotalSenders ? newTotalSenders : prev
-        );
-
-        setFetchedIds((prev) => new Set(prev).add(id)); // ✅ 가져온 ID 저장
+        setDisplaySenders(newDisplaySenders);
+        setExtraCount(newExtraCount);
+        setTotalSenders(newTotalSenders);
       } catch (error) {
         if (error.name !== "AbortError") {
           console.error("Error fetching messages:", error);
@@ -72,7 +64,7 @@ function CardBH({
     fetchMessages();
 
     return () => controller.abort();
-  }, [id]); // ✅ id가 변경될 때만 실행됨
+  }, []); // ✅ 의존성 배열 제거하여 최초 실행만 수행
 
   const patterns = {
     beige: { pattern: pattern02, bgColor: "#FFE2AD" },
