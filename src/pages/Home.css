@@ -267,6 +267,14 @@
   }
 }
 
+@media (max-width: 1248px) {
+  .emoji-section .point-container.emoji-layout {
+    flex-direction: column; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 24px; /* 이미지와 텍스트 사이 간격 */
+  }
+}
+
 @media (max-width: 1370px) {
   .explore-button {
     width: 100%; /* 컨테이너 전체 너비 */
