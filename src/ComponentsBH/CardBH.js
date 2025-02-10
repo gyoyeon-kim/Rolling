@@ -1,4 +1,3 @@
-/*
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardBH.css";
@@ -14,6 +13,8 @@ function CardBH({
   backgroundImageURL,
   backgroundColor,
   topReactions,
+  recentMessages,
+  messageCount,
 }) {
   const navigate = useNavigate();
   const [displaySenders, setDisplaySenders] = useState([]);
@@ -27,35 +28,24 @@ function CardBH({
     const fetchMessages = async () => {
       try {
         console.log(`Fetching messages for ID: ${id}`);
-        const response = await fetch(
-          `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`,
-          { signal }
-        );
-        if (!response.ok)
-          throw new Error(
-            `Failed to fetch messages (Status: ${response.status})`
-          );
-
-        const data = await response.json();
-        if (!data.results) throw new Error("Invalid data format");
-
-        const uniqueSenders = [
-          ...new Map(data.results.map((msg) => [msg.sender, msg])).values(),
-        ];
 
         setDisplaySenders((prev) =>
-          JSON.stringify(prev) !== JSON.stringify(uniqueSenders.slice(0, 3))
-            ? uniqueSenders.slice(0, 3)
-            : prev
+          recentMessages.map((recentMessage) => ({
+            sender: recentMessage.sender,
+            profileImageURL: recentMessage.profileImageURL,
+          }))
         );
+        // console.log("$$ messageCount", messageCount);
         setExtraCount((prev) =>
-          prev !== Math.max(uniqueSenders.length - 3, 0)
-            ? Math.max(uniqueSenders.length - 3, 0)
+          prev !== Math.max(messageCount - 3, 0)
+            ? Math.max(messageCount - 3, 0)
             : prev
         );
         setTotalSenders((prev) =>
-          prev !== uniqueSenders.length ? uniqueSenders.length : prev
+          prev !== messageCount ? messageCount : prev
         );
+
+        console.log("$$ recentMessages", recentMessages);
       } catch (error) {
         if (error.name !== "AbortError") {
           console.error("Error fetching messages:", error);
@@ -104,4 +94,3 @@ function CardBH({
 }
 
 export default CardBH;
-*/
