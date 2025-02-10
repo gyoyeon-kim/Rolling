@@ -1,7 +1,7 @@
-/* Global Styles */
 * {
   box-sizing: border-box;
 }
+
 
 @media (max-width: 768px) {
   .to-container {
@@ -20,12 +20,12 @@
   width: 100%;
   max-width: 1920px;
   height: 64px;
-  padding: 11px 18.75%;
+  padding: 11px 168px;
   display: flex;
+  position: fixed;
   align-items: center;
   justify-content: space-between;
 }
-
 .tologo {
   width: 106px;
   height: 42px;
@@ -42,6 +42,10 @@
 }
 
 .to-content section {
+  margin: 40px 0;
+}
+
+.background-selection {
   margin: 40px 0;
 }
 
@@ -70,12 +74,66 @@
   margin-bottom: 20px;
 }
 
-.background-selection {
-  margin: 40px 0;
+.selection-text {
+  width: 301px;
+  height: 66px;
+  text-align: center;
+  margin-top: 40px;
+  gap: 4px;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  width: 244px;
+  height: 40px;
+  margin-top: 20px;
+}
+
+.color-options,
+.image-preview {
+  display: flex;
+  justify-content: center;
+  width: 720px;
+  height: auto;
+  margin-top: 40px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.color-option,
+.image-container {
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.image-container {
+  overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
+}
+
+.preview-image {
+  width: 168px;
+  height: 168px;
+  border-radius: 8px;
+  object-fit: cover; /* 이미지를 컨테이너에 맞게 크기 조절 */
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
 }
 
 .background-selection-text {
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -94,14 +152,6 @@
   font-size: 16px;
   line-height: 26px;
   letter-spacing: -0.01em;
-}
-
-.toggle-buttons {
-  display: flex;
-  justify-content: center;
-  width: 244px;
-  height: 40px;
-  margin-top: 20px;
 }
 
 .tabs {
@@ -146,54 +196,6 @@
   opacity: 1;
 }
 
-.color-options {
-  display: flex;
-  justify-content: center;
-  width: 720px;
-  height: 168px;
-  margin-top: 40px;
-  gap: 16px;
-}
-
-.color-option {
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  position: relative;
-}
-
-.image-preview {
-  display: flex;
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.image-container {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.preview-image {
-  width: 168px;
-  height: 168px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.check-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-}
-
 .create-button {
   width: 720px;
   height: 56px;
@@ -214,4 +216,78 @@
   background-color: #ddd;
   color: #666;
   cursor: not-allowed;
+}
+
+/* URL 입력 팝업 스타일 */
+.url-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  z-index: 1000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.url-popup-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.url-popup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.url-popup button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #8c4bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.url-popup button:hover {
+  background: #6b3cf0;
+}
+
+/* + 버튼 스타일 업데이트 */
+.add-image-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 168px;
+  height: 168px;
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  background: #f9f9f9;
+  font-size: 24px;
+  font-weight: bold;
+  color: #bbb;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-image-button:hover {
+  border-color: #9935ff;
+  background-color: rgba(153, 53, 255, 0.1);
+  color: #9935ff;
 }

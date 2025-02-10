@@ -217,7 +217,6 @@ const Post = () => {
       setPasswordError("비밀번호가 틀렸습니다."); // 비밀번호 틀렸을 때 오류 표시
     }
   };
-
   return (
     <>
       <ToastContainer />
@@ -310,7 +309,14 @@ const Post = () => {
         </div>
       )}
 
-      <Header />
+      <header>
+        <div className="container">
+          <Link to="/" className="logo">
+            <img src={logo} alt="롤링페이퍼 로고" />
+          </Link>
+          {/* <Link to="/post" className="btn_making">롤링페이퍼 만들기</Link> */}
+        </div>
+      </header>
       <main>
         <h1 className="blind">보낸 롤링페이퍼 리스트</h1>
         {/* postHeader 시작 */}
@@ -356,7 +362,9 @@ const Post = () => {
               backgroundImage: backgroundImage
                 ? `url(${backgroundImage})`
                 : "none",
+
               backgroundColor: COLOR_MAP[backgroundColor] || "var(--beige-200)",
+             
             }}
           >
             <div className="container">
