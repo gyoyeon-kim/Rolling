@@ -27,18 +27,19 @@ function ListPageBH() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  /*
   // 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const popularResponse = await fetch(
-          "https://rolling-api.vercel.app/13-1/recipients/?sort=like"
+          "https://rolling-api.vercel.app/13-1/recipients/?sort=like&limit=10"
         );
         const popularData = await popularResponse.json();
 
         const recentResponse = await fetch(
-          "https://rolling-api.vercel.app/13-1/recipients/?limit=1000"
+          "https://rolling-api.vercel.app/13-1/recipients/?limit=10"
         );
         const recentData = await recentResponse.json();
 
@@ -54,6 +55,8 @@ function ListPageBH() {
 
     fetchData();
   }, []);
+
+  */
 
   if (loading)
     return <p>⏳ 데이터 불러오는 중입니다. 잠시만 기다려 주세요...</p>;
