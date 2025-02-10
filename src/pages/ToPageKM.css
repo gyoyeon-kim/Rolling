@@ -189,6 +189,7 @@
   justify-content: center;
   align-items: center;
 }
+
 /*이미지 탭 체크아이콘 중앙으로*/
 .image-container {
   position: relative;
@@ -220,4 +221,12 @@
   overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
 }
 
+.create-button:disabled {
+  background-color: #ddd;
+  color: #666;
+  cursor: not-allowed;
+}
 
+.toheader-container {
+  margin-left: 176px;
+}

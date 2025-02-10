@@ -49,7 +49,7 @@ const ToPageKM = () => {
     const data = {
       team: "13-1",
       name: recipient.trim(),
-      backgroundColor: isColor ? selectedBackground : null,
+      backgroundColor: isColor ? selectedBackground : "beige",
       backgroundImageURL: isImage ? selectedBackground : null,
     };
 

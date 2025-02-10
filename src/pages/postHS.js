@@ -567,7 +567,6 @@ const Post = () => {
       setPasswordError("비밀번호가 틀렸습니다."); // 비밀번호 틀렸을 때 오류 표시
     }
   };
-
   return (
     <>
       <ToastContainer />
@@ -661,6 +660,7 @@ const Post = () => {
       )}
 
       <header>
+
         <div className="container">
           <Link to="/" className="logo">
             <img src={logo} alt="롤링페이퍼 로고" />
@@ -783,6 +783,7 @@ const Post = () => {
                 ? `url(${backgroundImage})`
                 : "none",
               backgroundColor: backgroundColor || "var(--beige-200)",
+
             }}
           >
             <div className="container">
