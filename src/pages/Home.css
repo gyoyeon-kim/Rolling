@@ -95,11 +95,13 @@
   height: 260px;
   border: 1px solid var(--gray-300);
   border-radius: 16px;
-  overflow: hidden;
+  background-color: #fff;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-  box-sizing: border-box;
   background-color: #fff;
 }
+
 .home-card:hover {
   transform: scale(1.05);
 }
@@ -181,7 +183,7 @@
 }
 
 /* 카드 본문 내용 */
-.home-card-content {
+.Home-card-content {
   font-size: 0.95rem;
   line-height: 1.4;
   padding: 10px;

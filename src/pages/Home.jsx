@@ -39,7 +39,7 @@ function Home() {
                     <span className="card-date">2025.1.29</span>
                   </div>
                 </div>
-                <p className="home-card-content">곰 곰</p>
+                <p className="Home-card-content">곰 곰</p>
               </div>
 
               {/* 두 번째 카드 */}
@@ -56,7 +56,7 @@ function Home() {
                     <span className="card-date">2025.01.30</span>
                   </div>
                 </div>
-                <p className="home-card-content">아 당 떨어진다</p>
+                <p className="Home-card-content">아 당 떨어진다</p>
               </div>
 
               {/* + 버튼 카드 , To page연결*/}
