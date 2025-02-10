@@ -82,7 +82,7 @@ p {
 }
 
 .name_input.active {
-  outline: 0.1rem solid #0073e6; /* 값이 입력되었을 때 테두리 색상 변경 */
+  outline: 0.1rem solid var(--purple-600); /* 값이 입력되었을 때 테두리 색상 변경 */
 }
 
 .name-error_message {
@@ -107,7 +107,7 @@ p {
 }
 
 .pw_input.active {
-  outline: 0.1rem solid #0073e6; /* 값이 입력되었을 때 테두리 색상 변경 */
+  outline: 0.1rem solid var(--purple-600); /* 값이 입력되었을 때 테두리 색상 변경 */
 }
 
 .pw-error_message {

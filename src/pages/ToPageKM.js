@@ -3,34 +3,42 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import rolling_icon from "../images/logo.svg";
 import checkIcon from "../images/to_img/image_3.svg";
-import axios from "axios"; // axios 추가
+import axios from "axios";
+import CursorEffect from "../component/commons/CursorEffect"; // 커서 이펙트 가져오기
 import "./ToPageKM.css";
 
 const ToPageKM = () => {
   const [recipient, setRecipient] = useState("");
   const [error, setError] = useState(false);
   const [backgroundError, setBackgroundError] = useState(false);
-  const [selectedBackground, setSelectedBackground] = useState(null); // 배경(컬러 또는 이미지)
-  const [isColorSelected, setIsColorSelected] = useState(true); // 컬러/이미지 탭 상태
+  const [selectedBackground, setSelectedBackground] = useState(null);
+  const [isColorSelected, setIsColorSelected] = useState(true);
+  const [customImages, setCustomImages] = useState([
+    "https://images.pexels.com/photos/28184434/pexels-photo-28184434.jpeg",
+    "https://images.pexels.com/photos/30481070/pexels-photo-30481070.jpeg",
+    "https://images.pexels.com/photos/30449017/pexels-photo-30449017.jpeg",
+    "https://images.pexels.com/photos/17593640/pexels-photo-17593640.jpeg",
+  ]);
+  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
-  // 외부 이미지 URL로 설정
-  const images = [
-    "https://images.pexels.com/photos/28184434/pexels-photo-28184434.jpeg", // image1
-    "https://images.pexels.com/photos/30481070/pexels-photo-30481070.jpeg", // image2
-    "https://images.pexels.com/photos/30449017/pexels-photo-30449017.jpeg", // image4
-    "https://images.pexels.com/photos/17593640/pexels-photo-17593640.jpeg", // image5
-  ];
-
-  // 수신자 입력 핸들러
   const handleRecipientChange = (e) => {
     setRecipient(e.target.value);
     setError(e.target.value.trim() === "");
   };
 
-  const handleBackgroundChange = (color) => {
-    setSelectedBackground(color);
-    setBackgroundError(false); // 선택하면 에러 해제
+  const handleBackgroundChange = (value) => {
+    setSelectedBackground(value);
+    setBackgroundError(false);
+  };
+
+  const handleAddImage = () => {
+    if (imageUrl.trim()) {
+      setCustomImages([...customImages, imageUrl]);
+      setImageUrl("");
+      setShowUrlInput(false);
+    }
   };
 
   const handleSubmit = async () => {
@@ -43,9 +51,7 @@ const ToPageKM = () => {
       return;
     }
 
-    const isColor = ["beige", "purple", "blue", "green"].includes(
-      selectedBackground
-    );
+    const isColor = ["beige", "purple", "blue", "green"].includes(selectedBackground);
     const isImage = selectedBackground && selectedBackground.startsWith("http");
 
     const data = {
@@ -54,13 +60,6 @@ const ToPageKM = () => {
       backgroundColor: isColor ? selectedBackground : "beige",
       backgroundImageURL: isImage ? selectedBackground : null,
     };
-
-    if (!data.backgroundColor && !data.backgroundImageURL) {
-      alert("배경색 또는 배경 이미지를 선택해야 합니다.");
-      return;
-    }
-
-    console.log("📡 API 요청 데이터:", data);
 
     try {
       const response = await axios.post(
@@ -74,14 +73,14 @@ const ToPageKM = () => {
       navigate(`/post/${response.data.id}`);
     } catch (error) {
       console.error("API 요청 중 에러 발생:", error.response?.data || error);
-      alert(
-        `오류 발생: ${error.response?.data?.message || "다시 시도해주세요."}`
-      );
+      alert(`오류 발생: ${error.response?.data?.message || "다시 시도해주세요."}`);
     }
   };
 
   return (
     <div className="mainr">
+      <CursorEffect /> {/* 커서 이펙트 추가 */}
+      
       <header className="toheader">
         <Link to="/">
           <img className="tologo" src={rolling_icon} alt="롤링 이미지" />
@@ -100,12 +99,8 @@ const ToPageKM = () => {
         {error && <p className="error-message">받는 사람을 입력하세요.</p>}
 
         <div className="background-selection-text">
-          <p className="background-selection-header">
-            배경화면을 선택해 주세요.
-          </p>
-          <p className="background-selection-p">
-            컬러를 선택하거나, 이미지를 선택할 수 있습니다.
-          </p>
+          <p className="background-selection-header">배경화면을 선택해 주세요.</p>
+          <p className="background-selection-p">컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
         </div>
 
         <div className="background-selection">
@@ -124,7 +119,6 @@ const ToPageKM = () => {
             </button>
           </div>
 
-          {/* 컬러 옵션 */}
           {isColorSelected ? (
             <div className="color-options">
               {[
@@ -146,9 +140,11 @@ const ToPageKM = () => {
               ))}
             </div>
           ) : (
-            // 이미지 옵션
             <div className="image-preview">
-              {images.map((img, index) => (
+              <div className="add-image-button" onClick={() => setShowUrlInput(true)}>
+                +
+              </div>
+              {customImages.map((img, index) => (
                 <div key={index} className="image-container">
                   <img
                     src={img}
@@ -165,9 +161,7 @@ const ToPageKM = () => {
           )}
         </div>
 
-        {backgroundError && (
-          <p className="error-message">배경을 선택해주세요.</p>
-        )}
+        {backgroundError && <p className="error-message">배경을 선택해주세요.</p>}
 
         <button
           className="create-button"
@@ -176,6 +170,21 @@ const ToPageKM = () => {
         >
           생성하기
         </button>
+
+        {showUrlInput && (
+          <div className="url-popup">
+            <div className="url-popup-content">
+              <input
+                type="text"
+                placeholder="이미지 URL 입력"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+              />
+              <button onClick={handleAddImage}>추가</button>
+              <button onClick={() => setShowUrlInput(false)}>취소</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

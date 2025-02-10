@@ -242,7 +242,7 @@ legend {
   width: 100%;
   margin: 0 auto;
 }
-
+/* 
 header {
   border-bottom: 1px solid #ededed;
   display: none;
@@ -260,7 +260,7 @@ header .container .btn_making {
   padding: 8px 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
-}
+} */
 
 main .postHeader {
   position: sticky;
@@ -338,7 +338,7 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emoj
 main .postHeader .container .rightWrap .emojiReactionWrap .emojiCollection .emojiAllList ul {
   position: absolute;
   top: 35px;
-  left: 0;
+  left: -160px;
   /* right: 0; */
   border: 1px solid #b6b6b6;
   background-color: #fff;
@@ -384,8 +384,8 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker button sp
 
 main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker .emojiPickerDiv {
   position: absolute;
-  left: -100px;
-  /* right: 0; */
+  /* left: -100px; */
+  right: -100px;
   top: 50px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
 }
@@ -591,14 +591,14 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker .emojiPic
 태블릿 기본 세팅
 ===================*/
 @media all and (min-width: 768px) {
-  header {
+  /* header {
     display: block;
     padding: 12px 24px;
   }
 
   header .container .btn_making {
     font-size: var(--font-size-16);
-  }
+  } */
 
   main .postHeader {
     border-bottom: 1px solid #ededed;

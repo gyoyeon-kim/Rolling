@@ -10,6 +10,7 @@ import Loader from "../component/commons/Loader";
 import Badge from "../component/commons/Badge";
 import ShareButtons from "../component/headerPost/ShareButtons";
 import EmojiReactions from "../component/headerPost/EmojiReactions";
+import Header from "../component/Header";
 
 // 이미지 import
 import logo from "../images/logo.svg";
@@ -27,6 +28,13 @@ const FONT_STYLES = {
     fontFamily: '"나눔손글씨 손편지체", sans-serif',
     fontSize: "24px",
   },
+};
+
+const COLOR_MAP = {
+  beige: '#ffe2ad',
+  purple: '#ecd9ff',  // 요청한 색상 코드로 수정
+  blue: '#b1e4ff',
+  green: '#d0f5c3'
 };
 
 const Post = () => {
@@ -209,7 +217,6 @@ const Post = () => {
       setPasswordError("비밀번호가 틀렸습니다."); // 비밀번호 틀렸을 때 오류 표시
     }
   };
-
   return (
     <>
       <ToastContainer />
@@ -355,7 +362,9 @@ const Post = () => {
               backgroundImage: backgroundImage
                 ? `url(${backgroundImage})`
                 : "none",
-              backgroundColor: backgroundColor || "var(--beige-200)",
+
+              backgroundColor: COLOR_MAP[backgroundColor] || "var(--beige-200)",
+             
             }}
           >
             <div className="container">

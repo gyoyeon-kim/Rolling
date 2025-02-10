@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+
+@media (max-width: 768px) {
+  .to-container {
+    padding: 0 24px;
+  }
+}
+
 .to-page-container {
   width: 100%;
   max-width: 1920px;
@@ -9,8 +16,19 @@
   padding: 0 24px;
 }
 
+.toheader {
+  width: 100%;
+  max-width: 1920px;
+  height: 64px;
+  padding: 11px 168px;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+}
 .tologo {
-  margin-top: 15px;
+  width: 106px;
+  height: 42px;
 }
 
 .to-content {
@@ -72,39 +90,45 @@
   margin-top: 20px;
 }
 
-.color-options {
+.color-options,
+.image-preview {
   display: flex;
   justify-content: center;
   width: 720px;
-  height: 168px;
+  height: auto;
   margin-top: 40px;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
-.color-option {
+.color-option,
+.image-container {
   width: 168px;
   height: 168px;
   border-radius: 12px;
-  border: 2px solid transparent;
   cursor: pointer;
   position: relative;
-}
-
-.image-preview {
-  display: flex;
-  gap: 16px;
-  margin-top: 40px;
+  border: 2px solid transparent;
 }
 
 .image-container {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
+  overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
 }
 
 .preview-image {
+  width: 168px;
+  height: 168px;
   border-radius: 8px;
+  object-fit: cover; /* 이미지를 컨테이너에 맞게 크기 조절 */
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
 }
 
 .background-selection-text {
@@ -194,33 +218,76 @@
   cursor: not-allowed;
 }
 
-/*이미지 탭 체크아이콘 중앙으로*/
-.image-container {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-}
-
-.check-icon {
-  position: absolute;
+/* URL 입력 팝업 스타일 */
+.url-popup {
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-}
-.preview-image {
-  width: 168px;
-  height: 168px;
-  border-radius: 8px;
-  object-fit: cover; /* 이미지를 컨테이너에 맞게 크기 조절 */
+  width: 400px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  z-index: 1000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
 }
 
-.image-container {
-  position: relative;
+.url-popup-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.url-popup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.url-popup button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #8c4bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.url-popup button:hover {
+  background: #6b3cf0;
+}
+
+/* + 버튼 스타일 업데이트 */
+.add-image-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 168px;
   height: 168px;
+  border: 2px dashed #ddd;
   border-radius: 12px;
-  overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
+  background: #f9f9f9;
+  font-size: 24px;
+  font-weight: bold;
+  color: #bbb;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-image-button:hover {
+  border-color: #9935ff;
+  background-color: rgba(153, 53, 255, 0.1);
+  color: #9935ff;
 }
