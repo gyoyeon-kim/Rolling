@@ -1,5 +1,6 @@
 // components/Badge.js
 import React from "react";
+import "./Badge.css";
 
 const BADGE_STYLES = {
   지인: { background: "#FFF0D6", color: "#FF8832" },
