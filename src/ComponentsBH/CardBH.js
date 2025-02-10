@@ -1,5 +1,4 @@
-/*
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardBH.css";
 import CardDataBH from "./CardDataBH";
@@ -19,13 +18,8 @@ function CardBH({
   const [displaySenders, setDisplaySenders] = useState([]);
   const [extraCount, setExtraCount] = useState(0);
   const [totalSenders, setTotalSenders] = useState(0);
-  const fetchedIds = useRef(new Set()); // ✅ useRef로 저장하여 상태 변경 없이 유지
 
   useEffect(() => {
-    if (!id || fetchedIds.current.has(id)) return; // ✅ 이미 가져온 ID면 실행 안 함
-
-    fetchedIds.current.add(id); // ✅ 가져온 ID 저장
-
     const controller = new AbortController();
     const { signal } = controller;
 
@@ -36,7 +30,6 @@ function CardBH({
           `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`,
           { signal }
         );
-
         if (!response.ok)
           throw new Error(
             `Failed to fetch messages (Status: ${response.status})`
@@ -48,13 +41,20 @@ function CardBH({
         const uniqueSenders = [
           ...new Map(data.results.map((msg) => [msg.sender, msg])).values(),
         ];
-        const newDisplaySenders = uniqueSenders.slice(0, 3);
-        const newExtraCount = Math.max(uniqueSenders.length - 3, 0);
-        const newTotalSenders = uniqueSenders.length;
 
-        setDisplaySenders(newDisplaySenders);
-        setExtraCount(newExtraCount);
-        setTotalSenders(newTotalSenders);
+        setDisplaySenders((prev) =>
+          JSON.stringify(prev) !== JSON.stringify(uniqueSenders.slice(0, 3))
+            ? uniqueSenders.slice(0, 3)
+            : prev
+        );
+        setExtraCount((prev) =>
+          prev !== Math.max(uniqueSenders.length - 3, 0)
+            ? Math.max(uniqueSenders.length - 3, 0)
+            : prev
+        );
+        setTotalSenders((prev) =>
+          prev !== uniqueSenders.length ? uniqueSenders.length : prev
+        );
       } catch (error) {
         if (error.name !== "AbortError") {
           console.error("Error fetching messages:", error);
@@ -63,9 +63,8 @@ function CardBH({
     };
 
     fetchMessages();
-
     return () => controller.abort();
-  }, []); // ✅ 의존성 배열 제거하여 최초 실행만 수행
+  }, [id]);
 
   const patterns = {
     beige: { pattern: pattern02, bgColor: "#FFE2AD" },
@@ -104,4 +103,3 @@ function CardBH({
 }
 
 export default CardBH;
-*/
