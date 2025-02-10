@@ -283,7 +283,7 @@ const From = () => {
           <p className="title">비밀번호</p>
           <input
             className={`pw_input ${pw ? "active" : ""} ${pwError ? "error" : ""}`}
-            placeholder="비밀번호 4자리를 입력해 주세요."
+            placeholder="숫자 4자리를 입력해 주세요."
             value={pw}
             onChange={handlePwChange}
             maxLength={4} // 최대 4자리 제한
