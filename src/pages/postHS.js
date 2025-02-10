@@ -29,6 +29,13 @@ const FONT_STYLES = {
   },
 };
 
+const COLOR_MAP = {
+  beige: '#ffe2ad',
+  purple: '#ecd9ff',  // 요청한 색상 코드로 수정
+  blue: '#b1e4ff',
+  green: '#d0f5c3'
+};
+
 const Post = () => {
   // useNavigate 훅 추가
   const navigate = useNavigate();
@@ -355,7 +362,7 @@ const Post = () => {
               backgroundImage: backgroundImage
                 ? `url(${backgroundImage})`
                 : "none",
-              backgroundColor: backgroundColor || "var(--beige-200)",
+              backgroundColor: COLOR_MAP[backgroundColor] || "var(--beige-200)",
             }}
           >
             <div className="container">
