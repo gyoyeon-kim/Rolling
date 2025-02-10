@@ -145,6 +145,58 @@
     right: 2px; /* 오른쪽 여백 */
   }
 }
+/* ============================= 검색결과 ============================ */
+
+/* 검색 결과 그리드 스타일 */
+.search-results-grid {
+  display: grid;
+  gap: 16px; /* 카드 사이 간격 */
+  grid-template-columns: repeat(4, 1fr); /* 기본적으로 4열 그리드 */
+}
+/* 1025px에서 3x3 그리드 */
+@media (max-width: 1025px) {
+  .search-results-grid {
+    width: 85%;
+    grid-template-columns: repeat(3, 1fr); /* 타블릿에서 3열 그리드 */
+    gap: 16px; /* 카드 사이 간격 */
+    justify-items: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin: 0 auto;
+  }
+}
+/* 1024px에서 3x3 그리드 */
+@media (max-width: 1024px) {
+  .search-results-grid {
+    width: 70%;
+    grid-template-columns: repeat(3, 1fr); /* 타블릿에서 2열 그리드 */
+    gap: 16px; /* 카드 사이 간격 */
+    justify-items: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin: 0 
+  }
+}
+
+/* 타블릿에서 2x2 그리드 */
+@media (max-width: 768px) {
+  .search-results-grid {
+    width: 85%;
+    grid-template-columns: repeat(2, 1fr); /* 타블릿에서 2열 그리드 */
+    gap: 16px; /* 카드 사이 간격 */
+    justify-items: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin: 0 auto;
+  }
+}
+
+/* 모바일에서 1x1 그리드 */
+@media (max-width: 767px) {
+  .search-results-grid {
+    grid-template-columns: 1fr; /* 모바일에서 1열 그리드 */
+    justify-items: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+  }
+}
+
 
 /* ============================= 카드 리스트 및 스크롤 ============================ */
 

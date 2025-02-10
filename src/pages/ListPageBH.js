@@ -7,6 +7,7 @@ import CursorEffect from "../component/commons/CursorEffect";
 import "./ListPageBH.css";
 import arrowLeft from "../images/arrow_left.svg";
 import arrowRight from "../images/arrow_right.svg";
+import CardBH from "../ComponentsBH/CardBH"; // Card 컴포넌트
 
 function ListPageBH() {
   const [popularItems, setPopularItems] = useState([]);
@@ -57,6 +58,7 @@ function ListPageBH() {
   const handleSearch = (query) => {
     if (!query.trim()) {
       setIsSearching(false);
+      setSearchResults([]);  // 검색 결과 초기화
       return;
     }
     const filteredResults = popularItems.filter((item) =>
@@ -105,18 +107,35 @@ function ListPageBH() {
         {isSearching ? (
           <section className="list-section">
             <h2 className="section-title">검색 결과 🔍</h2>
-            {searchResults.length > 0 ? (
-              <CardListBH items={searchResults} />
+            {searchResults && searchResults.length > 0 ? (
+              <div className="search-results-grid">
+                {searchResults.map((item, index) => (
+                  <CardBH
+                    key={item.id}
+                    id={item.id}
+                    title={`To. ${item.name}`}
+                    backgroundImageURL={item.backgroundImageURL}
+                    backgroundColor={item.backgroundColor}
+                    stats={`${item.messageCount}명이 작성했어요!`}
+                    topReactions={item.topReactions}
+                    recentMessages={item.recentMessages}
+                    messageCount={item.messageCount}
+                  />
+                ))}
+              </div>
             ) : (
               <p>검색된 롤링 페이퍼가 없습니다.</p>
             )}
           </section>
         ) : (
           <>
+            {/* 인기 롤링 페이퍼 섹션 */}
             <section className="list-section">
               <h2 className="section-title">인기 롤링 페이퍼 🔥</h2>
               <div
-                className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}
+                className={`carousel-container ${
+                  isMobileOrTablet ? "touch-scroll" : ""
+                }`}
               >
                 {!isMobileOrTablet &&
                   popularStartIndex > 0 &&
@@ -144,7 +163,9 @@ function ListPageBH() {
                   popularItems.length > maxVisibleCards && (
                     <button
                       className="scroll-button right"
-                      onClick={() => scrollRight("popular", popularItems.length)}
+                      onClick={() =>
+                        scrollRight("popular", popularItems.length)
+                      }
                       aria-label="Scroll Right"
                     >
                       <img src={arrowRight} alt="Scroll Right" />
@@ -153,10 +174,13 @@ function ListPageBH() {
               </div>
             </section>
 
+            {/* 최근에 만든 롤링 페이퍼 섹션 */}
             <section className="list-section">
               <h2 className="section-title">최근에 만든 롤링 페이퍼 ⭐</h2>
               <div
-                className={`carousel-container ${isMobileOrTablet ? "touch-scroll" : ""}`}
+                className={`carousel-container ${
+                  isMobileOrTablet ? "touch-scroll" : ""
+                }`}
               >
                 {!isMobileOrTablet &&
                   recentStartIndex > 0 &&
@@ -184,7 +208,9 @@ function ListPageBH() {
                   recentItems.length > maxVisibleCards && (
                     <button
                       className="scroll-button right"
-                      onClick={() => scrollRight("recent", recentItems.length)}
+                      onClick={() =>
+                        scrollRight("recent", recentItems.length)
+                      }
                       aria-label="Scroll Right"
                     >
                       <img src={arrowRight} alt="Scroll Right" />
