@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardBH.css";
@@ -103,3 +104,4 @@ function CardBH({
 }
 
 export default CardBH;
+*/
