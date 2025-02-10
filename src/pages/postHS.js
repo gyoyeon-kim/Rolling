@@ -362,12 +362,9 @@ const Post = () => {
               backgroundImage: backgroundImage
                 ? `url(${backgroundImage})`
                 : "none",
-<<<<<<< HEAD
-              backgroundColor: backgroundColor || "var(--beige-200)",
 
-=======
               backgroundColor: COLOR_MAP[backgroundColor] || "var(--beige-200)",
->>>>>>> f0308804682a8cbd4fad586352ceb809bbd77029
+             
             }}
           >
             <div className="container">

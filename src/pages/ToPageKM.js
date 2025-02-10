@@ -3,34 +3,41 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import rolling_icon from "../images/logo.svg";
 import checkIcon from "../images/to_img/image_3.svg";
-import axios from "axios"; // axios 추가
+import axios from "axios";
 import "./ToPageKM.css";
 
 const ToPageKM = () => {
   const [recipient, setRecipient] = useState("");
   const [error, setError] = useState(false);
   const [backgroundError, setBackgroundError] = useState(false);
-  const [selectedBackground, setSelectedBackground] = useState(null); // 배경(컬러 또는 이미지)
-  const [isColorSelected, setIsColorSelected] = useState(true); // 컬러/이미지 탭 상태
+  const [selectedBackground, setSelectedBackground] = useState(null);
+  const [isColorSelected, setIsColorSelected] = useState(true);
+  const [customImages, setCustomImages] = useState([
+    "https://images.pexels.com/photos/28184434/pexels-photo-28184434.jpeg",
+    "https://images.pexels.com/photos/30481070/pexels-photo-30481070.jpeg",
+    "https://images.pexels.com/photos/30449017/pexels-photo-30449017.jpeg",
+    "https://images.pexels.com/photos/17593640/pexels-photo-17593640.jpeg",
+  ]);
+  const [showUrlInput, setShowUrlInput] = useState(false); // URL 입력창 상태
+  const [imageUrl, setImageUrl] = useState(""); // 입력된 이미지 URL
   const navigate = useNavigate();
 
-  // 외부 이미지 URL로 설정
-  const images = [
-    "https://images.pexels.com/photos/28184434/pexels-photo-28184434.jpeg", // image1
-    "https://images.pexels.com/photos/30481070/pexels-photo-30481070.jpeg", // image2
-    "https://images.pexels.com/photos/30449017/pexels-photo-30449017.jpeg", // image4
-    "https://images.pexels.com/photos/17593640/pexels-photo-17593640.jpeg", // image5
-  ];
-
-  // 수신자 입력 핸들러
   const handleRecipientChange = (e) => {
     setRecipient(e.target.value);
     setError(e.target.value.trim() === "");
   };
 
-  const handleBackgroundChange = (color) => {
-    setSelectedBackground(color);
-    setBackgroundError(false); // 선택하면 에러 해제
+  const handleBackgroundChange = (value) => {
+    setSelectedBackground(value);
+    setBackgroundError(false);
+  };
+
+  const handleAddImage = () => {
+    if (imageUrl.trim()) {
+      setCustomImages([...customImages, imageUrl]);
+      setImageUrl("");
+      setShowUrlInput(false);
+    }
   };
 
   const handleSubmit = async () => {
@@ -54,13 +61,6 @@ const ToPageKM = () => {
       backgroundColor: isColor ? selectedBackground : "beige",
       backgroundImageURL: isImage ? selectedBackground : null,
     };
-
-    if (!data.backgroundColor && !data.backgroundImageURL) {
-      alert("배경색 또는 배경 이미지를 선택해야 합니다.");
-      return;
-    }
-
-    console.log("📡 API 요청 데이터:", data);
 
     try {
       const response = await axios.post(
@@ -124,15 +124,9 @@ const ToPageKM = () => {
             </button>
           </div>
 
-          {/* 컬러 옵션 */}
           {isColorSelected ? (
             <div className="color-options">
-              {[
-                { color: "beige", hex: "#ffe2ad" },
-                { color: "purple", hex: "#ecd9ff" },
-                { color: "blue", hex: "#b1e4ef" },
-                { color: "green", hex: "#d0f5c3" },
-              ].map(({ color, hex }) => (
+              {[{ color: "beige", hex: "#ffe2ad" }, { color: "purple", hex: "#ecd9ff" }, { color: "blue", hex: "#b1e4ef" }, { color: "green", hex: "#d0f5c3" }].map(({ color, hex }) => (
                 <button
                   key={color}
                   className={`color-option ${selectedBackground === color ? "selected" : ""}`}
@@ -146,9 +140,15 @@ const ToPageKM = () => {
               ))}
             </div>
           ) : (
-            // 이미지 옵션
             <div className="image-preview">
-              {images.map((img, index) => (
+              {/* + 버튼 */}
+              <div
+                className="add-image-button"
+                onClick={() => setShowUrlInput(true)}
+              >
+                +
+              </div>
+              {customImages.map((img, index) => (
                 <div key={index} className="image-container">
                   <img
                     src={img}
@@ -176,6 +176,22 @@ const ToPageKM = () => {
         >
           생성하기
         </button>
+
+        {/* URL 입력 팝업 */}
+        {showUrlInput && (
+          <div className="url-popup">
+            <div className="url-popup-content">
+              <input
+                type="text"
+                placeholder="이미지 URL 입력"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+              />
+              <button onClick={handleAddImage}>추가</button>
+              <button onClick={() => setShowUrlInput(false)}>취소</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
