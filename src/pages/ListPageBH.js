@@ -27,7 +27,6 @@ function ListPageBH() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  /*
   // 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
@@ -55,8 +54,6 @@ function ListPageBH() {
 
     fetchData();
   }, []);
-
-  */
 
   if (loading)
     return <p>⏳ 데이터 불러오는 중입니다. 잠시만 기다려 주세요...</p>;
