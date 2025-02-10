@@ -38,7 +38,7 @@ function ListPageBH() {
         const popularData = await popularResponse.json();
 
         const recentResponse = await fetch(
-          "https://rolling-api.vercel.app/13-1/recipients/?limit=1000"
+          "https://rolling-api.vercel.app/13-1/recipients/?limit=10"
         );
         const recentData = await recentResponse.json();
 
