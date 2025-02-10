@@ -279,6 +279,7 @@ const Post = () => {
               <input
                 type="password"
                 id="pw"
+                maxLength={4} // 최대 4자리 제한
                 placeholder="비밀번호 입력"
                 onFocus={() => setPasswordError("")}
                 onBlur={(e) => {
