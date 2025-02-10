@@ -165,6 +165,11 @@
 }
 
 .card-author {
+  font-weight: 400px;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.card-user {
   font-weight: bold;
   font-size: 0.95rem;
   margin-bottom: 4px;
@@ -173,8 +178,23 @@
 .card-relationship {
   font-weight: normal;
   font-size: 0.85rem;
-  color: #9b51e0;
+  color: #861dee;
   margin-left: 8px;
+  background-color: #ecd9ff;
+  padding: 2px 5px;
+  gap: 5px;
+  border-radius: 3px;
+}
+
+.card-relationship-friend {
+  font-weight: normal;
+  font-size: 0.85rem;
+  color: #00a2fe;
+  margin-left: 8px;
+  background-color: #e2f5ff;
+  padding: 2px 5px;
+  gap: 5px;
+  border-radius: 3px;
 }
 
 .card-date {
