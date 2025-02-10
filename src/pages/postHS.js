@@ -36,165 +36,6 @@ const Post = () => {
 
   // api 데이터 저장 후 불러오기
   const { id } = useParams(); // URL에서 recipientId 가져오기
-  console.log("🟢 Post_HS - URL에서 가져온 id:", id);
-
-  // // 이모지 상태 관리
-  // const [isEmojiListOpen, setIsEmojiListOpen] = useState(false);
-  // const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
-  // const emojiRef = useRef(null);
-  // const emojiListRef = useRef(null);
-
-  // const toggleEmojiList = () => setIsEmojiListOpen((prev) => !prev);
-  // const toggleEmojiPicker = () => setIsEmojiPickerOpen((prev) => !prev);
-
-  // // 외부 클릭 감지 기능 추가 (이모지 피커)
-  // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (emojiRef.current && !emojiRef.current.contains(event.target)) {
-  //       setIsEmojiPickerOpen(false);
-  //     }
-  //   }
-  //   if (isEmojiPickerOpen) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isEmojiPickerOpen]);
-
-  // // 외부 클릭 감지 기능 추가 (이모지 리스트)
-  // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (
-  //       emojiListRef.current &&
-  //       !emojiListRef.current.contains(event.target)
-  //     ) {
-  //       setIsEmojiListOpen(false); // 📌 이모지 리스트 외부 클릭 시 닫힘
-  //     }
-  //   }
-
-  //   if (isEmojiListOpen) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   }
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isEmojiListOpen]);
-
-  // // 이모지 선택 시 처리
-  // // const onEmojiClick = (emojiData) => {
-  // //   console.log("선택된 이모지:", emojiData.emoji);
-  // // };
-
-  // const saveRecentEmoji = (emoji) => {
-  //   let recentEmojis = JSON.parse(localStorage.getItem("recentEmojis")) || [];
-  //   if (!recentEmojis.includes(emoji)) {
-  //     recentEmojis.unshift(emoji);
-  //     if (recentEmojis.length > 10) recentEmojis.pop(); // 최대 10개 저장
-  //     localStorage.setItem("recentEmojis", JSON.stringify(recentEmojis));
-  //   }
-  // };
-
-  // // 이모지 선택시 이모지 저장
-  // const saveEmojiToLocal = (recipientId, emoji) => {
-  //   let savedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {}; // 객체 형태로 저장
-  //   const recipientEmojis = savedEmojis[recipientId] || []; // 해당 recipient의 이모지 데이터 가져오기
-
-  //   const existingEmoji = recipientEmojis.find((item) => item.emoji === emoji);
-
-  //   if (existingEmoji) {
-  //     existingEmoji.count += 1; // 이미 있는 이모지는 count 증가
-  //   } else {
-  //     recipientEmojis.push({ emoji, count: 1 }); // 새로운 이모지는 추가
-  //   }
-
-  //   savedEmojis[recipientId] = recipientEmojis; // recipientId별로 저장
-  //   localStorage.setItem("savedEmojis", JSON.stringify(savedEmojis)); // localStorage에 저장
-  // };
-
-  // // 저장된 이모지 불러오기
-  // const [emojiList, setEmojiList] = useState([]);
-
-  // useEffect(() => {
-  //   const storedEmojis = JSON.parse(localStorage.getItem("savedEmojis")) || {};
-  //   setEmojiList(storedEmojis[id] || []); // 해당 recipientId의 이모지만 불러오기
-  // }, [id]);
-
-  // //api 요청함수
-  // const sendEmojiReaction = async (recipientId, emoji, type = "increase") => {
-  //   try {
-  //     const response = await axios.post(
-  //       `https://rolling-api.vercel.app/13-1/recipients/${id}/reactions/`,
-  //       {
-  //         emoji: emoji,
-  //         type: type,
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  
-  //     console.log("✅ 이모지 반응 전송 성공:", response.data);
-  //   } catch (error) {
-  //     console.error("❌ 이모지 반응 전송 실패:", error);
-  //   }
-  // };
-
-
-  // //이모지 데이터 가져오기
-  // const fetchEmojiReactions = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://rolling-api.vercel.app/13-1/recipients/${id}/reactions/`
-  //     );
-  //     console.log("🎯 이모지 데이터:", response.data);  // ✅ 응답 데이터 확인
-  
-  //     if (Array.isArray(response.data)) {
-  //       setEmojiList(response.data); // 배열인 경우에만 저장
-  //     } else if (Array.isArray(response.data.results)) {
-  //       setEmojiList(response.data.results); // results 배열이 있는 경우
-  //     } else {
-  //       console.error("❌ 예상하지 못한 데이터 형식:", response.data);
-  //       setEmojiList([]); // 데이터가 배열이 아니면 빈 배열로 초기화
-  //     }
-  //   } catch (error) {
-  //     console.error("❌ 이모지 데이터 불러오기 실패:", error);
-  //     setEmojiList([]); // 에러 발생 시 빈 배열로 설정
-  //   }
-  // };
-
-  
-  // // 이모지 선택시 화면에 반영
-  // const onEmojiClick = async (recipientId, emojiData) => {
-  //   const emoji = emojiData.emoji;
-  
-  //   // ✅ 로컬 저장
-  //   saveEmojiToLocal(recipientId, emoji);
-  
-  //   // ✅ API로 전송
-  //   await sendEmojiReaction(recipientId, emoji, "increase");  // 이모지 전송
-  //   fetchEmojiReactions(); // ✅ 이모지 데이터를 새로 불러오기
-  
-  //   // ✅ 화면 업데이트
-  //   setEmojiList((prev) => {
-  //     const updatedList = [...prev];
-  //     const existingEmoji = updatedList.find((item) => item.emoji === emoji);
-  
-  //     if (existingEmoji) {
-  //       existingEmoji.count += 1;
-  //     } else {
-  //       updatedList.push({ emoji: emoji, count: 1 });
-  //     }
-  
-  //     return updatedList.sort((a, b) => b.count - a.count);
-  //   });
-  // };
-
-  // // 이모지 카운트 수 상위 3개만 가져오기
-  // const topEmojis = emojiList.slice(0, 3);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -241,10 +82,10 @@ const Post = () => {
 // 메시지 가져오기 (GET 요청)
 const fetchMessages = async () => {
   try {
-    console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
+    // console.log("🟢 API 요청 URL:", `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
 
     const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/messages/?limit=100`);
-    console.log("📩 API 응답 데이터:", response.data);
+    // console.log("📩 API 응답 데이터:", response.data);
 
     if (response.data.results) {
       setMessages(response.data.results);
@@ -261,10 +102,10 @@ const fetchMessages = async () => {
 //수신자 정보 가져오기 별도
 const fetchRecipientData = async () => {
   try {
-    console.log("🎯 수신자 정보 API 요청:", `https://rolling-api.vercel.app/13-1/recipients/${id}/`);
+    // console.log("🎯 수신자 정보 API 요청:", `https://rolling-api.vercel.app/13-1/recipients/${id}/`);
     
     const response = await axios.get(`https://rolling-api.vercel.app/13-1/recipients/${id}/`);
-    console.log("📥 수신자 데이터:", response.data);
+    // console.log("📥 수신자 데이터:", response.data);
 
     // 배경 이미지와 색상 설정 이름 저장
     setRecipientName(response.data.name);
