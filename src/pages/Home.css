@@ -20,7 +20,7 @@
   padding: 40px 20px; /* 필요에 따라 조정 */
   background-color: #f6f8ff;
   border-radius: 16px;
-  height: auto;
+  height: 350px;
   max-height: 500px;
   box-sizing: border-box;
 }
