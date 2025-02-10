@@ -1,10 +1,8 @@
 import React, { useCallback, useState, useRef } from "react";
 import axios from "axios";
 import "./From.css";
-import debounce from "lodash.debounce";
 
 import rolling_icon from "../images/logo.svg";
-//import default_profile from "../images/From_img/profile.svg";
 import btn_plus from "../images/From_img/Btn_plus.svg";
 
 /* 텍스트 에디터 */
@@ -144,16 +142,12 @@ const From = () => {
     };
 
     try {
-      console.log("url:", url);
-      console.log("값:", data);
-
       const response = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      console.log("메세지가 성공적으로 생성되었습니다.:", response.data);
       navigate(`/post/${id}`);
     } catch (error) {
       console.error(
@@ -174,7 +168,7 @@ const From = () => {
         <div className="name">
           <p className="title">From.</p>
           <input
-            className={`name_input ${nameError ? "error" : ""}`}
+            className={`name_input ${name ? "active" : ""} ${nameError ? "error" : ""}`}
             placeholder="이름을 입력해 주세요."
             value={name}
             onChange={handleNameChange}
@@ -288,8 +282,8 @@ const From = () => {
         <div className="message_pw">
           <p className="title">비밀번호</p>
           <input
-            className={`pw_input ${pwError ? "error" : ""}`}
-            placeholder="비밀번호 4자리를 입력해 주세요."
+            className={`pw_input ${pw ? "active" : ""} ${pwError ? "error" : ""}`}
+            placeholder="숫자 4자리를 입력해 주세요."
             value={pw}
             onChange={handlePwChange}
             maxLength={4} // 최대 4자리 제한
