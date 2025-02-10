@@ -10,6 +10,7 @@ import Loader from "../component/commons/Loader";
 import Badge from "../component/commons/Badge";
 import ShareButtons from "../component/headerPost/ShareButtons";
 import EmojiReactions from "../component/headerPost/EmojiReactions";
+import Header from "../component/Header";
 
 // 이미지 import
 import logo from "../images/logo.svg";
@@ -309,14 +310,7 @@ const Post = () => {
         </div>
       )}
 
-      <header>
-        <div className="container">
-          <Link to="/" className="logo">
-            <img src={logo} alt="롤링페이퍼 로고" />
-          </Link>
-          {/* <Link to="/post" className="btn_making">롤링페이퍼 만들기</Link> */}
-        </div>
-      </header>
+      <Header />
       <main>
         <h1 className="blind">보낸 롤링페이퍼 리스트</h1>
         {/* postHeader 시작 */}
