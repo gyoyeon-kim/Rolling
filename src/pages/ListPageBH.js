@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navigation from "../component/Navigation";
 import CardListBH from "../ComponentsBH/CardListBH";
 import FooterBtnBH from "../ComponentsBH/FooterBtnBH";
+import CursorEffect from "../component/commons/CursorEffect";
 import "./ListPageBH.css";
 import arrowLeft from "../images/arrow_left.svg";
 import arrowRight from "../images/arrow_right.svg";
@@ -93,6 +94,7 @@ function ListPageBH() {
 
   return (
     <div className="list-page">
+      <CursorEffect /> {/* 💡 커서 이펙트 추가 */}
       <Navigation />
       <main className="list-content">
         {/* 인기 섹션 */}
