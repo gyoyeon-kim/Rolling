@@ -27,7 +27,7 @@ function ListPageBH() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 데이터 가져오기
+  // 데이터 가져오기2
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
