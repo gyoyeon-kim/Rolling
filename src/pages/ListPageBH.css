@@ -30,6 +30,9 @@
   color: var(--black);
 }
 
+
+
+
 /* ========================== 헤더 검색창 (PC & 반응형) ========================== */
 /* 검색창 컨테이너 */
 .search-bar-container {
@@ -145,6 +148,7 @@
     right: 2px; /* 오른쪽 여백 */
   }
 }
+
 /* ============================= 검색결과 ============================ */
 
 /* 검색 결과 그리드 스타일 */
@@ -153,6 +157,16 @@
   gap: 16px; /* 카드 사이 간격 */
   grid-template-columns: repeat(4, 1fr); /* 기본적으로 4열 그리드 */
 }
+
+.no-results-message {
+  font-size: 24px; /* 문구 크기 크게 설정 */
+  font-weight: bold;
+  color: var(--gray-400);
+  height: 100%; /* 화면 전체를 차지하게 설정 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  padding: 250px 10px 340px;
+}
+
 /* 1025px에서 3x3 그리드 */
 @media (max-width: 1025px) {
   .search-results-grid {
@@ -162,6 +176,9 @@
     justify-items: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
     margin: 0 auto;
+  }
+  .no-results-message {
+    padding-bottom: 380px;
   }
 }
 /* 1024px에서 3x3 그리드 */
@@ -173,6 +190,9 @@
     justify-items: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
     margin: 0 
+  }
+  .no-results-message {
+    padding-bottom: 290px;
   }
 }
 
@@ -186,6 +206,9 @@
     align-items: center; /* 수직 가운데 정렬 */
     margin: 0 auto;
   }
+  .no-results-message {
+    padding-bottom: 300px;
+  }
 }
 
 /* 모바일에서 1x1 그리드 */
@@ -194,6 +217,9 @@
     grid-template-columns: 1fr; /* 모바일에서 1열 그리드 */
     justify-items: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
+  }
+  .no-results-message {
+    padding-bottom: 320px;
   }
 }
 

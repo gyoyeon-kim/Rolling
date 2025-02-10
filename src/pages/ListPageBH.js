@@ -124,7 +124,7 @@ function ListPageBH() {
                 ))}
               </div>
             ) : (
-              <p>검색된 롤링 페이퍼가 없습니다.</p>
+               <div className="no-results-message">검색된 롤링 페이퍼가 없습니다.</div>
             )}
           </section>
         ) : (
