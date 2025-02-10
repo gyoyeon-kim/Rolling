@@ -1,0 +1,30 @@
+
+header {
+    border-bottom: 1px solid #ededed;
+    display: none;
+  }
+  
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header .container .btn_making {
+    font-size: var(--font-size-14);
+    letter-spacing: calc(var(--font-size) * 0.005);
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  @media all and (min-width: 768px) {
+    header {
+      display: block;
+      padding: 12px 24px;
+    }
+  
+    header .container .btn_making {
+      font-size: var(--font-size-16);
+    }
+}

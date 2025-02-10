@@ -7,6 +7,7 @@ import btn_plus from "../images/From_img/Btn_plus.svg";
 
 /* 텍스트 에디터 */
 import TextArea from "../component/TextArea";
+import Header from "../component/Header";
 
 /* select 박스 */
 import arrowTop from "../images/From_img/arrow_top.svg";
@@ -158,12 +159,9 @@ const From = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="main">
-      <div className="fromheader">
-        <a href="/">
-          <img className="fromlogo " src={rolling_icon} alt="롤링 이미지" />
-        </a>
-      </div>
       <div className="from_main">
         <div className="name">
           <p className="title">From.</p>
@@ -304,6 +302,7 @@ const From = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

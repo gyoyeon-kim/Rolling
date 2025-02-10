@@ -11,7 +11,7 @@ export const shareKakao = (backgroundImage, backgroundColor) => {
   
     const finalImage = backgroundImage
       ? backgroundImage
-      : `https://singlecolorimage.com/get/${backgroundColor.replace("#", "")}/500x500`;
+      : `https://via.placeholder.com/500/${backgroundColor.replace("#", "")}/FFFFFF?text=%20`;
   
     window.Kakao.Share.sendDefault({
       objectType: "feed",
