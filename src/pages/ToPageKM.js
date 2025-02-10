@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import rolling_icon from "../images/logo.svg";
 import checkIcon from "../images/to_img/image_3.svg";
 import axios from "axios";
+import CursorEffect from "../component/commons/CursorEffect"; // 🆕 커서 이펙트 가져오기
 import "./ToPageKM.css";
 
 const ToPageKM = () => {
@@ -18,8 +19,8 @@ const ToPageKM = () => {
     "https://images.pexels.com/photos/30449017/pexels-photo-30449017.jpeg",
     "https://images.pexels.com/photos/17593640/pexels-photo-17593640.jpeg",
   ]);
-  const [showUrlInput, setShowUrlInput] = useState(false); // URL 입력창 상태
-  const [imageUrl, setImageUrl] = useState(""); // 입력된 이미지 URL
+  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
   const handleRecipientChange = (e) => {
@@ -50,9 +51,7 @@ const ToPageKM = () => {
       return;
     }
 
-    const isColor = ["beige", "purple", "blue", "green"].includes(
-      selectedBackground
-    );
+    const isColor = ["beige", "purple", "blue", "green"].includes(selectedBackground);
     const isImage = selectedBackground && selectedBackground.startsWith("http");
 
     const data = {
@@ -74,14 +73,14 @@ const ToPageKM = () => {
       navigate(`/post/${response.data.id}`);
     } catch (error) {
       console.error("API 요청 중 에러 발생:", error.response?.data || error);
-      alert(
-        `오류 발생: ${error.response?.data?.message || "다시 시도해주세요."}`
-      );
+      alert(`오류 발생: ${error.response?.data?.message || "다시 시도해주세요."}`);
     }
   };
 
   return (
     <div className="mainr">
+      <CursorEffect /> {/* 🆕 커서 이펙트 추가 */}
+      
       <header className="toheader">
         <Link to="/">
           <img className="tologo" src={rolling_icon} alt="롤링 이미지" />
@@ -100,12 +99,8 @@ const ToPageKM = () => {
         {error && <p className="error-message">받는 사람을 입력하세요.</p>}
 
         <div className="background-selection-text">
-          <p className="background-selection-header">
-            배경화면을 선택해 주세요.
-          </p>
-          <p className="background-selection-p">
-            컬러를 선택하거나, 이미지를 선택할 수 있습니다.
-          </p>
+          <p className="background-selection-header">배경화면을 선택해 주세요.</p>
+          <p className="background-selection-p">컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
         </div>
 
         <div className="background-selection">
@@ -126,7 +121,12 @@ const ToPageKM = () => {
 
           {isColorSelected ? (
             <div className="color-options">
-              {[{ color: "beige", hex: "#ffe2ad" }, { color: "purple", hex: "#ecd9ff" }, { color: "blue", hex: "#b1e4ef" }, { color: "green", hex: "#d0f5c3" }].map(({ color, hex }) => (
+              {[
+                { color: "beige", hex: "#ffe2ad" },
+                { color: "purple", hex: "#ecd9ff" },
+                { color: "blue", hex: "#b1e4ef" },
+                { color: "green", hex: "#d0f5c3" },
+              ].map(({ color, hex }) => (
                 <button
                   key={color}
                   className={`color-option ${selectedBackground === color ? "selected" : ""}`}
@@ -141,11 +141,7 @@ const ToPageKM = () => {
             </div>
           ) : (
             <div className="image-preview">
-              {/* + 버튼 */}
-              <div
-                className="add-image-button"
-                onClick={() => setShowUrlInput(true)}
-              >
+              <div className="add-image-button" onClick={() => setShowUrlInput(true)}>
                 +
               </div>
               {customImages.map((img, index) => (
@@ -165,9 +161,7 @@ const ToPageKM = () => {
           )}
         </div>
 
-        {backgroundError && (
-          <p className="error-message">배경을 선택해주세요.</p>
-        )}
+        {backgroundError && <p className="error-message">배경을 선택해주세요.</p>}
 
         <button
           className="create-button"
@@ -177,7 +171,6 @@ const ToPageKM = () => {
           생성하기
         </button>
 
-        {/* URL 입력 팝업 */}
         {showUrlInput && (
           <div className="url-popup">
             <div className="url-popup-content">
