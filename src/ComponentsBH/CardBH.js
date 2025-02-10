@@ -35,7 +35,6 @@ function CardBH({
             profileImageURL: recentMessage.profileImageURL,
           }))
         );
-        // console.log("$$ messageCount", messageCount);
         setExtraCount((prev) =>
           prev !== Math.max(messageCount - 3, 0)
             ? Math.max(messageCount - 3, 0)
@@ -75,20 +74,24 @@ function CardBH({
       onClick={() => navigate(`/post/${id}`)}
       style={{
         background: backgroundImageURL
-          ? `url(${backgroundImageURL}) center/cover no-repeat`
+          ? `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${backgroundImageURL}) center/cover no-repeat`
           : bgColor,
       }}
     >
       {!backgroundImageURL && patternImage && (
         <img src={patternImage} alt="pattern" className="card-pattern" />
       )}
-      <CardDataBH
-        title={title}
-        totalSenders={totalSenders}
-        topReactions={topReactions}
-        displaySenders={displaySenders}
-        extraCount={extraCount}
-      />
+      <div
+        className={`card-content ${backgroundImageURL ? "dark-overlay" : ""}`}
+      >
+        <CardDataBH
+          title={title}
+          totalSenders={totalSenders}
+          topReactions={topReactions}
+          displaySenders={displaySenders}
+          extraCount={extraCount}
+        />
+      </div>
     </div>
   );
 }

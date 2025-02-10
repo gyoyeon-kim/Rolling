@@ -1,3 +1,4 @@
+/* 기본 BHcard 스타일 */
 .BHcard {
   width: 275px;
   height: 260px;
@@ -13,7 +14,7 @@
   box-sizing: border-box;
   position: relative;
   flex-shrink: 0;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 .BHcard:hover {
@@ -31,8 +32,11 @@
   pointer-events: none;
 }
 
-
-
+/* ✅ h3, span을 화이트로 바꾸는 스타일 */
+.card-content.dark-overlay h3,
+.card-content.dark-overlay span {
+  color: white !important;
+}
 
 /* ✅ 모바일 화면에서만 208x232 적용 (768px 이하) */
 @media (max-width: 767px) {
