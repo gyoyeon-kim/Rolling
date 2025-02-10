@@ -20,15 +20,18 @@
   padding: 40px 20px; /* 필요에 따라 조정 */
   background-color: #f6f8ff;
   border-radius: 16px;
-  height: 400px;
+  height: auto;
   max-height: 500px;
+  box-sizing: border-box;
 }
 
 /* 이모지 섹션에 한해서 .emoji-layout 클래스를 사용해 가로 배치 적용 */
 .emoji-section .point-container.emoji-layout {
-  flex-direction: row; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
+  display: flex;
+  flex-direction: row-reverse; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
   align-items: center; /* 수직 중앙 정렬 */
   gap: 24px; /* 이미지와 텍스트 사이 간격 */
+  justify-content: space-evenly;
 }
 
 /* 이미지 영역 스타일 */
@@ -38,7 +41,7 @@
 
 /* 이미지 크기 및 스타일 조절 */
 .emoji-section .emoji-layout .emoji-image img {
-  width: 640px; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
+  width: auto; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
   height: auto; /* 원본 비율 유지 */
   object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
 }
@@ -52,10 +55,12 @@
 
 /* 이모지 섹션에 한해서 .emoji-layout 클래스를 사용해 가로 배치 적용 */
 .emoji-section .point-container.emoji-layout2 {
-  flex-direction: row-reverse; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
+  display: flex;
+  flex-direction: row; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
   align-items: center; /* 수직 중앙 정렬 */
   gap: 24px; /* 이미지와 텍스트 사이 간격 */
   justify-content: space-evenly;
+  margin-top: 60px;
 }
 
 /* 이미지 영역 스타일 */
@@ -100,6 +105,8 @@
 .point-description {
   color: #666;
   margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 /* 구경해보기 버튼 섹션 */
@@ -112,12 +119,14 @@
 }
 .explore-button {
   color: #fff;
-  padding: 14px 24px;
+  padding: 20px 24px;
   background-color: #9935ff;
   border-radius: 6px;
   transition: 0.3s;
   width: 280px;
   align-self: center;
+  height: 56px;
+  font-size: 18px;
 }
 
 .explore-button:hover {
@@ -195,6 +204,12 @@
   .emoji-section .point-container.emoji-layout .point-subtitle {
     font-size: 1.5rem;
   }
+  .emoji-section .point-container.emoji-layout .emoji-text {
+    padding: 0 24px;
+  }
+  .emoji-section .point-container.emoji-layout2 .emoji-text {
+    padding: 0 24px;
+  }
 }
 /* 모바일 이하에서 적용: 768px 미만 */
 @media (max-width: 767px) {
@@ -203,34 +218,49 @@
   }
   /* 모바일 전용 스타일 (flex 방향 전환 등) */
 }
-@media (max-width: 1024px) {
-  .emoji-section .point-container.emoji-layout {
-    align-items: center; /* 수직 중앙 정렬 */
-    gap: 24px; /* 이미지와 텍스트 사이 간격 */
-    flex-direction: column-reverse;
-    height: 440px;
-  }
-  .emoji-text {
-    align-items: flex-start;
-  }
-}
 
 @media (max-width: 1024px) {
+  .emoji-section .point-container.emoji-layout {
+    align-items: flex-start; /* 수직 중앙 정렬 */
+    gap: 24px; /* 이미지와 텍스트 사이 간격 */
+    flex-direction: column;
+    height: auto;
+  }
   .emoji-section .point-container.emoji-layout2 {
     gap: 24px; /* 이미지와 텍스트 사이 간격 */
-    height: 440px;
-    flex-direction: column-reverse;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .emoji-section .point-container.emoji-layout .emoji-text {
+    padding: 0 40px;
+  }
+  .emoji-section .point-container.emoji-layout2 .emoji-text {
+    padding: 0 40px;
+  }
+  .emoji-section .point-container.emoji-layout2 .emoji-text br {
+    display: none;
+  }
+  .emoji-section .point-container.emoji-layout .emoji-text br {
+    display: none;
   }
 }
 
 @media (max-width: 1024px) {
   .explore-button {
     width: 100%; /* 컨테이너 전체 너비 */
-    padding: 16px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
+    padding: 18px 0; /* 좌우 패딩 제거, 상하 패딩 적용 */
     box-sizing: border-box;
   }
 }
 @media (max-width: 1024px) {
+  .emoji-section .emoji-layout2 .emoji-image {
+    align-self: center;
+  }
+  .emoji-section .emoji-layout .emoji-image {
+    align-self: center;
+  }
   .emoji-section .emoji-layout2 .emoji-image img {
     width: 100%; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
     height: auto; /* 원본 비율 유지 */
@@ -239,6 +269,11 @@
   .emoji-section .emoji-layout .emoji-image img {
     width: 100%; /* 원하는 이미지 너비 설정 (필요에 따라 조정) */
     height: auto; /* 원본 비율 유지 */
-    object-fit: cover; /* 영역 내 꽉 채우기 (선택 사항) */
+    padding-left: 15px;
+  }
+}
+@media (max-width: 767px) {
+  .emoji-section .point-container .emoji-text {
+    padding: 0 20px !important;
   }
 }
