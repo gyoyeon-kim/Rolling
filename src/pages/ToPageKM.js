@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import rolling_icon from "../images/logo.svg";
 import checkIcon from "../images/to_img/image_3.svg";
 import axios from "axios";
-import CursorEffect from "../component/commons/CursorEffect"; // 🆕 커서 이펙트 가져오기
+import CursorEffect from "../component/commons/CursorEffect"; // 커서 이펙트 가져오기
 import "./ToPageKM.css";
 
 const ToPageKM = () => {
@@ -79,7 +79,7 @@ const ToPageKM = () => {
 
   return (
     <div className="mainr">
-      <CursorEffect /> {/* 🆕 커서 이펙트 추가 */}
+      <CursorEffect /> {/* 커서 이펙트 추가 */}
       
       <header className="toheader">
         <Link to="/">
