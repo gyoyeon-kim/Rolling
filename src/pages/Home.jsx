@@ -25,7 +25,7 @@ function Home() {
             {/* 왼쪽에 카드 2개 + 버튼이 있는 형태 */}
             <div className="card-wrapper">
               {/* 첫 번째 카드 */}
-              <div className="card">
+              <div className="home-card">
                 <div className="card-header">
                   <div className="card-profile-image">
                     {/* 여기서 실제 이미지 경로나 URL로 변경 */}
@@ -33,30 +33,51 @@ function Home() {
                   </div>
                   <div className="card-author-info">
                     <span className="card-author">
-                      From. 이성준{" "}
-                      <span className="card-relationship">친구</span>
+                      From. <span className="card-user">2파트 1팀</span>
+                      <span className="card-relationship-friend">친구</span>
                     </span>
-                    <span className="card-date">2025.1.29</span>
                   </div>
                 </div>
-                <p className="card-content">곰 곰</p>
+                <p className="Home-card-content">
+                  이성준 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  김교연 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  이현선 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  김경민 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  홍보희 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                </p>
+                <span className="card-date">2025.1.29</span>
               </div>
 
               {/* 두 번째 카드 */}
-              <div className="card">
+              <div className="home-card">
                 <div className="card-header">
                   <div className="card-profile-image">
                     <img src={main_ex2} alt="프로필2" />
                   </div>
                   <div className="card-author-info">
                     <span className="card-author">
-                      From. 이성준{" "}
+                      From. <span className="card-user"> 2파트 1팀</span>
                       <span className="card-relationship">동료</span>
                     </span>
-                    <span className="card-date">2025.01.30</span>
                   </div>
                 </div>
-                <p className="card-content">아 당 떨어진다</p>
+                <p className="Home-card-content">
+                  이성준 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  김교연 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  이현선 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  김경민 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  <br />
+                  홍보희 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                </p>
+
+                <span className="card-date">2025.01.30</span>
               </div>
 
               {/* + 버튼 카드 , To page연결*/}

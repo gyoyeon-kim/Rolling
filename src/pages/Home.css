@@ -89,13 +89,21 @@
 }
 
 /* 개별 카드 스타일 */
-.card {
+.home-card {
   flex: 1;
+  width: 275px;
+  height: 260px;
+  border: 1px solid var(--gray-300);
+  border-radius: 16px;
   background-color: #fff;
-  border: 1px solid #ebebeb;
-  border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  background-color: #fff;
+}
+
+.home-card:hover {
+  transform: scale(1.05);
 }
 @media (max-width: 768px) {
   @media (max-width: 768px) {
@@ -113,7 +121,7 @@
       display: none;
     }
 
-    .card {
+    .home-card {
       flex: 0 0 auto; /* 아이템이 줄바꿈되지 않고 고정된 크기 */
       min-width: 240px; /* 원하는 만큼 최소 너비 설정 */
       scroll-snap-align: start; /* 스크롤 스냅 포인트 (옵션) */
@@ -157,6 +165,11 @@
 }
 
 .card-author {
+  font-weight: 400px;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.card-user {
   font-weight: bold;
   font-size: 0.95rem;
   margin-bottom: 4px;
@@ -165,8 +178,23 @@
 .card-relationship {
   font-weight: normal;
   font-size: 0.85rem;
-  color: #9b51e0;
+  color: #861dee;
   margin-left: 8px;
+  background-color: #ecd9ff;
+  padding: 2px 5px;
+  gap: 5px;
+  border-radius: 3px;
+}
+
+.card-relationship-friend {
+  font-weight: normal;
+  font-size: 0.85rem;
+  color: #00a2fe;
+  margin-left: 8px;
+  background-color: #e2f5ff;
+  padding: 2px 5px;
+  gap: 5px;
+  border-radius: 3px;
 }
 
 .card-date {
@@ -175,9 +203,10 @@
 }
 
 /* 카드 본문 내용 */
-.card-content {
+.Home-card-content {
   font-size: 0.95rem;
   line-height: 1.4;
+  padding: 10px;
 }
 
 /* + 버튼 카드 스타일 */
@@ -255,6 +284,14 @@
     left: 0;
     right: 0;
     border-radius: 0px;
+  }
+}
+
+@media (max-width: 1248px) {
+  .emoji-section .point-container.emoji-layout {
+    flex-direction: column; /* 왼쪽: 이미지, 오른쪽: 텍스트 */
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 24px; /* 이미지와 텍스트 사이 간격 */
   }
 }
 
