@@ -1,5 +1,12 @@
+/* Global Styles */
 * {
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .to-container {
+    padding: 0 24px;
+  }
 }
 
 .to-page-container {
@@ -9,8 +16,19 @@
   padding: 0 24px;
 }
 
+.toheader {
+  width: 100%;
+  max-width: 1920px;
+  height: 64px;
+  padding: 11px 18.75%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .tologo {
-  margin-top: 15px;
+  width: 106px;
+  height: 42px;
 }
 
 .to-content {
@@ -24,10 +42,6 @@
 }
 
 .to-content section {
-  margin: 40px 0;
-}
-
-.background-selection {
   margin: 40px 0;
 }
 
@@ -56,60 +70,12 @@
   margin-bottom: 20px;
 }
 
-.selection-text {
-  width: 301px;
-  height: 66px;
-  text-align: center;
-  margin-top: 40px;
-  gap: 4px;
-}
-
-.toggle-buttons {
-  display: flex;
-  justify-content: center;
-  width: 244px;
-  height: 40px;
-  margin-top: 20px;
-}
-
-.color-options {
-  display: flex;
-  justify-content: center;
-  width: 720px;
-  height: 168px;
-  margin-top: 40px;
-  gap: 16px;
-}
-
-.color-option {
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  position: relative;
-}
-
-.image-preview {
-  display: flex;
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.image-container {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-}
-
-.preview-image {
-  border-radius: 8px;
+.background-selection {
+  margin: 40px 0;
 }
 
 .background-selection-text {
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -128,6 +94,14 @@
   font-size: 16px;
   line-height: 26px;
   letter-spacing: -0.01em;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  width: 244px;
+  height: 40px;
+  margin-top: 20px;
 }
 
 .tabs {
@@ -172,6 +146,54 @@
   opacity: 1;
 }
 
+.color-options {
+  display: flex;
+  justify-content: center;
+  width: 720px;
+  height: 168px;
+  margin-top: 40px;
+  gap: 16px;
+}
+
+.color-option {
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.image-preview {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.image-container {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 168px;
+  height: 168px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+}
+
 .create-button {
   width: 720px;
   height: 56px;
@@ -192,35 +214,4 @@
   background-color: #ddd;
   color: #666;
   cursor: not-allowed;
-}
-
-/*이미지 탭 체크아이콘 중앙으로*/
-.image-container {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-}
-
-.check-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-}
-.preview-image {
-  width: 168px;
-  height: 168px;
-  border-radius: 8px;
-  object-fit: cover; /* 이미지를 컨테이너에 맞게 크기 조절 */
-}
-
-.image-container {
-  position: relative;
-  width: 168px;
-  height: 168px;
-  border-radius: 12px;
-  overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 */
 }
