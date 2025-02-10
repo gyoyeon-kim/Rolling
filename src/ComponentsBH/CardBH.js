@@ -7,7 +7,15 @@ import pattern02 from "../images/card_img/pattern_02.png";
 import pattern03 from "../images/card_img/pattern_03.png";
 import pattern04 from "../images/card_img/pattern_04.png";
 
-function CardBH({ id, title, backgroundImageURL, backgroundColor, topReactions }) {
+function CardBH({
+  id,
+  title,
+  backgroundImageURL,
+  backgroundColor,
+  topReactions,
+  recentMessages,
+  messageCount,
+}) {
   const navigate = useNavigate();
   const [displaySenders, setDisplaySenders] = useState([]);
   const [extraCount, setExtraCount] = useState(0);
@@ -16,24 +24,28 @@ function CardBH({ id, title, backgroundImageURL, backgroundColor, topReactions }
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
-    
+
     const fetchMessages = async () => {
       try {
         console.log(`Fetching messages for ID: ${id}`);
-        const response = await fetch(
-          `https://rolling-api.vercel.app/13-1/recipients/${id}/messages/`,
-          { signal }
+
+        setDisplaySenders((prev) =>
+          recentMessages.map((recentMessage) => ({
+            sender: recentMessage.sender,
+            profileImageURL: recentMessage.profileImageURL,
+          }))
         );
-        if (!response.ok) throw new Error(`Failed to fetch messages (Status: ${response.status})`);
-        
-        const data = await response.json();
-        if (!data.results) throw new Error("Invalid data format");
-        
-        const uniqueSenders = [...new Map(data.results.map((msg) => [msg.sender, msg])).values()];
-        
-        setDisplaySenders(prev => (JSON.stringify(prev) !== JSON.stringify(uniqueSenders.slice(0, 3)) ? uniqueSenders.slice(0, 3) : prev));
-        setExtraCount(prev => (prev !== Math.max(uniqueSenders.length - 3, 0) ? Math.max(uniqueSenders.length - 3, 0) : prev));
-        setTotalSenders(prev => (prev !== uniqueSenders.length ? uniqueSenders.length : prev));
+        // console.log("$$ messageCount", messageCount);
+        setExtraCount((prev) =>
+          prev !== Math.max(messageCount - 3, 0)
+            ? Math.max(messageCount - 3, 0)
+            : prev
+        );
+        setTotalSenders((prev) =>
+          prev !== messageCount ? messageCount : prev
+        );
+
+        console.log("$$ recentMessages", recentMessages);
       } catch (error) {
         if (error.name !== "AbortError") {
           console.error("Error fetching messages:", error);
@@ -62,7 +74,9 @@ function CardBH({ id, title, backgroundImageURL, backgroundColor, topReactions }
       className="BHcard"
       onClick={() => navigate(`/post/${id}`)}
       style={{
-        background: backgroundImageURL ? `url(${backgroundImageURL}) center/cover no-repeat` : bgColor,
+        background: backgroundImageURL
+          ? `url(${backgroundImageURL}) center/cover no-repeat`
+          : bgColor,
       }}
     >
       {!backgroundImageURL && patternImage && (
