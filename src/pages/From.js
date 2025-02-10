@@ -1,12 +1,14 @@
 import React, { useCallback, useState, useRef } from "react";
 import axios from "axios";
 import "./From.css";
+import CursorEffect from "../component/commons/CursorEffect";
 
 import rolling_icon from "../images/logo.svg";
 import btn_plus from "../images/From_img/Btn_plus.svg";
 
 /* 텍스트 에디터 */
 import TextArea from "../component/TextArea";
+import Header from "../component/Header";
 
 /* select 박스 */
 import arrowTop from "../images/From_img/arrow_top.svg";
@@ -158,152 +160,151 @@ const From = () => {
   };
 
   return (
-    <div className="main">
-      <div className="fromheader">
-        <a href="/">
-          <img className="fromlogo " src={rolling_icon} alt="롤링 이미지" />
-        </a>
-      </div>
-      <div className="from_main">
-        <div className="name">
-          <p className="title">From.</p>
-          <input
-            className={`name_input ${name ? "active" : ""} ${nameError ? "error" : ""}`}
-            placeholder="이름을 입력해 주세요."
-            value={name}
-            onChange={handleNameChange}
-            onBlur={handleNameBlur} // 포커스 아웃 시 에러 체크
-          />
-          {nameError && <p className="name-error_message">{nameError}</p>}{" "}
-        </div>
-        <div className="profileimg">
-          <p className="title">프로필 이미지</p>
-          <div className="profile_content">
-            <img
-              className="default_profile"
-              src={profileImageURL}
-              alt="프로필 이미지"
+    <>
+      <CursorEffect />
+      <Header />
+      <div className="main">
+        <div className="from_main">
+          <div className="name">
+            <p className="title">From.</p>
+            <input
+              className={`name_input ${name ? "active" : ""} ${nameError ? "error" : ""}`}
+              placeholder="이름을 입력해 주세요."
+              value={name}
+              onChange={handleNameChange}
+              onBlur={handleNameBlur} // 포커스 아웃 시 에러 체크
             />
-            <div className="profile_list">
-              <p className="profile_list-p">프로필 이미지를 선택해주세요!</p>
-              <div className="profile_list_image">
-                {/* 사용자 지정 이미지 파일 */}
-                <img
-                  className="custom_image"
-                  src={btn_plus}
-                  alt="프로필 이미지"
-                  onClick={() => document.getElementById("fileInput").click()} // 클릭 시 파일 선택 input 활성화
-                />
-
-                {/* 기본 프로필 이미지들 */}
-                {[...Array(9)].map((_, index) => (
-                  <img
-                    key={index}
-                    className="list_image"
-                    src={ex_img[index % ex_img.length]}
-                    alt={`프로필 이미지 ${index + 1}`}
-                    onClick={() =>
-                      setProfileImageURL(ex_img[index % ex_img.length])
-                    }
-                  />
-                ))}
-              </div>
-              <input // custom_image img에서 활성화
-                type="file"
-                id="fileInput"
-                style={{ display: "none" }} // 파일 선택 input은 화면에 보이지 않게 숨김
-                onChange={handleImageUpload}
+            {nameError && <p className="name-error_message">{nameError}</p>}{" "}
+          </div>
+          <div className="profileimg">
+            <p className="title">프로필 이미지</p>
+            <div className="profile_content">
+              <img
+                className="default_profile"
+                src={profileImageURL}
+                alt="프로필 이미지"
               />
+              <div className="profile_list">
+                <p className="profile_list-p">프로필 이미지를 선택해주세요!</p>
+                <div className="profile_list_image">
+                  {/* 사용자 지정 이미지 파일 */}
+                  <img
+                    className="custom_image"
+                    src={btn_plus}
+                    alt="프로필 이미지"
+                    onClick={() => document.getElementById("fileInput").click()} // 클릭 시 파일 선택 input 활성화
+                  />
+
+                  {/* 기본 프로필 이미지들 */}
+                  {[...Array(9)].map((_, index) => (
+                    <img
+                      key={index}
+                      className="list_image"
+                      src={ex_img[index % ex_img.length]}
+                      alt={`프로필 이미지 ${index + 1}`}
+                      onClick={() =>
+                        setProfileImageURL(ex_img[index % ex_img.length])
+                      }
+                    />
+                  ))}
+                </div>
+                <input // custom_image img에서 활성화
+                  type="file"
+                  id="fileInput"
+                  style={{ display: "none" }} // 파일 선택 input은 화면에 보이지 않게 숨김
+                  onChange={handleImageUpload}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="relation">
-          <p className="title">상대와의 관계</p>
-          <div className="selection" onClick={() => setIsOpen(!isOpen)}>
-            {relationship}
-            <img
-              src={isOpen ? arrowTop : arrowDown}
-              className="btn_selection"
-            />
-            {isOpen && (
-              <ul className="selection_list">
-                {realtion_options.map((realtion_options, index) => (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      setRelationship(realtion_options);
-                      setIsOpen(false);
-                    }}
-                  >
-                    {realtion_options}
-                  </li>
-                ))}
-              </ul>
-            )}
+          <div className="relation">
+            <p className="title">상대와의 관계</p>
+            <div className="selection" onClick={() => setIsOpen(!isOpen)}>
+              {relationship}
+              <img
+                src={isOpen ? arrowTop : arrowDown}
+                className="btn_selection"
+              />
+              {isOpen && (
+                <ul className="selection_list">
+                  {realtion_options.map((realtion_options, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        setRelationship(realtion_options);
+                        setIsOpen(false);
+                      }}
+                    >
+                      {realtion_options}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
-        </div>
 
-        <div className="content">
-          <p className="contnetp">내용을 입력해 주세요</p>
-          <TextArea
-            onQuillValueChange={handleQuillValue}
-            textContainerRef={textContainerRef}
-          />
-        </div>
-
-        <div className="font">
-          <p className="title">폰트 선택</p>
-          <div className="selection" onClick={() => setIsOpen2(!isOpen2)}>
-            <div style={{ fontFamily: font }}>{font}</div>
-            <img
-              src={isOpen2 ? arrowTop : arrowDown}
-              className="btn_selection"
+          <div className="content">
+            <p className="contnetp">내용을 입력해 주세요</p>
+            <TextArea
+              onQuillValueChange={handleQuillValue}
+              textContainerRef={textContainerRef}
             />
-            {isOpen2 && (
-              <ul className="selection_list">
-                {font_options.map((font_options, index) => (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      setFont(font_options.label);
-                      setIsOpen2(false);
-                    }}
-                    style={{ fontFamily: font_options.value }}
-                  >
-                    {font_options.label}
-                  </li>
-                ))}
-              </ul>
-            )}
           </div>
-        </div>
 
-        <div className="message_pw">
-          <p className="title">비밀번호</p>
-          <input
-            className={`pw_input ${pw ? "active" : ""} ${pwError ? "error" : ""}`}
-            placeholder="숫자 4자리를 입력해 주세요."
-            value={pw}
-            onChange={handlePwChange}
-            maxLength={4} // 최대 4자리 제한
-            inputMode="numeric"
-            onBlur={handlePwBlur} // 포커스 아웃 시 에러 체크
-          />
-          {pwError && <p className="pw-error_message">{pwError}</p>}{" "}
-        </div>
+          <div className="font">
+            <p className="title">폰트 선택</p>
+            <div className="selection" onClick={() => setIsOpen2(!isOpen2)}>
+              <div style={{ fontFamily: font }}>{font}</div>
+              <img
+                src={isOpen2 ? arrowTop : arrowDown}
+                className="btn_selection"
+              />
+              {isOpen2 && (
+                <ul className="selection_list">
+                  {font_options.map((font_options, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        setFont(font_options.label);
+                        setIsOpen2(false);
+                      }}
+                      style={{ fontFamily: font_options.value }}
+                    >
+                      {font_options.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
 
-        <div>
-          <button
-            className="btn_send"
-            onClick={sendMessage}
-            disabled={!name || !quillValue || pw.length !== 4}
-          >
-            보내기
-          </button>
+          <div className="message_pw">
+            <p className="title">비밀번호</p>
+            <input
+              className={`pw_input ${pw ? "active" : ""} ${pwError ? "error" : ""}`}
+              placeholder="숫자 4자리를 입력해 주세요."
+              value={pw}
+              onChange={handlePwChange}
+              maxLength={4} // 최대 4자리 제한
+              inputMode="numeric"
+              onBlur={handlePwBlur} // 포커스 아웃 시 에러 체크
+            />
+            {pwError && <p className="pw-error_message">{pwError}</p>}{" "}
+          </div>
+
+          <div>
+            <button
+              className="btn_send"
+              onClick={sendMessage}
+              disabled={!name || !quillValue || pw.length !== 4}
+            >
+              보내기
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

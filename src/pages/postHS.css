@@ -242,7 +242,7 @@ legend {
   width: 100%;
   margin: 0 auto;
 }
-
+/* 
 header {
   border-bottom: 1px solid #ededed;
   display: none;
@@ -260,7 +260,7 @@ header .container .btn_making {
   padding: 8px 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
-}
+} */
 
 main .postHeader {
   position: sticky;
@@ -591,14 +591,14 @@ main .postHeader .container .rightWrap .emojiReactionWrap .emojiPicker .emojiPic
 태블릿 기본 세팅
 ===================*/
 @media all and (min-width: 768px) {
-  header {
+  /* header {
     display: block;
     padding: 12px 24px;
   }
 
   header .container .btn_making {
     font-size: var(--font-size-16);
-  }
+  } */
 
   main .postHeader {
     border-bottom: 1px solid #ededed;
