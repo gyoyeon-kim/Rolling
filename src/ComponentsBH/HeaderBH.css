@@ -1,29 +1,28 @@
 /* 기본 헤더 스타일 */
 .header {
-  background-color: var(--white); /* 헤더 배경색 */
-  border-bottom: 1px solid #ddd; /* 헤더 하단 경계선 */
-  width: 100%; /* 전체 너비를 100%로 설정 */
-  height: 64px; /* 높이를 64px로 설정 */
-  display: flex; /* 플렉스박스로 설정하여 자식 요소를 제어 */
-  justify-content: center; /* 자식 요소를 가로로 가운데 정렬 */
-  align-items: center; /* 자식 요소를 세로로 가운데 정렬 */
+  background-color: var(--white);
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* 헬퍼 컨테이너 */
+/* 헤더 내부 컨테이너 */
 .header-container {
   display: flex;
-  justify-content: space-between; /* 로고와 버튼 사이에 간격을 두고 */
-  align-items: center; /* 세로 가운데 정렬 */
-  max-width: 1207px; /* 최대 너비 설정 */
-  width: 100%; /* 전체 화면을 차지하도록 */
-  margin: 0 auto; /* 가로 중앙 정렬 */
-  height: 40px; /* 컨테이너 높이 설정 */
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1207px;
+  width: 100%;
+  margin: 0 auto;
+  height: 40px;
 }
 
 /* 로고 스타일 */
 .header-logo {
   display: flex;
-  justify-content: space-between; 
   align-items: center;
   cursor: pointer;
   width: 106px;
@@ -44,19 +43,28 @@
   line-height: 30px;
 }
 
-/* 버튼 스타일 */
+/* 검색창 (PC 및 Tablet) */
+.header-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; /* 검색창이 남는 공간을 차지하도록 수정 */
+  max-width: 500px;
+  margin: 0 20px;
+  box-sizing: border-box;
+}
+
+/* 롤링페이퍼 만들기 버튼 스타일 */
 .create-paper-button {
   padding: 8px 16px;
   background-color: var(--white);
   color: var(--gray-900);
   border: 1px solid var(--gray-300);
-  font-size: var(-font-size-16);
+  font-size: var(--font-size-16);
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .create-paper-button:hover {
@@ -71,40 +79,93 @@
   transform: scale(0.98);
 }
 
-/* 반응형 디자인 */
-
-/* PC (1248px 이하) */
-@media (max-width: 1248px) {
-  .header-container {
-    padding: 0 24px; /* PC에서 좌우 여백을 24px로 고정 */
-    justify-content: space-between; /* 로고와 버튼 간격 줄어들기 */
-  }
-
-  .create-paper-button {
-    margin-left: 10px; /* 버튼 간격 좁히기 */
-  }
+/* 검색창 컨테이너 */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px; /* 최대 너비 설정 */
+  margin: 0 auto;
+  position: relative;
 }
 
-/* Tablet (1024px 이하) */
+/* 검색창 인풋 스타일 */
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 16px; /* 오른쪽 여백을 버튼 크기만큼 확보 */
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 50px; /* 둥근 모서리 */
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* 검색창 인풋에 포커스할 때 스타일 */
+.search-input:focus {
+  border-color: #a463f2;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(164, 99, 242, 0.3);
+}
+
+/* 검색 버튼 스타일 */
+.search-button {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* 버튼을 오른쪽에 배치 */
+  transform: translateY(-50%); /* 수직 중앙 정렬 */
+  background-color: #a463f2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 30px; /* 둥근 버튼 */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 버튼 hover 시 스타일 */
+.search-button:hover {
+  background-color: #8b4ecb;
+}
+
+/* 버튼 active 시 스타일 */
+.search-button:active {
+  background-color: #7638b2;
+}
+
+/* 반응형 디자인: 모바일 및 태블릿에서 검색창 크기 조정 */
 @media (max-width: 1024px) {
-  .header-container {
-    padding: 0 24px; /* Tablet에서 좌우 여백을 24px로 고정 */
-    justify-content: space-between; /* 간격을 유동적으로 조정 */
+  .search-bar-container {
+    width: 85%; /* 모바일에서 크기 줄이기 */
   }
 
-  .create-paper-button {
-    margin-left: 10px; /* 버튼 간격 조정 */
+  .search-input {
+    font-size: 13px;
+    padding: 8px 36px 8px 16px;
+  }
+
+  .search-button {
+    font-size: 13px;
+    padding: 8px 16px;
   }
 }
 
-/* Mobile (767px 이하) */
 @media (max-width: 767px) {
-  .header-container {
-    padding: 0 16px; /* Mobile에서 좌우 여백을 16px로 고정 */
-    justify-content: space-between;
+  .search-bar-container {
+    width: 90%; /* 모바일에서 더 줄어듬 */
   }
 
-  .create-paper-button {
-    font-size: 14px;
+  .search-input {
+    font-size: 12px;
+    padding: 8px 32px 8px 14px;
+  }
+
+  .search-button {
+    font-size: 12px;
+    padding: 8px 14px;
   }
 }

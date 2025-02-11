@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import SearchBarBH from "./SearchBarBH";
 import "./HeaderBH.css";
-import Logo from "../images/LogoBH.svg"; // 로고 파일 경로
+import Logo from "../images/LogoBH.svg";
 
-function HeaderBH() {
+function HeaderBH({ isMobileOrTablet, onSearch }) {
   const navigate = useNavigate();
 
   return (
@@ -13,6 +14,14 @@ function HeaderBH() {
           <img src={Logo} alt="Rolling Logo" className="logo-image" />
           <h1 className="logo-text">Rolling</h1>
         </div>
+
+        {/* PC에서만 헤더 검색창 표시 */}
+        {!isMobileOrTablet && (
+          <div className="header-search">
+            <SearchBarBH onSearch={onSearch} />
+          </div>
+        )}
+
         <button
           className="create-paper-button"
           onClick={() => navigate("/post")}
