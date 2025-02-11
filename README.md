@@ -50,6 +50,7 @@ URL: https://rolling-navy.vercel.app/
 
 ### 🔍팀원 소개
 
+
 <table>
   <tbody>
     <tr>
