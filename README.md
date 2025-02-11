@@ -27,6 +27,7 @@ URL: https://rolling-navy.vercel.app/
 - 평소에 말하지 못했던 진심을 전하고 싶을 때
 
 ## ⚙️ 기술 스택 
+
 **✅ 개발 환경**
 <div>
   <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"> 
@@ -48,6 +49,7 @@ URL: https://rolling-navy.vercel.app/
 </div>
 
 ### 🔍팀원 소개
+
 <table>
   <tbody>
     <tr>
@@ -71,4 +73,5 @@ URL: https://rolling-navy.vercel.app/
 </table>
 
 ### 💡역할분담
+
   
