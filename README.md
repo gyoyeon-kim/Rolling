@@ -7,7 +7,7 @@
 
 URL: https://rolling-navy.vercel.app/
 
-## 💡 프로젝트 목표
+## 🎯 프로젝트 목표
 
 ### 일정 준수
 - 각 개발 단계(기획, 디자인, 개발, 테스트)에 대한 구체적인 일정을 설정한다.
@@ -70,4 +70,5 @@ URL: https://rolling-navy.vercel.app/
   </tbody>
 </table>
 
+### 💡역할분담
   
