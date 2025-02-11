@@ -47,7 +47,27 @@ URL: https://rolling-navy.vercel.app/
    <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white">
 </div>
 
-
-
+### 🔍팀원 소개
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/codeit-kkm">
+      <img width=200px src="https://avatars.githubusercontent.com/u/189808233?v=4" alt=""/><br />
+      <sub><b>[FE] 김경민</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/gyoyeon-kim">
+      <img width=200px src="https://avatars.githubusercontent.com/u/81516127?v=4" alt=""/><br />
+      <sub><b>[FE] 김교연</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Supi001">
+      <img width=200px src="https://avatars.githubusercontent.com/u/189813561?v=4" alt=""/><br />
+      <sub><b>[FE] 이성준</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/eplssun">
+      <img width=200px src="https://avatars.githubusercontent.com/u/85532508?v=4" alt=""/><br />
+      <sub><b>[FE] 이현선</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/bohee-hee">
+      <img width=200px src="https://avatars.githubusercontent.com/u/196118653?v=4" alt=""/><br />
+      <sub><b>[FE] 홍보희</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
 
   
