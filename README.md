@@ -48,7 +48,7 @@ URL: https://rolling-navy.vercel.app/
    <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white">
 </div>
 
-### 🔍팀원 소개
+## 🔍팀원 소개
 
 
 <table>
@@ -73,6 +73,6 @@ URL: https://rolling-navy.vercel.app/
   </tbody>
 </table>
 
-### 💡역할분담
+## 💡역할분담
 
   
