@@ -4,4 +4,4 @@
 >
 > 개발 기간: 2025.1.23 ~ 1.30
 
-URL: [https://rolling-navy.vercel.app/]
+URL: https://rolling-navy.vercel.app/
