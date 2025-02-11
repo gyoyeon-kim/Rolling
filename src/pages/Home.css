@@ -115,13 +115,13 @@
   flex-direction: column;
   text-align: center;
   align-self: center;
-  margin-top: 30px;
+  margin-top: 48px;
 }
 .explore-button {
   color: #fff;
   padding: 20px 24px;
   background-color: #9935ff;
-  border-radius: 6px;
+  border-radius: 12px;
   transition: 0.3s;
   width: 280px;
   align-self: center;
