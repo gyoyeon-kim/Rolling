@@ -98,7 +98,7 @@ URL: https://rolling-navy.vercel.app/
 > - 반응형 UI
 >   - 모바일/ 태블릿에서 보기 편하도록 화면 크기에 따라 요소 크기 변화
 >   
-> **페이지 Preview:**
+
 
 ### **🌟김교연**
 
@@ -119,7 +119,7 @@ URL: https://rolling-navy.vercel.app/
 > - 팀 초기 컨벤션 세팅 설정
 > - Vercel를 통한 CI / CD 구축
 >   
-> **페이지 Preview:**  
+ 
 
 
 ### **🌟이현선**
@@ -148,7 +148,7 @@ URL: https://rolling-navy.vercel.app/
 > - 협업툴 노션 관리
 > - Git 협업
 >   
-> **페이지 Preview:**  
+  
 
 ### **🌟이성준**
 
@@ -165,7 +165,7 @@ URL: https://rolling-navy.vercel.app/
 >   - 이미지가 컨테이너 크기를 초과시 이미지 스크롤 적용
 >   - 태블릿 반응형 ‘구경하러 가기’ 버튼 구현
 >     
-> **페이지 Preview:**  
+ 
 
 ### **🌟홍보희**
 
